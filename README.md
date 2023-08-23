@@ -1,1 +1,1 @@
-# 2DPlatformerSurvival
+# 2DSurvivalPlatformer
