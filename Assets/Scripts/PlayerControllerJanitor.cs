@@ -16,6 +16,8 @@ public class PlayerControllerJanitor : MonoBehaviour
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
 
+    [SerializeField] private Animator _anim;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -51,6 +53,8 @@ public class PlayerControllerJanitor : MonoBehaviour
 
     private void FixedUpdate()
     {
+        _anim.SetBool("isMoving",horizontal != 0f);
+
         rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
         if (!IsGrounded())
         {
