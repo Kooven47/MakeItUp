@@ -7,6 +7,8 @@ public class NormalAttack : MonoBehaviour
     [SerializeField]private Animator _anim;
     bool _attackBuffer = false, _inAttack = false;
     [SerializeField]int _chain = 0;
+    [SerializeField]Collider2D _hurtBox;
+    [SerializeField]ContactFilter2D _hurtLayers;
     // Start is called before the first frame update
     void Start()
     {
@@ -28,6 +30,29 @@ public class NormalAttack : MonoBehaviour
             _chain = 0;
             _anim.SetInteger("chain",_chain);
 
+        }
+    }
+
+
+    void Hit()
+    {
+        List<Collider2D> targets = new List<Collider2D>();
+        _hurtBox.gameObject.SetActive(true);
+        Physics2D.OverlapCollider(_hurtBox,_hurtLayers,targets);
+        _hurtBox.gameObject.SetActive(false);
+
+        DamageEffect damageEffect;
+
+        if (targets.Count != 0)
+        {
+            foreach(Collider2D col in targets)
+            {
+                Debug.Log("Hit "+col.name);
+                damageEffect = col.gameObject.GetComponent<DamageEffect>();
+
+                if (damageEffect != null && col.CompareTag("Enemy"))
+                    damageEffect.TriggerEffect();
+            }
         }
     }
 
