@@ -9,10 +9,15 @@ public class NormalAttack : MonoBehaviour
     [SerializeField]int _chain = 0;
     [SerializeField]Collider2D _hurtBox;
     [SerializeField]ContactFilter2D _hurtLayers;
+    public AnimatorOverrideController aoc;
+
+    [SerializeField]private List<PlayerAbility> _normalAttacks = new List<PlayerAbility>(3);
+
     // Start is called before the first frame update
     void Start()
     {
         _anim = GetComponent<Animator>();
+        _anim.runtimeAnimatorController = aoc;
         
     }
 
@@ -28,8 +33,6 @@ public class NormalAttack : MonoBehaviour
             Debug.Log("End Chain");
             _inAttack = false;
             _chain = 0;
-            _anim.SetInteger("chain",_chain);
-
         }
     }
 
@@ -40,6 +43,7 @@ public class NormalAttack : MonoBehaviour
         _hurtBox.gameObject.SetActive(true);
         Physics2D.OverlapCollider(_hurtBox,_hurtLayers,targets);
         _hurtBox.gameObject.SetActive(false);
+        bool didHit = false;
 
         DamageEffect damageEffect;
 
@@ -51,18 +55,30 @@ public class NormalAttack : MonoBehaviour
                 damageEffect = col.gameObject.GetComponent<DamageEffect>();
 
                 if (damageEffect != null && col.CompareTag("Enemy"))
+                {
                     damageEffect.TriggerEffect();
+                    didHit = true;
+                }
+                    
             }
+        }
+
+        if (didHit)
+        {
+            // Question mark acts as a null check to avoid invoking an action if not initialized somehow
+            CameraFollow.StartShake?.Invoke();
         }
     }
 
     void Attack()
     {
-        _chain++;
-        if (_chain > 3)
-            _chain = 1;
         
-        _anim.SetInteger("chain",_chain);
+        aoc["Attack"] = _normalAttacks[_chain].animations[0];
+        aoc["Rec"] = _normalAttacks[_chain].animations[1];
+        _anim.Play("Attack");
+
+        _chain = (_chain + 1) % _normalAttacks.Count;
+
         _inAttack = true;
     }
 

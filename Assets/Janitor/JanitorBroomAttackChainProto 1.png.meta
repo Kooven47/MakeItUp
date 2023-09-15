@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 30c3ba92713ac29438db594d860647f1
+guid: 08ae583ef7d45e24fb9fe10562fac894
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -34,7 +34,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -72,7 +72,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -110,13 +110,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: JanitorBroomAttackChainProto_0
+      name: BroomNA1F1
       rect:
         serializedVersion: 2
         x: 0
-        y: 3072
-        width: 1024
-        height: 512
+        y: 384
+        width: 128
+        height: 64
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -124,20 +124,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: de5f63f99e3c46d42a297bc4b40494e4
-      internalID: -2110104815
+      spriteID: 5718964b217b2894ca75c35c83cefc5c
+      internalID: -2041669737
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: JanitorBroomAttackChainProto_1
+      name: BroomNA1F2
       rect:
         serializedVersion: 2
-        x: 1024
-        y: 3072
-        width: 1024
-        height: 512
+        x: 128
+        y: 384
+        width: 128
+        height: 64
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -145,20 +145,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 25d2c57067ab7eb48ab8388eeb479cd2
-      internalID: 1371982218
+      spriteID: 4fc53cdc189af0b479a2323f480c10cc
+      internalID: 72775354
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: JanitorBroomAttackChainProto_2
+      name: BroomNA1F3
       rect:
         serializedVersion: 2
-        x: 2048
-        y: 3072
-        width: 1024
-        height: 512
+        x: 256
+        y: 384
+        width: 128
+        height: 64
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -166,83 +166,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fc0ed9269c183ee42b1c10fbda9229fd
-      internalID: 242320797
+      spriteID: 31100632def0fcd419f1e542fb68012e
+      internalID: 96104792
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: JanitorBroomAttackChainProto_3
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 2560
-        width: 1024
-        height: 512
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 025e6118ffd36494a91917183b6cdce5
-      internalID: 741766150
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: JanitorBroomAttackChainProto_4
-      rect:
-        serializedVersion: 2
-        x: 1024
-        y: 2560
-        width: 1024
-        height: 512
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: a2cbd05864b27844cb181eae79b23b77
-      internalID: -801437921
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: JanitorBroomAttackChainProto_5
-      rect:
-        serializedVersion: 2
-        x: 2048
-        y: 2560
-        width: 1024
-        height: 512
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 58352881e9cbb9c48a0943008d7ed244
-      internalID: -1073941657
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: JanitorBroomAttackChainProto_6
+      name: BroomNA1F4
       rect:
         serializedVersion: 2
         x: 0
-        y: 2048
-        width: 1024
-        height: 512
+        y: 320
+        width: 128
+        height: 64
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -250,20 +187,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1f48904f092427649b09952376c21686
-      internalID: -1756353065
+      spriteID: 1c7087dbf04f6c44faa385599d1da8d9
+      internalID: -2073646040
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: JanitorBroomAttackChainProto_7
+      name: BroomNA1F5
       rect:
         serializedVersion: 2
-        x: 1024
-        y: 2048
-        width: 1024
-        height: 512
+        x: 128
+        y: 320
+        width: 128
+        height: 64
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -271,20 +208,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0ef00aa8d31db0241b706aef51b8ae3e
-      internalID: -1238802947
+      spriteID: a9e3d12af605a1746bd24e91c3101575
+      internalID: -1688260001
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: JanitorBroomAttackChainProto_8
+      name: BroomNA1F6
       rect:
         serializedVersion: 2
-        x: 2048
-        y: 2048
-        width: 1024
-        height: 512
+        x: 256
+        y: 320
+        width: 128
+        height: 64
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -292,83 +229,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e50ee841528a6574eb785f7b9ea0b906
-      internalID: 739086860
+      spriteID: eb684a6ab8dd8924dbb830624e7ac2f3
+      internalID: -376768768
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: JanitorBroomAttackChainProto_9
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 1536
-        width: 1024
-        height: 512
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 6441ec5a02cddca429e4b640eb2ffd90
-      internalID: 38155978
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: JanitorBroomAttackChainProto_10
-      rect:
-        serializedVersion: 2
-        x: 1024
-        y: 1536
-        width: 1024
-        height: 512
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 3ac78c33f769ecf4faf1387328fa629b
-      internalID: -561355639
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: JanitorBroomAttackChainProto_11
-      rect:
-        serializedVersion: 2
-        x: 2048
-        y: 1536
-        width: 1024
-        height: 512
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 09fffe67cde19604387a183b77e8ea6f
-      internalID: -1259114780
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: JanitorBroomAttackChainProto_12
+      name: BroomNA1F7
       rect:
         serializedVersion: 2
         x: 0
-        y: 1024
-        width: 1024
-        height: 512
+        y: 256
+        width: 128
+        height: 64
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -376,20 +250,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 03f7a5a75fc0511498378c3e6c5d53a5
-      internalID: -947823634
+      spriteID: 8e6fcc869eb45e840bb9dc7363234a40
+      internalID: 1541107535
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: JanitorBroomAttackChainProto_13
+      name: BroomNA2F1
       rect:
         serializedVersion: 2
-        x: 1024
-        y: 1024
-        width: 1024
-        height: 512
+        x: 128
+        y: 256
+        width: 128
+        height: 64
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -397,20 +271,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8511f55859711ae49ab9e4c29de6edbd
-      internalID: -304577159
+      spriteID: 4787db2c16797824b8f328781241349f
+      internalID: 323628643
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: JanitorBroomAttackChainProto_14
+      name: BroomNA2F2
       rect:
         serializedVersion: 2
-        x: 2048
-        y: 1024
-        width: 1024
-        height: 512
+        x: 256
+        y: 256
+        width: 128
+        height: 64
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -418,20 +292,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7bc61f768dc1f05469fda27bfc6d1b24
-      internalID: 110847266
+      spriteID: e922744e59df51c4dacbcf3cfc86abbc
+      internalID: 928407645
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: JanitorBroomAttackChainProto_15
+      name: BroomNA2F3
       rect:
         serializedVersion: 2
         x: 0
-        y: 512
-        width: 1024
-        height: 512
+        y: 192
+        width: 128
+        height: 64
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -439,20 +313,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3b188d39e9beeb548a166f998b8a4936
-      internalID: -641859711
+      spriteID: 6a2e826579d8c0948bbfe7a4dee39072
+      internalID: 1616841876
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: JanitorBroomAttackChainProto_16
+      name: BroomNA2F4
       rect:
         serializedVersion: 2
-        x: 1024
-        y: 512
-        width: 1024
-        height: 512
+        x: 128
+        y: 192
+        width: 128
+        height: 64
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -460,20 +334,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 84f963c51842b8c419fc7e189282d705
-      internalID: -1169053667
+      spriteID: 0f9f98dc8ac609e4f8ed3f9807593be5
+      internalID: 721287739
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: JanitorBroomAttackChainProto_17
+      name: BroomNA2F5
       rect:
         serializedVersion: 2
-        x: 2048
-        y: 512
-        width: 1024
-        height: 512
+        x: 256
+        y: 192
+        width: 128
+        height: 64
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -481,20 +355,146 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0d25737c15286084e9db3f57ded45ca9
-      internalID: 450191066
+      spriteID: 846f4f14a3db4df48b7caa2d7c994aa1
+      internalID: 1686826861
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: JanitorBroomAttackChainProto_18
+      name: BroomNA2F6
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 128
+        width: 128
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d7d323ac45a370846823b4868cd5d287
+      internalID: 136211755
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BroomNA3F1
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 128
+        width: 128
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b668caf09b7d465408a595e8d4deb626
+      internalID: 2117374475
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BroomNA3F2
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 128
+        width: 128
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b3429bf8209df2a498fdd049be3517d1
+      internalID: -311586821
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BroomNA3F3
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 64
+        width: 128
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 56e917123d7c6a343af0a70260322685
+      internalID: -1311552557
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BroomNA3F4
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 64
+        width: 128
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4afea268b9cc4694695ffc6add348c85
+      internalID: -428254772
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BroomNA3F5
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 64
+        width: 128
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 37af98791081fa64eb213a273261e7b0
+      internalID: 1597428803
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BroomNA3F6
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 1024
-        height: 512
+        width: 128
+        height: 64
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -502,20 +502,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 410621ac34aa9a847bab422b11d1f944
-      internalID: -2080287059
+      spriteID: f18b2e4b34758394d980006c309f27d7
+      internalID: -722137942
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: JanitorBroomAttackChainProto_19
+      name: BroomNA3F7
       rect:
         serializedVersion: 2
-        x: 1024
+        x: 128
         y: 0
-        width: 1024
-        height: 512
+        width: 128
+        height: 64
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -523,29 +523,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 607e152d483bf654d9cb1364bb6af691
-      internalID: 537220968
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: JanitorBroomAttackChainProto_20
-      rect:
-        serializedVersion: 2
-        x: 2048
-        y: 0
-        width: 1024
-        height: 512
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 651c30f6934a6d649b727682cc5ba543
-      internalID: -899235626
+      spriteID: 5df51a85e61304042890fdb8ab4a514d
+      internalID: -1657803961
       vertices: []
       indices: 
       edges: []
@@ -561,27 +540,26 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      JanitorBroomAttackChainProto_0: -2110104815
-      JanitorBroomAttackChainProto_1: 1371982218
-      JanitorBroomAttackChainProto_10: -561355639
-      JanitorBroomAttackChainProto_11: -1259114780
-      JanitorBroomAttackChainProto_12: -947823634
-      JanitorBroomAttackChainProto_13: -304577159
-      JanitorBroomAttackChainProto_14: 110847266
-      JanitorBroomAttackChainProto_15: -641859711
-      JanitorBroomAttackChainProto_16: -1169053667
-      JanitorBroomAttackChainProto_17: 450191066
-      JanitorBroomAttackChainProto_18: -2080287059
-      JanitorBroomAttackChainProto_19: 537220968
-      JanitorBroomAttackChainProto_2: 242320797
-      JanitorBroomAttackChainProto_20: -899235626
-      JanitorBroomAttackChainProto_3: 741766150
-      JanitorBroomAttackChainProto_4: -801437921
-      JanitorBroomAttackChainProto_5: -1073941657
-      JanitorBroomAttackChainProto_6: -1756353065
-      JanitorBroomAttackChainProto_7: -1238802947
-      JanitorBroomAttackChainProto_8: 739086860
-      JanitorBroomAttackChainProto_9: 38155978
+      BroomNA1F1: 72775354
+      BroomNA1F2: 96104792
+      BroomNA1F3: -2073646040
+      BroomNA1F4: -1688260001
+      BroomNA1F5: -376768768
+      BroomNA1F6: 1541107535
+      BroomNA1F7: 323628643
+      BroomNA2F1: 928407645
+      BroomNA2F2: 928407645
+      BroomNA2F3: 1616841876
+      BroomNA2F4: 721287739
+      BroomNA2F5: 1686826861
+      BroomNA2F6: 136211755
+      BroomNA3F1: 2117374475
+      BroomNA3F2: -311586821
+      BroomNA3F3: -1311552557
+      BroomNA3F4: -428254772
+      BroomNA3F5: 1597428803
+      BroomNA3F6: -722137942
+      BroomNA3F7: -1657803961
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
