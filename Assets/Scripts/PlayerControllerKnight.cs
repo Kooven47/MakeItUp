@@ -2,21 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerControllerJanitor : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
     private float horizontal;
-    public float speed;
-    public float jumpingPower;
+    private float speed = 8f;
+    private float jumpingPower = 16f;
     private bool isFacingRight = true;
-    private bool jumpKeyHeld;
-    private bool isJumping;
-    public Vector2 counterJumpForce;
 
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
-
-    [SerializeField] private Animator _anim;
 
     // Start is called before the first frame update
     void Start()
@@ -29,40 +24,22 @@ public class PlayerControllerJanitor : MonoBehaviour
     {
         horizontal = Input.GetAxisRaw("Horizontal");
 
-        if(Input.GetButtonDown("Jump"))
+        if (Input.GetButtonDown("Jump") && IsGrounded())
         {
-            jumpKeyHeld = true;
-            if (IsGrounded())
-            {
-                rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
-            }
-
-            if (rb.velocity.y > 0f)
-            {
-                rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
-            }
-        }
-        else if (Input.GetButtonUp("Jump"))
-        {
-            jumpKeyHeld = false;
+            rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
         }
 
+        if (Input.GetButtonDown("Jump") && rb.velocity.y > 0f)
+        {
+            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
+        }
 
         Flip();
     }
 
     private void FixedUpdate()
     {
-        _anim.SetBool("isMoving",horizontal != 0f);
-
         rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
-        if (!IsGrounded())
-        {
-            if (!jumpKeyHeld && Vector2.Dot(rb.velocity, Vector2.up) > 0)
-            {
-                rb.AddForce(counterJumpForce * rb.mass);
-            }
-        }
     }
 
     private bool IsGrounded()
