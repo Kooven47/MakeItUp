@@ -1,11 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerControllerJanitor : MonoBehaviour
 {
     private float horizontal;
-    public float speed;
+    private float speed;
+    public float normalSpeed;
+    public float sprintingSpeed;
     public float jumpingPower;
     private bool isFacingRight = true;
     private bool jumpKeyHeld;
@@ -15,21 +15,31 @@ public class PlayerControllerJanitor : MonoBehaviour
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
-
     [SerializeField] private Animator _anim;
 
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-
+        speed = normalSpeed;
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         horizontal = Input.GetAxisRaw("Horizontal");
+        
+        // Check if Shift key is held down to increase speed
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            speed = sprintingSpeed;
+        }
+        else
+        {
+            speed = normalSpeed;
+        }
 
-        if(Input.GetButtonDown("Jump"))
+
+        if (Input.GetButtonDown("Jump"))
         {
             jumpKeyHeld = true;
             if (IsGrounded())
@@ -54,7 +64,7 @@ public class PlayerControllerJanitor : MonoBehaviour
     private void FixedUpdate()
     {
         _anim.SetBool("isMoving",horizontal != 0f);
-
+        
         rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
         if (!IsGrounded())
         {
