@@ -5,6 +5,9 @@ using Pathfinding;
 
 public class EnemyAI : MonoBehaviour
 {
+    [SerializeField] private Transform groundCheck;
+    [SerializeField] private LayerMask groundLayer;
+
     [Header("Pathfinding")]
     public Transform target;
     public float activateDistance = 50f;
@@ -66,7 +69,7 @@ public class EnemyAI : MonoBehaviour
 
         // See if colliding with anything
         Vector3 startOffset = transform.position - new Vector3(0f, GetComponent<Collider2D>().bounds.extents.y + jumpCheckOffset);
-        isGrounded = Physics2D.Raycast(startOffset, -Vector3.up, 0.05f);
+        isGrounded = Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
 
         // Direction Calculation
         Vector2 direction = ((Vector2)path.vectorPath[currentWaypoint] - rb.position).normalized;
