@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public class PlayerControllerJanitor : MonoBehaviour
 {
@@ -15,8 +16,9 @@ public class PlayerControllerJanitor : MonoBehaviour
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
+    [SerializeField] private LayerMask platformLayer;
     [SerializeField] private Animator _anim;
-
+    
     // Start is called before the first frame update
     private void Start()
     {
@@ -38,11 +40,10 @@ public class PlayerControllerJanitor : MonoBehaviour
             speed = normalSpeed;
         }
 
-
         if (Input.GetButtonDown("Jump"))
         {
             jumpKeyHeld = true;
-            if (IsGrounded())
+            if (IsGrounded() || IsOnOneWayPlatform())
             {
                 rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
             }
@@ -56,7 +57,12 @@ public class PlayerControllerJanitor : MonoBehaviour
         {
             jumpKeyHeld = false;
         }
-
+        
+        // One way platforms
+        if (Input.GetKeyDown(KeyCode.S) && IsOnOneWayPlatform())
+        {
+            StartCoroutine(DisablePlatformCollision());
+        }
 
         Flip();
     }
@@ -66,7 +72,7 @@ public class PlayerControllerJanitor : MonoBehaviour
         _anim.SetBool("isMoving",horizontal != 0f);
         
         rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
-        if (!IsGrounded())
+        if (!IsGrounded() && !IsOnOneWayPlatform())
         {
             if (!jumpKeyHeld && Vector2.Dot(rb.velocity, Vector2.up) > 0)
             {
@@ -78,6 +84,26 @@ public class PlayerControllerJanitor : MonoBehaviour
     private bool IsGrounded()
     {
         return Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
+    }
+
+    private bool IsOnOneWayPlatform()
+    {
+        return Physics2D.OverlapCircle(groundCheck.position, 0.2f, platformLayer);
+    }
+
+    private IEnumerator DisablePlatformCollision()
+    {
+        var playerCollider = rb.GetComponent<Collider2D>();
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(groundCheck.position, 0.2f, platformLayer);
+        foreach (Collider2D collider in colliders)
+        {
+            Physics2D.IgnoreCollision(playerCollider, collider, true);
+        }
+        yield return new WaitForSeconds(0.5f);
+        foreach (Collider2D collider in colliders)
+        {
+            Physics2D.IgnoreCollision(playerCollider, collider, false);
+        }
     }
 
     private void Flip()
