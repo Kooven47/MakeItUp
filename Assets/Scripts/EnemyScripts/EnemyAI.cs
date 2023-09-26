@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,6 +8,7 @@ public class EnemyAI : MonoBehaviour
 {
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
+    [SerializeField] private LayerMask platformLayer;
     [SerializeField] private PlayerControllerJanitor playerController;
 
     [Header("Pathfinding")]
@@ -32,6 +34,7 @@ public class EnemyAI : MonoBehaviour
     private Path path;
     private int currentWaypoint = 0;
     bool isGrounded = false;
+    bool IsOnOneWayPlatform = false;
     Seeker seeker;
     Rigidbody2D rb;
     float time = 0f;
@@ -47,6 +50,7 @@ public class EnemyAI : MonoBehaviour
     }
     private void FixedUpdate()
     {
+        print(rb.velocity);
         if (TargetInDistance() && followEnabled)
         {
             PathFollow();
@@ -54,7 +58,7 @@ public class EnemyAI : MonoBehaviour
     }
     private void UpdatePath()
     {
-        print(timeSincePathStart);
+        // print(timeSincePathStart);
         if (!isFollowingJumpPath && followEnabled && TargetInDistance() && seeker.IsDone())
         {
             if (playerController.jumpList.Count > 0)
@@ -71,8 +75,11 @@ public class EnemyAI : MonoBehaviour
         }
         else if (isFollowingJumpPath && (timeSincePathStart <= 0))
         {
-            isFollowingJumpPath = false;
-            playerController.jumpList.Clear();
+            if ((Math.Abs(rb.velocity.x) < 0.5) || (Math.Abs(rb.velocity.y) < 0.5)) 
+            {
+                isFollowingJumpPath = false;
+                playerController.jumpList.Clear();
+            }
         }
         else if (timeSincePathStart > 0)
         {
@@ -95,15 +102,17 @@ public class EnemyAI : MonoBehaviour
         }
 
         // See if colliding with anything
-        Vector3 startOffset = transform.position - new Vector3(0f, GetComponent<Collider2D>().bounds.extents.y + jumpCheckOffset);
+        // Vector3 startOffset = transform.position - new Vector3(0f, GetComponent<Collider2D>().bounds.extents.y + jumpCheckOffset);
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
 
+        IsOnOneWayPlatform = Physics2D.OverlapCircle(groundCheck.position, 0.2f, platformLayer);
+        
         // Direction Calculation
         Vector2 direction = ((Vector2)path.vectorPath[currentWaypoint] - rb.position).normalized;
         Vector2 force = direction * speed * Time.deltaTime;
 
         // Jump
-        if (jumpEnabled && isGrounded)
+        if (jumpEnabled && (isGrounded || IsOnOneWayPlatform))
         {
             if (time > 0f)
             {
@@ -120,7 +129,7 @@ public class EnemyAI : MonoBehaviour
         }
 
         // Movement
-        if (!isGrounded)
+        if (!isGrounded && !IsOnOneWayPlatform)
         {
           if (!flyingEnabled)
             force.y = 0;
