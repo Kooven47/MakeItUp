@@ -7,11 +7,13 @@ public class EnemyAI : MonoBehaviour
 {
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
+    [SerializeField] private PlayerControllerJanitor playerController;
 
     [Header("Pathfinding")]
     public Transform target;
     public float activateDistance = 50f;
     public float pathUpdateSeconds = 0.5f;
+    // float stuckDelay = 0f; // This is the delay to skip to the next path if the enemy is stuck when attempting a player history jump
 
     [Header("Physics")]
     public float speed = 200f;
@@ -33,6 +35,8 @@ public class EnemyAI : MonoBehaviour
     Seeker seeker;
     Rigidbody2D rb;
     float time = 0f;
+    float timeSincePathStart = 0f;
+    private bool isFollowingJumpPath = false;
 
     public void Start()
     {
@@ -50,21 +54,33 @@ public class EnemyAI : MonoBehaviour
     }
     private void UpdatePath()
     {
-        if (followEnabled && TargetInDistance() && seeker.IsDone())
+        if (!isFollowingJumpPath && followEnabled && TargetInDistance() && seeker.IsDone())
         {
-            seeker.StartPath(rb.position, target.position, OnPathComplete);
+            if (playerController.jumpList.Count > 0)
+            {
+                Vector2 nextPostion = playerController.jumpList.Dequeue();
+                seeker.StartPath(rb.position, nextPostion, OnPathComplete);
+                isFollowingJumpPath = true;
+            }
+            else
+            {
+                seeker.StartPath(rb.position, target.position, OnPathComplete);
+            }
         }
+
     } 
     private void PathFollow()
     {
         if (path == null)
         {
+            isFollowingJumpPath = false;
             return;
         }
-
+        
         // Reached end of path
         if (currentWaypoint >= path.vectorPath.Count)
         {
+            isFollowingJumpPath = false;
             return;
         }
 
