@@ -25,6 +25,7 @@ public class EnemyAI : MonoBehaviour
     public bool followEnabled = true;
     public bool jumpEnabled = true;
     public bool directionLookEnabled = true;
+    public bool flyingEnabled = false;
 
     private Path path;
     private int currentWaypoint = 0;
@@ -95,6 +96,7 @@ public class EnemyAI : MonoBehaviour
         // Movement
         if (!isGrounded)
         {
+          if (!flyingEnabled)
             force.y = 0;
         }
         rb.AddForce(force);
