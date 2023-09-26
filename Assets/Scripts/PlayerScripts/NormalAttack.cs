@@ -5,13 +5,15 @@ using UnityEngine;
 public class NormalAttack : MonoBehaviour
 {
     [SerializeField]private Animator _anim;
-    bool _attackBuffer = false, _inAttack = false;
+
+    int _attackBuffer = 0,_inAttack = 0;
     [SerializeField]int _chain = 0;
     [SerializeField]Collider2D _hurtBox;
     [SerializeField]ContactFilter2D _hurtLayers;
     public AnimatorOverrideController aoc;
 
-    [SerializeField]private List<PlayerAbility> _normalAttacks = new List<PlayerAbility>(3);
+    [SerializeField]private List<PlayerAbility> _broomNormalAttacks = new List<PlayerAbility>(3);
+    [SerializeField]private List<PlayerAbility> _mopNormalAttacks = new List<PlayerAbility>(3);
 
     // Start is called before the first frame update
     void Start()
@@ -23,17 +25,17 @@ public class NormalAttack : MonoBehaviour
 
     void Recover()
     {
-        if (_attackBuffer)
+        if (_attackBuffer != 0)
         {
-            _attackBuffer = false;
-            Attack();
+            Attack(_attackBuffer);
         }
         else
         {
             Debug.Log("End Chain");
-            _inAttack = false;
+            _inAttack = 0;
             _chain = 0;
         }
+        _attackBuffer = 0;
     }
 
 
@@ -56,7 +58,7 @@ public class NormalAttack : MonoBehaviour
 
                 if (damageEffect != null && col.CompareTag("Enemy"))
                 {
-                    damageEffect.TriggerEffect();
+                    damageEffect.TriggerEffect(_inAttack);
                     didHit = true;
                 }
                     
@@ -70,30 +72,51 @@ public class NormalAttack : MonoBehaviour
         }
     }
 
-    void Attack()
+    void Attack(int weapon)
     {
+        if (weapon == 1)
+        {
+            aoc["Attack"] = _broomNormalAttacks[_chain].animations[0];
+            aoc["Rec"] = _broomNormalAttacks[_chain].animations[1];
+        }
+        else if (weapon == 2)
+        {
+            aoc["Attack"] = _mopNormalAttacks[_chain].animations[0];
+            aoc["Rec"] = _mopNormalAttacks[_chain].animations[1];
+        }
         
-        aoc["Attack"] = _normalAttacks[_chain].animations[0];
-        aoc["Rec"] = _normalAttacks[_chain].animations[1];
         _anim.Play("Attack");
 
-        _chain = (_chain + 1) % _normalAttacks.Count;
+        _chain = (_chain + 1) % _broomNormalAttacks.Count;
 
-        _inAttack = true;
+        _inAttack = weapon;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyUp("z"))
+        if (Input.GetKeyUp("z") && _attackBuffer == 0)
         {
-            if (!_inAttack)
+            if (_inAttack == 0)
             {
-                Attack();
+                Attack(1);
             }
             else
             {
-                _attackBuffer = true;
+                _attackBuffer = 1;
+            }
+                
+        }
+
+        if (Input.GetKeyUp("x") && _attackBuffer == 0)
+        {
+            if (_inAttack == 0)
+            {
+                Attack(2);
+            }
+            else
+            {
+                _attackBuffer = 2;
             }
                 
         }

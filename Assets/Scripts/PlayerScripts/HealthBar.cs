@@ -102,13 +102,13 @@ public class HealthBar : MonoBehaviour
     void Update()
     {
         // For test purposes. Later on the HP management will be done by stat script.
-        if (Input.GetKeyUp("x"))
-        {
-            SetHealth(_testCurHP - 7f,_testMaxHP);
-        }
-        if (Input.GetKeyUp("c"))
-        {
-            SetHealth(_testCurHP + 7f,_testMaxHP);
-        }
+        // if (Input.GetKeyUp("x"))
+        // {
+        //     SetHealth(_testCurHP - 7f,_testMaxHP);
+        // }
+        // if (Input.GetKeyUp("c"))
+        // {
+        //     SetHealth(_testCurHP + 7f,_testMaxHP);
+        // }
     }
 }
