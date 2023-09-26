@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using System.Collections;
 
@@ -12,13 +13,14 @@ public class PlayerControllerJanitor : MonoBehaviour
     private bool jumpKeyHeld;
     private bool isJumping;
     public Vector2 counterJumpForce;
+    public Queue<Vector2> jumpList = new Queue<Vector2>();
 
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private LayerMask platformLayer;
     [SerializeField] private Animator _anim;
-    
+    public int maxJumpTrackNum = 3; // This is the number of jump history you want to keep track of for the ai to follow 
     // Start is called before the first frame update
     private void Start()
     {
@@ -45,6 +47,10 @@ public class PlayerControllerJanitor : MonoBehaviour
             jumpKeyHeld = true;
             if (IsGrounded() || IsOnOneWayPlatform())
             {
+                // This keeps track of the jumps for the a* platforming
+                if (jumpList.Count < maxJumpTrackNum)
+                    jumpList.Enqueue(rb.position);  
+
                 rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
             }
 
@@ -115,5 +121,10 @@ public class PlayerControllerJanitor : MonoBehaviour
             localScale.x *= -1f;
             transform.localScale = localScale;
         }
+    }
+
+    public Queue<Vector2> GetJumpList()
+    {
+        return jumpList;
     }
 }
