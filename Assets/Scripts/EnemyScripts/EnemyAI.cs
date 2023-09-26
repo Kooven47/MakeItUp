@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,11 +8,14 @@ public class EnemyAI : MonoBehaviour
 {
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
+    [SerializeField] private LayerMask platformLayer;
+    [SerializeField] private PlayerControllerJanitor playerController;
 
     [Header("Pathfinding")]
     public Transform target;
     public float activateDistance = 50f;
     public float pathUpdateSeconds = 0.5f;
+    public float stuckDelay = 0f; // This is the delay to skip to the next path if the enemy is stuck when attempting a player history jump
 
     [Header("Physics")]
     public float speed = 200f;
@@ -19,19 +23,23 @@ public class EnemyAI : MonoBehaviour
     public float jumpNodeHeightRequirement = 0.8f;
     public float jumpModifier = 0.3f;
     public float jumpCheckOffset = 0.1f;
-    public float jumpDelay = 0.0f; // Implement in future
+    public float jumpDelay = 0.0f;
 
     [Header("Custom Behavior")]
     public bool followEnabled = true;
     public bool jumpEnabled = true;
     public bool directionLookEnabled = true;
+    public bool flyingEnabled = false;
 
     private Path path;
     private int currentWaypoint = 0;
     bool isGrounded = false;
+    bool IsOnOneWayPlatform = false;
     Seeker seeker;
     Rigidbody2D rb;
     float time = 0f;
+    float timeSincePathStart = 0f;
+    private bool isFollowingJumpPath = false;
 
     public void Start()
     {
@@ -42,6 +50,7 @@ public class EnemyAI : MonoBehaviour
     }
     private void FixedUpdate()
     {
+        print(rb.velocity);
         if (TargetInDistance() && followEnabled)
         {
             PathFollow();
@@ -49,34 +58,61 @@ public class EnemyAI : MonoBehaviour
     }
     private void UpdatePath()
     {
-        if (followEnabled && TargetInDistance() && seeker.IsDone())
+        // print(timeSincePathStart);
+        if (!isFollowingJumpPath && followEnabled && TargetInDistance() && seeker.IsDone())
         {
-            seeker.StartPath(rb.position, target.position, OnPathComplete);
+            if (playerController.jumpList.Count > 0)
+            {
+                Vector2 nextPostion = playerController.jumpList.Dequeue();
+                seeker.StartPath(rb.position, nextPostion, OnPathComplete);
+                isFollowingJumpPath = true;
+                timeSincePathStart = stuckDelay;
+            }
+            else
+            {
+                seeker.StartPath(rb.position, target.position, OnPathComplete);
+            }
+        }
+        else if (isFollowingJumpPath && (timeSincePathStart <= 0))
+        {
+            if ((Math.Abs(rb.velocity.x) < 0.5) || (Math.Abs(rb.velocity.y) < 0.5)) 
+            {
+                isFollowingJumpPath = false;
+                playerController.jumpList.Clear();
+            }
+        }
+        else if (timeSincePathStart > 0)
+        {
+            timeSincePathStart -= (Time.deltaTime * 120);
         }
     } 
     private void PathFollow()
     {
         if (path == null)
         {
+            isFollowingJumpPath = false;
             return;
         }
-
+        
         // Reached end of path
         if (currentWaypoint >= path.vectorPath.Count)
         {
+            isFollowingJumpPath = false;
             return;
         }
 
         // See if colliding with anything
-        Vector3 startOffset = transform.position - new Vector3(0f, GetComponent<Collider2D>().bounds.extents.y + jumpCheckOffset);
+        // Vector3 startOffset = transform.position - new Vector3(0f, GetComponent<Collider2D>().bounds.extents.y + jumpCheckOffset);
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
 
+        IsOnOneWayPlatform = Physics2D.OverlapCircle(groundCheck.position, 0.2f, platformLayer);
+        
         // Direction Calculation
         Vector2 direction = ((Vector2)path.vectorPath[currentWaypoint] - rb.position).normalized;
         Vector2 force = direction * speed * Time.deltaTime;
 
         // Jump
-        if (jumpEnabled && isGrounded)
+        if (jumpEnabled && (isGrounded || IsOnOneWayPlatform))
         {
             if (time > 0f)
             {
@@ -93,8 +129,9 @@ public class EnemyAI : MonoBehaviour
         }
 
         // Movement
-        if (!isGrounded)
+        if (!isGrounded && !IsOnOneWayPlatform)
         {
+          if (!flyingEnabled)
             force.y = 0;
         }
         rb.AddForce(force);
