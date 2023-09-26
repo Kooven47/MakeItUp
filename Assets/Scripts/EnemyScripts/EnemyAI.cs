@@ -13,7 +13,7 @@ public class EnemyAI : MonoBehaviour
     public Transform target;
     public float activateDistance = 50f;
     public float pathUpdateSeconds = 0.5f;
-    // float stuckDelay = 0f; // This is the delay to skip to the next path if the enemy is stuck when attempting a player history jump
+    public float stuckDelay = 0f; // This is the delay to skip to the next path if the enemy is stuck when attempting a player history jump
 
     [Header("Physics")]
     public float speed = 200f;
@@ -21,7 +21,7 @@ public class EnemyAI : MonoBehaviour
     public float jumpNodeHeightRequirement = 0.8f;
     public float jumpModifier = 0.3f;
     public float jumpCheckOffset = 0.1f;
-    public float jumpDelay = 0.0f; // Implement in future
+    public float jumpDelay = 0.0f;
 
     [Header("Custom Behavior")]
     public bool followEnabled = true;
@@ -54,6 +54,7 @@ public class EnemyAI : MonoBehaviour
     }
     private void UpdatePath()
     {
+        print(timeSincePathStart);
         if (!isFollowingJumpPath && followEnabled && TargetInDistance() && seeker.IsDone())
         {
             if (playerController.jumpList.Count > 0)
@@ -61,13 +62,22 @@ public class EnemyAI : MonoBehaviour
                 Vector2 nextPostion = playerController.jumpList.Dequeue();
                 seeker.StartPath(rb.position, nextPostion, OnPathComplete);
                 isFollowingJumpPath = true;
+                timeSincePathStart = stuckDelay;
             }
             else
             {
                 seeker.StartPath(rb.position, target.position, OnPathComplete);
             }
         }
-
+        else if (isFollowingJumpPath && (timeSincePathStart <= 0))
+        {
+            isFollowingJumpPath = false;
+            playerController.jumpList.Clear();
+        }
+        else if (timeSincePathStart > 0)
+        {
+            timeSincePathStart -= (Time.deltaTime * 120);
+        }
     } 
     private void PathFollow()
     {

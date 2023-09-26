@@ -395,6 +395,7 @@ MonoBehaviour:
   target: {fileID: 159826991}
   activateDistance: 50
   pathUpdateSeconds: 0.5
+  stuckDelay: 4
   speed: 500
   nextWaypointDistance: 0.8
   jumpNodeHeightRequirement: 0.15
@@ -556,7 +557,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   _anim: {fileID: 297442758}
-  maxJumpTrackNum: 3
+  maxJumpTrackNum: 99
 --- !u!114 &159826993
 MonoBehaviour:
   m_ObjectHideFlags: 0
