@@ -52,6 +52,7 @@ public class EnemyAI : MonoBehaviour
     }
     private void FixedUpdate()
     {
+        print(rb.velocity);
         if (TargetInDistance() && followEnabled)
         {
             PathFollow();
