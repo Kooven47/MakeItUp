@@ -384,6 +384,8 @@ MonoBehaviour:
   activateDistance: 50
   pathUpdateSeconds: 0.5
   stuckDelay: 3
+  minDropAngle: 240
+  maxDropAngle: 300
   speed: 500
   nextWaypointDistance: 0.8
   jumpNodeHeightRequirement: 0.15
@@ -826,6 +828,8 @@ MonoBehaviour:
   activateDistance: 50
   pathUpdateSeconds: 0.5
   stuckDelay: 3
+  minDropAngle: 240
+  maxDropAngle: 300
   speed: 500
   nextWaypointDistance: 0.8
   jumpNodeHeightRequirement: 0.15
@@ -1306,9 +1310,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43ebb0d3ad1d1714db114dddf19daed8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defaultOrthographicSize: 4.8
+  defaultOrthographicSize: 2.5
   minOrthographicSize: 1
-  maxOrthographicSize: 7.28
+  maxOrthographicSize: 5
 --- !u!1 &588837973
 GameObject:
   m_ObjectHideFlags: 0
@@ -1420,6 +1424,8 @@ MonoBehaviour:
   activateDistance: 50
   pathUpdateSeconds: 0.5
   stuckDelay: 3
+  minDropAngle: 240
+  maxDropAngle: 300
   speed: 500
   nextWaypointDistance: 0.8
   jumpNodeHeightRequirement: 0.15
@@ -7567,6 +7573,8 @@ MonoBehaviour:
   activateDistance: 50
   pathUpdateSeconds: 0.5
   stuckDelay: 3
+  minDropAngle: 240
+  maxDropAngle: 300
   speed: 500
   nextWaypointDistance: 0.8
   jumpNodeHeightRequirement: 0.15
@@ -7799,6 +7807,8 @@ MonoBehaviour:
   activateDistance: 50
   pathUpdateSeconds: 0.5
   stuckDelay: 3
+  minDropAngle: 240
+  maxDropAngle: 300
   speed: 500
   nextWaypointDistance: 0.8
   jumpNodeHeightRequirement: 0.15
@@ -8217,6 +8227,8 @@ MonoBehaviour:
   activateDistance: 50
   pathUpdateSeconds: 0.5
   stuckDelay: 3
+  minDropAngle: 240
+  maxDropAngle: 300
   speed: 500
   nextWaypointDistance: 0.8
   jumpNodeHeightRequirement: 0.15
