@@ -14,16 +14,19 @@ public class PlayerControllerJanitor : MonoBehaviour
     private bool isJumping;
     public Vector2 counterJumpForce;
     public Queue<Vector2> jumpList = new Queue<Vector2>();
-
+    EnemyAI[] enemyAIList;
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private LayerMask platformLayer;
     [SerializeField] private Animator _anim;
-    public int maxJumpTrackNum = 3; // This is the number of jump history you want to keep track of for the ai to follow 
+
+ 
+    // public int maxJumpTrackNum = 3; // This is the number of jump history you want to keep track of for the ai to follow 
     // Start is called before the first frame update
     private void Start()
     {
+        enemyAIList = FindObjectsOfType<EnemyAI>();
         speed = normalSpeed;
     }
 
@@ -48,10 +51,14 @@ public class PlayerControllerJanitor : MonoBehaviour
             if (IsGrounded() || IsOnOneWayPlatform())
             {
                 // This keeps track of the jumps for the a* platforming
-                if (jumpList.Count < maxJumpTrackNum)
-                    jumpList.Enqueue(rb.position);  
+                foreach (EnemyAI enemy in enemyAIList)
+                {
+                    enemy.newJumpPosition(rb.position);
+                }
 
-                rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
+
+
+                    rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
             }
 
             if (rb.velocity.y > 0f)
@@ -123,8 +130,4 @@ public class PlayerControllerJanitor : MonoBehaviour
         }
     }
 
-    public Queue<Vector2> GetJumpList()
-    {
-        return jumpList;
-    }
 }
