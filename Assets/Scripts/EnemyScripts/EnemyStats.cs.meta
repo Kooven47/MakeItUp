@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Scripts/EnemyScripts/EnemyStats.cs.meta
 guid: f3a22861b8619d24ba3bd3971ecdff31
+========
+guid: 126312cec99dc9a44957fd7a003811c0
+>>>>>>>> main:Assets/Scripts/PlayerControllerKnight.cs.meta
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
