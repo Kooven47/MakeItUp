@@ -18,6 +18,8 @@ public class EnemyAI : MonoBehaviour
     public float stuckDelay = 0f; // This is the delay to skip to the next path if the enemy is stuck when attempting a player history jump
 
     [Header("Physics")]
+    public float minDropAngle = 240;
+    public float maxDropAngle = 300;
     public float speed = 200f;
     public float nextWaypointDistance = 3f;
     public float jumpNodeHeightRequirement = 0.8f;
@@ -50,7 +52,7 @@ public class EnemyAI : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        print(rb.velocity);
+        // print(rb.velocity);
         if (TargetInDistance() && followEnabled)
         {
             PathFollow();
@@ -135,6 +137,20 @@ public class EnemyAI : MonoBehaviour
             force.y = 0;
         }
         rb.AddForce(force);
+        
+        // One way platforms
+        if (IsOnOneWayPlatform)
+        {
+            // Only go down if direction from path to player is downwards-ish, angle can be adjusted
+            // Converts radians in arctan's domain to degrees from 0-360
+            var directionInDegrees = Math.Atan2(direction.y, direction.x);
+            directionInDegrees *= (180 / Math.PI);
+            directionInDegrees = (directionInDegrees + 360) % 360;
+            if (directionInDegrees >= minDropAngle && directionInDegrees <= maxDropAngle)
+            {
+                StartCoroutine(DisablePlatformCollision());
+            }
+        }
 
         // Next Waypoint
         float distance = Vector2.Distance(rb.position, path.vectorPath[currentWaypoint]);
@@ -169,5 +185,20 @@ public class EnemyAI : MonoBehaviour
             path = p;
             currentWaypoint = 0;
         }    
+    }
+    
+    private IEnumerator DisablePlatformCollision()
+    {
+        var playerCollider = rb.GetComponent<Collider2D>();
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(groundCheck.position, 0.2f, platformLayer);
+        foreach (Collider2D collider in colliders)
+        {
+            Physics2D.IgnoreCollision(playerCollider, collider, true);
+        }
+        yield return new WaitForSeconds(0.5f);
+        foreach (Collider2D collider in colliders)
+        {
+            Physics2D.IgnoreCollision(playerCollider, collider, false);
+        }
     }
 }
