@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,12 +6,15 @@ using UnityEngine;
 public class NormalAttack : MonoBehaviour
 {
     [SerializeField]private Animator _anim;
+    [SerializeField]private PlayerStats _playerStat;
 
     int _attackBuffer = 0,_inAttack = 0;
     [SerializeField]int _chain = 0;
     [SerializeField]Collider2D _hurtBox;
     [SerializeField]ContactFilter2D _hurtLayers;
     public AnimatorOverrideController aoc;
+
+    EnumLib.DamageType _activeDamageType = EnumLib.DamageType.Neutral;
 
     [SerializeField]private List<PlayerAbility> _broomNormalAttacks = new List<PlayerAbility>(3);
     [SerializeField]private List<PlayerAbility> _mopNormalAttacks = new List<PlayerAbility>(3);
@@ -59,6 +63,7 @@ public class NormalAttack : MonoBehaviour
                 if (damageEffect != null && col.CompareTag("Enemy"))
                 {
                     damageEffect.TriggerEffect(_inAttack);
+                    col.gameObject.GetComponent<EnemyStats>().DamageCalc(_playerStat.attack,_activeDamageType,false);
                     didHit = true;
                 }
                     
@@ -84,6 +89,10 @@ public class NormalAttack : MonoBehaviour
             aoc["Attack"] = _mopNormalAttacks[_chain].animations[0];
             aoc["Rec"] = _mopNormalAttacks[_chain].animations[1];
         }
+
+        _activeDamageType = (EnumLib.DamageType)weapon;
+
+        Debug.Log("Current Damage Type is "+_activeDamageType.ToString());
         
         _anim.Play("Attack");
 

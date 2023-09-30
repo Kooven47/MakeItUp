@@ -51,3 +51,6 @@ TagManager:
   - name: FX
     uniqueID: 1032589667
     locked: 0
+  - name: EffectNumbers
+    uniqueID: 2498930675
+    locked: 0

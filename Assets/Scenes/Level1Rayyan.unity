@@ -265,6 +265,7 @@ GameObject:
   - component: {fileID: 149738208}
   - component: {fileID: 149738207}
   - component: {fileID: 149738209}
+  - component: {fileID: 149738210}
   m_Layer: 8
   m_Name: Enemy
   m_TagString: Enemy
@@ -376,6 +377,23 @@ MonoBehaviour:
   _numHitFX: 5
   _dustFXPrefab: {fileID: 6472207152727060526, guid: a97461cc9776c3146bfb0f1f2fd41cb8, type: 3}
   _splashFXPrefab: {fileID: 5744230232610498280, guid: c16f56c36c4a5704db6915657ed34405, type: 3}
+--- !u!114 &149738210
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 149738205}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3a22861b8619d24ba3bd3971ecdff31, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _maxHP: 50
+  _attack: 5
+  _defense: 2
+  _moveSpeed: 1
+  _attribute: 2
 --- !u!1 &159826987
 GameObject:
   m_ObjectHideFlags: 0
@@ -389,6 +407,7 @@ GameObject:
   - component: {fileID: 159826988}
   - component: {fileID: 159826992}
   - component: {fileID: 159826993}
+  - component: {fileID: 159826994}
   m_Layer: 7
   m_Name: Janitor
   m_TagString: Player
@@ -513,6 +532,24 @@ MonoBehaviour:
   _numHitFX: 5
   _dustFXPrefab: {fileID: 6472207152727060526, guid: a97461cc9776c3146bfb0f1f2fd41cb8, type: 3}
   _splashFXPrefab: {fileID: 5744230232610498280, guid: c16f56c36c4a5704db6915657ed34405, type: 3}
+--- !u!114 &159826994
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 159826987}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3c28381c12b23c419e1920aa36f5649, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _maxHP: 100
+  _attack: 5
+  _defense: 2
+  _moveSpeed: 1
+  _critRate: 0.05
+  _critDMG: 0.5
 --- !u!1001 &165778963
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -974,6 +1011,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _anim: {fileID: 0}
+  _playerStat: {fileID: 159826994}
   _chain: 0
   _hurtBox: {fileID: 1582571412}
   _hurtLayers:
@@ -2341,6 +2379,53 @@ Transform:
   m_Children: []
   m_Father: {fileID: 149738206}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1880353850
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1880353852}
+  - component: {fileID: 1880353851}
+  m_Layer: 8
+  m_Name: DamageNumbers
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1880353851
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1880353850}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e868a5f7b71c08d46a51f2e7b6f9b0c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _damageNumPrefab: {fileID: 7230832556009651920, guid: 8f11aa39f2450324d87defa802b35466, type: 3}
+  _damageNumCount: 10
+  _positionVariance: 0.5
+--- !u!4 &1880353852
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1880353850}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -2.68, y: -1.09, z: 0}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1963227732
 GameObject:
   m_ObjectHideFlags: 0
@@ -3047,6 +3132,7 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 850116251}
+  - {fileID: 1880353852}
   - {fileID: 1187996051}
   - {fileID: 1697887447}
   - {fileID: 756989922}
