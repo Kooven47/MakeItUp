@@ -9,13 +9,13 @@ public class EnemyAI : MonoBehaviour
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private LayerMask platformLayer;
-    [SerializeField] private PlayerControllerJanitor playerController;
 
     [Header("Pathfinding")]
     public Transform target;
     public float activateDistance = 50f;
     public float pathUpdateSeconds = 0.5f;
     public float stuckDelay = 0f; // This is the delay to skip to the next path if the enemy is stuck when attempting a player history jump
+    public int maxJumpTrackNum = 3;
 
     [Header("Physics")]
     public float minDropAngle = 240;
@@ -43,6 +43,8 @@ public class EnemyAI : MonoBehaviour
     float timeSincePathStart = 0f;
     private bool isFollowingJumpPath = false;
 
+    public Queue<Vector2> jumpList = new Queue<Vector2>();
+
     public void Start()
     {
         seeker = GetComponent<Seeker>();
@@ -63,9 +65,9 @@ public class EnemyAI : MonoBehaviour
         // print(timeSincePathStart);
         if (!isFollowingJumpPath && followEnabled && TargetInDistance() && seeker.IsDone())
         {
-            if (playerController.jumpList.Count > 0)
+            if (jumpList.Count > 0)
             {
-                Vector2 nextPostion = playerController.jumpList.Dequeue();
+                Vector2 nextPostion = jumpList.Dequeue();
                 seeker.StartPath(rb.position, nextPostion, OnPathComplete);
                 isFollowingJumpPath = true;
                 timeSincePathStart = stuckDelay;
@@ -80,7 +82,7 @@ public class EnemyAI : MonoBehaviour
             if ((Math.Abs(rb.velocity.x) < 0.5) || (Math.Abs(rb.velocity.y) < 0.5)) 
             {
                 isFollowingJumpPath = false;
-                playerController.jumpList.Clear();
+                jumpList.Clear();
             }
         }
         else if (timeSincePathStart > 0)
@@ -200,5 +202,10 @@ public class EnemyAI : MonoBehaviour
         {
             Physics2D.IgnoreCollision(playerCollider, collider, false);
         }
+    }
+    public void newJumpPosition(Vector2 position)
+    {
+        if (jumpList.Count < maxJumpTrackNum)
+            jumpList.Enqueue(position);
     }
 }
