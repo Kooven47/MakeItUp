@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Collections;
@@ -12,6 +13,7 @@ public class PlayerControllerJanitor : MonoBehaviour
     private bool isFacingRight = true;
     private bool jumpKeyHeld;
     private bool isJumping;
+    private bool isGrounded;
     public Vector2 counterJumpForce;
     public Queue<Vector2> jumpList = new Queue<Vector2>();
     EnemyAI[] enemyAIList;
@@ -20,7 +22,13 @@ public class PlayerControllerJanitor : MonoBehaviour
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private LayerMask platformLayer;
     [SerializeField] private Animator _anim;
-
+    
+    [Header("Sound Effects")]
+    [SerializeField] private AudioSource jumpSoundEffect;
+    [SerializeField] private AudioSource dropThroughSoundEffect;
+    [SerializeField] private AudioSource landingSound;
+    [SerializeField] private AudioSource walkingSound;
+    [SerializeField] private AudioSource sprintingSound;
  
     // public int maxJumpTrackNum = 3; // This is the number of jump history you want to keep track of for the ai to follow 
     // Start is called before the first frame update
@@ -44,7 +52,43 @@ public class PlayerControllerJanitor : MonoBehaviour
         {
             speed = normalSpeed;
         }
-
+        
+        // Handle footsteps
+        if (IsGrounded() || IsOnOneWayPlatform())
+        {
+            // Just landed
+            if (isGrounded == false)
+            {
+                landingSound.Play();
+            }
+            isGrounded = true;
+            
+            if (Math.Abs(horizontal) > 0f)
+            {
+                if (speed == sprintingSpeed)
+                {
+                    walkingSound.enabled = false;
+                    sprintingSound.enabled = true;
+                }
+                else if (speed == normalSpeed)
+                {
+                    walkingSound.enabled = true;
+                    sprintingSound.enabled = false;
+                }
+            }
+            else
+            {
+                walkingSound.enabled = false;
+                sprintingSound.enabled = false;
+            }
+        }
+        else
+        {
+            isGrounded = false;
+            walkingSound.enabled = false;
+            sprintingSound.enabled = false;
+        }
+        
         if (Input.GetButtonDown("Jump"))
         {
             jumpKeyHeld = true;
@@ -55,10 +99,9 @@ public class PlayerControllerJanitor : MonoBehaviour
                 {
                     enemy.newJumpPosition(rb.position);
                 }
-
-
-
-                    rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
+                
+                jumpSoundEffect.Play();
+                rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
             }
 
             if (rb.velocity.y > 0f)
@@ -75,6 +118,7 @@ public class PlayerControllerJanitor : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.S) && IsOnOneWayPlatform())
         {
             StartCoroutine(DisablePlatformCollision());
+            dropThroughSoundEffect.Play();
         }
 
         Flip();
@@ -129,5 +173,4 @@ public class PlayerControllerJanitor : MonoBehaviour
             transform.localScale = localScale;
         }
     }
-
 }
