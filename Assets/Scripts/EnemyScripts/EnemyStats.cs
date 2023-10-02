@@ -15,6 +15,7 @@ public class EnemyStats : Stats
     {
         float damage = (attack - _defense/2f) * (isCrit ? 1.0f : 1.5f);
         int effective = 0;
+        Debug.Log("Attribute is "+attribute);
         if (_attribute == attribute)
         {
             Debug.Log("Weakness!");

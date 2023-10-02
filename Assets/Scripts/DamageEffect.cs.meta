@@ -3,7 +3,9 @@ guid: 68ad60f36eb6f2a4da70fc3e6b39ef1e
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - _dustFXPrefab: {fileID: 6472207152727060526, guid: a97461cc9776c3146bfb0f1f2fd41cb8, type: 3}
+  - _splashFXPrefab: {fileID: 5744230232610498280, guid: c16f56c36c4a5704db6915657ed34405, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
