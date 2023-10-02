@@ -269,8 +269,8 @@ GameObject:
   - component: {fileID: 149738206}
   - component: {fileID: 149738208}
   - component: {fileID: 149738207}
-  - component: {fileID: 149738209}
   - component: {fileID: 149738210}
+  - component: {fileID: 149738211}
   m_Layer: 8
   m_Name: Enemy
   m_TagString: Enemy
@@ -367,21 +367,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2.79, y: 2.41}
   m_EdgeRadius: 0
---- !u!114 &149738209
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 149738205}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 68ad60f36eb6f2a4da70fc3e6b39ef1e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _numHitFX: 5
-  _dustFXPrefab: {fileID: 0}
-  _splashFXPrefab: {fileID: 0}
 --- !u!114 &149738210
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -399,6 +384,21 @@ MonoBehaviour:
   _defense: 2
   _moveSpeed: 1
   _attribute: 2
+--- !u!114 &149738211
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 149738205}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68ad60f36eb6f2a4da70fc3e6b39ef1e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _numHitFX: 5
+  _dustFXPrefab: {fileID: 6472207152727060526, guid: a97461cc9776c3146bfb0f1f2fd41cb8, type: 3}
+  _splashFXPrefab: {fileID: 5744230232610498280, guid: c16f56c36c4a5704db6915657ed34405, type: 3}
 --- !u!1 &159826987
 GameObject:
   m_ObjectHideFlags: 0
@@ -2170,10 +2170,10 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 5.12, y: 5.12}
+  m_Size: {x: 0.64, y: 0.64}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &1697887445
