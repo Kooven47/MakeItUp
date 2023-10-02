@@ -123,6 +123,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &61697650 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5744230232610498280, guid: c16f56c36c4a5704db6915657ed34405, type: 3}
+  m_PrefabInstance: {fileID: 2391676159451276339}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &149192582
 GameObject:
   m_ObjectHideFlags: 0
@@ -374,6 +379,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68ad60f36eb6f2a4da70fc3e6b39ef1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _numHitFX: 5
+  _dustFXPrefab: {fileID: 0}
+  _splashFXPrefab: {fileID: 0}
 --- !u!114 &149738210
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -505,8 +513,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec20565aebebc1c41b4efff3d6714206, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  normalSpeed: 0
-  sprintingSpeed: 0
+  normalSpeed: 6
+  sprintingSpeed: 12
   jumpingPower: 15
   counterJumpForce: {x: 0, y: -30}
   rb: {fileID: 159826988}
@@ -531,6 +539,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68ad60f36eb6f2a4da70fc3e6b39ef1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _numHitFX: 5
+  _dustFXPrefab: {fileID: 633380393}
+  _splashFXPrefab: {fileID: 61697650}
 --- !u!114 &159826994
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1010,6 +1021,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _anim: {fileID: 0}
+  _playerStat: {fileID: 0}
   _chain: 0
   _hurtBox: {fileID: 1582571412}
   _hurtLayers:
@@ -1027,7 +1039,14 @@ MonoBehaviour:
     minNormalAngle: 0
     maxNormalAngle: 0
   aoc: {fileID: 22100000, guid: f9c4168e238fdf94abe8668d1c597617, type: 2}
-  _normalAttacks: []
+  _broomNormalAttacks:
+  - {fileID: 11400000, guid: bb0b404e1e01d4a4191f0453ef8bed4d, type: 2}
+  - {fileID: 11400000, guid: 4ddbe0241b479a149a7a26f03b6d5c89, type: 2}
+  - {fileID: 11400000, guid: 27425e1815d635643badb09e4d7b293e, type: 2}
+  _mopNormalAttacks:
+  - {fileID: 11400000, guid: f8195da83b36fc1488209ba2f5b0c95f, type: 2}
+  - {fileID: 11400000, guid: e1ae4c28998e5754b9776f8b31a5e0fd, type: 2}
+  - {fileID: 11400000, guid: 29e4fd4ef75f4d0438fe04b2f190d0d7, type: 2}
 --- !u!1 &421689560
 GameObject:
   m_ObjectHideFlags: 0
@@ -1167,6 +1186,11 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &633380393 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6472207152727060526, guid: a97461cc9776c3146bfb0f1f2fd41cb8, type: 3}
+  m_PrefabInstance: {fileID: 2345560555353030711}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &756989921
 GameObject:
   m_ObjectHideFlags: 0
@@ -1822,10 +1846,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71d20a0bcfa6a474dab0480f95089c1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxSegments: 0
-  _curRatio: 1
-  _testCurHP: 100
-  _testMaxHP: 100
 --- !u!114 &1445353078
 MonoBehaviour:
   m_ObjectHideFlags: 0
