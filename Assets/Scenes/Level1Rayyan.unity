@@ -1021,7 +1021,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _anim: {fileID: 0}
-  _playerStat: {fileID: 0}
+  _playerStat: {fileID: 159826994}
   _chain: 0
   _hurtBox: {fileID: 1582571412}
   _hurtLayers:
@@ -2162,8 +2162,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 522313821
-  m_SortingLayer: 0
+  m_SortingLayerID: -558521977
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 6da79b1e7fa53f642a0f7b98493573c9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

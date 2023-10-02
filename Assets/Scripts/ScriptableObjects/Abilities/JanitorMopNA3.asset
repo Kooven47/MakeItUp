@@ -16,4 +16,4 @@ MonoBehaviour:
   animations:
   - {fileID: 7400000, guid: 6cb46a1aa07d069409a72b6f85bc0ce0, type: 2}
   - {fileID: 7400000, guid: 716ef89266f8c0446b1dc529cceb1469, type: 2}
-  dmgType: 1
+  dmgType: 2
