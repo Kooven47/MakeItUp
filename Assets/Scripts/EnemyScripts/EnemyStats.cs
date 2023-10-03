@@ -5,6 +5,8 @@ using UnityEngine;
 public class EnemyStats : Stats
 {
     [SerializeField]EnumLib.DamageType _attribute = EnumLib.DamageType.Neutral;
+    private float _shieldHealth = 0f;
+    EnumLib.DamageType _shieldAttribute = EnumLib.DamageType.Neutral;
     // Start is called before the first frame update
     protected void Start()
     {
