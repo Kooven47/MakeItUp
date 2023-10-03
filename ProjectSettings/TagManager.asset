@@ -43,3 +43,12 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Foreground
+    uniqueID: 3736445319
+    locked: 0
+  - name: VFX
+    uniqueID: 2085199911
+    locked: 0
+  - name: UI
+    uniqueID: 536609991
+    locked: 0

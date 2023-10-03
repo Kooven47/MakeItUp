@@ -5,6 +5,8 @@ using UnityEngine;
 public class EnemyStats : Stats
 {
     [SerializeField]EnumLib.DamageType _attribute = EnumLib.DamageType.Neutral;
+    private float _shieldHealth = 0f;
+    EnumLib.DamageType _shieldAttribute = EnumLib.DamageType.Neutral;
     // Start is called before the first frame update
     protected void Start()
     {
@@ -15,6 +17,7 @@ public class EnemyStats : Stats
     {
         float damage = (attack - _defense/2f) * (isCrit ? 1.0f : 1.5f);
         int effective = 0;
+        Debug.Log("Attribute is "+attribute);
         if (_attribute == attribute)
         {
             Debug.Log("Weakness!");
