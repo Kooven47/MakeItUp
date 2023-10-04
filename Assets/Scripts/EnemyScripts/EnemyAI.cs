@@ -26,6 +26,7 @@ public class EnemyAI : MonoBehaviour
     public float jumpModifier = 0.3f;
     public float jumpCheckOffset = 0.1f;
     public float jumpDelay = 0.0f;
+    public float groundCheckSize = 0.31f; // 0.31f allowed the groundcheck to match with the spaghetti monster collider. Adjust for other enemies.
 
     [Header("Custom Behavior")]
     public bool followEnabled = true;
@@ -54,7 +55,6 @@ public class EnemyAI : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        // print(rb.velocity);
         if (TargetInDistance() && followEnabled)
         {
             PathFollow();
@@ -62,7 +62,6 @@ public class EnemyAI : MonoBehaviour
     }
     private void UpdatePath()
     {
-        // print(timeSincePathStart);
         if (!isFollowingJumpPath && followEnabled && TargetInDistance() && seeker.IsDone())
         {
             if (jumpList.Count > 0)
@@ -89,7 +88,7 @@ public class EnemyAI : MonoBehaviour
         {
             timeSincePathStart -= (Time.deltaTime * 120);
         }
-    } 
+    }
     private void PathFollow()
     {
         if (path == null)
@@ -97,26 +96,34 @@ public class EnemyAI : MonoBehaviour
             isFollowingJumpPath = false;
             return;
         }
-        
         // Reached end of path
-        if (currentWaypoint >= path.vectorPath.Count)
+        if (currentWaypoint >= path.vectorPath.Count && time <= 0)
         {
+            if (isFollowingJumpPath)    // This could only be true if we have jumplist count > 0. Which we would set to 0 if flying enemy anyways. Keep this in mind 
+                rb.AddForce(Vector2.up * speed * jumpModifier); // Add jump
+
             isFollowingJumpPath = false;
+            time = jumpDelay;
+            return;
+        }
+        else if (currentWaypoint >= path.vectorPath.Count)
+        {
+            time -= Time.deltaTime;
             return;
         }
 
         // See if colliding with anything
         // Vector3 startOffset = transform.position - new Vector3(0f, GetComponent<Collider2D>().bounds.extents.y + jumpCheckOffset);
-        isGrounded = Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
+        isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckSize, groundLayer);
 
-        IsOnOneWayPlatform = Physics2D.OverlapCircle(groundCheck.position, 0.2f, platformLayer);
+        IsOnOneWayPlatform = Physics2D.OverlapCircle(groundCheck.position, groundCheckSize, platformLayer);
         
         // Direction Calculation
         Vector2 direction = ((Vector2)path.vectorPath[currentWaypoint] - rb.position).normalized;
         Vector2 force = direction * speed * Time.deltaTime;
 
         // Jump
-        if (jumpEnabled && (isGrounded || IsOnOneWayPlatform))
+        if (jumpEnabled && (isGrounded || IsOnOneWayPlatform) && !flyingEnabled)
         {
             if (time > 0f)
             {
@@ -192,7 +199,7 @@ public class EnemyAI : MonoBehaviour
     private IEnumerator DisablePlatformCollision()
     {
         var playerCollider = rb.GetComponent<Collider2D>();
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(groundCheck.position, 0.2f, platformLayer);
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(groundCheck.position, groundCheckSize, platformLayer);
         foreach (Collider2D collider in colliders)
         {
             Physics2D.IgnoreCollision(playerCollider, collider, true);

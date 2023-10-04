@@ -15,7 +15,6 @@ public class PlayerControllerJanitor : MonoBehaviour
     private bool isJumping;
     private bool isGrounded;
     public Vector2 counterJumpForce;
-    public Queue<Vector2> jumpList = new Queue<Vector2>();
     EnemyAI[] enemyAIList;
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private Transform groundCheck;
