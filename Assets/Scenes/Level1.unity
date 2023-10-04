@@ -223,6 +223,7 @@ MonoBehaviour:
   jumpModifier: 0.6
   jumpCheckOffset: 0.1
   jumpDelay: 0.3
+  groundCheckSize: 0.31
   followEnabled: 1
   jumpEnabled: 1
   directionLookEnabled: 1
@@ -1966,27 +1967,27 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 17.060461, y: 6.9779854}
-      - {x: 68.99985, y: 6.9999504}
-      - {x: 69.000015, y: 19.000954}
-      - {x: 86.99926, y: 19.000048}
-      - {x: 86.99974, y: 2.0001392}
-      - {x: 89.0001, y: 1.9996037}
-      - {x: 89.00001, y: 18.999994}
-      - {x: 100.99982, y: 18.999924}
+    - - {x: 17, y: 7}
+      - {x: 69, y: 7}
+      - {x: 69, y: 19}
+      - {x: 87, y: 19}
+      - {x: 87, y: 2}
+      - {x: 89, y: 2}
+      - {x: 89, y: 19}
+      - {x: 101, y: 19}
       - {x: 101, y: 36}
-      - {x: 134.0002, y: 35.999825}
-      - {x: 134.00009, y: 17.999945}
+      - {x: 134, y: 36}
+      - {x: 134, y: 18}
       - {x: 137, y: 17.999996}
-      - {x: 137.00008, y: 13.9999695}
-      - {x: 95.00001, y: 14.000004}
-      - {x: 95, y: -3.0000045}
-      - {x: 81.00001, y: -2.9999974}
-      - {x: 80.99999, y: 13.9999895}
-      - {x: 74.99988, y: 13.999951}
+      - {x: 137, y: 14}
+      - {x: 95, y: 14.000004}
+      - {x: 95, y: -3}
+      - {x: 81, y: -3}
+      - {x: 81, y: 14}
+      - {x: 75, y: 14}
       - {x: 75, y: -3.0000002}
-      - {x: 17.00001, y: -2.9999983}
-      - {x: 17.021015, y: 0.06599277}
+      - {x: 17, y: -3}
+      - {x: 17, y: 0}
   m_UseDelaunayMesh: 0
 --- !u!1 &458483279
 GameObject:
@@ -17954,7 +17955,7 @@ Transform:
   m_GameObject: {fileID: 850116248}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -13.930439, y: -0.36987188, z: -10.036367}
+  m_LocalPosition: {x: -13.930439, y: 2.0301182, z: -10.036367}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -18152,6 +18153,7 @@ MonoBehaviour:
   jumpModifier: 0.6
   jumpCheckOffset: 0.1
   jumpDelay: 0.3
+  groundCheckSize: 0.31
   followEnabled: 1
   jumpEnabled: 1
   directionLookEnabled: 1
@@ -18658,6 +18660,7 @@ MonoBehaviour:
   jumpModifier: 0.6
   jumpCheckOffset: 0.1
   jumpDelay: 0.3
+  groundCheckSize: 0.31
   followEnabled: 1
   jumpEnabled: 1
   directionLookEnabled: 1
@@ -19672,6 +19675,7 @@ MonoBehaviour:
   jumpModifier: 0.6
   jumpCheckOffset: 0.1
   jumpDelay: 0.3
+  groundCheckSize: 0.31
   followEnabled: 1
   jumpEnabled: 1
   directionLookEnabled: 1
@@ -19911,6 +19915,7 @@ MonoBehaviour:
   jumpModifier: 0.6
   jumpCheckOffset: 0.1
   jumpDelay: 0.3
+  groundCheckSize: 0.31
   followEnabled: 1
   jumpEnabled: 1
   directionLookEnabled: 1
@@ -20426,6 +20431,7 @@ MonoBehaviour:
   jumpModifier: 0.6
   jumpCheckOffset: 0.1
   jumpDelay: 0.3
+  groundCheckSize: 0.31
   followEnabled: 1
   jumpEnabled: 1
   directionLookEnabled: 1
@@ -26307,6 +26313,7 @@ MonoBehaviour:
   jumpModifier: 0.6
   jumpCheckOffset: 0.1
   jumpDelay: 0.3
+  groundCheckSize: 0.31
   followEnabled: 1
   jumpEnabled: 1
   directionLookEnabled: 1
