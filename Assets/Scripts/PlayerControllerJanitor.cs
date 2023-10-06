@@ -14,6 +14,7 @@ public class PlayerControllerJanitor : MonoBehaviour
     private bool jumpKeyHeld;
     private bool isJumping;
     private bool isGrounded;
+    private float timeInAir;
     [SerializeField] private Vector2 counterJumpForce;
     
     [SerializeField] private float coyoteTime;
@@ -21,12 +22,24 @@ public class PlayerControllerJanitor : MonoBehaviour
 
     [SerializeField] private float jumpBufferTime;
     private float jumpBufferTimeCounter;
+
+    private bool isWallSliding;
+    private float wallSlidingSpeed = 2f;
+    
+    private bool isWallJumping;
+    private float wallJumpingDirection;
+    private float wallJumpingTime = 0.2f;
+    private float wallJumpingTimeCounter;
+    private float wallJumpingDuration = 0.4f;
+    private Vector2 wallJumpingPower = new Vector2(8f, 16f);
     
     private EnemyAI[] enemyAIList;
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private LayerMask platformLayer;
+    [SerializeField] private Transform wallCheck;
+    [SerializeField] private LayerMask wallLayer;
     [SerializeField] private Animator _anim;
     
     [Header("Sound Effects")]
@@ -67,6 +80,7 @@ public class PlayerControllerJanitor : MonoBehaviour
         else
         {
             coyoteTimeCounter -= Time.deltaTime;
+            timeInAir += Time.deltaTime;
         }
         
         // Jump Buffer
@@ -83,12 +97,13 @@ public class PlayerControllerJanitor : MonoBehaviour
         if (coyoteTimeCounter > 0f)
         {
             // Just landed
-            if (isGrounded == false)
+            if (!isGrounded)
             {
                 // TODO: FIX SO ONLY HAPPENS WHEN LANDING FROM GREAT HEIGHT, USE TIME COUNTER
-                landingSound.Play();
+                if (timeInAir >= 0.5f) landingSound.Play();
             }
             isGrounded = true;
+            timeInAir = 0f;
             
             if (Math.Abs(horizontal) > 0f)
             {
@@ -143,14 +158,24 @@ public class PlayerControllerJanitor : MonoBehaviour
             dropThroughSoundEffect.Play();
         }
 
-        Flip();
+        WallSlide();
+        WallJump();
+
+        if (!isWallJumping)
+        {
+            Flip();
+        }
     }
 
     private void FixedUpdate()
     {
         _anim.SetBool("isMoving",horizontal != 0f);
-        
-        rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
+
+        if (!isWallJumping)
+        {
+            rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
+        }
+
         if (!IsGrounded() && !IsOnOneWayPlatform())
         {
             if (!jumpKeyHeld && Vector2.Dot(rb.velocity, Vector2.up) > 0)
@@ -168,6 +193,62 @@ public class PlayerControllerJanitor : MonoBehaviour
     private bool IsOnOneWayPlatform()
     {
         return Physics2D.OverlapCircle(groundCheck.position, 0.2f, platformLayer);
+    }
+    
+    private bool IsWalled()
+    {
+        return Physics2D.OverlapCircle(wallCheck.position, 0.2f, wallLayer);
+    }
+
+    private void WallSlide()
+    {
+        if (IsWalled() && !IsGrounded() && !IsOnOneWayPlatform() && horizontal != 0f)
+        {
+            isWallSliding = true;
+            rb.velocity = new Vector2(rb.velocity.x, Mathf.Clamp(rb.velocity.y, -wallSlidingSpeed, float.MaxValue));
+        }
+        else
+        {
+            isWallSliding = false;
+        }
+    }
+
+    private void WallJump()
+    {
+        if (isWallSliding)
+        {
+            isWallJumping = false;
+            wallJumpingDirection = -transform.localScale.x;
+            wallJumpingTimeCounter = wallJumpingTime;
+
+            CancelInvoke(nameof(StopWallJumping));
+        }
+        else
+        {
+            wallJumpingTimeCounter -= Time.deltaTime;
+        }
+
+        if (Input.GetButtonDown("Jump") && wallJumpingTimeCounter > 0f)
+        {
+            isWallJumping = true;
+            rb.velocity = new Vector2(wallJumpingDirection * wallJumpingPower.x, wallJumpingPower.y);
+            wallJumpingTimeCounter = 0f;
+
+            if (transform.localScale.x != wallJumpingDirection)
+            {
+                isFacingRight = !isFacingRight;
+                Vector3 localScale = transform.localScale;
+                localScale.x *= -1f;
+                transform.localScale = localScale;
+            }
+
+            Invoke(nameof(StopWallJumping), wallJumpingDuration);
+        }
+    }
+    
+    private void StopWallJumping()
+    {
+        isWallJumping = false;
     }
 
     private IEnumerator DisablePlatformCollision()
