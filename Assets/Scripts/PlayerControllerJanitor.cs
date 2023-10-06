@@ -53,7 +53,7 @@ public class PlayerControllerJanitor : MonoBehaviour
         }
         
         // Handle footsteps
-        if (IsGrounded() || IsOnOneWayPlatform())
+        if ((IsGrounded() || IsOnOneWayPlatform()) && (Time.timeScale != 0))
         {
             // Just landed
             if (isGrounded == false)
@@ -98,8 +98,8 @@ public class PlayerControllerJanitor : MonoBehaviour
                 {
                     enemy.newJumpPosition(rb.position);
                 }
-                
-                jumpSoundEffect.Play();
+                if(Time.timeScale != 0)
+                    jumpSoundEffect.Play();
                 rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
             }
 
@@ -164,7 +164,7 @@ public class PlayerControllerJanitor : MonoBehaviour
 
     private void Flip()
     {
-        if (isFacingRight && horizontal < 0f || !isFacingRight && horizontal > 0f)
+        if ((isFacingRight && horizontal < 0f || !isFacingRight && horizontal > 0f) && (Time.timeScale != 0))
         {
             isFacingRight = !isFacingRight;
             Vector3 localScale = transform.localScale;
