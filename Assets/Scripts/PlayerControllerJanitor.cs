@@ -7,15 +7,22 @@ public class PlayerControllerJanitor : MonoBehaviour
 {
     private float horizontal;
     private float speed;
-    public float normalSpeed;
-    public float sprintingSpeed;
-    public float jumpingPower;
+    [SerializeField] private float normalSpeed;
+    [SerializeField] private float sprintingSpeed;
+    [SerializeField] private float jumpingPower;
     private bool isFacingRight = true;
     private bool jumpKeyHeld;
     private bool isJumping;
     private bool isGrounded;
-    public Vector2 counterJumpForce;
-    EnemyAI[] enemyAIList;
+    [SerializeField] private Vector2 counterJumpForce;
+    
+    [SerializeField] private float coyoteTime;
+    private float coyoteTimeCounter;
+
+    [SerializeField] private float jumpBufferTime;
+    private float jumpBufferTimeCounter;
+    
+    private EnemyAI[] enemyAIList;
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
@@ -52,28 +59,41 @@ public class PlayerControllerJanitor : MonoBehaviour
             speed = normalSpeed;
         }
         
-        // Handle footsteps
+        // Coyote Time
         if (IsGrounded() || IsOnOneWayPlatform())
+        {
+            coyoteTimeCounter = coyoteTime;
+        }
+        else
+        {
+            coyoteTimeCounter -= Time.deltaTime;
+        }
+        
+        // Jump Buffer
+        if (Input.GetButtonDown("Jump"))
+        {
+            jumpBufferTimeCounter = jumpBufferTime;
+        }
+        else
+        {
+            jumpBufferTimeCounter -= Time.deltaTime;
+        }
+        
+        // Handle footsteps
+        if (coyoteTimeCounter > 0f)
         {
             // Just landed
             if (isGrounded == false)
             {
+                // TODO: FIX SO ONLY HAPPENS WHEN LANDING FROM GREAT HEIGHT, USE TIME COUNTER
                 landingSound.Play();
             }
             isGrounded = true;
             
             if (Math.Abs(horizontal) > 0f)
             {
-                if (speed == sprintingSpeed)
-                {
-                    walkingSound.enabled = false;
-                    sprintingSound.enabled = true;
-                }
-                else if (speed == normalSpeed)
-                {
-                    walkingSound.enabled = true;
-                    sprintingSound.enabled = false;
-                }
+                walkingSound.enabled = speed == normalSpeed;
+                sprintingSound.enabled = speed == sprintingSpeed;
             }
             else
             {
@@ -88,10 +108,10 @@ public class PlayerControllerJanitor : MonoBehaviour
             sprintingSound.enabled = false;
         }
         
-        if (Input.GetButtonDown("Jump"))
+        if (jumpBufferTimeCounter > 0f && !isJumping)
         {
             jumpKeyHeld = true;
-            if (IsGrounded() || IsOnOneWayPlatform())
+            if (coyoteTimeCounter > 0f)
             {
                 // This keeps track of the jumps for the a* platforming
                 foreach (EnemyAI enemy in enemyAIList)
@@ -101,11 +121,14 @@ public class PlayerControllerJanitor : MonoBehaviour
                 
                 jumpSoundEffect.Play();
                 rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
+                jumpBufferTimeCounter = 0f;
+                StartCoroutine(JumpCooldown());
             }
 
             if (rb.velocity.y > 0f)
             {
                 rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
+                coyoteTimeCounter = 0f;
             }
         }
         else if (Input.GetButtonUp("Jump"))
@@ -160,6 +183,12 @@ public class PlayerControllerJanitor : MonoBehaviour
         {
             Physics2D.IgnoreCollision(playerCollider, collider, false);
         }
+    }
+    private IEnumerator JumpCooldown()
+    {
+        isJumping = true;
+        yield return new WaitForSeconds(0.4f);
+        isJumping = false;
     }
 
     private void Flip()
