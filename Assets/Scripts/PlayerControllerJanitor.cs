@@ -193,7 +193,9 @@ public class PlayerControllerJanitor : MonoBehaviour
 
     private bool IsGrounded()
     {
-        return Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
+        bool isGrounded = Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
+        _anim.SetBool("onGround",isGrounded);
+        return isGrounded;
     }
 
     private bool IsOnOneWayPlatform()
