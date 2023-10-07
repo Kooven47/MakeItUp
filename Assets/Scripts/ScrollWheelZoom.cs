@@ -17,8 +17,8 @@ public class ScrollWheelZoom : MonoBehaviour
     void Start()
     {
         vCam = GetComponent<CinemachineVirtualCamera>();
-        vCam.m_Lens.OrthographicSize = defaultOrthographicSize;
-
+        // vCam.m_Lens.OrthographicSize = defaultOrthographicSize;
+        
         confiner = GetComponent<CinemachineConfiner2D>();
         boundingBox = confiner.m_BoundingShape2D;
     }
@@ -28,8 +28,7 @@ public class ScrollWheelZoom : MonoBehaviour
     {
         float scrollWheelInput = Input.GetAxis("Mouse ScrollWheel");
         float newOrthographicSize = vCam.m_Lens.OrthographicSize - scrollWheelInput * zoomSpeed;
-        // Had to do -0.1 b/c it breaks at 5 for some reason???
-        newOrthographicSize = Mathf.Clamp(newOrthographicSize, minOrthographicSize, maxOrthographicSize - 0.1f);
+        newOrthographicSize = Mathf.Clamp(newOrthographicSize, minOrthographicSize, maxOrthographicSize);
         if (newOrthographicSize != vCam.m_Lens.OrthographicSize) Debug.Log("New orthographic size: " + newOrthographicSize);
         vCam.m_Lens.OrthographicSize = newOrthographicSize;
 
