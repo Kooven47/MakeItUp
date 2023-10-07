@@ -2,10 +2,13 @@ using UnityEngine;
 using TMPro;
 using Unity.VisualScripting;
 
-public class SignMenuCollision : MonoBehaviour
+public class SignMenuCollisionWithEnemy : MonoBehaviour
 {
     public GameObject signMenu;
     public static bool isMenuActive;
+
+    public SpawnManager spawnManager;
+    public Transform enemyLocations;
 
     bool shownBefore;
 
@@ -21,7 +24,7 @@ public class SignMenuCollision : MonoBehaviour
     void Update()
     {
 
-
+       
     }
 
     public void PauseGame()
@@ -32,13 +35,14 @@ public class SignMenuCollision : MonoBehaviour
     }
 
     public void ResumeGame()
-    {
+    {   
         isMenuActive = false;
         signMenu.SetActive(false);
         shownBefore = true;
         if (!PauseMenu.isPaused)
         {
             Time.timeScale = 1;
+            spawnManager.SpawnEnemy(enemyLocations);
         }
     }
 

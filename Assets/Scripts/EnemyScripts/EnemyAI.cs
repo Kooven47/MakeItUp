@@ -48,6 +48,7 @@ public class EnemyAI : MonoBehaviour
 
     public void Start()
     {
+        target = GameObject.FindWithTag("Player").transform;
         seeker = GetComponent<Seeker>();
         rb = GetComponent<Rigidbody2D>();
 
@@ -78,7 +79,7 @@ public class EnemyAI : MonoBehaviour
         }
         else if (isFollowingJumpPath && (timeSincePathStart <= 0))
         {
-            if ((Math.Abs(rb.velocity.x) < 0.5) || (Math.Abs(rb.velocity.y) < 0.5)) 
+            if ((Math.Abs(rb.velocity.x) < 0.5) || (Math.Abs(rb.velocity.y) < 0.5))
             {
                 isFollowingJumpPath = false;
                 jumpList.Clear();
@@ -117,7 +118,7 @@ public class EnemyAI : MonoBehaviour
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckSize, groundLayer);
 
         IsOnOneWayPlatform = Physics2D.OverlapCircle(groundCheck.position, groundCheckSize, platformLayer);
-        
+
         // Direction Calculation
         Vector2 direction = ((Vector2)path.vectorPath[currentWaypoint] - rb.position).normalized;
         Vector2 force = direction * speed * Time.deltaTime;
@@ -142,11 +143,11 @@ public class EnemyAI : MonoBehaviour
         // Movement
         if (!isGrounded && !IsOnOneWayPlatform)
         {
-          if (!flyingEnabled)
-            force.y = 0;
+            if (!flyingEnabled)
+                force.y = 0;
         }
         rb.AddForce(force);
-        
+
         // One way platforms
         if (IsOnOneWayPlatform)
         {
@@ -193,9 +194,9 @@ public class EnemyAI : MonoBehaviour
         {
             path = p;
             currentWaypoint = 0;
-        }    
+        }
     }
-    
+
     private IEnumerator DisablePlatformCollision()
     {
         var playerCollider = rb.GetComponent<Collider2D>();

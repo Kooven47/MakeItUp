@@ -27,5 +27,9 @@ public class Stats : MonoBehaviour
     {
         
     }
-
+    public virtual void EnemyDie()
+    {
+        Debug.Log("DEFEATED!");
+        Destroy(gameObject, 1.0f);
+    }
 }

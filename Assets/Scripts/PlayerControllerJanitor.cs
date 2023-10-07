@@ -23,6 +23,8 @@ public class PlayerControllerJanitor : MonoBehaviour
     [SerializeField] private float jumpBufferTime;
     private float jumpBufferTimeCounter;
 
+    [SerializeField] private float airDashTime;
+
     private bool isWallSliding;
     private float wallSlidingSpeed = 0.5f;
 
@@ -37,7 +39,7 @@ public class PlayerControllerJanitor : MonoBehaviour
     private float wallJumpingDuration = 0.4f;
     private Vector2 wallJumpingPower = new Vector2(8f, 8f);
     
-    private EnemyAI[] enemyAIList;
+    public static EnemyAI[] enemyAIList;
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
@@ -57,7 +59,6 @@ public class PlayerControllerJanitor : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
-        enemyAIList = FindObjectsOfType<EnemyAI>();
         speed = normalSpeed;
     }
 
@@ -133,11 +134,14 @@ public class PlayerControllerJanitor : MonoBehaviour
             if (coyoteTimeCounter > 0f)
             {
                 // This keeps track of the jumps for the a* platforming
-                foreach (EnemyAI enemy in enemyAIList)
+                if (enemyAIList != null)
                 {
-                    enemy.newJumpPosition(rb.position);
+                    foreach (EnemyAI enemy in enemyAIList)
+                    {
+                        enemy.newJumpPosition(rb.position);
+                    }
                 }
-                if(Time.timeScale != 0)
+                if (Time.timeScale != 0)
                     jumpSoundEffect.Play();
                 rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
                 jumpBufferTimeCounter = 0f;
@@ -268,7 +272,7 @@ public class PlayerControllerJanitor : MonoBehaviour
         }
         else
         {
-            if (Input.GetKeyDown(KeyCode.LeftShift))
+            if (Input.GetKeyDown(KeyCode.LeftShift) && (Time.timeScale != 0))
             {
                 if (airDashesRemaining > 0)
                 {
@@ -307,7 +311,7 @@ public class PlayerControllerJanitor : MonoBehaviour
         rb.velocity = Vector2.zero;
         rb.gravityScale = 0f;
         rb.velocity = new Vector2(10 * transform.localScale.x, 0);
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(airDashTime);
         rb.gravityScale = 1.5f;
         isAirDashing = false;
     }
