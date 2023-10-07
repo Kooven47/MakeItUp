@@ -24,14 +24,14 @@ public class PlayerControllerJanitor : MonoBehaviour
     private float jumpBufferTimeCounter;
 
     private bool isWallSliding;
-    private float wallSlidingSpeed = 2f;
+    private float wallSlidingSpeed = 0.5f;
     
     private bool isWallJumping;
     private float wallJumpingDirection;
     private float wallJumpingTime = 0.2f;
     private float wallJumpingTimeCounter;
     private float wallJumpingDuration = 0.4f;
-    private Vector2 wallJumpingPower = new Vector2(8f, 16f);
+    private Vector2 wallJumpingPower = new Vector2(8f, 8f);
     
     private EnemyAI[] enemyAIList;
     [SerializeField] private Rigidbody2D rb;
@@ -140,7 +140,7 @@ public class PlayerControllerJanitor : MonoBehaviour
                 StartCoroutine(JumpCooldown());
             }
 
-            if (rb.velocity.y > 0f)
+            if (rb.velocity.y > 0f && !isWallJumping)
             {
                 rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
                 coyoteTimeCounter = 0f;
