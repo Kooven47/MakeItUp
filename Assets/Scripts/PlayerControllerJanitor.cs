@@ -25,6 +25,10 @@ public class PlayerControllerJanitor : MonoBehaviour
 
     private bool isWallSliding;
     private float wallSlidingSpeed = 0.5f;
+
+    private int maxAirDashes = 1;
+    private int airDashesRemaining;
+    private bool isAirDashing;
     
     private bool isWallJumping;
     private float wallJumpingDirection;
@@ -97,10 +101,9 @@ public class PlayerControllerJanitor : MonoBehaviour
         if (coyoteTimeCounter > 0f)
         {
             // Just landed
-            if (!isGrounded)
+            if (!isGrounded && timeInAir >= 0.5f)
             {
-                // TODO: FIX SO ONLY HAPPENS WHEN LANDING FROM GREAT HEIGHT, USE TIME COUNTER
-                if (timeInAir >= 0.5f) landingSound.Play();
+                landingSound.Play();
             }
             isGrounded = true;
             timeInAir = 0f;
@@ -123,6 +126,7 @@ public class PlayerControllerJanitor : MonoBehaviour
             sprintingSound.enabled = false;
         }
         
+        // Handle jump
         if (jumpBufferTimeCounter > 0f && !isJumping)
         {
             jumpKeyHeld = true;
@@ -139,7 +143,8 @@ public class PlayerControllerJanitor : MonoBehaviour
                 jumpBufferTimeCounter = 0f;
                 StartCoroutine(JumpCooldown());
             }
-
+            
+            // Make jump last longer on hold
             if (rb.velocity.y > 0f && !isWallJumping)
             {
                 rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
@@ -160,8 +165,9 @@ public class PlayerControllerJanitor : MonoBehaviour
 
         WallSlide();
         WallJump();
+        AirDash();
 
-        if (!isWallJumping)
+        if (!isWallJumping && !isAirDashing)
         {
             Flip();
         }
@@ -171,12 +177,12 @@ public class PlayerControllerJanitor : MonoBehaviour
     {
         _anim.SetBool("isMoving",horizontal != 0f);
 
-        if (!isWallJumping)
+        if (!isWallJumping && !isAirDashing)
         {
             rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
         }
 
-        if (!IsGrounded() && !IsOnOneWayPlatform())
+        if (!IsGrounded() && !IsOnOneWayPlatform() && !isAirDashing)
         {
             if (!jumpKeyHeld && Vector2.Dot(rb.velocity, Vector2.up) > 0)
             {
@@ -251,6 +257,27 @@ public class PlayerControllerJanitor : MonoBehaviour
         isWallJumping = false;
     }
 
+    private void AirDash()
+    {
+        if (IsGrounded() || IsOnOneWayPlatform() || IsWalled())
+        {
+            airDashesRemaining = maxAirDashes;
+            isAirDashing = false;
+        }
+        else
+        {
+            if (Input.GetKeyDown(KeyCode.LeftShift))
+            {
+                if (airDashesRemaining > 0)
+                {
+                    airDashesRemaining--;
+                    isAirDashing = true;
+                    StartCoroutine(AirDashTime());
+                }
+            }
+        }
+    }
+
     private IEnumerator DisablePlatformCollision()
     {
         var playerCollider = rb.GetComponent<Collider2D>();
@@ -265,11 +292,22 @@ public class PlayerControllerJanitor : MonoBehaviour
             Physics2D.IgnoreCollision(playerCollider, collider, false);
         }
     }
+    
     private IEnumerator JumpCooldown()
     {
         isJumping = true;
         yield return new WaitForSeconds(0.4f);
         isJumping = false;
+    }
+
+    private IEnumerator AirDashTime()
+    {
+        rb.velocity = Vector2.zero;
+        rb.gravityScale = 0f;
+        rb.velocity = new Vector2(10 * transform.localScale.x, 0);
+        yield return new WaitForSeconds(0.5f);
+        rb.gravityScale = 1.5f;
+        isAirDashing = false;
     }
 
     private void Flip()
