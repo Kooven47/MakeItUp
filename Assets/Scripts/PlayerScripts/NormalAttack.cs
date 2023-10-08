@@ -14,6 +14,8 @@ public class NormalAttack : MonoBehaviour
     [SerializeField]ContactFilter2D _hurtLayers;
     public AnimatorOverrideController aoc;
 
+    private Vector2 _knockBackVector = Vector2.zero;
+
     EnumLib.DamageType _activeDamageType = EnumLib.DamageType.Neutral;
 
     [SerializeField]private List<PlayerAbility> _broomNormalAttacks = new List<PlayerAbility>(3);
@@ -51,19 +53,21 @@ public class NormalAttack : MonoBehaviour
         _hurtBox.gameObject.SetActive(false);
         bool didHit = false;
 
+
         DamageEffect damageEffect;
 
         if (targets.Count != 0)
         {
             foreach(Collider2D col in targets)
             {
-                Debug.Log("Hit "+col.name);
                 damageEffect = col.gameObject.GetComponent<DamageEffect>();
 
                 if (damageEffect != null && col.CompareTag("Enemy"))
                 {
                     damageEffect.TriggerEffect(_inAttack);
                     col.gameObject.GetComponent<EnemyStats>().DamageCalc(_playerStat.attack,_activeDamageType,false);
+                    Vector2 direction = (col.transform.position - transform.position).normalized;
+                    col.gameObject.GetComponent<EnemyInterrupt>().Stagger(_inAttack, direction * _knockBackVector);
                     didHit = true;
                 }
                     
@@ -83,11 +87,13 @@ public class NormalAttack : MonoBehaviour
         {
             aoc["Attack"] = _broomNormalAttacks[_chain].animations[0];
             aoc["Rec"] = _broomNormalAttacks[_chain].animations[1];
+            _knockBackVector = EnumLib.KnockbackVector(_broomNormalAttacks[_chain].force);
         }
         else if (weapon == 2)
         {
             aoc["Attack"] = _mopNormalAttacks[_chain].animations[0];
             aoc["Rec"] = _mopNormalAttacks[_chain].animations[1];
+             _knockBackVector = EnumLib.KnockbackVector(_mopNormalAttacks[_chain].force);
         }
 
         _activeDamageType = (EnumLib.DamageType)weapon;

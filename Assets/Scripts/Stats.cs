@@ -28,4 +28,9 @@ public class Stats : MonoBehaviour
         
     }
 
+    public virtual void Death()
+    {
+        
+    }
+
 }
