@@ -86,13 +86,13 @@ public class NormalAttack : MonoBehaviour
         if (weapon == 1)
         {
             aoc["Attack"] = _broomNormalAttacks[_chain].animations[0];
-            aoc["Rec"] = _broomNormalAttacks[_chain].animations[1];
+            aoc["Recovery"] = _broomNormalAttacks[_chain].animations[1];
             _knockBackVector = EnumLib.KnockbackVector(_broomNormalAttacks[_chain].force);
         }
         else if (weapon == 2)
         {
             aoc["Attack"] = _mopNormalAttacks[_chain].animations[0];
-            aoc["Rec"] = _mopNormalAttacks[_chain].animations[1];
+            aoc["Recovery"] = _mopNormalAttacks[_chain].animations[1];
              _knockBackVector = EnumLib.KnockbackVector(_mopNormalAttacks[_chain].force);
         }
 

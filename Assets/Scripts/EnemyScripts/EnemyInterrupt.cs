@@ -1,15 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class EnemyInterrupt : InterruptSystem
 {
     private EnemyStats _enemyStats;
+    [SerializeField]private EnemyCore _enemyCore;
 
     protected override void Start()
     {
         base.Start();
+        Debug.Log("Calling child start");
         _enemyStats = GetComponent<EnemyStats>();
+        _enemyCore = transform.GetChild(0).GetComponent<EnemyCore>();
+        _enemyCore.StartArmor = SuperArmor;
     }
 
     protected override IEnumerator StaggerTime(float staggerTime)
@@ -18,12 +23,18 @@ public class EnemyInterrupt : InterruptSystem
         _anim.SetBool("isStaggered",false);
     }
 
+    protected void SuperArmor(bool isSuper)
+    {
+        _poise = (isSuper ? ArmorType.SuperArmor : ArmorType.Neutral);
+    }
+
     public override void Stagger(int damageType, Vector2 knockVector)
     {
-        if (_poise == ArmorType.SuperArmor || _enemyStats.isShielded)
+        int effective = _enemyStats.IsEffective((EnumLib.DamageType)damageType);
+
+        if ((_poise == ArmorType.SuperArmor && effective != 1) || _enemyStats.isShielded)
             return;
 
-        int effective = _enemyStats.IsEffective((EnumLib.DamageType)damageType);
         float staggerTimeMod = 1f;
 
         if (effective == -1)
@@ -38,7 +49,10 @@ public class EnemyInterrupt : InterruptSystem
 
         _rb.AddForce(knockVector * _rb.mass,ForceMode2D.Impulse);
 
-        _anim.SetBool("isStaggered",true);
+        _anim.Play("Stagger");
+
+        _poise = ArmorType.Neutral;
+        _enemyCore.Interrupt();
 
         if (_staggerTimer != null)
         {
