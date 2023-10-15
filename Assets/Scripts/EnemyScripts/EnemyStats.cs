@@ -59,7 +59,7 @@ public class EnemyStats : Stats
         _curHP -= damage;
         if (_curHP <= 0)
         {
-            EnemyDie();
+            Death();
         }
         Debug.Log("Damage received "+damage);
 
