@@ -22,14 +22,17 @@ public class EnemyCore : MonoBehaviour
 
     [SerializeField]protected Transform _target;
 
+
     public Action<bool> StartArmor;
 
     protected virtual void Start()
     {
+        _target = GameObject.FindWithTag("Player").transform;
         _idleTimer = StartCoroutine(IdleTimer(3f));
         _animOverride = Instantiate(_animOverride);
         _anim = GetComponent<Animator>();
         _anim.runtimeAnimatorController = _animOverride;
+        
     }
 
     protected bool InDistance(Vector2 range)
