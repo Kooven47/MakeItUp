@@ -55,6 +55,7 @@ public class NormalAttack : MonoBehaviour
 
 
         DamageEffect damageEffect;
+        EnemyStats _enemyStat;
 
         if (targets.Count != 0)
         {
@@ -64,10 +65,14 @@ public class NormalAttack : MonoBehaviour
 
                 if (damageEffect != null && col.CompareTag("Enemy"))
                 {
-                    damageEffect.TriggerEffect(_inAttack);
-                    col.gameObject.GetComponent<EnemyStats>().DamageCalc(_playerStat.attack,_activeDamageType,false);
-                    Vector2 direction = (col.transform.position - transform.position).normalized;
-                    col.gameObject.GetComponent<EnemyInterrupt>().Stagger(_inAttack, direction * _knockBackVector);
+                    _enemyStat = col.gameObject.GetComponent<EnemyStats>();
+                    _enemyStat.DamageCalc(_playerStat.attack,_activeDamageType,false);
+                    if (_enemyStat._healthRatio > 0f)
+                    {
+                        damageEffect.TriggerEffect(_inAttack);
+                        Vector2 direction = (col.transform.position - transform.position).normalized;
+                        col.gameObject.GetComponent<EnemyInterrupt>().Stagger(_inAttack, direction * _knockBackVector);
+                    }
                     didHit = true;
                 }
                     

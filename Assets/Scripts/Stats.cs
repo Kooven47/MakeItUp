@@ -6,8 +6,13 @@ public class Stats : MonoBehaviour
 {
     [SerializeField]protected float _maxHP = 50f,_attack = 5,_defense = 2;
     [SerializeField]protected float _moveSpeed = 1.0f;
-    protected float _curHP;
+    protected float _curHP = 50f;
     // Start is called before the first frame update
+
+    public float _healthRatio
+    {
+        get {return _curHP/_maxHP;}
+    }
     protected void Start()
     {
         _curHP = _maxHP;
