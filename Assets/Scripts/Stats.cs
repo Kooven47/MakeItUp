@@ -38,5 +38,4 @@ public class Stats : MonoBehaviour
         Debug.Log("DEFEATED!");
         Destroy(gameObject, 1.0f);
     }
-
 }

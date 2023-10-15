@@ -76,9 +76,10 @@ public class PlayerControllerJanitor : MonoBehaviour
         {
             speed = normalSpeed;
         }
+        _anim.SetBool("onGround", IsGrounded() || IsOnOneWayPlatform());
         
         // Handle footsteps
-        if ((IsGrounded() || IsOnOneWayPlatform()) && (Time.timeScale != 0))
+        if ((IsGrounded() || IsOnOneWayPlatform()) && Time.timeScale != 0)
         {
             coyoteTimeCounter = coyoteTime;
         }
@@ -318,7 +319,7 @@ public class PlayerControllerJanitor : MonoBehaviour
 
     private void Flip()
     {
-        if ((isFacingRight && horizontal < 0f || !isFacingRight && horizontal > 0f) && (Time.timeScale != 0))
+        if ((isFacingRight && horizontal < 0f || !isFacingRight && horizontal > 0f) && Time.timeScale != 0)
         {
             isFacingRight = !isFacingRight;
             Vector3 localScale = transform.localScale;
