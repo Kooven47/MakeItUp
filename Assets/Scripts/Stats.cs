@@ -35,7 +35,8 @@ public class Stats : MonoBehaviour
 
     public virtual void Death()
     {
-        
+        Debug.Log("DEFEATED!");
+        Destroy(gameObject, 1.0f);
     }
 
 }

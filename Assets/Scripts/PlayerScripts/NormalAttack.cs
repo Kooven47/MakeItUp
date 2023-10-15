@@ -114,31 +114,33 @@ public class NormalAttack : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
-        if (Input.GetKeyUp("z") && _attackBuffer == 0)
+    {   if (Time.timeScale != 0)
         {
-            if (_inAttack == 0)
+            if (Input.GetKeyUp("z") && _attackBuffer == 0)
             {
-                Attack(1);
-            }
-            else
-            {
-                _attackBuffer = 1;
-            }
-                
-        }
+                if (_inAttack == 0)
+                {
+                    Attack(1);
+                }
+                else
+                {
+                    _attackBuffer = 1;
+                }
 
-        if (Input.GetKeyUp("x") && _attackBuffer == 0)
-        {
-            if (_inAttack == 0)
-            {
-                Attack(2);
             }
-            else
+
+            if (Input.GetKeyUp("x") && _attackBuffer == 0)
             {
-                _attackBuffer = 2;
+                if (_inAttack == 0)
+                {
+                    Attack(2);
+                }
+                else
+                {
+                    _attackBuffer = 2;
+                }
+
             }
-                
         }
     }
 }

@@ -57,7 +57,10 @@ public class EnemyStats : Stats
         }
 
         _curHP -= damage;
-
+        if (_curHP <= 0)
+        {
+            EnemyDie();
+        }
         Debug.Log("Damage received "+damage);
 
         DamageNumberPool.summonDamageNum?.Invoke(damage,effective,transform.position);

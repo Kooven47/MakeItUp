@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Collections;
@@ -6,21 +7,55 @@ public class PlayerControllerJanitor : MonoBehaviour
 {
     private float horizontal;
     private float speed;
-    public float normalSpeed;
-    public float sprintingSpeed;
-    public float jumpingPower;
+    [SerializeField] private float normalSpeed;
+    [SerializeField] private float sprintingSpeed;
+    [SerializeField] private float jumpingPower;
     private bool isFacingRight = true;
     private bool jumpKeyHeld;
     private bool isJumping;
-    public Vector2 counterJumpForce;
-    public Queue<Vector2> jumpList = new Queue<Vector2>();
+    private bool isGrounded;
+    private float timeInAir;
+    [SerializeField] private Vector2 counterJumpForce;
+    
+    [SerializeField] private float coyoteTime;
+    private float coyoteTimeCounter;
 
+    [SerializeField] private float jumpBufferTime;
+    private float jumpBufferTimeCounter;
+
+    [SerializeField] private float airDashTime;
+
+    private bool isWallSliding;
+    private float wallSlidingSpeed = 0.5f;
+
+    private int maxAirDashes = 1;
+    private int airDashesRemaining;
+    private bool isAirDashing;
+    
+    private bool isWallJumping;
+    private float wallJumpingDirection;
+    private float wallJumpingTime = 0.2f;
+    private float wallJumpingTimeCounter;
+    private float wallJumpingDuration = 0.4f;
+    private Vector2 wallJumpingPower = new Vector2(8f, 8f);
+    
+    public static EnemyAI[] enemyAIList;
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private LayerMask platformLayer;
+    [SerializeField] private Transform wallCheck;
+    [SerializeField] private LayerMask wallLayer;
     [SerializeField] private Animator _anim;
-    public int maxJumpTrackNum = 3; // This is the number of jump history you want to keep track of for the ai to follow 
+    
+    [Header("Sound Effects")]
+    [SerializeField] private AudioSource jumpSoundEffect;
+    [SerializeField] private AudioSource dropThroughSoundEffect;
+    [SerializeField] private AudioSource landingSound;
+    [SerializeField] private AudioSource walkingSound;
+    [SerializeField] private AudioSource sprintingSound;
+ 
+    // public int maxJumpTrackNum = 3; // This is the number of jump history you want to keep track of for the ai to follow 
     // Start is called before the first frame update
     private void Start()
     {
@@ -41,22 +76,83 @@ public class PlayerControllerJanitor : MonoBehaviour
         {
             speed = normalSpeed;
         }
-
+        
+        // Handle footsteps
+        if ((IsGrounded() || IsOnOneWayPlatform()) && (Time.timeScale != 0))
+        {
+            coyoteTimeCounter = coyoteTime;
+        }
+        else
+        {
+            coyoteTimeCounter -= Time.deltaTime;
+            timeInAir += Time.deltaTime;
+        }
+        
+        // Jump Buffer
         if (Input.GetButtonDown("Jump"))
         {
+            jumpBufferTimeCounter = jumpBufferTime;
+        }
+        else
+        {
+            jumpBufferTimeCounter -= Time.deltaTime;
+        }
+        
+        // Handle footsteps
+        if (coyoteTimeCounter > 0f)
+        {
+            // Just landed
+            if (!isGrounded && timeInAir >= 0.5f)
+            {
+                landingSound.Play();
+            }
+            isGrounded = true;
+            timeInAir = 0f;
+            
+            if (Math.Abs(horizontal) > 0f)
+            {
+                walkingSound.enabled = speed == normalSpeed;
+                sprintingSound.enabled = speed == sprintingSpeed;
+            }
+            else
+            {
+                walkingSound.enabled = false;
+                sprintingSound.enabled = false;
+            }
+        }
+        else
+        {
+            isGrounded = false;
+            walkingSound.enabled = false;
+            sprintingSound.enabled = false;
+        }
+        
+        // Handle jump
+        if (jumpBufferTimeCounter > 0f && !isJumping)
+        {
             jumpKeyHeld = true;
-            if (IsGrounded() || IsOnOneWayPlatform())
+            if (coyoteTimeCounter > 0f)
             {
                 // This keeps track of the jumps for the a* platforming
-                if (jumpList.Count < maxJumpTrackNum)
-                    jumpList.Enqueue(rb.position);  
-
+                if (enemyAIList != null)
+                {
+                    foreach (EnemyAI enemy in enemyAIList)
+                    {
+                        enemy.newJumpPosition(rb.position);
+                    }
+                }
+                if (Time.timeScale != 0)
+                    jumpSoundEffect.Play();
                 rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
+                jumpBufferTimeCounter = 0f;
+                StartCoroutine(JumpCooldown());
             }
-
-            if (rb.velocity.y > 0f)
+            
+            // Make jump last longer on hold
+            if (rb.velocity.y > 0f && !isWallJumping)
             {
                 rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
+                coyoteTimeCounter = 0f;
             }
         }
         else if (Input.GetButtonUp("Jump"))
@@ -68,17 +164,29 @@ public class PlayerControllerJanitor : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.S) && IsOnOneWayPlatform())
         {
             StartCoroutine(DisablePlatformCollision());
+            dropThroughSoundEffect.Play();
         }
 
-        Flip();
+        WallSlide();
+        WallJump();
+        AirDash();
+
+        if (!isWallJumping && !isAirDashing)
+        {
+            Flip();
+        }
     }
 
     private void FixedUpdate()
     {
         _anim.SetBool("isMoving",horizontal != 0f);
-        
-        rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
-        if (!IsGrounded() && !IsOnOneWayPlatform())
+
+        if (!isWallJumping && !isAirDashing)
+        {
+            rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
+        }
+
+        if (!IsGrounded() && !IsOnOneWayPlatform() && !isAirDashing)
         {
             if (!jumpKeyHeld && Vector2.Dot(rb.velocity, Vector2.up) > 0)
             {
@@ -98,6 +206,83 @@ public class PlayerControllerJanitor : MonoBehaviour
     {
         return Physics2D.OverlapCircle(groundCheck.position, 0.2f, platformLayer);
     }
+    
+    private bool IsWalled()
+    {
+        return Physics2D.OverlapCircle(wallCheck.position, 0.2f, wallLayer);
+    }
+
+    private void WallSlide()
+    {
+        if (IsWalled() && !IsGrounded() && !IsOnOneWayPlatform() && horizontal != 0f)
+        {
+            isWallSliding = true;
+            rb.velocity = new Vector2(rb.velocity.x, Mathf.Clamp(rb.velocity.y, -wallSlidingSpeed, float.MaxValue));
+        }
+        else
+        {
+            isWallSliding = false;
+        }
+    }
+
+    private void WallJump()
+    {
+        if (isWallSliding)
+        {
+            isWallJumping = false;
+            wallJumpingDirection = -transform.localScale.x;
+            wallJumpingTimeCounter = wallJumpingTime;
+
+            CancelInvoke(nameof(StopWallJumping));
+        }
+        else
+        {
+            wallJumpingTimeCounter -= Time.deltaTime;
+        }
+
+        if (Input.GetButtonDown("Jump") && wallJumpingTimeCounter > 0f)
+        {
+            isWallJumping = true;
+            rb.velocity = new Vector2(wallJumpingDirection * wallJumpingPower.x, wallJumpingPower.y);
+            wallJumpingTimeCounter = 0f;
+
+            if (transform.localScale.x != wallJumpingDirection)
+            {
+                isFacingRight = !isFacingRight;
+                Vector3 localScale = transform.localScale;
+                localScale.x *= -1f;
+                transform.localScale = localScale;
+            }
+
+            Invoke(nameof(StopWallJumping), wallJumpingDuration);
+        }
+    }
+    
+    private void StopWallJumping()
+    {
+        isWallJumping = false;
+    }
+
+    private void AirDash()
+    {
+        if (IsGrounded() || IsOnOneWayPlatform() || IsWalled())
+        {
+            airDashesRemaining = maxAirDashes;
+            isAirDashing = false;
+        }
+        else
+        {
+            if (Input.GetKeyDown(KeyCode.LeftShift) && (Time.timeScale != 0))
+            {
+                if (airDashesRemaining > 0)
+                {
+                    airDashesRemaining--;
+                    isAirDashing = true;
+                    StartCoroutine(AirDashTime());
+                }
+            }
+        }
+    }
 
     private IEnumerator DisablePlatformCollision()
     {
@@ -113,20 +298,32 @@ public class PlayerControllerJanitor : MonoBehaviour
             Physics2D.IgnoreCollision(playerCollider, collider, false);
         }
     }
+    
+    private IEnumerator JumpCooldown()
+    {
+        isJumping = true;
+        yield return new WaitForSeconds(0.4f);
+        isJumping = false;
+    }
+
+    private IEnumerator AirDashTime()
+    {
+        rb.velocity = Vector2.zero;
+        rb.gravityScale = 0f;
+        rb.velocity = new Vector2(10 * transform.localScale.x, 0);
+        yield return new WaitForSeconds(airDashTime);
+        rb.gravityScale = 1.5f;
+        isAirDashing = false;
+    }
 
     private void Flip()
     {
-        if (isFacingRight && horizontal < 0f || !isFacingRight && horizontal > 0f)
+        if ((isFacingRight && horizontal < 0f || !isFacingRight && horizontal > 0f) && (Time.timeScale != 0))
         {
             isFacingRight = !isFacingRight;
             Vector3 localScale = transform.localScale;
             localScale.x *= -1f;
             transform.localScale = localScale;
         }
-    }
-
-    public Queue<Vector2> GetJumpList()
-    {
-        return jumpList;
     }
 }
