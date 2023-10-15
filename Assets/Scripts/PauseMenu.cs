@@ -32,7 +32,7 @@ public class PauseMenu : MonoBehaviour
     public void ResumeGame()
     {
         pauseMenu.SetActive(false);
-        if (!SignMenuCollision.isMenuActive && !SignMenuCollisionWithEnemy.isMenuActive)
+        if (!SignMenuCollision.isMenuActive && !SignMenuCollisionWithEnemy.isMenuActive && !SignMenu.isMenuActive && !SignMenuEnemy.isMenuActive)
             Time.timeScale = 1;
         isPaused = false;
     }
