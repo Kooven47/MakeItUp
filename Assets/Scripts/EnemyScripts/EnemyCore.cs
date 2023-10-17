@@ -30,6 +30,7 @@ public class EnemyCore : MonoBehaviour
         _animOverride = Instantiate(_animOverride);
         _anim = GetComponent<Animator>();
         _anim.runtimeAnimatorController = _animOverride;
+        _target = GameObject.Find("Janitor").transform;
     }
 
     protected bool InDistance(Vector2 range)
