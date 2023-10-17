@@ -13,6 +13,8 @@ public class InterruptSystem : MonoBehaviour
 
     protected Coroutine _staggerTimer;
 
+    protected bool _isStunned = false;
+
     // Start is called before the first frame update
     protected virtual void Start()
     {

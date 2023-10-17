@@ -24,6 +24,8 @@ public class EnemyCore : MonoBehaviour
 
     public Action<bool> StartArmor;
 
+    protected Vector2 _knockBackVector;
+
     protected virtual void Start()
     {
         _idleTimer = StartCoroutine(IdleTimer(3f));
@@ -56,6 +58,8 @@ public class EnemyCore : MonoBehaviour
                 if (col.CompareTag("Player"))
                 {
                     Debug.Log("Hit the janitor!");
+                    Vector2 direction = (col.transform.position - transform.position).normalized;
+                    col.GetComponent<PlayerInterrupt>().Stagger(1,_knockBackVector * direction * 0.5f);
                     didHit = true;
                 }
             }
@@ -72,7 +76,7 @@ public class EnemyCore : MonoBehaviour
     {
         _canAttack = false;
         StartArmor?.Invoke(false);
-        if (_idleTimer != null)
+        if (_idleTimer != null || _attackIndex < 0)
         {
             StopCoroutine(_idleTimer);
             _idleTimer = StartCoroutine(IdleTimer(3f));
@@ -95,6 +99,7 @@ public class EnemyCore : MonoBehaviour
         {
             _canAttack = false;
             _attackIndex = 0;
+            _knockBackVector = EnumLib.KnockbackVector(_enemySkills[_attackIndex].force);
         }
     }
 

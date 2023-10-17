@@ -21,12 +21,20 @@ public class NormalAttack : MonoBehaviour
     [SerializeField]private List<PlayerAbility> _broomNormalAttacks = new List<PlayerAbility>(3);
     [SerializeField]private List<PlayerAbility> _mopNormalAttacks = new List<PlayerAbility>(3);
 
+    private bool _canAttack = true;
+
     // Start is called before the first frame update
     void Start()
     {
         _anim = GetComponent<Animator>();
         _anim.runtimeAnimatorController = aoc;
+        PlayerInterrupt.staggered += SetCanAttack;
         
+    }
+
+    public void SetCanAttack(bool toggle)
+    {
+        _canAttack = toggle;
     }
 
     void Recover()
@@ -114,9 +122,9 @@ public class NormalAttack : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {   if (Time.timeScale != 0)
+    {   if (Time.timeScale != 0 && _attackBuffer == 0 && _canAttack)
         {
-            if (Input.GetKeyUp("z") && _attackBuffer == 0)
+            if (Input.GetKeyUp("z"))
             {
                 if (_inAttack == 0)
                 {
@@ -129,7 +137,7 @@ public class NormalAttack : MonoBehaviour
 
             }
 
-            if (Input.GetKeyUp("x") && _attackBuffer == 0)
+            if (Input.GetKeyUp("x"))
             {
                 if (_inAttack == 0)
                 {
