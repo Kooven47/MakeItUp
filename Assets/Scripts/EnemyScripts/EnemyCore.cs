@@ -5,6 +5,7 @@ using System;
 
 public class EnemyCore : MonoBehaviour
 {
+    [SerializeField] private bool _isMelee = true;
     [SerializeField] protected Vector2 _projectileRange = new Vector2(3f,2f);
     [SerializeField] protected Vector2 _meleeRange = new Vector2(3f,2f);
     [SerializeField] ContactFilter2D _hurtLayers;
@@ -41,6 +42,11 @@ public class EnemyCore : MonoBehaviour
         float y_dist = Mathf.Abs(transform.position.y - _target.position.y);
 
         return x_dist <= range.x && y_dist <= range.y;
+    }
+
+    protected void ProjectileFire()
+    {
+
     }
 
     protected void MeleeStrike()
@@ -95,7 +101,7 @@ public class EnemyCore : MonoBehaviour
         //     _canAttack = false;
         //     _attackIndex = 1;
         // }
-        if (InDistance(_meleeRange))
+        if (InDistance(_meleeRange) && _isMelee)
         {
             _canAttack = false;
             _attackIndex = 0;

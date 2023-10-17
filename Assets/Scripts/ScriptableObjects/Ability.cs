@@ -9,4 +9,5 @@ public class Ability : ScriptableObject
 
     public EnumLib.KnockBackPower force = EnumLib.KnockBackPower.Sideways;
     public EnumLib.DamageType attribute = EnumLib.DamageType.Neutral;
+    public AnimationClip[] projectileAnims;
 }

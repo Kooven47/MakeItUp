@@ -6,8 +6,10 @@ AnimatorOverrideController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Enemy
+  m_Name: Spaghetti
   m_Controller: {fileID: 9100000, guid: 2f5e19ea9ffdc6344ac29e947a556d9e, type: 2}
   m_Clips:
-  - m_OriginalClip: {fileID: 7400000, guid: 0fa3cadfdac67564fa956ddca1c10026, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 236fa6e58d53ef840913f2f1886e6d3c, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 4ce76eb8fa784bc409f4bd2d560b39e8, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 526f85575a13edf46a177126a5f3cbbf, type: 2}
     m_OverrideClip: {fileID: 7400000, guid: 0fa3cadfdac67564fa956ddca1c10026, type: 2}

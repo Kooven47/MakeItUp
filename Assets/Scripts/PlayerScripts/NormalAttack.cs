@@ -35,6 +35,8 @@ public class NormalAttack : MonoBehaviour
     public void SetCanAttack(bool toggle)
     {
         _canAttack = toggle;
+        if (toggle)
+            _attackBuffer = 0;
     }
 
     void Recover()
