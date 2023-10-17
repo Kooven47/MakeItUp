@@ -44,9 +44,10 @@ public class PauseMenu : MonoBehaviour
         isPaused = false;
     }
 
-    public void QuitGame()
+    public void RestartLevel()
     {
-        Debug.Log("Quit game!");
-        Application.Quit();
+        Time.timeScale = 1;
+        isPaused = false;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }
