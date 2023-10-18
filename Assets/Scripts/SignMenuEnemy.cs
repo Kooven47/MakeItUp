@@ -1,10 +1,8 @@
 using UnityEngine;
 using TMPro;
 using Unity.VisualScripting;
-using UnityEngine.Events;
-using System;
 
-public class SignMenuCollisionWithEnemy : MonoBehaviour
+public class SignMenuEnemy : MonoBehaviour
 {
     public GameObject signMenu;
     public static bool isMenuActive;
@@ -13,7 +11,7 @@ public class SignMenuCollisionWithEnemy : MonoBehaviour
     public Transform enemyLocations;
 
     bool shownBefore;
-    
+
     // Start is called before the first frame update
     void Start()
     {
@@ -26,7 +24,6 @@ public class SignMenuCollisionWithEnemy : MonoBehaviour
     void Update()
     {
 
-       
     }
 
     public void PauseGame()
@@ -37,7 +34,7 @@ public class SignMenuCollisionWithEnemy : MonoBehaviour
     }
 
     public void ResumeGame()
-    {   
+    {
         isMenuActive = false;
         signMenu.SetActive(false);
         shownBefore = true;
@@ -45,17 +42,14 @@ public class SignMenuCollisionWithEnemy : MonoBehaviour
         {
             Time.timeScale = 1;
             spawnManager.SpawnEnemy(enemyLocations);
-            ObjectiveManager.OnUpdateObjective();
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    public void ShowSign()
     {
-        if (other.CompareTag("Player"))
-        {
-            // When colliding pause the game
-            if (!shownBefore)
-                PauseGame();
+        if (!shownBefore)
+        { 
+            PauseGame();
         }
     }
 

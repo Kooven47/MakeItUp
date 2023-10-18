@@ -1,6 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
+
 
 public class Stats : MonoBehaviour
 {
@@ -35,8 +38,6 @@ public class Stats : MonoBehaviour
 
     public virtual void Death()
     {
-        Debug.Log("DEFEATED!");
-        Destroy(gameObject, 1.0f);
-    }
 
+    }
 }

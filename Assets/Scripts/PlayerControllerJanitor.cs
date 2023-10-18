@@ -91,9 +91,10 @@ public class PlayerControllerJanitor : MonoBehaviour
             speed = normalSpeed;
             _isSprinting = false;
         }
+        _anim.SetBool("onGround", IsGrounded() || IsOnOneWayPlatform());
         
         // Handle footsteps
-        if ((IsGrounded() || IsOnOneWayPlatform()) && (Time.timeScale != 0))
+        if ((IsGrounded() || IsOnOneWayPlatform()) && Time.timeScale != 0)
         {
             coyoteTimeCounter = coyoteTime;
         }
@@ -227,9 +228,7 @@ public class PlayerControllerJanitor : MonoBehaviour
 
     private bool IsGrounded()
     {
-        bool isGrounded = Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
-        _anim.SetBool("onGround",isGrounded);
-        return isGrounded;
+        return Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
     }
 
     private bool IsOnOneWayPlatform()
@@ -348,7 +347,7 @@ public class PlayerControllerJanitor : MonoBehaviour
 
     private void Flip()
     {
-        if ((isFacingRight && horizontal < 0f || !isFacingRight && horizontal > 0f) && (Time.timeScale != 0))
+        if ((isFacingRight && horizontal < 0f || !isFacingRight && horizontal > 0f) && Time.timeScale != 0)
         {
             isFacingRight = !isFacingRight;
             Vector3 localScale = transform.localScale;
