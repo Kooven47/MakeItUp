@@ -1,8 +1,6 @@
 using UnityEngine;
 using TMPro;
 using Unity.VisualScripting;
-using UnityEngine.Events;
-using System;
 
 public class SignMenuCollisionWithEnemy : MonoBehaviour
 {
@@ -13,7 +11,7 @@ public class SignMenuCollisionWithEnemy : MonoBehaviour
     public Transform enemyLocations;
 
     bool shownBefore;
-    
+
     // Start is called before the first frame update
     void Start()
     {
@@ -45,7 +43,6 @@ public class SignMenuCollisionWithEnemy : MonoBehaviour
         {
             Time.timeScale = 1;
             spawnManager.SpawnEnemy(enemyLocations);
-            ObjectiveManager.OnUpdateObjective();
         }
     }
 

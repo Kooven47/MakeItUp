@@ -32,7 +32,7 @@ public class PauseMenu : MonoBehaviour
     public void ResumeGame()
     {
         pauseMenu.SetActive(false);
-        if (!SignMenuCollision.isMenuActive && !SignMenuCollisionWithEnemy.isMenuActive && !SignMenu.isMenuActive && !SignMenuEnemy.isMenuActive)
+        if (!SignMenuCollision.isMenuActive)
             Time.timeScale = 1;
         isPaused = false;
     }
@@ -44,10 +44,9 @@ public class PauseMenu : MonoBehaviour
         isPaused = false;
     }
 
-    public void RestartLevel()
+    public void QuitGame()
     {
-        Time.timeScale = 1;
-        isPaused = false;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        Debug.Log("Quit game!");
+        Application.Quit();
     }
 }

@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,8 +11,6 @@ public class EnemyStats : Stats
 
     private bool _isShielded = false;
     EnumLib.DamageType _shieldAttribute = EnumLib.DamageType.Neutral;
-
-    public static event Action OnDeath;
     // Start is called before the first frame update
     protected void Start()
     {
@@ -36,10 +33,6 @@ public class EnemyStats : Stats
 
     public override void Death()
     {
-
-        Debug.Log("DEFEATED!");
-        OnDeath?.Invoke();
-        Destroy(gameObject);
         this.gameObject.SetActive(false);
     }
 
@@ -64,7 +57,6 @@ public class EnemyStats : Stats
         }
 
         _curHP -= damage;
-        
         Debug.Log("Damage received "+damage);
 
         DamageNumberPool.summonDamageNum?.Invoke(damage,effective,transform.position);
