@@ -17,7 +17,6 @@ public class HealthBar : MonoBehaviour
     {
         _maxSegments = transform.childCount;
         settingHealth = SetHealth;
-        SetHealth(100,100);
     }
 
     void SetHealth(float curHP, float maxHP)
@@ -33,6 +32,8 @@ public class HealthBar : MonoBehaviour
 
         // 0.8f new ratio, old ratio = 0.67f
         float newRatio = (curHP/maxHP);
+
+        _healthTally.SetText(curHP.ToString()+"/"+maxHP.ToString());
 
         if (newRatio == _curRatio)
             return;
@@ -86,7 +87,8 @@ public class HealthBar : MonoBehaviour
 
         _curRatio = newRatio;
 
-        _healthTally.SetText(curHP.ToString()+"/"+maxHP.ToString());
+        // _healthTally.SetText(curHP.ToString()+"/"+maxHP.ToString());
+        Debug.Log("Called Healthbar on awake!");
 
         _testCurHP = curHP;
         

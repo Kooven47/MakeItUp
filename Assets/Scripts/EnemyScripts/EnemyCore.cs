@@ -57,6 +57,8 @@ public class EnemyCore : MonoBehaviour
         _hurtBox.gameObject.SetActive(false);
         bool didHit = false;
 
+        PlayerInterrupt _playerInter;
+
         if (targets.Count != 0)
         {
             foreach(Collider2D col in targets)
@@ -64,9 +66,19 @@ public class EnemyCore : MonoBehaviour
                 if (col.CompareTag("Player"))
                 {
                     Debug.Log("Hit the janitor!");
-                    Vector2 direction = (col.transform.position - transform.position).normalized;
-                    col.GetComponent<PlayerInterrupt>().Stagger(1,_knockBackVector * direction * 0.5f);
-                    didHit = true;
+                    _playerInter = col.GetComponent<PlayerInterrupt>();
+                    if (!_playerInter.iFrame)
+                    {
+                        Vector2 direction = (col.transform.position - transform.position).normalized;
+                        _playerInter.Stagger(1,_knockBackVector * direction * 0.5f);
+                        col.GetComponent<PlayerStats>().DamageCalc(_enemySkills[_attackIndex].damage,_enemySkills[_attackIndex].attribute,false);
+                        didHit = true;
+                    }
+                    else
+                    {
+                        Debug.Log("Under Iframes");
+                    }
+                    
                 }
             }
         }
@@ -84,7 +96,9 @@ public class EnemyCore : MonoBehaviour
         StartArmor?.Invoke(false);
         if (_idleTimer != null || _attackIndex < 0)
         {
-            StopCoroutine(_idleTimer);
+            if (_idleTimer != null)
+                StopCoroutine(_idleTimer);
+            
             _idleTimer = StartCoroutine(IdleTimer(3f));
         }
         else
