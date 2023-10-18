@@ -9,6 +9,7 @@ public class PlayerStats : Stats
     void Start()
     {
         base.Start();
+        HealthBar.settingHealth?.Invoke(_curHP,_maxHP);
     }
 
 }

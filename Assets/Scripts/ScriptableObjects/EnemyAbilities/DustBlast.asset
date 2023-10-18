@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2de1d81a5b6c432449110860e48a0570, type: 3}
+  m_Name: DustBlast
+  m_EditorClassIdentifier: 
+  damage: 5
+  animations:
+  - {fileID: 7400000, guid: 558454198a879e6429f470524be112b5, type: 2}
+  - {fileID: 7400000, guid: 84e2efc9ed39674448056ff589a0c0a8, type: 2}
+  force: 0
+  attribute: 1
+  projectileAnims: []
+  idleTime: 2

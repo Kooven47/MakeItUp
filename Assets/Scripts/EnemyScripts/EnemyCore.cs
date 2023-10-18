@@ -5,6 +5,7 @@ using System;
 
 public class EnemyCore : MonoBehaviour
 {
+    [SerializeField] private bool _isMelee = true;
     [SerializeField] protected Vector2 _projectileRange = new Vector2(3f,2f);
     [SerializeField] protected Vector2 _meleeRange = new Vector2(3f,2f);
     [SerializeField] ContactFilter2D _hurtLayers;
@@ -25,6 +26,8 @@ public class EnemyCore : MonoBehaviour
 
     public Action<bool> StartArmor;
 
+    protected Vector2 _knockBackVector;
+
     protected virtual void Start()
     {
         _target = GameObject.FindWithTag("Player").transform;
@@ -32,7 +35,7 @@ public class EnemyCore : MonoBehaviour
         _animOverride = Instantiate(_animOverride);
         _anim = GetComponent<Animator>();
         _anim.runtimeAnimatorController = _animOverride;
-        
+        _target = GameObject.Find("Janitor").transform;
     }
 
     protected bool InDistance(Vector2 range)
@@ -41,6 +44,11 @@ public class EnemyCore : MonoBehaviour
         float y_dist = Mathf.Abs(transform.position.y - _target.position.y);
 
         return x_dist <= range.x && y_dist <= range.y;
+    }
+
+    protected void ProjectileFire()
+    {
+
     }
 
     protected void MeleeStrike()
@@ -58,6 +66,8 @@ public class EnemyCore : MonoBehaviour
                 if (col.CompareTag("Player"))
                 {
                     Debug.Log("Hit the janitor!");
+                    Vector2 direction = (col.transform.position - transform.position).normalized;
+                    col.GetComponent<PlayerInterrupt>().Stagger(1,_knockBackVector * direction * 0.5f);
                     didHit = true;
                 }
             }
@@ -74,7 +84,7 @@ public class EnemyCore : MonoBehaviour
     {
         _canAttack = false;
         StartArmor?.Invoke(false);
-        if (_idleTimer != null)
+        if (_idleTimer != null || _attackIndex < 0)
         {
             StopCoroutine(_idleTimer);
             _idleTimer = StartCoroutine(IdleTimer(3f));
@@ -93,10 +103,11 @@ public class EnemyCore : MonoBehaviour
         //     _canAttack = false;
         //     _attackIndex = 1;
         // }
-        if (InDistance(_meleeRange))
+        if (InDistance(_meleeRange) && _isMelee)
         {
             _canAttack = false;
             _attackIndex = 0;
+            _knockBackVector = EnumLib.KnockbackVector(_enemySkills[_attackIndex].force);
         }
     }
 
