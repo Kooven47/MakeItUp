@@ -5,14 +5,17 @@ using System;
 
 public class ProjectileScript : MonoBehaviour
 {
-    private const int MOTION = 0, IMPACT = 1, IDLE = 2;
     [SerializeField] AnimatorOverrideController _animatorOverride;
     [SerializeField]Material _spriteDefault,_wetOutline, _dryOutline;
+    private const int MOTION = 0, IMPACT = 1, IDLE = 2;
+
+    protected int projState = 0;
     Rigidbody2D _rigid;
     Animator _anim;
     BoxCollider2D _hitBox;
     SpriteRenderer _spriteRender;
-    private float _damage = 0f;
+    private float _damage = 0f, timer = 0f;
+    private Coroutine _projectileLife;
 
     EnumLib.DamageType _damageType = EnumLib.DamageType.Neutral;
 
@@ -31,7 +34,7 @@ public class ProjectileScript : MonoBehaviour
         _animatorOverride["Motion"] = skill.projectileAnims[MOTION];
         _damage = skill.damage;
         _damageType = skill.attribute;
-        
+
         if (_damageType == EnumLib.DamageType.Dry)
         {
             _spriteRender.material = _dryOutline;
@@ -47,6 +50,13 @@ public class ProjectileScript : MonoBehaviour
 
         _anim.Play("Motion");
         _rigid.AddForce(trajectory * 50f);
+        _projectileLife = StartCoroutine(ProjectileLifeSpan(3f));
+    }
+
+    private IEnumerator ProjectileLifeSpan(float projTime)
+    {
+        yield return new WaitForSeconds(projTime);
+        gameObject.SetActive(false);
     }
 
     public void Dissipate()
