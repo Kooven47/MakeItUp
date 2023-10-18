@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class EnemyStats : Stats
 {
@@ -11,6 +12,7 @@ public class EnemyStats : Stats
 
     private bool _isShielded = false;
     EnumLib.DamageType _shieldAttribute = EnumLib.DamageType.Neutral;
+    public static event Action OnDeath;
     // Start is called before the first frame update
     protected void Start()
     {
@@ -33,7 +35,10 @@ public class EnemyStats : Stats
 
     public override void Death()
     {
-        this.gameObject.SetActive(false);
+         Debug.Log("DEFEATED!");
+            OnDeath?.Invoke();
+            Destroy(gameObject);
+        // this.gameObject.SetActive(false);
     }
 
     public override void DamageCalc(float attack,EnumLib.DamageType attribute, bool isCrit)
