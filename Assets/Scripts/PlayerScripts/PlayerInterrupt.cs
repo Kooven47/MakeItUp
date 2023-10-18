@@ -29,16 +29,11 @@ public class PlayerInterrupt : InterruptSystem
             return;
         
         _isStunned = true;
-
-        staggered?.Invoke(false);
         _rb.AddForce(knockVector * _rb.mass,ForceMode2D.Impulse);
 
         _anim.Play("Stagger");
 
-        if (_staggerTimer != null)
-        {
-            StopCoroutine(_staggerTimer);
-        }
+        staggered?.Invoke(false);
 
        _staggerTimer = StartCoroutine(StaggerTime(1f));
     }

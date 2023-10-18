@@ -8,7 +8,7 @@ public class NormalAttack : MonoBehaviour
     [SerializeField]private Animator _anim;
     [SerializeField]private PlayerStats _playerStat;
 
-    int _attackBuffer = 0,_inAttack = 0;
+    [SerializeField]int _attackBuffer = 0,_inAttack = 0;
     [SerializeField]int _chain = 0;
     [SerializeField]Collider2D _hurtBox;
     [SerializeField]ContactFilter2D _hurtLayers;
@@ -21,7 +21,7 @@ public class NormalAttack : MonoBehaviour
     [SerializeField]private List<PlayerAbility> _broomNormalAttacks = new List<PlayerAbility>(3);
     [SerializeField]private List<PlayerAbility> _mopNormalAttacks = new List<PlayerAbility>(3);
 
-    private bool _canAttack = true;
+    [SerializeField]private bool _canAttack = true;
 
     // Start is called before the first frame update
     void Start()
@@ -36,7 +36,11 @@ public class NormalAttack : MonoBehaviour
     {
         _canAttack = toggle;
         if (toggle)
+        {
             _attackBuffer = 0;
+            _inAttack = 0;
+            _chain = 0;
+        }
     }
 
     void Recover()
