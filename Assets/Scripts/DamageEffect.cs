@@ -43,16 +43,18 @@ public class DamageEffect : MonoBehaviour
         {
             temp = _dustFX.Dequeue();
             temp.SetActive(true);
-            temp.transform.localPosition = Vector2.zero + new Vector2(Random.Range(0f,1f),Random.Range(0f,1f));
+            // temp.transform.localPosition = Vector2.zero + new Vector2(Random.Range(0f,1f),Random.Range(0f,1f));
             _dustFX.Enqueue(temp);
         }
-        else if (type == 2)
+        else
         {
             temp = _splashFX.Dequeue();
             temp.SetActive(true);
-            temp.transform.localPosition = Vector2.zero + new Vector2(Random.Range(0f,1f),Random.Range(0f,1f));
+            // temp.transform.localPosition = Vector2.zero + new Vector2(Random.Range(0f,1f),Random.Range(0f,1f));
             _splashFX.Enqueue(temp);
         }
+
+        temp.transform.localPosition = Vector2.zero;
     }
 
     private IEnumerator HitTimer(float timer)

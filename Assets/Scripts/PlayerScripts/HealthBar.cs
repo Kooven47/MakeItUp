@@ -1,18 +1,23 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
+using System;
 
 public class HealthBar : MonoBehaviour
 {
     [SerializeField]private int _maxSegments = 0;
+    [SerializeField]private TMP_Text _healthTally;
     private float _curRatio = 1f;
+
+    public static Action<float,float> settingHealth;
 
     private float _testCurHP = 100f, _testMaxHP = 100f;
     // Start is called before the first frame update
     void Start()
     {
         _maxSegments = transform.childCount;
+        settingHealth = SetHealth;
+        SetHealth(100,100);
     }
 
     void SetHealth(float curHP, float maxHP)
@@ -80,6 +85,8 @@ public class HealthBar : MonoBehaviour
         
 
         _curRatio = newRatio;
+
+        _healthTally.SetText(curHP.ToString()+"/"+maxHP.ToString());
 
         _testCurHP = curHP;
         

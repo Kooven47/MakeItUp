@@ -6,6 +6,8 @@ public class EnumLib
     public enum DamageType {Neutral,Dry,Wet};
     public enum KnockBackPower{Sideways,Launch,SideLaunch};
 
+    public enum ProjectileType{None,Dust};
+
     public static Vector2 KnockbackVector(KnockBackPower power)
     {
         switch (power)

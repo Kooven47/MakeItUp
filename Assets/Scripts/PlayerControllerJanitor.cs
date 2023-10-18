@@ -15,6 +15,8 @@ public class PlayerControllerJanitor : MonoBehaviour
     private bool isJumping;
     private bool isGrounded;
     private float timeInAir;
+
+    private bool _canMove = true, _isSprinting = false;
     [SerializeField] private Vector2 counterJumpForce;
     
     [SerializeField] private float coyoteTime;
@@ -49,17 +51,28 @@ public class PlayerControllerJanitor : MonoBehaviour
     [SerializeField] private Animator _anim;
     
     [Header("Sound Effects")]
-    [SerializeField] private AudioSource jumpSoundEffect;
-    [SerializeField] private AudioSource dropThroughSoundEffect;
-    [SerializeField] private AudioSource landingSound;
-    [SerializeField] private AudioSource walkingSound;
-    [SerializeField] private AudioSource sprintingSound;
+    private const int JUMP = 0,DROP = 1,LAND = 2,WALK = 3,RUN = 4;
+    [SerializeField] private AudioClip[] _soundEffects = new AudioClip[5];
+    [SerializeField] private AudioSource _audioSrc, _moveAudio;
  
     // public int maxJumpTrackNum = 3; // This is the number of jump history you want to keep track of for the ai to follow 
     // Start is called before the first frame update
     private void Start()
     {
         speed = normalSpeed;
+        _moveAudio.clip = _soundEffects[WALK];
+        PlayerInterrupt.staggered += SetMobility;
+    }
+
+    private void PlaySoundEffect(int index)
+    {
+        _audioSrc.clip = _soundEffects[index];
+        _audioSrc.Play();
+    }
+
+    public void SetMobility(bool isMobile)
+    {
+        _canMove = isMobile;
     }
 
     // Update is called once per frame
@@ -71,15 +84,16 @@ public class PlayerControllerJanitor : MonoBehaviour
         if (Input.GetKey(KeyCode.LeftShift))
         {
             speed = sprintingSpeed;
+            _isSprinting = true;
         }
         else
         {
             speed = normalSpeed;
+            _isSprinting = false;
         }
-        _anim.SetBool("onGround", IsGrounded() || IsOnOneWayPlatform());
         
         // Handle footsteps
-        if ((IsGrounded() || IsOnOneWayPlatform()) && Time.timeScale != 0)
+        if ((IsGrounded() || IsOnOneWayPlatform()) && (Time.timeScale != 0))
         {
             coyoteTimeCounter = coyoteTime;
         }
@@ -105,27 +119,36 @@ public class PlayerControllerJanitor : MonoBehaviour
             // Just landed
             if (!isGrounded && timeInAir >= 0.5f)
             {
-                landingSound.Play();
+                PlaySoundEffect(LAND);
             }
             isGrounded = true;
             timeInAir = 0f;
-            
             if (Math.Abs(horizontal) > 0f)
             {
-                walkingSound.enabled = speed == normalSpeed;
-                sprintingSound.enabled = speed == sprintingSpeed;
+                // walkingSound.enabled = speed == normalSpeed;
+                // sprintingSound.enabled = speed == sprintingSpeed;
+                _moveAudio.enabled = true;
+                if (_isSprinting)
+                {
+                    _moveAudio.clip = _soundEffects[RUN];
+                }
+                else
+                {
+                    _moveAudio.clip = _soundEffects[WALK];
+                }
+
+                if (!_moveAudio.isPlaying)
+                {
+                    _moveAudio.Play();
+                }
             }
             else
-            {
-                walkingSound.enabled = false;
-                sprintingSound.enabled = false;
-            }
+                _moveAudio.enabled = false;
         }
         else
         {
             isGrounded = false;
-            walkingSound.enabled = false;
-            sprintingSound.enabled = false;
+            _moveAudio.enabled = false;
         }
         
         // Handle jump
@@ -143,7 +166,7 @@ public class PlayerControllerJanitor : MonoBehaviour
                     }
                 }
                 if (Time.timeScale != 0)
-                    jumpSoundEffect.Play();
+                    PlaySoundEffect(JUMP);
                 rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
                 jumpBufferTimeCounter = 0f;
                 StartCoroutine(JumpCooldown());
@@ -165,7 +188,7 @@ public class PlayerControllerJanitor : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.S) && IsOnOneWayPlatform())
         {
             StartCoroutine(DisablePlatformCollision());
-            dropThroughSoundEffect.Play();
+            PlaySoundEffect(DROP);
         }
 
         WallSlide();
@@ -179,6 +202,12 @@ public class PlayerControllerJanitor : MonoBehaviour
     }
 
     private void FixedUpdate()
+    {
+        if (_canMove)
+            Movement();
+    }
+
+    private void Movement()
     {
         _anim.SetBool("isMoving",horizontal != 0f);
 
@@ -198,7 +227,9 @@ public class PlayerControllerJanitor : MonoBehaviour
 
     private bool IsGrounded()
     {
-        return Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
+        bool isGrounded = Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
+        _anim.SetBool("onGround",isGrounded);
+        return isGrounded;
     }
 
     private bool IsOnOneWayPlatform()
@@ -317,7 +348,7 @@ public class PlayerControllerJanitor : MonoBehaviour
 
     private void Flip()
     {
-        if ((isFacingRight && horizontal < 0f || !isFacingRight && horizontal > 0f) && Time.timeScale != 0)
+        if ((isFacingRight && horizontal < 0f || !isFacingRight && horizontal > 0f) && (Time.timeScale != 0))
         {
             isFacingRight = !isFacingRight;
             Vector3 localScale = transform.localScale;
