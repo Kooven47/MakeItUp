@@ -9,15 +9,6 @@ public class PlayerInterrupt : InterruptSystem
 
     public static Action<bool> staggered;
 
-    [SerializeField]private float _invincTimer = 0.5f;
-
-    private Coroutine _iFrameTimer;
-
-    public bool iFrame
-    {
-        get{return _iFrameTimer != null;}
-    }
-
     protected override void Start()
     {
         base.Start();
@@ -32,15 +23,9 @@ public class PlayerInterrupt : InterruptSystem
         _isStunned = false;
         _staggerTimer = null;
     }
-
-    private IEnumerator InvincibilityTimer(float iFrameTime)
-    {
-        yield return new WaitForSeconds(iFrameTime);
-        _iFrameTimer = null;
-    }
     public override void Stagger(int damageType, Vector2 knockVector)
     {
-        if (_poise == ArmorType.SuperArmor || iFrame)
+        if (_poise == ArmorType.SuperArmor)
             return;
         
         _isStunned = true;
@@ -51,6 +36,5 @@ public class PlayerInterrupt : InterruptSystem
         staggered?.Invoke(false);
 
        _staggerTimer = StartCoroutine(StaggerTime(1f));
-       _iFrameTimer = StartCoroutine(InvincibilityTimer(1f + _invincTimer));
     }
 }

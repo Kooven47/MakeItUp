@@ -9,7 +9,7 @@ AnimatorOverrideController:
   m_Name: DustBunny
   m_Controller: {fileID: 9100000, guid: 2f5e19ea9ffdc6344ac29e947a556d9e, type: 2}
   m_Clips:
-  - m_OriginalClip: {fileID: 7400000, guid: 236fa6e58d53ef840913f2f1886e6d3c, type: 2}
-    m_OverrideClip: {fileID: 7400000, guid: eeaef3ef1cd21f64687d246646cb767a, type: 2}
   - m_OriginalClip: {fileID: 7400000, guid: 526f85575a13edf46a177126a5f3cbbf, type: 2}
     m_OverrideClip: {fileID: 7400000, guid: 6f7ace898debae54bb56e1fd0854c14d, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 716747a66dba09c4b9f7fc372e7b7c4a, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: eeaef3ef1cd21f64687d246646cb767a, type: 2}

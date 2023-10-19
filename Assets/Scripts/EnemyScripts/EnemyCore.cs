@@ -62,7 +62,7 @@ public class EnemyCore : MonoBehaviour
         _hurtBox.gameObject.SetActive(false);
         bool didHit = false;
 
-        PlayerInterrupt _playerInter;
+        PlayerStats _playerStat;
 
         if (targets.Count != 0)
         {
@@ -71,12 +71,12 @@ public class EnemyCore : MonoBehaviour
                 if (col.CompareTag("Player"))
                 {
                     Debug.Log("Hit the janitor!");
-                    _playerInter = col.GetComponent<PlayerInterrupt>();
-                    if (!_playerInter.iFrame)
+                    _playerStat = col.GetComponent<PlayerStats>();
+                    if (!_playerStat.iFrame)
                     {
                         Vector2 direction = (col.transform.position - transform.position).normalized;
-                        _playerInter.Stagger(1,_knockBackVector * direction * 0.5f);
-                        col.GetComponent<PlayerStats>().DamageCalc(_enemySkills[_attackIndex].damage,_enemySkills[_attackIndex].attribute,false);
+                        col.GetComponent<PlayerInterrupt>().Stagger(1,_knockBackVector * direction * 0.5f);
+                        _playerStat.DamageCalc(_enemySkills[_attackIndex].damage,_enemySkills[_attackIndex].attribute,false);
                         didHit = true;
                     }
                     else

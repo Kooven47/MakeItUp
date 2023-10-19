@@ -73,9 +73,13 @@ public class ProjectileScript : MonoBehaviour
         if (collider.collider.CompareTag("Player"))
         {
             Collider2D col = collider.collider;
-            Vector2 knockBack = EnumLib.KnockbackVector(_knockBack);
-            col.GetComponent<PlayerInterrupt>().Stagger((int) _damageType,knockBack * 0.25f);
-            col.GetComponent<PlayerStats>().DamageCalc(_damage,_damageType,false);
+            PlayerStats _playerStat = col.GetComponent<PlayerStats>();
+            if (!_playerStat.iFrame)
+            {
+                Vector2 knockBack = EnumLib.KnockbackVector(_knockBack);
+                col.GetComponent<PlayerInterrupt>().Stagger((int) _damageType,knockBack * 0.25f);
+                _playerStat.DamageCalc(_damage,_damageType,false); 
+            }
             Dissipate();
         }
     }
