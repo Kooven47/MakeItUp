@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using Unity.VisualScripting;
 
 public class ProjectileScript : MonoBehaviour
 {
@@ -17,7 +18,13 @@ public class ProjectileScript : MonoBehaviour
     private float _damage = 0f, timer = 0f;
     private Coroutine _projectileLife;
 
-    EnumLib.DamageType _damageType = EnumLib.DamageType.Neutral;
+    private EnumLib.DamageType _damageType = EnumLib.DamageType.Neutral;
+    private EnumLib.KnockBackPower _knockBack = EnumLib.KnockBackPower.Sideways;
+
+    public EnumLib.DamageType damageType
+    {
+        get{return _damageType;}
+    }
 
     public void Initialize()
     {
@@ -34,6 +41,7 @@ public class ProjectileScript : MonoBehaviour
         _animatorOverride["Motion"] = skill.projectileAnims[MOTION];
         _damage = skill.damage;
         _damageType = skill.attribute;
+        _knockBack = skill.force;
 
         if (_damageType == EnumLib.DamageType.Dry)
         {
@@ -49,18 +57,36 @@ public class ProjectileScript : MonoBehaviour
         }
 
         _anim.Play("Motion");
-        _rigid.AddForce(trajectory * 50f);
+        _rigid.AddForce(trajectory * 300f);
         _projectileLife = StartCoroutine(ProjectileLifeSpan(3f));
     }
 
     private IEnumerator ProjectileLifeSpan(float projTime)
     {
         yield return new WaitForSeconds(projTime);
-        gameObject.SetActive(false);
+        _projectileLife = null;
+        Dissipate();
+    }
+
+    private void OnCollisionEnter2D(Collision2D collider)
+    {
+        if (collider.collider.CompareTag("Player"))
+        {
+            Collider2D col = collider.collider;
+            Vector2 knockBack = EnumLib.KnockbackVector(_knockBack);
+            col.GetComponent<PlayerInterrupt>().Stagger((int) _damageType,knockBack * 0.25f);
+            col.GetComponent<PlayerStats>().DamageCalc(_damage,_damageType,false);
+            Dissipate();
+        }
     }
 
     public void Dissipate()
     {
-
+        if (_projectileLife != null)
+        {
+            StopCoroutine(_projectileLife);
+            _projectileLife = null;
+        }
+        ProjectileManager.returnProjectile?.Invoke(gameObject);
     }
 }

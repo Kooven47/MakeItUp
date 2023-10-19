@@ -18,5 +18,8 @@ MonoBehaviour:
   - {fileID: 7400000, guid: 84e2efc9ed39674448056ff589a0c0a8, type: 2}
   force: 0
   attribute: 1
-  projectileAnims: []
+  projectileAnims:
+  - {fileID: 7400000, guid: f221ed8b125675f40933b85f76b5a858, type: 2}
+  - {fileID: 7400000, guid: be36bd1bc451fe94fb7732bcab8508e9, type: 2}
+  - {fileID: 7400000, guid: f221ed8b125675f40933b85f76b5a858, type: 2}
   idleTime: 2

@@ -47,7 +47,11 @@ public class EnemyCore : MonoBehaviour
 
     protected void ProjectileFire()
     {
+        int skillIndex = _attackIndex;
+        if (skillIndex == -1)
+            skillIndex = 0;
 
+        ProjectileManager.createProjectile?.Invoke(transform.position,(_target.transform.position - transform.position).normalized,_enemySkills[skillIndex]);
     }
 
     protected void MeleeStrike()
@@ -117,6 +121,12 @@ public class EnemyCore : MonoBehaviour
         //     _attackIndex = 1;
         // }
         if (InDistance(_meleeRange) && _isMelee)
+        {
+            _canAttack = false;
+            _attackIndex = 0;
+            _knockBackVector = EnumLib.KnockbackVector(_enemySkills[_attackIndex].force);
+        }
+        else if (InDistance(_projectileRange) && !_isMelee)
         {
             _canAttack = false;
             _attackIndex = 0;

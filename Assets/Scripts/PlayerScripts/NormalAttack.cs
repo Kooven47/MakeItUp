@@ -70,6 +70,7 @@ public class NormalAttack : MonoBehaviour
 
         DamageEffect damageEffect;
         EnemyStats _enemyStat;
+        ProjectileScript _projectile;
 
         if (targets.Count != 0)
         {
@@ -88,6 +89,19 @@ public class NormalAttack : MonoBehaviour
                         col.gameObject.GetComponent<EnemyInterrupt>().Stagger(_inAttack, direction * _knockBackVector);
                     }
                     didHit = true;
+                }
+                else if (col.CompareTag("Projectile"))
+                {
+                    _projectile = col.GetComponent<ProjectileScript>();
+                    if ((int)_projectile.damageType == _inAttack)
+                    {
+                        _projectile.Dissipate();
+                        Debug.Log("Destroyed projectile");
+                    }
+                    else
+                    {
+                        Debug.Log("Wrong weapon to destroy");
+                    }
                 }
                     
             }
