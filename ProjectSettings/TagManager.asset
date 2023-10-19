@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Enemy
   - OneWayPlatforms
+  - Projectile
   layers:
   - Default
   - TransparentFX
@@ -18,7 +19,7 @@ TagManager:
   - Enemy
   - One Way Platform
   - WalljumpableWalls
-  - 
+  - Projectile
   - 
   - 
   - 
