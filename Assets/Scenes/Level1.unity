@@ -375,7 +375,7 @@ GameObject:
   - component: {fileID: 66012604}
   m_Layer: 10
   m_Name: WalljumpableWalls
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2728,6 +2728,7 @@ MonoBehaviour:
   _moveSpeed: 1
   _critRate: 0.05
   _critDMG: 0.5
+  _invincTimer: 0.5
 --- !u!114 &159827001
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2740,7 +2741,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4d0cdab8cddd264ebfaceddb792076d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _invincTimer: 0.5
 --- !u!1 &175763757
 GameObject:
   m_ObjectHideFlags: 0
@@ -4321,7 +4321,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4d0cdab8cddd264ebfaceddb792076d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _invincTimer: 0.5
 --- !u!82 &523233885
 AudioSource:
   m_ObjectHideFlags: 0
@@ -4532,6 +4531,7 @@ MonoBehaviour:
   _moveSpeed: 1
   _critRate: 0.05
   _critDMG: 0.5
+  _invincTimer: 0.5
 --- !u!114 &523233888
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24315,7 +24315,7 @@ GameObject:
   - component: {fileID: 2004955441}
   m_Layer: 6
   m_Name: Terrain
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

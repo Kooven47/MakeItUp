@@ -8,18 +8,20 @@ public class ProjectileScript : MonoBehaviour
 {
     [SerializeField] AnimatorOverrideController _animatorOverride;
     [SerializeField]Material _spriteDefault,_wetOutline, _dryOutline;
-    private const int MOTION = 0, IMPACT = 1, IDLE = 2;
+    protected const int MOTION = 0, IMPACT = 1, IDLE = 2;
 
-    protected int projState = 0;
-    Rigidbody2D _rigid;
-    Animator _anim;
-    BoxCollider2D _hitBox;
-    SpriteRenderer _spriteRender;
-    private float _damage = 0f, timer = 0f;
-    private Coroutine _projectileLife;
+    protected int _projState = 0, _bounces = 3, _maxBounce = 3;
+    protected Rigidbody2D _rigid;
+    protected Animator _anim;
+    protected BoxCollider2D _hitBox;
+    protected SpriteRenderer _spriteRender;
+    protected float _damage = 0f, timer = 0f;
+    protected Coroutine _projectileLife;
 
-    private EnumLib.DamageType _damageType = EnumLib.DamageType.Neutral;
-    private EnumLib.KnockBackPower _knockBack = EnumLib.KnockBackPower.Sideways;
+    protected Vector2 _lastVelocity = Vector2.zero;
+
+    protected EnumLib.DamageType _damageType = EnumLib.DamageType.Neutral;
+    protected EnumLib.KnockBackPower _knockBack = EnumLib.KnockBackPower.Sideways;
 
     public EnumLib.DamageType damageType
     {
@@ -61,14 +63,14 @@ public class ProjectileScript : MonoBehaviour
         _projectileLife = StartCoroutine(ProjectileLifeSpan(3f));
     }
 
-    private IEnumerator ProjectileLifeSpan(float projTime)
+    protected IEnumerator ProjectileLifeSpan(float projTime)
     {
         yield return new WaitForSeconds(projTime);
         _projectileLife = null;
         Dissipate();
     }
 
-    private void OnCollisionEnter2D(Collision2D collider)
+    protected void OnCollisionEnter2D(Collision2D collider)
     {
         if (collider.collider.CompareTag("Player"))
         {
@@ -82,6 +84,25 @@ public class ProjectileScript : MonoBehaviour
             }
             Dissipate();
         }
+        else if (collider.collider.CompareTag("Ground"))
+        {
+            if (_damageType == EnumLib.DamageType.Dry)
+            {
+                if (_bounces == 0)
+                {
+                    _bounces = _maxBounce;
+                    Dissipate();
+                    return;
+                }
+                
+                Debug.Log("Bounce!");
+                _bounces--;
+                float speed = _lastVelocity.magnitude;
+                Vector2 direction = Vector2.Reflect(_lastVelocity.normalized,collider.contacts[0].normal);
+                _rigid.velocity = direction * Mathf.Max(speed,0f); 
+            }
+            
+        }
     }
 
     public void Dissipate()
@@ -92,5 +113,10 @@ public class ProjectileScript : MonoBehaviour
             _projectileLife = null;
         }
         ProjectileManager.returnProjectile?.Invoke(gameObject);
+    }
+
+    void Update()
+    {
+        _lastVelocity = _rigid.velocity;
     }
 }
