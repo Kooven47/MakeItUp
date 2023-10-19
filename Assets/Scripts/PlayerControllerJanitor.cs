@@ -79,7 +79,7 @@ public class PlayerControllerJanitor : MonoBehaviour
     private void Update()
     {
         horizontal = Input.GetAxisRaw("Horizontal");
-        
+        _anim.SetBool("onGround", IsGrounded() || IsOnOneWayPlatform());
         // Check if Shift key is held down to increase speed
         if (Input.GetKey(KeyCode.LeftShift))
         {
@@ -227,9 +227,7 @@ public class PlayerControllerJanitor : MonoBehaviour
 
     private bool IsGrounded()
     {
-        bool isGrounded = Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
-        _anim.SetBool("onGround",isGrounded);
-        return isGrounded;
+        return Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
     }
 
     private bool IsOnOneWayPlatform()
