@@ -34,6 +34,7 @@ public class EnemyCore : MonoBehaviour
         _anim = GetComponent<Animator>();
         _anim.runtimeAnimatorController = _animOverride;
         _target = GameObject.Find("Janitor").transform;
+        _hurtBox = transform.GetChild(0).GetComponent<Collider2D>();
     }
 
     protected bool InDistance(Vector2 range)
