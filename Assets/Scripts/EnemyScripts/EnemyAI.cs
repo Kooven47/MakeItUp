@@ -51,6 +51,12 @@ public class EnemyAI : MonoBehaviour
         target = GameObject.FindWithTag("Player").transform;
         seeker = GetComponent<Seeker>();
         rb = GetComponent<Rigidbody2D>();
+        gameObject.layer = 8; // Enemy layer
+        // Check if flying, if so, no collision on platforms
+        if (flyingEnabled)
+        {
+            gameObject.layer = 13; // Flying enemy layer
+        }
 
         InvokeRepeating("UpdatePath", 0f, pathUpdateSeconds);
     }

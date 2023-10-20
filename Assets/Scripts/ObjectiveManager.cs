@@ -13,6 +13,8 @@ public class ObjectiveManager : MonoBehaviour
     public static bool activeObjective;
     public static event Action UpdateObjective; // Use 'UpdateObjective?.Invoke();' to invoke this. It will do NextObjective() in this class
     public TMP_Text objectiveText;
+    [SerializeField] private GameObject _barriers;
+    public static Queue<GameObject> barrierList = new Queue<GameObject>();
     // Start is called before the first frame update
     void Start()
     {
@@ -20,9 +22,17 @@ public class ObjectiveManager : MonoBehaviour
         activeObjective = false;
         objList.Enqueue(new Objective1Kill());
         objList.Enqueue(new Objective2Kill());
-
+        objList.Enqueue(new Objective3KillBoss());
+        if (_barriers != null) 
+        { 
+            for (int i = 0; i < _barriers.transform.childCount; i ++)
+            {
+                GameObject wallGameObject = _barriers.transform.GetChild(i).gameObject;
+                wallGameObject.SetActive(true);
+                barrierList.Enqueue(wallGameObject);
+            }
+        }
     }
-
     // Update is called once per frame
     void Update()
     {
@@ -107,7 +117,8 @@ public class Objective1Kill : Objective
         EnemyStats.OnDeath -= KillUpdate;
         signMenu.GetComponent<SignMenuEnemy>().ShowSign();
         ObjectiveManager.OnUpdateObjective();
-        //Remove listener
+        GameObject barrier = ObjectiveManager.barrierList.Dequeue(); // This and the next line removes the barrier
+        barrier.SetActive(false);
     }
 
     public override void Display()
@@ -155,12 +166,64 @@ public class Objective2Kill : Objective
         EnemyStats.OnDeath -= KillUpdate;
         signMenu.GetComponent<SignMenuEnemy>().ShowSign();
         ObjectiveManager.OnUpdateObjective();
-        //Remove listener
+        GameObject barrier = ObjectiveManager.barrierList.Dequeue(); // This and the next line removes the barrier
+        barrier.SetActive(false);
     }
 
     public override void Display()
     {
         objectiveText.SetText("Level 1: Janitor's Closet" + System.Environment.NewLine + "Current Objective - Kill the monsters: " + (killNum) + "/" + killObj);
+    }
+
+}
+
+public class Objective3KillBoss : Objective
+{
+    private GameObject signMenu;
+    private GameObject objectiveTextObject;
+    private TMP_Text objectiveText;
+
+    public int killNum;
+    public int killObj;
+    public override void OnStart()
+    {
+        ObjectiveManager.activeObjective = true;
+        killNum = 0;
+        killObj = 1;
+        signMenu = GameObject.Find("Signs/BossDefeatSign/Canvas/Sign"); // Change this to the sign object location
+        objectiveTextObject = GameObject.Find("ObjectiveManager/Canvas/Sign/ObjectiveText"); // This is to find the ObjectiveText object for display
+        objectiveText = objectiveTextObject.GetComponent<TMP_Text>();
+        EnemyStats.OnDeath += KillUpdate;
+        Display();
+
+        // Add the listener for the next obj
+    }
+    public void KillUpdate()
+    {
+        killNum++;
+        Display();
+        if ((killNum >= killObj) && (killObj != -1)) // Objective completed
+        {
+            killNum = 0;
+            OnComplete();
+        }
+
+
+    }
+    public override void OnComplete()
+    {
+        ObjectiveManager.activeObjective = false;
+        EnemyStats.OnDeath -= KillUpdate;
+        signMenu.GetComponent<SignMenu>().ShowSign();
+        ObjectiveManager.OnUpdateObjective();
+        
+        GameObject barrier = ObjectiveManager.barrierList.Dequeue(); // This and the next line removes the barrier
+        barrier.SetActive(false);
+    }
+
+    public override void Display()
+    {
+        objectiveText.SetText("Level 1: Janitor's Closet" + System.Environment.NewLine + "Current Objective - Kill the Toilet Monster");
     }
 
 }
