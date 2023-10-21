@@ -9,6 +9,7 @@ public class EnemyAI : MonoBehaviour
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private LayerMask platformLayer;
+    [SerializeField] private EnemyCore _enemyCore;
 
     [Header("Pathfinding")]
     public Transform target;
@@ -16,7 +17,8 @@ public class EnemyAI : MonoBehaviour
     public float pathUpdateSeconds = 0.5f;
     public float stuckDelay = 0f; // This is the delay to skip to the next path if the enemy is stuck when attempting a player history jump
     public int maxJumpTrackNum = 3;
-
+    [SerializeField] private float _playerBubbleDistance = 1f;
+    [SerializeField] private float _enemyBubbleDistance = 1f;
     [Header("Physics")]
     public float minDropAngle = 240;
     public float maxDropAngle = 300;
@@ -43,6 +45,8 @@ public class EnemyAI : MonoBehaviour
     float time = 0f;
     float timeSincePathStart = 0f;
     private bool isFollowingJumpPath = false;
+    private bool _canFlip = true;
+    private bool _canMove = true;
 
     public Queue<Vector2> jumpList = new Queue<Vector2>();
 
@@ -57,7 +61,8 @@ public class EnemyAI : MonoBehaviour
         {
             gameObject.layer = 13; // Flying enemy layer
         }
-
+        _enemyCore = transform.GetChild(0).GetComponent<EnemyCore>();
+        _enemyCore.StartArmor += IsAttacking;
         InvokeRepeating("UpdatePath", 0f, pathUpdateSeconds);
     }
     private void FixedUpdate()
@@ -67,6 +72,12 @@ public class EnemyAI : MonoBehaviour
             PathFollow();
         }
     }
+   
+    private void OnDisable()
+    {
+        _enemyCore.StartArmor -= IsAttacking;
+    }
+
     private void UpdatePath()
     {
         if (!isFollowingJumpPath && followEnabled && TargetInDistance() && seeker.IsDone())
@@ -103,88 +114,133 @@ public class EnemyAI : MonoBehaviour
             isFollowingJumpPath = false;
             return;
         }
-        // Reached end of path
-        if (currentWaypoint >= path.vectorPath.Count && time <= 0)
-        {
-            if (isFollowingJumpPath)    // This could only be true if we have jumplist count > 0. Which we would set to 0 if flying enemy anyways. Keep this in mind 
-                rb.AddForce(Vector2.up * speed * jumpModifier); // Add jump
 
-            isFollowingJumpPath = false;
-            time = jumpDelay;
-            return;
+        float distanceToPlayer = Vector2.Distance(rb.position, target.position);
+
+        if ((distanceToPlayer < _playerBubbleDistance) && _canMove)
+        {
+            Vector2 directionToPlayer = ((Vector2)target.position - rb.position).normalized;
+            Vector2 moveAwayForce = -directionToPlayer * speed * Time.deltaTime;
+            if(flyingEnabled)
+                rb.AddForce(moveAwayForce);
+            else
+                rb.AddForce(new Vector2(moveAwayForce.x,0));
         }
-        else if (currentWaypoint >= path.vectorPath.Count)
+        else
         {
-            time -= Time.deltaTime;
-            return;
-        }
+            GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
 
-        // See if colliding with anything
-        // Vector3 startOffset = transform.position - new Vector3(0f, GetComponent<Collider2D>().bounds.extents.y + jumpCheckOffset);
-        isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckSize, groundLayer);
+            foreach (GameObject enemy in enemies)
+            {
+                if (enemy != gameObject)
+                {
+                    float distanceToEnemy = Vector2.Distance(rb.position, enemy.transform.position);
 
-        IsOnOneWayPlatform = Physics2D.OverlapCircle(groundCheck.position, groundCheckSize, platformLayer);
+                    // If the enemy is too close to another enemy, move away
+                    if (distanceToEnemy < _enemyBubbleDistance)
+                    {
+                        Vector2 directionToEnemy = ((Vector2)enemy.transform.position - rb.position).normalized;
+                        float distanceFactor = 1.0f - (distanceToEnemy / _enemyBubbleDistance); // Adjust the factor
+                        Vector2 moveAwayFromEnemyForce = -directionToEnemy * speed * distanceFactor * Time.deltaTime;
 
-        // Direction Calculation
-        Vector2 direction = ((Vector2)path.vectorPath[currentWaypoint] - rb.position).normalized;
-        Vector2 force = direction * speed * Time.deltaTime;
+                        // Set the horizontal velocity while keeping the current vertical velocity
+                        moveAwayFromEnemyForce.y = rb.velocity.y;
 
-        // Jump
-        if (jumpEnabled && (isGrounded || IsOnOneWayPlatform) && !flyingEnabled)
-        {
-            if (time > 0f)
+                        // Apply the force to the Rigidbody2D
+                        if (_canMove) 
+                        {
+                            if (flyingEnabled)
+                                rb.velocity = moveAwayFromEnemyForce;
+                            else
+                                rb.velocity = new Vector2(moveAwayFromEnemyForce.x, 0);
+                        }
+                    }
+                }
+            }
+            // Reached end of path
+            if (currentWaypoint >= path.vectorPath.Count && time <= 0)
+            {
+                if (isFollowingJumpPath && _canMove)    // This could only be true if we have jumplist count > 0. Which we would set to 0 if flying enemy anyways. Keep this in mind 
+                    rb.AddForce(Vector2.up * speed * jumpModifier); // Add jump
+
+                isFollowingJumpPath = false;
+                time = jumpDelay;
+                return;
+            }
+            else if (currentWaypoint >= path.vectorPath.Count)
             {
                 time -= Time.deltaTime;
+                return;
             }
-            else if (time <= 0)
+
+            // See if colliding with anything
+            // Vector3 startOffset = transform.position - new Vector3(0f, GetComponent<Collider2D>().bounds.extents.y + jumpCheckOffset);
+            isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckSize, groundLayer);
+
+            IsOnOneWayPlatform = Physics2D.OverlapCircle(groundCheck.position, groundCheckSize, platformLayer);
+
+            // Direction Calculation
+            Vector2 direction = ((Vector2)path.vectorPath[currentWaypoint] - rb.position).normalized;
+            Vector2 force = direction * speed * Time.deltaTime;
+
+            // Jump
+            if (jumpEnabled && (isGrounded || IsOnOneWayPlatform) && !flyingEnabled)
             {
-                if (direction.y > jumpNodeHeightRequirement)
+                if (time > 0f)
                 {
-                    rb.AddForce(Vector2.up * speed * jumpModifier);
+                    time -= Time.deltaTime;
                 }
-                time = jumpDelay;
+                else if (time <= 0)
+                {
+                    if ((direction.y > jumpNodeHeightRequirement) && _canMove)
+                    {
+                        rb.AddForce(Vector2.up * speed * jumpModifier);
+                    }
+                    time = jumpDelay;
+                }
             }
-        }
 
-        // Movement
-        if (!isGrounded && !IsOnOneWayPlatform)
-        {
-            if (!flyingEnabled)
-                force.y = 0;
-        }
-        rb.AddForce(force);
-
-        // One way platforms
-        if (IsOnOneWayPlatform)
-        {
-            // Only go down if direction from path to player is downwards-ish, angle can be adjusted
-            // Converts radians in arctan's domain to degrees from 0-360
-            var directionInDegrees = Math.Atan2(direction.y, direction.x);
-            directionInDegrees *= (180 / Math.PI);
-            directionInDegrees = (directionInDegrees + 360) % 360;
-            if (directionInDegrees >= minDropAngle && directionInDegrees <= maxDropAngle)
+            // Movement
+            if (!isGrounded && !IsOnOneWayPlatform)
             {
-                StartCoroutine(DisablePlatformCollision());
+                if (!flyingEnabled)
+                    force.y = 0;
             }
-        }
+            if (_canMove)
+                rb.AddForce(force);
 
-        // Next Waypoint
-        float distance = Vector2.Distance(rb.position, path.vectorPath[currentWaypoint]);
-        if (distance < nextWaypointDistance)
-        {
-            currentWaypoint++;
-        }
-
-        // Direction Graphics Handling
-        if (directionLookEnabled)
-        {
-            if (rb.velocity.x > 0f)
+            // One way platforms
+            if (IsOnOneWayPlatform)
             {
-                transform.localScale = new Vector3(-1f * Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+                // Only go down if direction from path to player is downwards-ish, angle can be adjusted
+                // Converts radians in arctan's domain to degrees from 0-360
+                var directionInDegrees = Math.Atan2(direction.y, direction.x);
+                directionInDegrees *= (180 / Math.PI);
+                directionInDegrees = (directionInDegrees + 360) % 360;
+                if (directionInDegrees >= minDropAngle && directionInDegrees <= maxDropAngle)
+                {
+                    StartCoroutine(DisablePlatformCollision());
+                }
             }
-            else if (rb.velocity.x < 0f)
+
+            // Next Waypoint
+            float distance = Vector2.Distance(rb.position, path.vectorPath[currentWaypoint]);
+            if (distance < nextWaypointDistance)
             {
-                transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+                currentWaypoint++;
+            }
+
+            // Direction Graphics Handling
+            if (directionLookEnabled && _canFlip)
+            {
+                if (rb.velocity.x > 0.5f)
+                {
+                    transform.localScale = new Vector3(-1f * Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+                }
+                else if (rb.velocity.x < 0.5f)
+                {
+                    transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+                }
             }
         }
     }
@@ -221,5 +277,18 @@ public class EnemyAI : MonoBehaviour
     {
         if (jumpList.Count < maxJumpTrackNum)
             jumpList.Enqueue(position);
+    }
+
+    private void IsAttacking(bool isAttacking)
+    {
+        _canFlip = !isAttacking;
+        _canMove = !isAttacking;
+        if (isAttacking)
+        {
+            if (((Vector2)target.position).x < rb.position.x)
+                transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+            else
+                transform.localScale = new Vector3(-1f * Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+        }
     }
 }

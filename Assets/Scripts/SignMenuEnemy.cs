@@ -8,7 +8,8 @@ public class SignMenuEnemy : MonoBehaviour
     public static bool isMenuActive;
 
     public SpawnManager spawnManager;
-    public Transform enemyLocations;
+    [SerializeField] private Transform spaghettiEnemyLocations;
+    [SerializeField] private Transform dustBunnyEnemyLocations;
 
     bool shownBefore;
 
@@ -41,7 +42,10 @@ public class SignMenuEnemy : MonoBehaviour
         if (!PauseMenu.isPaused)
         {
             Time.timeScale = 1;
-            spawnManager.SpawnEnemy(enemyLocations);
+            if(spaghettiEnemyLocations != null)
+                spawnManager.SpawnEnemy(spaghettiEnemyLocations, 0);
+            if(dustBunnyEnemyLocations != null)
+                spawnManager.SpawnEnemy(dustBunnyEnemyLocations, 1);
         }
     }
 
