@@ -30,16 +30,19 @@ public class PlayerControllerJanitor : MonoBehaviour
     private bool isWallSliding;
     private float wallSlidingSpeed = 0.5f;
 
-    private int maxAirDashes = 1;
-    private int airDashesRemaining;
-    private bool isAirDashing;
-    
     private bool isWallJumping;
     private float wallJumpingDirection;
     private float wallJumpingTime = 0.2f;
     private float wallJumpingTimeCounter;
     private float wallJumpingDuration = 0.4f;
     private Vector2 wallJumpingPower = new Vector2(8f, 8f);
+    
+    private int maxAirDashes = 1;
+    private int airDashesRemaining;
+    private bool isAirDashing;
+
+    private int jumpCount;
+    [SerializeField] private int maxJumpCount = 1;
     
     public static EnemyAI[] enemyAIList;
     [SerializeField] private Rigidbody2D rb;
@@ -96,6 +99,7 @@ public class PlayerControllerJanitor : MonoBehaviour
         if ((IsGrounded() || IsOnOneWayPlatform()) && (Time.timeScale != 0))
         {
             coyoteTimeCounter = coyoteTime;
+            jumpCount = 0;
         }
         else
         {
@@ -155,7 +159,7 @@ public class PlayerControllerJanitor : MonoBehaviour
         if (jumpBufferTimeCounter > 0f && !isJumping)
         {
             jumpKeyHeld = true;
-            if (coyoteTimeCounter > 0f)
+            if (!isAirDashing && (coyoteTimeCounter > 0f || jumpCount < maxJumpCount))
             {
                 // This keeps track of the jumps for the a* platforming
                 if (enemyAIList != null)
@@ -170,6 +174,8 @@ public class PlayerControllerJanitor : MonoBehaviour
                 rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
                 jumpBufferTimeCounter = 0f;
                 StartCoroutine(JumpCooldown());
+                
+                jumpCount++;
             }
             
             // Make jump last longer on hold
@@ -245,6 +251,7 @@ public class PlayerControllerJanitor : MonoBehaviour
         if (IsWalled() && !IsGrounded() && !IsOnOneWayPlatform() && horizontal != 0f)
         {
             isWallSliding = true;
+            jumpCount = 0;
             rb.velocity = new Vector2(rb.velocity.x, Mathf.Clamp(rb.velocity.y, -wallSlidingSpeed, float.MaxValue));
         }
         else
@@ -272,6 +279,8 @@ public class PlayerControllerJanitor : MonoBehaviour
         {
             isWallJumping = true;
             rb.velocity = new Vector2(wallJumpingDirection * wallJumpingPower.x, wallJumpingPower.y);
+            jumpCount = 0; // maybe a mistake lol
+            StartCoroutine(JumpCooldown(wallJumpingDuration));
             wallJumpingTimeCounter = 0f;
 
             if (transform.localScale.x != wallJumpingDirection)
@@ -326,11 +335,11 @@ public class PlayerControllerJanitor : MonoBehaviour
             Physics2D.IgnoreCollision(playerCollider, collider, false);
         }
     }
-    
-    private IEnumerator JumpCooldown()
+
+    private IEnumerator JumpCooldown(float cooldown = 0.4f)
     {
         isJumping = true;
-        yield return new WaitForSeconds(0.4f);
+        yield return new WaitForSeconds(cooldown);
         isJumping = false;
     }
 

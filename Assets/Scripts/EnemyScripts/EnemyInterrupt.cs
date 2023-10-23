@@ -58,8 +58,8 @@ public class EnemyInterrupt : InterruptSystem
         {
             StopCoroutine(_staggerTimer);
         }
-
-       _staggerTimer = StartCoroutine(StaggerTime(1f * staggerTimeMod));
+        
+        _staggerTimer = StartCoroutine(StaggerTime(1f * staggerTimeMod));
 
     }
 }
