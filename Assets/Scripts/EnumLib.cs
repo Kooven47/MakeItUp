@@ -16,6 +16,16 @@ public class EnumLib
             {
                 return new Vector2(20f,0f);
             }
+
+            case KnockBackPower.Launch:
+            {
+                return new Vector2(0f,20f);
+            }
+
+            case KnockBackPower.SideLaunch:
+            {
+                return new Vector2(20f,20f);
+            }
         }
         return Vector2.zero;
     }
