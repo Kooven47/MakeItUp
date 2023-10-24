@@ -20,6 +20,8 @@ public class NormalAttack : MonoBehaviour
 
     EnumLib.DamageType _activeDamageType = EnumLib.DamageType.Neutral;
 
+    float _damageDealing = 0f;
+
     [SerializeField]private List<PlayerAbility> _broomNormalAttacks = new List<PlayerAbility>(3);
     [SerializeField]private List<PlayerAbility> _mopNormalAttacks = new List<PlayerAbility>(3);
     [SerializeField]private List<PlayerAbility> _broomFu = new List <PlayerAbility>();
@@ -85,7 +87,7 @@ public class NormalAttack : MonoBehaviour
                 if (damageEffect != null && col.CompareTag("Enemy"))
                 {
                     _enemyStat = col.gameObject.GetComponent<EnemyStats>();
-                    _enemyStat.DamageCalc(_playerStat.attack,_activeDamageType,false);
+                    _enemyStat.DamageCalc(_damageDealing,_activeDamageType,false);
                     if (_enemyStat._healthRatio > 0f)
                     {
                         damageEffect.TriggerEffect(_inAttack);
@@ -127,6 +129,7 @@ public class NormalAttack : MonoBehaviour
                 aoc["Attack"] = _broomFu[direction].animations[0];
                 aoc["Recovery"] = _broomFu[direction].animations[1];
                 _knockBackVector = EnumLib.KnockbackVector(_broomFu[direction].force);
+                _damageDealing = _broomFu[direction].damage;
                 _chain = 0;
                 _anim.Play("Attack");
                 _inAttack = weapon;
@@ -140,6 +143,7 @@ public class NormalAttack : MonoBehaviour
             {
                 aoc["Attack"] = _mopFu[direction].animations[0];
                 aoc["Recovery"] = _mopFu[direction].animations[1];
+                _damageDealing = _mopFu[direction].damage;
                 _knockBackVector = EnumLib.KnockbackVector(_mopFu[direction].force);
                 _chain = 0;
                 _anim.Play("Attack");
@@ -157,11 +161,13 @@ public class NormalAttack : MonoBehaviour
             aoc["Attack"] = _broomNormalAttacks[_chain].animations[0];
             aoc["Recovery"] = _broomNormalAttacks[_chain].animations[1];
             _knockBackVector = EnumLib.KnockbackVector(_broomNormalAttacks[_chain].force);
+            _damageDealing = _broomNormalAttacks[_chain].damage;
         }
         else if (weapon == 2)
         {
             aoc["Attack"] = _mopNormalAttacks[_chain].animations[0];
             aoc["Recovery"] = _mopNormalAttacks[_chain].animations[1];
+            _damageDealing = _mopNormalAttacks[_chain].damage;
              _knockBackVector = EnumLib.KnockbackVector(_mopNormalAttacks[_chain].force);
         }
 
