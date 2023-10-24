@@ -1,20 +1,23 @@
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class GameOverMenu : MonoBehaviour
 {
     public GameObject gameOverMenu;
+    public static Action gameOver;
 
     // Start is called before the first frame update
     void Start()
     {
         gameOverMenu.SetActive(false);
+        gameOver = GameOver;
     }
 
-    void Update()
-    {
-        if (PlayerStats.playerIsDead) GameOver();
-    }
+    // void Update()
+    // {
+    //     if (PlayerStats.playerIsDead) GameOver();
+    // }
 
     public void GameOver()
     {
@@ -32,7 +35,6 @@ public class GameOverMenu : MonoBehaviour
 
     public void RestartLevel()
     {
-        PlayerStats.playerIsDead = false;
         gameOverMenu.SetActive(false);
         Time.timeScale = 1;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);

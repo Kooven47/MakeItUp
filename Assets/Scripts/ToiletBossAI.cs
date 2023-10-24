@@ -141,6 +141,7 @@ public class ToiletBossAI : MonoBehaviour
             playerStat = col.GetComponent<PlayerStats>();
             if (!playerStat.iFrame)
             {
+                Debug.Log("Vroom vroom you fool! Toilet gonna give it to ya");
                 Vector2 direction = (col.transform.position - toiletTransform.position).normalized;
                 col.GetComponent<PlayerInterrupt>().Stagger(1,knockBackVector * direction.x * 0.5f);
                 playerStat.DamageCalc(200, EnumLib.DamageType.Wet,false);

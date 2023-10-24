@@ -18,7 +18,6 @@ public class PlayerStats : Stats
     {
         base.Start();
         HealthBar.settingHealth?.Invoke(_curHP,_maxHP);
-        playerIsDead = false;
     }
 
     private IEnumerator InvincibilityTimer(float iFrameTime)
@@ -40,6 +39,6 @@ public class PlayerStats : Stats
 
     public override void Death()
     {
-        playerIsDead = true;
+        GameOverMenu.gameOver?.Invoke();
     }
 }

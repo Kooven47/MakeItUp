@@ -13,7 +13,7 @@ public class HealthBar : MonoBehaviour
 
     private float _testCurHP = 100f, _testMaxHP = 100f;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         _maxSegments = transform.childCount;
         settingHealth = SetHealth;
