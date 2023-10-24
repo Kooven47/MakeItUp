@@ -77,6 +77,7 @@ public class EnemyCore : MonoBehaviour
                         Vector2 direction = (col.transform.position - transform.position).normalized;
                         col.GetComponent<PlayerInterrupt>().Stagger(1,_knockBackVector * direction * 0.5f);
                         _playerStat.DamageCalc(_enemySkills[_attackIndex].damage,_enemySkills[_attackIndex].attribute,false);
+                        col.gameObject.GetComponent<DamageEffect>().TriggerEffect((int)_enemySkills[_attackIndex].attribute);
                         didHit = true;
                     }
                     else

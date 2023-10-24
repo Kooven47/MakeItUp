@@ -79,8 +79,9 @@ public class ProjectileScript : MonoBehaviour
             if (!_playerStat.iFrame)
             {
                 Vector2 knockBack = EnumLib.KnockbackVector(_knockBack);
-                col.GetComponent<PlayerInterrupt>().Stagger((int) _damageType,knockBack * 0.25f);
+                col.GetComponent<PlayerInterrupt>().Stagger((int) _damageType,Vector2.zero);
                 _playerStat.DamageCalc(_damage,_damageType,false); 
+                col.gameObject.GetComponent<DamageEffect>().TriggerEffect((int) _damageType);
             }
             Dissipate();
         }
