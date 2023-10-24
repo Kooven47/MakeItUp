@@ -88,11 +88,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2866952751640819706, guid: 52ef50d26a617054f942d9f279d53e36, type: 3}
       propertyPath: _enemyBubbleDistance
-      value: 10
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2866952751640819706, guid: 52ef50d26a617054f942d9f279d53e36, type: 3}
       propertyPath: _playerBubbleDistance
-      value: 10
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 3762292207589212751, guid: 52ef50d26a617054f942d9f279d53e36, type: 3}
       propertyPath: m_LocalScale.x
