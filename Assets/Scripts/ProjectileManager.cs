@@ -35,6 +35,14 @@ public class ProjectileManager : MonoBehaviour
         _projectileQueue.Enqueue(projectile);
     }
 
+    public void SummonProjectileArc(Vector2 position, Vector2 trajectory, Ability _skill)
+    {
+            GameObject temp = _projectileQueue.Dequeue();
+            temp.gameObject.SetActive(true);
+            temp.transform.position = position;
+            temp.GetComponent<ProjectileScript>().FireArc(trajectory,_skill);
+    }
+
     public void SummonProjectile(Vector2 position, Vector2 trajectory, Ability _skill)
     {
             GameObject temp = _projectileQueue.Dequeue();

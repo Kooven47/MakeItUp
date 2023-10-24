@@ -38,7 +38,7 @@ public class ProjectileScript : MonoBehaviour
         _anim.runtimeAnimatorController = _animatorOverride;
     }
 
-    public void FireArch(Vector2 trajectory, Ability skill)
+    public void FireArc(Vector2 trajectory, Ability skill)
     {
         InitializeProjectile(skill);
         _anim.Play("Motion");
