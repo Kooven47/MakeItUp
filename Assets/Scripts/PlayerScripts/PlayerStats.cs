@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,6 +9,7 @@ public class PlayerStats : Stats
     [SerializeField] private float _invincTimer = 0.5f;
     private Coroutine _iFrameTimer;
     public static bool playerIsDead = false;
+    public static Action<float> dashIFrame;
 
     public bool iFrame
     {
@@ -19,6 +21,7 @@ public class PlayerStats : Stats
         base.Start();
         HealthBar.settingHealth?.Invoke(_curHP,_maxHP);
         playerIsDead = false;
+        dashIFrame = DashIFrame;
     }
 
     private IEnumerator InvincibilityTimer(float iFrameTime)
@@ -35,7 +38,14 @@ public class PlayerStats : Stats
         DamageNumberPool.summonDamageNum?.Invoke(damage,0,transform.position);
         HealthBar.settingHealth?.Invoke(_curHP,_maxHP);
         _iFrameTimer = StartCoroutine(InvincibilityTimer(1f + _invincTimer));
+        
         if (_curHP <= 0) Death();
+    }
+
+    public void DashIFrame(float iFrameLength)
+    {
+        if (_iFrameTimer != null) StopCoroutine(_iFrameTimer);
+        _iFrameTimer = StartCoroutine(InvincibilityTimer(iFrameLength));
     }
 
     public override void Death()

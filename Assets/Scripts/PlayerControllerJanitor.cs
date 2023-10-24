@@ -37,9 +37,9 @@ public class PlayerControllerJanitor : MonoBehaviour
     private float wallJumpingDuration = 0.4f;
     private Vector2 wallJumpingPower = new Vector2(8f, 8f);
     
-    private int maxAirDashes = 1;
+    private int maxAirDashes = 10;
     private int airDashesRemaining;
-    private bool isAirDashing;
+    private bool isDashing;
 
     private int jumpCount;
     [SerializeField] private int maxJumpCount = 1;
@@ -159,7 +159,7 @@ public class PlayerControllerJanitor : MonoBehaviour
         if (jumpBufferTimeCounter > 0f && !isJumping)
         {
             jumpKeyHeld = true;
-            if (!isAirDashing && (coyoteTimeCounter > 0f || jumpCount < maxJumpCount))
+            if (!isDashing && (coyoteTimeCounter > 0f || jumpCount < maxJumpCount))
             {
                 // This keeps track of the jumps for the a* platforming
                 if (enemyAIList != null)
@@ -169,8 +169,7 @@ public class PlayerControllerJanitor : MonoBehaviour
                         enemy.newJumpPosition(rb.position);
                     }
                 }
-                if (Time.timeScale != 0)
-                    PlaySoundEffect(JUMP);
+                if (Time.timeScale != 0) PlaySoundEffect(JUMP);
                 rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
                 jumpBufferTimeCounter = 0f;
                 StartCoroutine(JumpCooldown());
@@ -199,9 +198,9 @@ public class PlayerControllerJanitor : MonoBehaviour
 
         WallSlide();
         WallJump();
-        AirDash();
+        GroundAndAirDash();
 
-        if (!isWallJumping && !isAirDashing)
+        if (!isWallJumping && !isDashing)
         {
             Flip();
         }
@@ -217,12 +216,12 @@ public class PlayerControllerJanitor : MonoBehaviour
     {
         _anim.SetBool("isMoving",horizontal != 0f);
 
-        if (!isWallJumping && !isAirDashing)
+        if (!isWallJumping && !isDashing)
         {
             rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
         }
 
-        if (!IsGrounded() && !IsOnOneWayPlatform() && !isAirDashing)
+        if (!IsGrounded() && !IsOnOneWayPlatform() && !isDashing)
         {
             if (!jumpKeyHeld && Vector2.Dot(rb.velocity, Vector2.up) > 0)
             {
@@ -300,22 +299,28 @@ public class PlayerControllerJanitor : MonoBehaviour
         isWallJumping = false;
     }
 
-    private void AirDash()
+    private void GroundAndAirDash()
     {
         if (IsGrounded() || IsOnOneWayPlatform() || IsWalled())
         {
             airDashesRemaining = maxAirDashes;
-            isAirDashing = false;
+            if (Input.GetKeyDown(KeyCode.B) && Time.timeScale != 0 && !isDashing)
+            {
+                isDashing = true;
+                StartCoroutine(AirDashTime());
+                PlayerStats.dashIFrame(0.1f);
+            }
         }
         else
         {
-            if (Input.GetKeyDown(KeyCode.LeftShift) && (Time.timeScale != 0))
+            if (Input.GetKeyDown(KeyCode.LeftShift) && Time.timeScale != 0)
             {
-                if (airDashesRemaining > 0)
+                if (airDashesRemaining > 0 && !isDashing)
                 {
                     airDashesRemaining--;
-                    isAirDashing = true;
+                    isDashing = true;
                     StartCoroutine(AirDashTime());
+                    PlayerStats.dashIFrame(0.1f);
                 }
             }
         }
@@ -350,7 +355,7 @@ public class PlayerControllerJanitor : MonoBehaviour
         rb.velocity = new Vector2(10 * transform.localScale.x, 0);
         yield return new WaitForSeconds(airDashTime);
         rb.gravityScale = 1.5f;
-        isAirDashing = false;
+        isDashing = false;
     }
 
     private void Flip()
