@@ -38,9 +38,19 @@ public class ProjectileScript : MonoBehaviour
         _anim.runtimeAnimatorController = _animatorOverride;
     }
 
-    public void Fire(Vector2 trajectory, Ability skill)
+    public void FireArch(Vector2 trajectory, Ability skill)
+    {
+        InitializeProjectile(skill);
+        _anim.Play("Motion");
+        _rigid.AddForce(trajectory * 300f);
+        _rigid.gravityScale = 1f;
+    }
+
+    public void InitializeProjectile(Ability skill)
     {
         _animatorOverride["Motion"] = skill.projectileAnims[MOTION];
+        _animatorOverride["Idle"] = skill.projectileAnims[IDLE];
+        _projState = MOTION;
         _damage = skill.damage;
         _damageType = skill.attribute;
         _knockBack = skill.force;
@@ -57,10 +67,15 @@ public class ProjectileScript : MonoBehaviour
         {
             _spriteRender.material = _spriteDefault;
         }
+    }
 
+    public void Fire(Vector2 trajectory, Ability skill)
+    {
+        InitializeProjectile(skill);
         _anim.Play("Motion");
         _rigid.AddForce(trajectory * 300f);
         _projectileLife = StartCoroutine(ProjectileLifeSpan(3f));
+        _rigid.gravityScale = 0f;
     }
 
     protected IEnumerator ProjectileLifeSpan(float projTime)
@@ -102,6 +117,10 @@ public class ProjectileScript : MonoBehaviour
                 Vector2 direction = Vector2.Reflect(_lastVelocity.normalized,collider.contacts[0].normal);
                 _rigid.velocity = direction * Mathf.Max(speed,0f); 
             }
+            else if (_damageType == EnumLib.DamageType.Wet && _projState != IDLE)
+            {
+                Linger();
+            }
             
         }
     }
@@ -114,6 +133,18 @@ public class ProjectileScript : MonoBehaviour
             _projectileLife = null;
         }
         ProjectileManager.returnProjectile?.Invoke(gameObject);
+    }
+
+    public void Linger()
+    {
+        if (_projectileLife != null)
+        {
+            _projState = IDLE;
+            StopCoroutine(_projectileLife);
+            _projectileLife = StartCoroutine(ProjectileLifeSpan(2f));
+            _rigid.velocity = Vector2.zero;
+            _anim.Play("Idle");
+        }
     }
 
     void Update()

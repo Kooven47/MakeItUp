@@ -31446,14 +31446,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 67861214759490070, guid: 732ac9d8b1362044ea2fc49bc57603c0, type: 3}
-      propertyPath: _enemyBubbleDistance
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 67861214759490070, guid: 732ac9d8b1362044ea2fc49bc57603c0, type: 3}
-      propertyPath: _playerBubbleDistance
-      value: 10
-      objectReference: {fileID: 0}
     - target: {fileID: 1373098607073716131, guid: 732ac9d8b1362044ea2fc49bc57603c0, type: 3}
       propertyPath: m_LocalPosition.x
       value: 17.406263
