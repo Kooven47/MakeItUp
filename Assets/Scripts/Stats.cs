@@ -11,7 +11,7 @@ public class Stats : MonoBehaviour
     protected float _curHP = 50f;
     // Start is called before the first frame update
 
-    public float _healthRatio
+    public float healthRatio
     {
         get {return _curHP/_maxHP;}
     }
@@ -22,12 +22,12 @@ public class Stats : MonoBehaviour
 
     public float attack
     {
-        get{return _attack;}
+        get {return _attack;}
     }
 
     public float defense
     {
-        get{return _defense;}
+        get {return _defense;}
     }
 
     public virtual void DamageCalc(float attack, EnumLib.DamageType attribute ,bool isCrit)

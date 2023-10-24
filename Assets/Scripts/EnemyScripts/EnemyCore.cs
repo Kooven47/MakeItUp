@@ -84,7 +84,6 @@ public class EnemyCore : MonoBehaviour
                     {
                         Debug.Log("Under Iframes");
                     }
-                    
                 }
             }
         }
@@ -167,6 +166,4 @@ public class EnemyCore : MonoBehaviour
             }
         }
     }
-
-
 }

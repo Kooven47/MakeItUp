@@ -29,7 +29,7 @@ public class ScrollWheelZoom : MonoBehaviour
         float scrollWheelInput = Input.GetAxis("Mouse ScrollWheel");
         float newOrthographicSize = vCam.m_Lens.OrthographicSize - scrollWheelInput * zoomSpeed;
         newOrthographicSize = Mathf.Clamp(newOrthographicSize, minOrthographicSize, maxOrthographicSize);
-        if (newOrthographicSize != vCam.m_Lens.OrthographicSize) Debug.Log("New orthographic size: " + newOrthographicSize);
+        // if (newOrthographicSize != vCam.m_Lens.OrthographicSize) Debug.Log("New orthographic size: " + newOrthographicSize);
         vCam.m_Lens.OrthographicSize = newOrthographicSize;
 
         // Apply the confiner's bounding shape to the camera's orthographic bounds

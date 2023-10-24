@@ -88,7 +88,7 @@ public class NormalAttack : MonoBehaviour
                 {
                     _enemyStat = col.gameObject.GetComponent<EnemyStats>();
                     _enemyStat.DamageCalc(_damageDealing,_activeDamageType,false);
-                    if (_enemyStat._healthRatio > 0f)
+                    if (_enemyStat.healthRatio > 0f)
                     {
                         damageEffect.TriggerEffect(_inAttack);
                         Vector2 direction = (Vector2)(col.transform.position - transform.position).normalized + (new Vector2(0,1f));
