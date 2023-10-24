@@ -101,6 +101,14 @@ PrefabInstance:
       value: DustBunnySprite
       objectReference: {fileID: 0}
     - target: {fileID: 5183310862211311413, guid: 52ef50d26a617054f942d9f279d53e36, type: 3}
+      propertyPath: _maxHP
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 5183310862211311413, guid: 52ef50d26a617054f942d9f279d53e36, type: 3}
+      propertyPath: _defense
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5183310862211311413, guid: 52ef50d26a617054f942d9f279d53e36, type: 3}
       propertyPath: _attribute
       value: 1
       objectReference: {fileID: 0}

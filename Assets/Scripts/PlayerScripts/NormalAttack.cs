@@ -16,10 +16,14 @@ public class NormalAttack : MonoBehaviour
 
     private Vector2 _knockBackVector = Vector2.zero;
 
+    private enum Direction {UP = 0,SIDE = 1,DOWN = 2};
+
     EnumLib.DamageType _activeDamageType = EnumLib.DamageType.Neutral;
 
     [SerializeField]private List<PlayerAbility> _broomNormalAttacks = new List<PlayerAbility>(3);
     [SerializeField]private List<PlayerAbility> _mopNormalAttacks = new List<PlayerAbility>(3);
+    [SerializeField]private List<PlayerAbility> _broomFu = new List <PlayerAbility>();
+    [SerializeField]private List<PlayerAbility> _mopFu = new List <PlayerAbility>();
 
     [SerializeField]private bool _canAttack = true;
 
@@ -86,7 +90,7 @@ public class NormalAttack : MonoBehaviour
                     {
                         damageEffect.TriggerEffect(_inAttack);
                         Vector2 direction = (col.transform.position - transform.position).normalized;
-                        col.gameObject.GetComponent<EnemyInterrupt>().Stagger(_inAttack, direction * _knockBackVector);
+                        col.gameObject.GetComponent<EnemyInterrupt>().Stagger((int)_activeDamageType, direction * _knockBackVector);
                     }
                     didHit = true;
                 }
@@ -111,6 +115,38 @@ public class NormalAttack : MonoBehaviour
         {
             // Question mark acts as a null check to avoid invoking an action if not initialized somehow
             CameraFollow.StartShake?.Invoke();
+        }
+    }
+
+    void JanitorFu(int weapon, int direction)
+    {
+        if (weapon == 1)
+        {
+            if (direction < _broomFu.Count)
+            {
+                aoc["Attack"] = _broomFu[direction].animations[0];
+                aoc["Recovery"] = _broomFu[direction].animations[1];
+                _knockBackVector = EnumLib.KnockbackVector(_broomFu[direction].force);
+                _chain = 0;
+                _anim.Play("Attack");
+                _inAttack = weapon;
+                _activeDamageType = (EnumLib.DamageType)weapon;
+                Debug.Log("Broom Skill in Attack "+((EnumLib.DamageType)_inAttack));
+            }
+        }
+        else if (weapon == 2)
+        {
+            if (direction < _mopFu.Count)
+            {
+                aoc["Attack"] = _mopFu[direction].animations[0];
+                aoc["Recovery"] = _mopFu[direction].animations[1];
+                _knockBackVector = EnumLib.KnockbackVector(_mopFu[direction].force);
+                _chain = 0;
+                _anim.Play("Attack");
+                _inAttack = weapon;
+                _activeDamageType = (EnumLib.DamageType)weapon;
+                Debug.Log("Mop Skill in Attack "+((EnumLib.DamageType)_inAttack));
+            }
         }
     }
 
@@ -144,11 +180,16 @@ public class NormalAttack : MonoBehaviour
     void Update()
     {   if (Time.timeScale != 0 && _attackBuffer == 0 && _canAttack)
         {
-            if (Input.GetKeyUp("z"))
+            if (Input.GetKeyUp("j"))
             {
                 if (_inAttack == 0)
                 {
-                    Attack(1);
+                    if (Input.GetAxisRaw("Vertical") > 0f)
+                    {
+                        JanitorFu(1,(int)Direction.UP);
+                    }
+                    else
+                        Attack(1);
                 }
                 else
                 {
@@ -157,11 +198,16 @@ public class NormalAttack : MonoBehaviour
 
             }
 
-            if (Input.GetKeyUp("x"))
+            if (Input.GetKeyUp("k"))
             {
                 if (_inAttack == 0)
                 {
-                    Attack(2);
+                    if (Input.GetAxisRaw("Vertical") > 0f)
+                    {
+                        JanitorFu(2,(int)Direction.UP);
+                    }
+                    else
+                        Attack(2);
                 }
                 else
                 {

@@ -12,8 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2e7dfdbcdfa317419ba30cac05519fc, type: 3}
   m_Name: JanitorBroomNA3
   m_EditorClassIdentifier: 
-  damage: 10
+  damage: 20
   animations:
   - {fileID: 7400000, guid: 53d6b58bc3093214e9336959da3a167f, type: 2}
   - {fileID: 7400000, guid: 9169e14c0a9f54848adc383314ab5fe4, type: 2}
-  dmgType: 1
+  force: 0
+  attribute: 1
+  projectileAnims: []

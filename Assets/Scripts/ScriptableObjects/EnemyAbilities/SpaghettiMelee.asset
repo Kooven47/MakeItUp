@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2de1d81a5b6c432449110860e48a0570, type: 3}
   m_Name: SpaghettiMelee
   m_EditorClassIdentifier: 
-  damage: 10
+  damage: 8
   animations:
   - {fileID: 7400000, guid: 12b37d6459ba6fc4bba06d7247868302, type: 2}
   - {fileID: 7400000, guid: b181128e95b70a349aed209b43b04144, type: 2}
   force: 0
   attribute: 0
+  projectileAnims: []
   idleTime: 2
