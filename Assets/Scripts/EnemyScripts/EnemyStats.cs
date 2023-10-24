@@ -43,7 +43,7 @@ public class EnemyStats : Stats
 
     public override void DamageCalc(float attack,EnumLib.DamageType attribute, bool isCrit)
     {
-        float damage = (attack - _defense/2f) * (isCrit ? 1.0f : 1.5f);
+        float damage = (attack - _defense/2f) * (isCrit ? 1.5f : 1.0f);
         int effective = 0;
         Debug.Log("Attribute is "+attribute);
 
