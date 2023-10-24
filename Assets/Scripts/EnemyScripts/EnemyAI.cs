@@ -144,15 +144,18 @@ public class EnemyAI : MonoBehaviour
                         Vector2 moveAwayFromEnemyForce = -directionToEnemy * speed * distanceFactor * Time.deltaTime;
 
                         // Set the horizontal velocity while keeping the current vertical velocity
-                        moveAwayFromEnemyForce.y = rb.velocity.y;
+                        
 
                         // Apply the force to the Rigidbody2D
                         if (_canMove) 
                         {
                             if (flyingEnabled)
-                                rb.velocity = moveAwayFromEnemyForce;
+                                rb.AddForce(moveAwayFromEnemyForce);
                             else
-                                rb.velocity = new Vector2(moveAwayFromEnemyForce.x, 0);
+                            {
+                                moveAwayFromEnemyForce.y = rb.velocity.y;
+                                rb.AddForce(new Vector2(moveAwayFromEnemyForce.x, 0));
+                            }
                         }
                     }
                 }
