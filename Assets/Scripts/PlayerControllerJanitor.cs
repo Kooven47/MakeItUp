@@ -37,6 +37,11 @@ public class PlayerControllerJanitor : MonoBehaviour
     private float wallJumpingDuration = 0.4f;
     private Vector2 wallJumpingPower = new Vector2(8f, 8f);
     
+    // For detecting double press for dash
+    float delayBetweenPresses = 0.25f;
+    bool pressedFirstTime = false;
+    float lastPressedTime;
+    
     private int maxAirDashes = 10;
     private int airDashesRemaining;
     private bool isDashing;
@@ -190,7 +195,7 @@ public class PlayerControllerJanitor : MonoBehaviour
         }
         
         // One way platforms
-        if (Input.GetKeyDown(KeyCode.S) && IsOnOneWayPlatform())
+        if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow) && IsOnOneWayPlatform())
         {
             StartCoroutine(DisablePlatformCollision());
             PlaySoundEffect(DROP);
@@ -298,13 +303,45 @@ public class PlayerControllerJanitor : MonoBehaviour
     {
         isWallJumping = false;
     }
+    
+    bool KeyPressedTwice(KeyCode keypress)
+    {
+        if (Input.GetKeyDown(keypress))
+        {
+            if (pressedFirstTime)
+            {
+                bool isDoublePress = Time.time - lastPressedTime <= delayBetweenPresses;
+ 
+                if (isDoublePress)
+                {
+                    return true;
+                }
+            }
+            else 
+            {
+                pressedFirstTime = true;
+            }
+ 
+            lastPressedTime = Time.time;
+        }
+                
+        if (pressedFirstTime && Time.time - lastPressedTime > delayBetweenPresses)
+        {
+            pressedFirstTime = false;
+            return false;
+        }
 
+        return false;
+    }
+    
     private void GroundAndAirDash()
     {
         if (IsGrounded() || IsOnOneWayPlatform() || IsWalled())
         {
             airDashesRemaining = maxAirDashes;
-            if (Input.GetKeyDown(KeyCode.B) && Time.timeScale != 0 && !isDashing)
+
+            if (Time.timeScale != 0 && !isDashing && (KeyPressedTwice(KeyCode.D) || KeyPressedTwice(KeyCode.RightArrow) || 
+                KeyPressedTwice(KeyCode.A) || KeyPressedTwice(KeyCode.LeftArrow)))
             {
                 isDashing = true;
                 StartCoroutine(AirDashTime());
@@ -313,15 +350,13 @@ public class PlayerControllerJanitor : MonoBehaviour
         }
         else
         {
-            if (Input.GetKeyDown(KeyCode.LeftShift) && Time.timeScale != 0)
+            if (airDashesRemaining > 0 && !isDashing && Time.timeScale != 0 && (KeyPressedTwice(KeyCode.D) || KeyPressedTwice(KeyCode.RightArrow) || 
+                    KeyPressedTwice(KeyCode.A) || KeyPressedTwice(KeyCode.LeftArrow)))
             {
-                if (airDashesRemaining > 0 && !isDashing)
-                {
-                    airDashesRemaining--;
-                    isDashing = true;
-                    StartCoroutine(AirDashTime());
-                    PlayerStats.dashIFrame(0.1f);
-                }
+                airDashesRemaining--;
+                isDashing = true;
+                StartCoroutine(AirDashTime());
+                PlayerStats.dashIFrame(0.1f);
             }
         }
     }

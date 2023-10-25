@@ -19,8 +19,13 @@ public class ToiletBossAI : MonoBehaviour
     private Vector3 rightSide;
     private Vector3 center;
     
-    private float dashCooldown = 5f;
-    private float dashSpeed = 50f;
+    private float dashCooldown = 0.5f;
+    private float phaseOneDashSpeed = 25f;
+    private float phaseTwoDashSpeed = 50f;
+    private float currentDashSpeed;
+    private float phaseOneDamage = 10f;
+    private float phaseTwoDamage = 20f;
+    private float currentDamage;
     private bool isDashing = false;
     private int dashesRemaining;
     private int maxDashes = 3;
@@ -49,13 +54,20 @@ public class ToiletBossAI : MonoBehaviour
         rightSide = rightSideTransform.position;
         center = centerTransform.position;
         dashesRemaining = maxDashes;
+        currentDashSpeed = phaseOneDashSpeed;
+        currentDamage = phaseOneDamage;
         toiletStats = GetComponent<EnemyStats>();
         bossCoroutine = StartCoroutine(StartBoss());
     }
 
     void Update()
     {
-        onPhaseTwo = toiletStats.healthRatio <= 0.5;
+        if (toiletStats.healthRatio <= 0.5)
+        {
+            onPhaseTwo = true;
+            currentDashSpeed = phaseTwoDashSpeed;
+            currentDamage = phaseTwoDamage;
+        }
     }
 
     IEnumerator StartBoss()
@@ -70,7 +82,6 @@ public class ToiletBossAI : MonoBehaviour
                 yield return new WaitForSeconds(dashCooldown);
                 dashesRemaining--;
                 currentState = dashesRemaining > 0 ? BossState.DashToRight : BossState.DashToCenter;
-                print("finished moving to left, dashes remaining: " + dashesRemaining + ", new state: " + currentState);
             }
             else if (currentState == BossState.DashToRight)
             {
@@ -79,33 +90,31 @@ public class ToiletBossAI : MonoBehaviour
                 yield return new WaitForSeconds(dashCooldown);
                 dashesRemaining--;
                 currentState = dashesRemaining > 0 ? BossState.DashToLeft : BossState.DashToCenter;
-                print("finished moving to right, dashes remaining: " + dashesRemaining + ", new state: " + currentState);
             }
             else if (currentState == BossState.DashToCenter)
             {
                 MoveTo(center, centerCollider);
                 yield return new WaitWhile(() => isDashing);
-                yield return new WaitForSeconds(centerCooldown);
+                if (onPhaseTwo)
+                {
+                    if (timeToPee)
+                    {
+                        yield return new WaitForSeconds(centerCooldown * 2);
+                    }
+                    else
+                    {
+                        yield return new WaitForSeconds(centerCooldown);
+                    }
+
+                    timeToPee = !timeToPee;
+                }
+                else
+                {
+                    yield return new WaitForSeconds(centerCooldown);
+                }
                 dashesRemaining = maxDashes;
                 currentState = BossState.DashToLeft;
-                print("finished moving to center, dashes remaining: " + dashesRemaining + ", new state: " + currentState);
             }
-            // else if (currentState == BossState.HitPlayer)
-            // {
-            //     yield return new WaitForSeconds(playerHitCooldown);
-            //     if (stateBeforeHit == BossState.DashToLeft)
-            //     {
-            //         currentState = BossState.DashToRight;
-            //         dashesRemaining--;
-            //     }
-            //     else if (stateBeforeHit == BossState.DashToRight)
-            //     {
-            //         currentState = BossState.DashToLeft;
-            //         dashesRemaining--;
-            //     }
-            //     else if (stateBeforeHit == BossState.DashToCenter) currentState = BossState.DashToCenter;
-            //     print("finished getting hit, dashes remaining: " + dashesRemaining + ", new state: " + currentState);
-            // }
         }
     }
 
@@ -144,7 +153,7 @@ public class ToiletBossAI : MonoBehaviour
                 Debug.Log("Vroom vroom you fool! Toilet gonna give it to ya");
                 Vector2 direction = (col.transform.position - toiletTransform.position).normalized;
                 col.GetComponent<PlayerInterrupt>().Stagger(1,knockBackVector * direction.x * 0.5f);
-                playerStat.DamageCalc(200, EnumLib.DamageType.Wet,false);
+                playerStat.DamageCalc(currentDamage, EnumLib.DamageType.Wet,false);
                 CameraFollow.StartShake?.Invoke();
             }
             else
@@ -155,8 +164,6 @@ public class ToiletBossAI : MonoBehaviour
             rb.velocity = Vector2.zero;
             isDashing = false;
             stateBeforeHit = currentState;
-            // print("saved state: " + stateBeforeHit);
-            // currentState = BossState.HitPlayer;
             StopCoroutine(bossCoroutine);
             StartCoroutine(HitPlayerCooldown());
         }
@@ -180,7 +187,7 @@ public class ToiletBossAI : MonoBehaviour
     {
         isDashing = true;
         Vector3 direction = (targetPosition - toiletTransform.position).normalized;
-        rb.velocity = new Vector2(direction.x * dashSpeed, rb.velocity.y);
+        rb.velocity = new Vector2(direction.x * currentDashSpeed, rb.velocity.y);
         Flip();
         StartCoroutine(CheckIfDashingComplete(targetCollider));
     }
@@ -191,7 +198,8 @@ public class ToiletBossAI : MonoBehaviour
         {
             yield return null;
         }
-
+        
+        print("dashing complete!");
         rb.velocity = Vector2.zero;
         isDashing = false;
     }
