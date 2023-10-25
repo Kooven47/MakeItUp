@@ -91,7 +91,8 @@ public class NormalAttack : MonoBehaviour
                     if (_enemyStat.healthRatio > 0f)
                     {
                         damageEffect.TriggerEffect(_inAttack);
-                        Vector2 direction = (Vector2)(col.transform.position - transform.position).normalized + (new Vector2(0,1f));
+                        Vector2 direction = (Vector2)(col.transform.position - transform.position).normalized;
+                        direction.Set(direction.x,1f);
                         col.gameObject.GetComponent<EnemyInterrupt>().Stagger((int)_activeDamageType, direction * _knockBackVector);
                     }
                     didHit = true;

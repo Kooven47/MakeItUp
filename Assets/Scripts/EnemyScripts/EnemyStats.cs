@@ -11,6 +11,7 @@ public class EnemyStats : Stats
     public bool isShielded {get {return _isShielded;} private set {_isShielded = value;}}
 
     private bool _isShielded = false;
+    [SerializeField] private bool _isBoss = false;
     EnumLib.DamageType _shieldAttribute = EnumLib.DamageType.Neutral;
     public static event Action OnDeath;
     // Start is called before the first frame update
@@ -65,6 +66,9 @@ public class EnemyStats : Stats
         Debug.Log("Damage received "+damage);
 
         DamageNumberPool.summonDamageNum?.Invoke(damage,effective,transform.position);
+
+        if(_isBoss)
+            BossHealthBar.settingHealth?.Invoke(_curHP,_maxHP);
 
         if (_curHP <= 0f)
         {

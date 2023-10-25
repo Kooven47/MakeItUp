@@ -5,6 +5,7 @@ using UnityEngine;
 public class WallEnclosureCollision : MonoBehaviour
 {
     [SerializeField] private GameObject Enclosure;
+    [SerializeField] private bool _isBossEntrance;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,6 +22,10 @@ public class WallEnclosureCollision : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             Enclosure.SetActive(true);
+            if (_isBossEntrance)
+            {
+                BossHealthBar.activateHealthBar?.Invoke();
+            }
         }
     }
 }

@@ -8,7 +8,7 @@ public class ProjectileManager : MonoBehaviour
     [SerializeField] private int _projectileCopies = 10;
     [SerializeField] private GameObject _projectilePrefab;
     Queue<GameObject> _projectileQueue = new();
-    public static Action<Vector2,Vector2,Ability> createProjectile;
+    public static Action<Vector2,Vector2,Ability> createProjectile,projectileArc;
     
     public static Action<GameObject> returnProjectile;
 
@@ -26,6 +26,7 @@ public class ProjectileManager : MonoBehaviour
         }
 
         createProjectile = SummonProjectile;
+        projectileArc = SummonProjectileArc;
         returnProjectile = ReturnProjectile;
     }
 

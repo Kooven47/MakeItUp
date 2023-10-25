@@ -43,6 +43,7 @@ public class ProjectileScript : MonoBehaviour
         InitializeProjectile(skill);
         _anim.Play("Motion");
         _rigid.AddForce(trajectory * 300f);
+        _projectileLife = StartCoroutine(ProjectileLifeSpan(6f));
         _rigid.gravityScale = 1f;
     }
 
@@ -139,6 +140,7 @@ public class ProjectileScript : MonoBehaviour
     {
         if (_projectileLife != null)
         {
+            Debug.Log("Lingering");
             _projState = IDLE;
             StopCoroutine(_projectileLife);
             _projectileLife = StartCoroutine(ProjectileLifeSpan(2f));
