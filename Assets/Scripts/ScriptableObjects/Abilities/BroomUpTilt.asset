@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2e7dfdbcdfa317419ba30cac05519fc, type: 3}
   m_Name: BroomUpTilt
   m_EditorClassIdentifier: 
-  damage: 10
+  damage: 5
   animations:
   - {fileID: 7400000, guid: 297c7bfc4513003468368717944d804c, type: 2}
   - {fileID: 7400000, guid: 24e7058aad6e5444fbe3763b2118a2e5, type: 2}

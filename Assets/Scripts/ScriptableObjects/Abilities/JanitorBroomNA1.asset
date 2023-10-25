@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2e7dfdbcdfa317419ba30cac05519fc, type: 3}
   m_Name: JanitorBroomNA1
   m_EditorClassIdentifier: 
-  damage: 10
+  damage: 5
   animations:
   - {fileID: 7400000, guid: 53e7408e68b1de84dab2e753333ada13, type: 2}
   - {fileID: 7400000, guid: 7b85f33261c0a0542bc50c4249cac6e7, type: 2}

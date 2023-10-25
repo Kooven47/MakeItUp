@@ -64,7 +64,7 @@ public class ToiletBossAI : MonoBehaviour
 
     void Update()
     {
-        if (toiletStats.healthRatio <= 1f)
+        if (toiletStats.healthRatio <= 0.5f)
         {
             onPhaseTwo = true;
             currentDashSpeed = phaseTwoDashSpeed;
@@ -102,11 +102,12 @@ public class ToiletBossAI : MonoBehaviour
                     if (timeToPee)
                     {
                         Debug.Log("Time to pee!");
+                        yield return new WaitForSeconds(centerCooldown / 2);
                         ProjectileManager.projectileArc?.Invoke(transform.position,new Vector2(-1f,1f),_moveSet[0]);
                         ProjectileManager.projectileArc?.Invoke(transform.position,new Vector2(-0.5f,1f),_moveSet[0]);
                         ProjectileManager.projectileArc?.Invoke(transform.position,new Vector2(1f,1f),_moveSet[0]);
                         ProjectileManager.projectileArc?.Invoke(transform.position,new Vector2(0.5f,1f),_moveSet[0]);
-                        yield return new WaitForSeconds(centerCooldown * 2);
+                        yield return new WaitForSeconds(centerCooldown);
                     }
                     else
                     {

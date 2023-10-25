@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Collections;
+using UnityEngine.Serialization;
 
 public class PlayerControllerJanitor : MonoBehaviour
 {
@@ -42,12 +43,12 @@ public class PlayerControllerJanitor : MonoBehaviour
     bool pressedFirstTime = false;
     float lastPressedTime;
     
-    private int maxAirDashes = 10;
+    private int maxAirDashes = 1;
     private int airDashesRemaining;
     private bool isDashing;
 
     private int jumpCount;
-    [SerializeField] private int maxJumpCount = 1;
+    [SerializeField] private int maxAirJumpCount = 1;
     
     public static EnemyAI[] enemyAIList;
     [SerializeField] private Rigidbody2D rb;
@@ -164,7 +165,7 @@ public class PlayerControllerJanitor : MonoBehaviour
         if (jumpBufferTimeCounter > 0f && !isJumping)
         {
             jumpKeyHeld = true;
-            if (!isDashing && (coyoteTimeCounter > 0f || jumpCount < maxJumpCount))
+            if (!isDashing && (coyoteTimeCounter > 0f || jumpCount < maxAirJumpCount))
             {
                 // This keeps track of the jumps for the a* platforming
                 if (enemyAIList != null)

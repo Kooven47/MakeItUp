@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2e7dfdbcdfa317419ba30cac05519fc, type: 3}
   m_Name: MopUpTilt
   m_EditorClassIdentifier: 
-  damage: 10
+  damage: 5
   animations:
   - {fileID: 7400000, guid: 0064f4b847f71e84a943a2a6a0035fd6, type: 2}
   - {fileID: 7400000, guid: e909e2cbb5a5b5046a5fe461b15d19cc, type: 2}
