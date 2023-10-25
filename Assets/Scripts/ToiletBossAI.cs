@@ -14,6 +14,8 @@ public class ToiletBossAI : MonoBehaviour
     [SerializeField] private BoxCollider2D centerCollider;
     [SerializeField] private Transform rightSideTransform;
     [SerializeField] private BoxCollider2D rightSideCollider;
+
+    [SerializeField] private List<EnemyAbility> _moveSet = new List<EnemyAbility>();
     private EnemyStats toiletStats;
     private Vector3 leftSide;
     private Vector3 rightSide;

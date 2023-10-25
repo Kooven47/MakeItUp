@@ -7,6 +7,7 @@ public class EnemyInterrupt : InterruptSystem
 {
     private EnemyStats _enemyStats;
     [SerializeField]private EnemyCore _enemyCore;
+    [SerializeField]private bool _canKnockBack = true;
 
     protected override void Start()
     {
@@ -46,8 +47,9 @@ public class EnemyInterrupt : InterruptSystem
         {
             staggerTimeMod = 1.2f;
         }
-
-        _rb.AddForce(knockVector * _rb.mass,ForceMode2D.Impulse);
+        
+        if (_canKnockBack)
+            _rb.AddForce(knockVector * _rb.mass,ForceMode2D.Impulse);
 
         _anim.Play("Stagger");
 
