@@ -17,7 +17,7 @@ public class PlayerControllerJanitor : MonoBehaviour
     private bool isGrounded;
     private float timeInAir;
 
-    private bool _canMove = true, _isSprinting = false;
+    private bool _canMove = true, _isSprinting = true;
     [SerializeField] private Vector2 counterJumpForce;
     
     [SerializeField] private float coyoteTime;
@@ -68,8 +68,8 @@ public class PlayerControllerJanitor : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
-        speed = normalSpeed;
-        _moveAudio.clip = _soundEffects[WALK];
+        speed = sprintingSpeed;
+        _moveAudio.clip = _soundEffects[RUN];
         PlayerInterrupt.staggered += SetMobility;
     }
 
@@ -89,16 +89,19 @@ public class PlayerControllerJanitor : MonoBehaviour
     {
         horizontal = Input.GetAxisRaw("Horizontal");
         _anim.SetBool("onGround", IsGrounded() || IsOnOneWayPlatform());
-        // Check if Shift key is held down to increase speed
-        if (Input.GetKey(KeyCode.LeftShift))
+        // Check for ctrl key to toggle between sprint or walk
+        if (Input.GetKeyDown(KeyCode.LeftControl))
         {
-            speed = sprintingSpeed;
-            _isSprinting = true;
-        }
-        else
-        {
-            speed = normalSpeed;
-            _isSprinting = false;
+            if (_isSprinting)
+            {
+                speed = normalSpeed;
+                _isSprinting = false;
+            }
+            else
+            {
+                speed = sprintingSpeed;
+                _isSprinting = true;
+            }
         }
         
         // Handle footsteps
@@ -341,22 +344,20 @@ public class PlayerControllerJanitor : MonoBehaviour
         {
             airDashesRemaining = maxAirDashes;
 
-            if (Time.timeScale != 0 && !isDashing && (KeyPressedTwice(KeyCode.D) || KeyPressedTwice(KeyCode.RightArrow) || 
-                KeyPressedTwice(KeyCode.A) || KeyPressedTwice(KeyCode.LeftArrow)))
+            if (Time.timeScale != 0 && !isDashing && Input.GetKeyDown(KeyCode.LeftShift))
             {
                 isDashing = true;
-                StartCoroutine(AirDashTime());
+                StartCoroutine(DoDash());
                 PlayerStats.dashIFrame(0.1f);
             }
         }
         else
         {
-            if (airDashesRemaining > 0 && !isDashing && Time.timeScale != 0 && (KeyPressedTwice(KeyCode.D) || KeyPressedTwice(KeyCode.RightArrow) || 
-                    KeyPressedTwice(KeyCode.A) || KeyPressedTwice(KeyCode.LeftArrow)))
+            if (airDashesRemaining > 0 && !isDashing && Time.timeScale != 0 && Input.GetKeyDown(KeyCode.LeftShift))
             {
                 airDashesRemaining--;
                 isDashing = true;
-                StartCoroutine(AirDashTime());
+                StartCoroutine(DoDash());
                 PlayerStats.dashIFrame(0.1f);
             }
         }
@@ -384,7 +385,7 @@ public class PlayerControllerJanitor : MonoBehaviour
         isJumping = false;
     }
 
-    private IEnumerator AirDashTime()
+    private IEnumerator DoDash()
     {
         rb.velocity = Vector2.zero;
         rb.gravityScale = 0f;
@@ -396,7 +397,7 @@ public class PlayerControllerJanitor : MonoBehaviour
 
     private void Flip()
     {
-        if ((isFacingRight && horizontal < 0f || !isFacingRight && horizontal > 0f) && (Time.timeScale != 0))
+        if ((isFacingRight && horizontal < 0f || !isFacingRight && horizontal > 0f) && Time.timeScale != 0)
         {
             isFacingRight = !isFacingRight;
             Vector3 localScale = transform.localScale;
