@@ -33,7 +33,7 @@ public class PlayerStats : Stats
     public override void DamageCalc(float attack, EnumLib.DamageType attribute, bool isCrit)
     {
         float damage = (attack - _defense / 2f) * (isCrit ? 1.5f : 1.0f);
-        _curHP -= damage;
+        curHP -= damage;
 
         DamageNumberPool.summonDamageNum?.Invoke(damage,0,transform.position);
         HealthBar.settingHealth?.Invoke(_curHP,_maxHP);
@@ -46,6 +46,12 @@ public class PlayerStats : Stats
     {
         if (_iFrameTimer != null) StopCoroutine(_iFrameTimer);
         _iFrameTimer = StartCoroutine(InvincibilityTimer(iFrameLength));
+    }
+
+    public void RestoreHealth(float percent)
+    {
+        curHP += _maxHP * percent;
+        HealthBar.settingHealth?.Invoke(_curHP,_maxHP);
     }
 
     public override void Death()

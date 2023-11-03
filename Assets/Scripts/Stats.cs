@@ -30,6 +30,20 @@ public class Stats : MonoBehaviour
         get {return _defense;}
     }
 
+    protected float curHP
+    {
+        get{return _curHP;}
+        set{
+            _curHP = value;
+            if (curHP > _maxHP)
+                _curHP = _maxHP;
+            else if (curHP < 0f)
+            {
+                _curHP = 0f;
+            }
+        }
+    }
+
     public virtual void DamageCalc(float attack, EnumLib.DamageType attribute ,bool isCrit)
     {
         
