@@ -4206,14 +4206,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 455845808}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -13.396124, y: -6.409349, z: 1.7657592}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1059624222}
   - {fileID: 159821082}
-  m_Father: {fileID: 1114164546}
+  m_Father: {fileID: 730773502}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &467581092
 GameObject:
@@ -6548,6 +6548,106 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 724594842}
   m_CullTransparentMesh: 1
+--- !u!1 &730773501
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 730773502}
+  - component: {fileID: 730773504}
+  - component: {fileID: 730773503}
+  m_Layer: 0
+  m_Name: EnemyEnclosure
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &730773502
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 730773501}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 42.26, y: 5.63, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1146278011}
+  - {fileID: 455845809}
+  m_Father: {fileID: 1187996051}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &730773503
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 730773501}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5274e68ada88ba47aa2b3b9619e0166, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Enclosure: {fileID: 501640426}
+  _isHidden: 0
+  _isBossEntrance: 0
+  _spawnEnemies: 1
+  enemyLocations:
+  - {fileID: 1146278011}
+  - {fileID: 455845809}
+  spawnManager: {fileID: 894913568}
+--- !u!61 &730773504
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 730773501}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.30978203, y: -2.206953}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1.1947212, y: 5.413906}
+  m_EdgeRadius: 0
 --- !u!1 &730866379
 GameObject:
   m_ObjectHideFlags: 0
@@ -22815,7 +22915,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2066100588}
-        m_TargetAssemblyTypeName: SignMenuEnemy, Assembly-CSharp
+        m_TargetAssemblyTypeName: SignMenu, Assembly-CSharp
         m_MethodName: ResumeGame
         m_Mode: 1
         m_Arguments:
@@ -23551,7 +23651,7 @@ Transform:
   m_GameObject: {fileID: 850116248}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -14.53043, y: 2.089718, z: -10.036367}
+  m_LocalPosition: {x: -14.53043, y: 0.58010817, z: -10.036367}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -24618,8 +24718,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1393133035}
-  - {fileID: 1146278011}
-  - {fileID: 455845809}
   m_Father: {fileID: 414148584}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1135643729
@@ -24829,15 +24927,15 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1146278010}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -13.396124, y: -6.409349, z: 1.7657592}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 839411094}
   - {fileID: 1836287769}
   - {fileID: 133897209}
-  m_Father: {fileID: 1114164546}
+  m_Father: {fileID: 730773502}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1173087523
 GameObject:
@@ -25158,6 +25256,7 @@ Transform:
   - {fileID: 2142286282}
   - {fileID: 427288589}
   - {fileID: 1250672940}
+  - {fileID: 730773502}
   - {fileID: 2063533986}
   - {fileID: 844879401}
   m_Father: {fileID: 0}
@@ -32414,7 +32513,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Enclosure: {fileID: 1817370022}
+  _isHidden: 1
   _isBossEntrance: 1
+  _spawnEnemies: 0
+  enemyLocations: []
+  spawnManager: {fileID: 0}
 --- !u!61 &2063533988
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -32547,13 +32650,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 2066100583}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2ca9d3858c4fc52478d48dc484fcb26a, type: 3}
+  m_Script: {fileID: 11500000, guid: 22d6c7687b6a0534aa4173d0608e9ef0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   signMenu: {fileID: 2066100583}
-  spawnManager: {fileID: 894913568}
-  spaghettiEnemyLocations: {fileID: 1146278011}
-  dustBunnyEnemyLocations: {fileID: 455845809}
 --- !u!1 &2103174085
 GameObject:
   m_ObjectHideFlags: 0

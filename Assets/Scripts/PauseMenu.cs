@@ -1,11 +1,12 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System;
 
 public class PauseMenu : MonoBehaviour
 {
     public GameObject pauseMenu;
     public static bool isPaused;
-
+    public static event Action cleanUp;
     // Start is called before the first frame update
     void Start()
     {
@@ -32,7 +33,7 @@ public class PauseMenu : MonoBehaviour
     public void ResumeGame()
     {
         pauseMenu.SetActive(false);
-        if (!SignMenuCollision.isMenuActive && !SignMenuCollisionWithEnemy.isMenuActive && !SignMenu.isMenuActive && !SignMenuEnemy.isMenuActive)
+        if (!SignMenuCollision.isMenuActive && !SignMenuCollisionWithEnemy.isMenuActive && !SignMenu.isMenuActive && !SignMenuEnemy.isMenuActive && !GameOverMenu.isMenuActive)
             Time.timeScale = 1;
         isPaused = false;
     }
@@ -40,6 +41,7 @@ public class PauseMenu : MonoBehaviour
     public void GoToMainMenu()
     {
         Time.timeScale = 1;
+        cleanUp?.Invoke();
         SceneManager.LoadScene("Start Screen");
         isPaused = false;
     }
@@ -48,6 +50,7 @@ public class PauseMenu : MonoBehaviour
     {
         Time.timeScale = 1;
         isPaused = false;
+        cleanUp?.Invoke();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }

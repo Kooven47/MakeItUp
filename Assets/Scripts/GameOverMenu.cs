@@ -6,10 +6,12 @@ public class GameOverMenu : MonoBehaviour
 {
     public GameObject gameOverMenu;
     public static Action gameOver;
-
+    public static event Action cleanUp;
+    public static bool isMenuActive;
     // Start is called before the first frame update
     void Start()
     {
+        isMenuActive = false;
         gameOverMenu.SetActive(false);
         gameOver = GameOver;
     }
@@ -22,6 +24,7 @@ public class GameOverMenu : MonoBehaviour
     public void GameOver()
     {
         gameOverMenu.SetActive(true);
+        isMenuActive = true;
         Time.timeScale = 0;
     }
 
@@ -30,6 +33,8 @@ public class GameOverMenu : MonoBehaviour
         PlayerStats.playerIsDead = false;
         gameOverMenu.SetActive(false);
         Time.timeScale = 1;
+        cleanUp?.Invoke();
+        isMenuActive = false;
         SceneManager.LoadScene("Start Screen");
     }
 
@@ -37,6 +42,8 @@ public class GameOverMenu : MonoBehaviour
     {
         gameOverMenu.SetActive(false);
         Time.timeScale = 1;
+        cleanUp?.Invoke();
+        isMenuActive = false;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
     
@@ -44,6 +51,7 @@ public class GameOverMenu : MonoBehaviour
     {
         PlayerStats.playerIsDead = false;
         Debug.Log("Pressed quit game!");
+        isMenuActive = false;
         Application.Quit();
     }
 }

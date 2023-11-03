@@ -9,15 +9,18 @@ using TMPro;
 
 public class ObjectiveManager : MonoBehaviour
 {
-    public Queue<Objective> objList = new Queue<Objective>();
+    public Queue<Objective> objList;
     public static bool activeObjective;
     public static event Action UpdateObjective; // Use 'UpdateObjective?.Invoke();' to invoke this. It will do NextObjective() in this class
     public TMP_Text objectiveText;
     [SerializeField] private GameObject _barriers;
-    public static Queue<GameObject> barrierList = new Queue<GameObject>();
+    public static Queue<GameObject> barrierList;
     // Start is called before the first frame update
     void Start()
     {
+        objList = new Queue<Objective>();
+        barrierList = new Queue<GameObject>();
+
         objectiveText.SetText("Level 1: Janitor's Closet" + System.Environment.NewLine + "Current Objective - Head to north-east platform");
         activeObjective = false;
         objList.Enqueue(new Objective1Kill());
@@ -75,7 +78,7 @@ public abstract class Objective
     public abstract void OnStart();
     public abstract void OnComplete();
     public abstract void Display();
-
+    public abstract void Cleanup();
 }
 
 public class Objective1Kill : Objective
@@ -95,7 +98,11 @@ public class Objective1Kill : Objective
         signMenu = GameObject.Find("Signs/AttackTutorial2Sign/Canvas/Sign");
         objectiveTextObject = GameObject.Find("ObjectiveManager/Canvas/Sign/ObjectiveText"); // This is to find the ObjectiveText object for display
         objectiveText = objectiveTextObject.GetComponent<TMP_Text>();
+
         EnemyStats.OnDeath += KillUpdate;
+        PauseMenu.cleanUp += Cleanup;
+        GameOverMenu.cleanUp += Cleanup;
+
         Display();
 
         // Add the listener for the next obj
@@ -115,7 +122,7 @@ public class Objective1Kill : Objective
     {
         ObjectiveManager.activeObjective = false;
         EnemyStats.OnDeath -= KillUpdate;
-        signMenu.GetComponent<SignMenuEnemy>().ShowSign();
+        signMenu.GetComponent<SignMenu>().ShowSign();
         ObjectiveManager.OnUpdateObjective();
         GameObject barrier = ObjectiveManager.barrierList.Dequeue(); // This and the next line removes the barrier
         barrier.SetActive(false);
@@ -124,6 +131,12 @@ public class Objective1Kill : Objective
     public override void Display()
     {
         objectiveText.SetText("Level 1: Janitor's Closet" + System.Environment.NewLine + "Current Objective - Kill the monsters: " + (killNum) + "/" + killObj);
+    }
+    public override void Cleanup()
+    {
+        EnemyStats.OnDeath -= KillUpdate;
+        PauseMenu.cleanUp -= Cleanup;
+        GameOverMenu.cleanUp -= Cleanup;
     }
 }
 
@@ -143,7 +156,11 @@ public class Objective2Kill : Objective
         signMenu = GameObject.Find("Signs/ContinueSign/Canvas/Sign");
         objectiveTextObject = GameObject.Find("ObjectiveManager/Canvas/Sign/ObjectiveText"); // This is to find the ObjectiveText object for display
         objectiveText = objectiveTextObject.GetComponent<TMP_Text>();
+
         EnemyStats.OnDeath += KillUpdate;
+        PauseMenu.cleanUp += Cleanup;
+        GameOverMenu.cleanUp += Cleanup;
+
         Display();
 
         // Add the listener for the next obj
@@ -175,6 +192,12 @@ public class Objective2Kill : Objective
         objectiveText.SetText("Level 1: Janitor's Closet" + System.Environment.NewLine + "Current Objective - Kill the monsters: " + (killNum) + "/" + killObj);
     }
 
+    public override void Cleanup()
+    {
+        EnemyStats.OnDeath -= KillUpdate;
+        PauseMenu.cleanUp -= Cleanup;
+        GameOverMenu.cleanUp -= Cleanup;
+    }
 }
 
 public class Objective3KillBoss : Objective
@@ -193,7 +216,11 @@ public class Objective3KillBoss : Objective
         signMenu = GameObject.Find("Signs/BossDefeatSign/Canvas/Sign"); // Change this to the sign object location
         objectiveTextObject = GameObject.Find("ObjectiveManager/Canvas/Sign/ObjectiveText"); // This is to find the ObjectiveText object for display
         objectiveText = objectiveTextObject.GetComponent<TMP_Text>();
+
         EnemyStats.OnDeath += KillUpdate;
+        PauseMenu.cleanUp += Cleanup;
+        GameOverMenu.cleanUp += Cleanup;
+
         Display();
 
         // Add the listener for the next obj
@@ -226,4 +253,10 @@ public class Objective3KillBoss : Objective
         objectiveText.SetText("Level 1: Janitor's Closet" + System.Environment.NewLine + "Current Objective - Kill the Toilet Monster");
     }
 
+    public override void Cleanup()
+    {
+        EnemyStats.OnDeath -= KillUpdate;
+        PauseMenu.cleanUp -= Cleanup;
+        GameOverMenu.cleanUp -= Cleanup;
+    }
 }
