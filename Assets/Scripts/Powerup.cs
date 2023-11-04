@@ -9,6 +9,9 @@ public class Powerup : MonoBehaviour
     [SerializeField] private PowerUpCategory _typeofPowerUp;
     [SerializeField] private float _effectValue = 0.0f;
     [SerializeField] private Sprite _icon;
+    [SerializeField] private float _existenceTime = 15f;
+
+    private Coroutine _existenceTimer;
 
 
 
@@ -19,8 +22,33 @@ public class Powerup : MonoBehaviour
             if (_typeofPowerUp == PowerUpCategory.Heal)
             {
                 col.GetComponent<PlayerStats>().RestoreHealth(_effectValue);
-                gameObject.SetActive(false);
+                if (_existenceTimer == null)
+                    gameObject.SetActive(false);
+                else
+                {
+                    ReturnPoweruptoPool();
+                }
             }
+        }
+    }
+
+    void ReturnPoweruptoPool()
+    {
+        PowerupManager.returnToHealingPool?.Invoke(gameObject);
+        _existenceTimer = null;
+    }
+
+    private IEnumerator ExistenceTimer()
+    {
+        yield return new WaitForSeconds(_existenceTime);
+        ReturnPoweruptoPool();
+    }
+
+    public void StartExistenceTimer()
+    {
+        if (_existenceTimer == null)
+        {
+            _existenceTimer = StartCoroutine(ExistenceTimer());
         }
     }
 }

@@ -39,6 +39,21 @@ public class EnemyStats : Stats
          Debug.Log("DEFEATED!");
             OnDeath?.Invoke();
             Destroy(gameObject);
+        if (PlayerStatus.Instance.playerHPRatio <= 0.5f)
+        {
+            if (UnityEngine.Random.Range(0f,1f) < 0.25f)
+            {
+                PowerupManager.spawnHealingItem?.Invoke(0, transform.position);
+            }
+            else
+            {
+                Debug.Log("Better luck next time for health drop!");
+            }
+        }
+        else
+        {
+            Debug.Log("HP Ratio of player is "+PlayerStatus.Instance.playerHPRatio);
+        }
         // this.gameObject.SetActive(false);
     }
 
