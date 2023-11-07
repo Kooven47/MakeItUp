@@ -3,10 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ToiletBossAI : MonoBehaviour
-{
-    private Rigidbody2D rb;
-    [SerializeField] private BoxCollider2D toiletCollider;
+public class ToiletBossAI : BossCore
+{   
     [SerializeField] private Transform toiletTransform;
     [SerializeField] private Transform leftSideTransform;
     [SerializeField] private BoxCollider2D leftSideCollider;
@@ -15,8 +13,6 @@ public class ToiletBossAI : MonoBehaviour
     [SerializeField] private Transform rightSideTransform;
     [SerializeField] private BoxCollider2D rightSideCollider;
 
-    [SerializeField] private List<EnemyAbility> _moveSet = new List<EnemyAbility>();
-    private EnemyStats toiletStats;
     private Vector3 leftSide;
     private Vector3 rightSide;
     private Vector3 center;
@@ -51,20 +47,20 @@ public class ToiletBossAI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
+        _rb = GetComponent<Rigidbody2D>();
         leftSide = leftSideTransform.position;
         rightSide = rightSideTransform.position;
         center = centerTransform.position;
         dashesRemaining = maxDashes;
         currentDashSpeed = phaseOneDashSpeed;
         currentDamage = phaseOneDamage;
-        toiletStats = GetComponent<EnemyStats>();
+        _bossStats = GetComponent<EnemyStats>();
         bossCoroutine = StartCoroutine(StartBoss());
     }
 
     void Update()
     {
-        if (toiletStats.healthRatio <= 0.5f)
+        if (_bossStats.healthRatio <= 0.5f)
         {
             onPhaseTwo = true;
             currentDashSpeed = phaseTwoDashSpeed;
@@ -151,7 +147,7 @@ public class ToiletBossAI : MonoBehaviour
     
         if (col.CompareTag("Player") && isDashing)
         {
-            Physics2D.IgnoreCollision(col, toiletCollider, true);
+            Physics2D.IgnoreCollision(col, _toiletCollider, true);
             StartCoroutine(ReenableCollision(col));
             Debug.Log("Hit the janitor!");
             Debug.Log("isDashing: " + isDashing + ", current state: " + currentState);
@@ -169,7 +165,7 @@ public class ToiletBossAI : MonoBehaviour
                 Debug.Log("Under Iframes");
             }
     
-            rb.velocity = Vector2.zero;
+            _rb.velocity = Vector2.zero;
             isDashing = false;
             stateBeforeHit = currentState;
             StopCoroutine(bossCoroutine);
@@ -181,44 +177,44 @@ public class ToiletBossAI : MonoBehaviour
     {
         if (col.CompareTag("Player"))
         {
-            Physics2D.IgnoreCollision(col, toiletCollider, false);
+            Physics2D.IgnoreCollision(col, _toiletCollider, false);
         }
     }
 
     private IEnumerator ReenableCollision(Collider2D col)
     {
         yield return new WaitForSeconds(1f);
-        Physics2D.IgnoreCollision(col, toiletCollider, false);
+        Physics2D.IgnoreCollision(col, _toiletCollider, false);
     }
 
     private void MoveTo(Vector3 targetPosition, BoxCollider2D targetCollider)
     {
         isDashing = true;
         Vector3 direction = (targetPosition - toiletTransform.position).normalized;
-        rb.velocity = new Vector2(direction.x * currentDashSpeed, rb.velocity.y);
+        _rb.velocity = new Vector2(direction.x * currentDashSpeed, _rb.velocity.y);
         Flip();
         StartCoroutine(CheckIfDashingComplete(targetCollider));
     }
     
     private IEnumerator CheckIfDashingComplete(BoxCollider2D targetCollider)
     {
-        while (!toiletCollider.IsTouching(targetCollider))
+        while (!_toiletCollider.IsTouching(targetCollider))
         {
             yield return null;
         }
         
         print("dashing complete!");
-        rb.velocity = Vector2.zero;
+        _rb.velocity = Vector2.zero;
         isDashing = false;
     }
 
-    private void Flip()
+    protected override void Flip()
     {
-        if (rb.velocity.x > 0f)
+        if (_rb.velocity.x > 0f)
         {
             toiletTransform.localScale = new Vector3(Mathf.Abs(toiletTransform.localScale.x), toiletTransform.localScale.y, toiletTransform.localScale.z);
         }
-        else if (rb.velocity.x < 0f)
+        else if (_rb.velocity.x < 0f)
         {
             toiletTransform.localScale = new Vector3(-1f * Mathf.Abs(toiletTransform.localScale.x), toiletTransform.localScale.y, toiletTransform.localScale.z);
         }
