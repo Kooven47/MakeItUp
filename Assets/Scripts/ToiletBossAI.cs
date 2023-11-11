@@ -30,6 +30,7 @@ public class ToiletBossAI : BossCore
     
     private bool timeToPee = false;
     private bool onPhaseTwo = false;
+    private bool _isReady = true;
     
     private float centerCooldown = 5f;
     private float playerHitCooldown = 3f;
@@ -45,8 +46,9 @@ public class ToiletBossAI : BossCore
     private Coroutine bossCoroutine;
     
     // Start is called before the first frame update
-    void Start()
+    protected override void Start()
     {
+        base.Start();
         _rb = GetComponent<Rigidbody2D>();
         leftSide = leftSideTransform.position;
         rightSide = rightSideTransform.position;
@@ -68,6 +70,14 @@ public class ToiletBossAI : BossCore
         }
     }
 
+    public override void Fire()
+    {
+        ProjectileManager.projectileArc?.Invoke(transform.position,new Vector2(-1f,1f),_moveSet[0]);
+        ProjectileManager.projectileArc?.Invoke(transform.position,new Vector2(-0.5f,1f),_moveSet[0]);
+        ProjectileManager.projectileArc?.Invoke(transform.position,new Vector2(1f,1f),_moveSet[0]);
+        ProjectileManager.projectileArc?.Invoke(transform.position,new Vector2(0.5f,1f),_moveSet[0]);
+    }
+
     IEnumerator StartBoss()
     {
         while (true)
@@ -75,34 +85,43 @@ public class ToiletBossAI : BossCore
             // Fuck switch statements, all my homies hate switch statements
             if (currentState == BossState.DashToLeft)
             {
+                SetUpAttack(1);
+                yield return new WaitForSeconds(dashCooldown/2f);
+                _anim.SetTrigger("release");
                 MoveTo(leftSide, leftSideCollider);
                 yield return new WaitWhile(() => isDashing);
+                _anim.SetTrigger("recover");
                 yield return new WaitForSeconds(dashCooldown);
                 dashesRemaining--;
                 currentState = dashesRemaining > 0 ? BossState.DashToRight : BossState.DashToCenter;
             }
             else if (currentState == BossState.DashToRight)
             {
+                SetUpAttack(1);
+                yield return new WaitForSeconds(dashCooldown/2f);
+                _anim.SetTrigger("release");
                 MoveTo(rightSide, rightSideCollider);
                 yield return new WaitWhile(() => isDashing);
+                _anim.SetTrigger("recover");
                 yield return new WaitForSeconds(dashCooldown);
                 dashesRemaining--;
                 currentState = dashesRemaining > 0 ? BossState.DashToLeft : BossState.DashToCenter;
             }
             else if (currentState == BossState.DashToCenter)
             {
+                SetUpAttack(1);
+                yield return new WaitForSeconds(dashCooldown/2f);
+                _anim.SetTrigger("release");
                 MoveTo(center, centerCollider);
                 yield return new WaitWhile(() => isDashing);
+                _anim.SetTrigger("recover");
                 if (onPhaseTwo)
                 {
                     if (timeToPee)
                     {
-                        Debug.Log("Time to pee!");
+                        SetUpAttack(0);
                         yield return new WaitForSeconds(centerCooldown / 2);
-                        ProjectileManager.projectileArc?.Invoke(transform.position,new Vector2(-1f,1f),_moveSet[0]);
-                        ProjectileManager.projectileArc?.Invoke(transform.position,new Vector2(-0.5f,1f),_moveSet[0]);
-                        ProjectileManager.projectileArc?.Invoke(transform.position,new Vector2(1f,1f),_moveSet[0]);
-                        ProjectileManager.projectileArc?.Invoke(transform.position,new Vector2(0.5f,1f),_moveSet[0]);
+                        _anim.SetTrigger("release");
                         yield return new WaitForSeconds(centerCooldown);
                     }
                     else

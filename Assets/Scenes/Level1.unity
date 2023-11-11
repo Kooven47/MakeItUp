@@ -2557,7 +2557,7 @@ Transform:
   m_GameObject: {fileID: 159826987}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 33.6, y: -1.4, z: 0}
+  m_LocalPosition: {x: 33.77, y: -0.43, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -4282,7 +4282,7 @@ Transform:
   m_GameObject: {fileID: 467581092}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -14.530422, y: -0.8758919, z: -10.036367}
+  m_LocalPosition: {x: -14.36042, y: 0.094108075, z: -10.036367}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -23698,7 +23698,7 @@ Transform:
   m_GameObject: {fileID: 850116248}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -14.53043, y: 0.58010817, z: -10.036367}
+  m_LocalPosition: {x: -14.360428, y: 0.58010805, z: -10.036367}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -25763,6 +25763,63 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1292782255
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 472122592458666930, guid: db306fa2c8303b846aac884a8cd19766, type: 3}
+      propertyPath: m_Name
+      value: SpaghettiPrefab Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 6685603223680461644, guid: db306fa2c8303b846aac884a8cd19766, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 114.18847
+      objectReference: {fileID: 0}
+    - target: {fileID: 6685603223680461644, guid: db306fa2c8303b846aac884a8cd19766, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 16.815872
+      objectReference: {fileID: 0}
+    - target: {fileID: 6685603223680461644, guid: db306fa2c8303b846aac884a8cd19766, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6685603223680461644, guid: db306fa2c8303b846aac884a8cd19766, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6685603223680461644, guid: db306fa2c8303b846aac884a8cd19766, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6685603223680461644, guid: db306fa2c8303b846aac884a8cd19766, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6685603223680461644, guid: db306fa2c8303b846aac884a8cd19766, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6685603223680461644, guid: db306fa2c8303b846aac884a8cd19766, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6685603223680461644, guid: db306fa2c8303b846aac884a8cd19766, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6685603223680461644, guid: db306fa2c8303b846aac884a8cd19766, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: db306fa2c8303b846aac884a8cd19766, type: 3}
 --- !u!1 &1321289910
 GameObject:
   m_ObjectHideFlags: 0
@@ -33432,7 +33489,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a08067db8511469459034c7173292886, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemyCore: {fileID: 6679580527087687945}
+  _enemyCore: {fileID: 0}
   _canKnockBack: 0
 --- !u!4 &3206543731698276314
 Transform:
@@ -33521,6 +33578,7 @@ GameObject:
   - component: {fileID: 1673216969294267583}
   - component: {fileID: 6060800172553377562}
   - component: {fileID: 6679580527087687945}
+  - component: {fileID: 7245647824116209567}
   m_Layer: 0
   m_Name: TestingToiletBossSprite
   m_TagString: Untagged
@@ -33604,9 +33662,9 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3634480393704055059}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 2f5e19ea9ffdc6344ac29e947a556d9e, type: 2}
+  m_Controller: {fileID: 9100000, guid: 2d4a786d60e33c64b81f667b3c9d0d7d, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -33680,12 +33738,25 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 4, y: 4, z: 4}
+  m_LocalScale: {x: -4, y: 4, z: 4}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 3206543731698276314}
   m_Father: {fileID: 6459844245242173203}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7245647824116209567
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3634480393704055059}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e93e7f1d877c96541bef2cec695815ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bossCore: {fileID: 0}
 --- !u!1 &7980445763008071178
 GameObject:
   m_ObjectHideFlags: 0
@@ -33834,9 +33905,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e150158f48081247955b2c1fe714815, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _toiletCollider: {fileID: 0}
+  _toiletCollider: {fileID: 8566474005196601802}
   _moveSet:
   - {fileID: 11400000, guid: 05f34cb49e1913a42bdd4d8b6942265c, type: 2}
+  - {fileID: 11400000, guid: 17a0bcf85dd98fc41ae0a16f18444cff, type: 2}
+  _animOverride: {fileID: 22100000, guid: 5637c636ea5c92949a49ed107421f73b, type: 2}
   toiletTransform: {fileID: 6459844245242173203}
   leftSideTransform: {fileID: 256378233}
   leftSideCollider: {fileID: 256378234}
@@ -33871,3 +33944,4 @@ SceneRoots:
   - {fileID: 1413474090}
   - {fileID: 671217605}
   - {fileID: 2118338132}
+  - {fileID: 1292782255}
