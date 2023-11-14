@@ -13,6 +13,7 @@ public class EnemyAI : MonoBehaviour
 
     [Header("Pathfinding")]
     public Transform target;
+    [SerializeField] private bool _isplayertarget = true;
     public float activateDistance = 50f;
     public float pathUpdateSeconds = 0.5f;
     public float stuckDelay = 0f; // This is the delay to skip to the next path if the enemy is stuck when attempting a player history jump
@@ -52,7 +53,10 @@ public class EnemyAI : MonoBehaviour
 
     public void Start()
     {
-        target = GameObject.FindWithTag("Player").transform;
+        if (_isplayertarget) 
+        {
+            target = GameObject.FindWithTag("Player").transform;
+        }
         seeker = GetComponent<Seeker>();
         rb = GetComponent<Rigidbody2D>();
         gameObject.layer = 8; // Enemy layer
