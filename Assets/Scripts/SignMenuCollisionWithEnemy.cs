@@ -45,7 +45,7 @@ public class SignMenuCollisionWithEnemy : MonoBehaviour
         {
             Time.timeScale = 1;
             spawnManager.SpawnEnemy(enemyLocations, 0);
-            ObjectiveManager.OnUpdateObjective();
+            ObjectiveManagerLevel1.OnUpdateObjective();
         }
     }
 
@@ -58,5 +58,4 @@ public class SignMenuCollisionWithEnemy : MonoBehaviour
                 PauseGame();
         }
     }
-
 }

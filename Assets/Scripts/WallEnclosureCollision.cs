@@ -5,9 +5,14 @@ using UnityEngine;
 public class WallEnclosureCollision : MonoBehaviour
 {
     [SerializeField] private GameObject Enclosure;
-    [SerializeField] private bool _isHidden = true;
-    [SerializeField] private bool _isBossEntrance;
-    [SerializeField] private bool _spawnEnemies = false;
+    [SerializeField] private bool isHidden = true;
+    [SerializeField] private bool isBossEntrance;
+    [SerializeField] private bool spawnEnemies = false;
+    [SerializeField] private bool triggerObjective = false;
+    [SerializeField] private bool timedSpawn = false;
+    [SerializeField] private float timeBetweenSpawns;
+    [SerializeField] private float totalSpawnTime;
+    
     [SerializeField] List<Transform> enemyLocations;
     public SpawnManager spawnManager;
     private bool _collidedBefore = false;
@@ -15,30 +20,42 @@ public class WallEnclosureCollision : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (_isHidden)
+        if (isHidden)
             Enclosure.SetActive(false);
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
         {
             Enclosure.SetActive(true);
-            if (_isBossEntrance && !_collidedBefore)
+
+            if (triggerObjective)
+            {
+                ObjectiveManagerLevel3.OnUpdateObjective();
+            }
+            
+            if (isBossEntrance && !_collidedBefore)
             {
                 BossHealthBar.activateHealthBar?.Invoke();
             }
-            if (_spawnEnemies && !_collidedBefore)
+            
+            if (spawnEnemies && !_collidedBefore)
             {
-                if (enemyLocations[0] != null)
-                    spawnManager.SpawnEnemy(enemyLocations[0], 0);
-                if (enemyLocations[1] != null)
-                    spawnManager.SpawnEnemy(enemyLocations[1], 1);
+                for (int i = 0; i < enemyLocations.Count; i++)
+                {
+                    if (enemyLocations[i] != null)
+                    {
+                        if (timedSpawn)
+                        {
+                            spawnManager.CallTimedEnemySpawnCoroutine(enemyLocations[i], i, timeBetweenSpawns, totalSpawnTime);
+                        }
+                        else
+                        {
+                            spawnManager.SpawnEnemy(enemyLocations[i], i);
+                        }
+                    }
+                }
             }
 
             _collidedBefore = true;

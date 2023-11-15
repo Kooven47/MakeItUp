@@ -7,7 +7,7 @@ using UnityEngine.Events;
 using static KillManager;
 using TMPro;
 
-public class ObjectiveManager : MonoBehaviour
+public class ObjectiveManagerLevel1 : MonoBehaviour
 {
     public Queue<Objective> objList;
     public static bool activeObjective;
@@ -23,9 +23,11 @@ public class ObjectiveManager : MonoBehaviour
 
         objectiveText.SetText("Level 1: Janitor's Closet" + System.Environment.NewLine + "Current Objective - Head to north-east platform");
         activeObjective = false;
-        objList.Enqueue(new Objective1Kill());
-        objList.Enqueue(new Objective2Kill());
+        
+        objList.Enqueue(new Objective1KillSpaghettiMonster());
+        objList.Enqueue(new Objective2KillSpaghettiAndDustBunny());
         objList.Enqueue(new Objective3KillBoss());
+        
         if (_barriers != null) 
         { 
             for (int i = 0; i < _barriers.transform.childCount; i ++)
@@ -36,15 +38,12 @@ public class ObjectiveManager : MonoBehaviour
             }
         }
     }
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    
     public static void OnUpdateObjective()
     {
         UpdateObjective?.Invoke();
     }
+    
     public void NextObjective()
     {
         if (!activeObjective) // No active Objective
@@ -69,19 +68,10 @@ public class ObjectiveManager : MonoBehaviour
     private void OnDisable()
     {
         UpdateObjective -= NextObjective;
-
     }
 }
 
-public abstract class Objective
-{
-    public abstract void OnStart();
-    public abstract void OnComplete();
-    public abstract void Display();
-    public abstract void Cleanup();
-}
-
-public class Objective1Kill : Objective
+public class Objective1KillSpaghettiMonster : Objective
 {
     private GameObject signMenu;
     private GameObject objectiveTextObject;
@@ -92,7 +82,7 @@ public class Objective1Kill : Objective
     
     public override void OnStart()
     {
-        ObjectiveManager.activeObjective = true;
+        ObjectiveManagerLevel1.activeObjective = true;
         killNum = 0;
         killObj = 1;
         signMenu = GameObject.Find("Signs/AttackTutorial2Sign/Canvas/Sign");
@@ -107,6 +97,7 @@ public class Objective1Kill : Objective
 
         // Add the listener for the next obj
     }
+    
     public void KillUpdate()
     {
         killNum++;
@@ -116,15 +107,15 @@ public class Objective1Kill : Objective
             killNum = 0;
             OnComplete();
         }
-        
     }
+    
     public override void OnComplete()
     {
-        ObjectiveManager.activeObjective = false;
+        ObjectiveManagerLevel1.activeObjective = false;
         EnemyStats.OnDeath -= KillUpdate;
         signMenu.GetComponent<SignMenu>().ShowSign();
-        ObjectiveManager.OnUpdateObjective();
-        GameObject barrier = ObjectiveManager.barrierList.Dequeue(); // This and the next line removes the barrier
+        ObjectiveManagerLevel1.OnUpdateObjective();
+        GameObject barrier = ObjectiveManagerLevel1.barrierList.Dequeue(); // This and the next line removes the barrier
         barrier.SetActive(false);
     }
 
@@ -132,6 +123,7 @@ public class Objective1Kill : Objective
     {
         objectiveText.SetText("Level 1: Janitor's Closet" + System.Environment.NewLine + "Current Objective - Kill the monsters: " + (killNum) + "/" + killObj);
     }
+    
     public override void Cleanup()
     {
         EnemyStats.OnDeath -= KillUpdate;
@@ -140,7 +132,7 @@ public class Objective1Kill : Objective
     }
 }
 
-public class Objective2Kill : Objective
+public class Objective2KillSpaghettiAndDustBunny : Objective
 {
     private GameObject signMenu;
     private GameObject objectiveTextObject;
@@ -150,7 +142,7 @@ public class Objective2Kill : Objective
     public int killObj;
     public override void OnStart()
     {
-        ObjectiveManager.activeObjective = true;
+        ObjectiveManagerLevel1.activeObjective = true;
         killNum = 0;
         killObj = 5;
         signMenu = GameObject.Find("Signs/ContinueSign/Canvas/Sign");
@@ -174,16 +166,15 @@ public class Objective2Kill : Objective
             killNum = 0;
             OnComplete();
         }
-
-
     }
+    
     public override void OnComplete()
     {
-        ObjectiveManager.activeObjective = false;
+        ObjectiveManagerLevel1.activeObjective = false;
         EnemyStats.OnDeath -= KillUpdate;
         signMenu.GetComponent<SignMenuEnemy>().ShowSign();
-        ObjectiveManager.OnUpdateObjective();
-        GameObject barrier = ObjectiveManager.barrierList.Dequeue(); // This and the next line removes the barrier
+        ObjectiveManagerLevel1.OnUpdateObjective();
+        GameObject barrier = ObjectiveManagerLevel1.barrierList.Dequeue(); // This and the next line removes the barrier
         barrier.SetActive(false);
     }
 
@@ -208,9 +199,10 @@ public class Objective3KillBoss : Objective
 
     public int killNum;
     public int killObj;
+    
     public override void OnStart()
     {
-        ObjectiveManager.activeObjective = true;
+        ObjectiveManagerLevel1.activeObjective = true;
         killNum = 0;
         killObj = 1;
         signMenu = GameObject.Find("Signs/BossDefeatSign/Canvas/Sign"); // Change this to the sign object location
@@ -225,6 +217,7 @@ public class Objective3KillBoss : Objective
 
         // Add the listener for the next obj
     }
+    
     public void KillUpdate()
     {
         killNum++;
@@ -234,18 +227,18 @@ public class Objective3KillBoss : Objective
             killNum = 0;
             OnComplete();
         }
-
-
     }
+    
     public override void OnComplete()
     {
-        ObjectiveManager.activeObjective = false;
+        ObjectiveManagerLevel1.activeObjective = false;
         EnemyStats.OnDeath -= KillUpdate;
         signMenu.GetComponent<SignMenu>().ShowSign();
-        ObjectiveManager.OnUpdateObjective();
+        ObjectiveManagerLevel1.OnUpdateObjective();
         
-        GameObject barrier = ObjectiveManager.barrierList.Dequeue(); // This and the next line removes the barrier
+        GameObject barrier = ObjectiveManagerLevel1.barrierList.Dequeue(); // This and the next line removes the barrier
         barrier.SetActive(false);
+        objectiveText.SetText("Level 1: Janitor's Closet" + System.Environment.NewLine + "Current Objective - Get to the Elevator");
     }
 
     public override void Display()
@@ -260,3 +253,10 @@ public class Objective3KillBoss : Objective
         GameOverMenu.cleanUp -= Cleanup;
     }
 }
+
+// -------- Level 2 -------- //
+
+// TODO
+// Get can of beans from freezer <-- spawn manager
+// Escape freezer <-- spawn manager
+// Defeat freezer
