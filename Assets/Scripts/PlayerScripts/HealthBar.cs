@@ -57,7 +57,7 @@ public class HealthBar : MonoBehaviour
             {
                 if (i == (newHPSegment - 1))
                 {
-                    transform.GetChild(i).GetChild(0).GetComponent<Image>().fillAmount = diff;
+                    transform.GetChild(i).GetChild(0).GetComponent<Image>().fillAmount = (diff > 0f ? diff : 1.0f);
                 }
                 else if (i > (newHPSegment - 1))
                 {
@@ -69,7 +69,6 @@ public class HealthBar : MonoBehaviour
         {
             // Insert HP increasing code for when restoring health.
             
-            Debug.Log("Diff is "+diff);
             
             for (int i = 0; i < _maxSegments; i++)
             {
@@ -99,11 +98,11 @@ public class HealthBar : MonoBehaviour
         // For test purposes. Later on the HP management will be done by stat script.
         if (Input.GetKeyUp("c"))
         {
-            SetHealth(_testCurHP - 7f,_testMaxHP);
+            SetHealth(_testCurHP - 10f,_testMaxHP);
         }
         if (Input.GetKeyUp("v"))
         {
-            SetHealth(_testCurHP + 7f,_testMaxHP);
+            SetHealth(_testCurHP + 10f,_testMaxHP);
         }
     }
 }
