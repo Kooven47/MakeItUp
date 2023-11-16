@@ -2,14 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TriggerColliderWithEnemy : MonoBehaviour
+public class TriggerColliderWithEnemy : EnclosureCollision
 {
-    private bool _collidedBefore = false;
     [SerializeField] private bool _spawnEnemies = false;
     [SerializeField] List<Transform> enemyLocations;
-    public SpawnManager spawnManager;
+    protected override void Start()
+    {
+        base.Start();
+    }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    protected override void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
         {

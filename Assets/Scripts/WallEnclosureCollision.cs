@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WallEnclosureCollision : MonoBehaviour
+public class WallEnclosureCollision : EnclosureCollision
 {
     [SerializeField] private GameObject Enclosure;
     [SerializeField] private bool isHidden = true;
@@ -14,17 +14,16 @@ public class WallEnclosureCollision : MonoBehaviour
     [SerializeField] private float totalSpawnTime;
     
     [SerializeField] List<Transform> enemyLocations;
-    public SpawnManager spawnManager;
-    private bool _collidedBefore = false;
 
     // Start is called before the first frame update
-    void Start()
+    protected override void Start()
     {
+        base.Start();
         if (isHidden)
             Enclosure.SetActive(false);
     }
     
-    private void OnTriggerEnter2D(Collider2D other)
+    protected override void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
         {
@@ -59,6 +58,7 @@ public class WallEnclosureCollision : MonoBehaviour
             }
 
             _collidedBefore = true;
+            gameObject.SetActive(false);
         }
     }
 }

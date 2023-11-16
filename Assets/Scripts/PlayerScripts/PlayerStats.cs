@@ -3,13 +3,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerStats : Stats
+public class PlayerStats : Stats, ISaveGame
 {
     [SerializeField] private float _critRate = 0.05f, _critDMG = 0.5f;
     [SerializeField] private float _invincTimer = 0.5f;
     private Coroutine _iFrameTimer;
     public static bool playerIsDead = false;
     public static Action<float> dashIFrame;
+
+    private bool _loadedStats = false;
 
     public bool iFrame
     {
@@ -18,7 +20,9 @@ public class PlayerStats : Stats
     // Start is called before the first frame update
     void Start()
     {
-        base.Start();
+        if(!_loadedStats)
+            base.Start();
+        
         HealthBar.settingHealth?.Invoke(_curHP,_maxHP);
         playerIsDead = false;
         dashIFrame = DashIFrame;
@@ -57,5 +61,42 @@ public class PlayerStats : Stats
     public override void Death()
     {
         GameOverMenu.gameOver?.Invoke();
+    }
+
+    public void LoadSaveData(SaveData data)
+    {
+        if (data.janitorStartMaxHealth < 0f && data.janitorMaxHealth < 0f)
+        {
+            Debug.Log("Fresh save");
+            base.Start();
+            SaveInitialData(ref data);
+            return;
+        }
+
+        _maxHP = data.janitorMaxHealth;
+        _curHP = data.janitorCurrentHealth;
+        _loadedStats = true;
+    }
+
+    public void LoadInitialData(SaveData data)
+    {
+        _maxHP = data.janitorStartMaxHealth;
+        _curHP = data.janitorStartCurrentHealth;
+
+        data.janitorMaxHealth = data.janitorStartMaxHealth;
+        data.janitorCurrentHealth = data.janitorStartCurrentHealth;
+    }
+
+    public void SaveData(ref SaveData data)
+    {
+        if (_curHP <= 0f) return;
+        data.janitorMaxHealth = _maxHP;
+        data.janitorCurrentHealth = _curHP;
+    }
+
+    public void SaveInitialData(ref SaveData data)
+    {
+        data.janitorStartMaxHealth = _maxHP;
+        data.janitorStartCurrentHealth = _curHP;
     }
 }

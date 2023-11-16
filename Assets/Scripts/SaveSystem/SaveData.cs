@@ -6,7 +6,9 @@ using System;
 [Serializable]
 public class SaveData
 {
-    public float janitorHealth;
+    public float janitorMaxHealth = -1f, janitorCurrentHealth = -1f;
     public int currentLevel;
-    public int numObjectivesCompleted;
+    public int numObjectivesCompleted = -1;
+
+    public float janitorStartMaxHealth = -1f, janitorStartCurrentHealth = -1f;
 }

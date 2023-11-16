@@ -7,7 +7,7 @@ using UnityEngine.Events;
 using static KillManager;
 using TMPro;
 
-public class ObjectiveManagerLevel1 : MonoBehaviour
+public class ObjectiveManagerLevel1 : MonoBehaviour,ISaveGame
 {
     public Queue<Objective> objList;
     public static bool activeObjective;
@@ -15,6 +15,7 @@ public class ObjectiveManagerLevel1 : MonoBehaviour
     public TMP_Text objectiveText;
     [SerializeField] private GameObject _barriers;
     public static Queue<GameObject> barrierList;
+    private int _objectivesComplete = -1;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,16 +24,19 @@ public class ObjectiveManagerLevel1 : MonoBehaviour
 
         objectiveText.SetText("Level 1: Janitor's Closet" + System.Environment.NewLine + "Current Objective - Head to north-east platform");
         activeObjective = false;
-        
-        objList.Enqueue(new Objective1KillSpaghettiMonster());
-        objList.Enqueue(new Objective2KillSpaghettiAndDustBunny());
-        objList.Enqueue(new Objective3KillBoss());
+        // if (_objectivesComplete < 1)
+            objList.Enqueue(new Objective1KillSpaghettiMonster());
+        // if (_objectivesComplete < 2)
+            objList.Enqueue(new Objective2KillSpaghettiAndDustBunny());
+        // if (_objectivesComplete < 3)
+            objList.Enqueue(new Objective3KillBoss());
         
         if (_barriers != null) 
         { 
             for (int i = 0; i < _barriers.transform.childCount; i ++)
             {
                 GameObject wallGameObject = _barriers.transform.GetChild(i).gameObject;
+                // if (i < _objectivesComplete) continue;
                 wallGameObject.SetActive(true);
                 barrierList.Enqueue(wallGameObject);
             }
@@ -42,10 +46,12 @@ public class ObjectiveManagerLevel1 : MonoBehaviour
     public static void OnUpdateObjective()
     {
         UpdateObjective?.Invoke();
+        SaveSystem.instance.SaveGame();
     }
     
     public void NextObjective()
     {
+        _objectivesComplete++;
         if (!activeObjective) // No active Objective
         {
             if (objList.Count > 0)
@@ -68,6 +74,26 @@ public class ObjectiveManagerLevel1 : MonoBehaviour
     private void OnDisable()
     {
         UpdateObjective -= NextObjective;
+    }
+
+    public void SaveData(ref SaveData sd)
+    {
+        sd.numObjectivesCompleted = _objectivesComplete;
+    }
+
+    public void SaveInitialData(ref SaveData sd)
+    {
+        sd.numObjectivesCompleted = -1;
+    }
+
+    public void LoadSaveData(SaveData sd)
+    {
+        _objectivesComplete = sd.numObjectivesCompleted;
+    }
+
+    public void LoadInitialData(SaveData sd)
+    {
+        _objectivesComplete = -1;
     }
 }
 

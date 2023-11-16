@@ -20,6 +20,7 @@ public class FileDataHandler
 
     public SaveData Load()
     {
+        // Creates a filepath to extract the data file from
         string fullPath = Path.Combine(dataDirPath,dataFileName);
         SaveData loadedData = null;
 
