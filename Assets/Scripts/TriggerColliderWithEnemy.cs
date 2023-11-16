@@ -10,12 +10,22 @@ public class TriggerColliderWithEnemy : EnclosureCollision
     {
         base.Start();
     }
+    private bool _collidedBefore = false;
+    [SerializeField] private bool EndCurrentObjective;
+    [SerializeField] private bool _spawnEnemies = false;
+    [SerializeField] List<Transform> enemyLocations;
+    public SpawnManager spawnManager;
+    [SerializeField] private ObjectiveManagerLevel3 objectiveManager;
 
     protected override void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
         {
-            ObjectiveManagerLevel3.OnUpdateObjective();
+            if (EndCurrentObjective)
+            {
+                objectiveManager.currentObjective.OnComplete();
+            }
+            // ObjectiveManagerLevel3.OnUpdateObjective();
             if (_spawnEnemies && !_collidedBefore)
             {
                 for (int i = 0; i < enemyLocations.Count; i++)

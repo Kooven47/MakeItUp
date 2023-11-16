@@ -12,6 +12,8 @@ public class WallEnclosureCollision : EnclosureCollision
     [SerializeField] private bool timedSpawn = false;
     [SerializeField] private float timeBetweenSpawns;
     [SerializeField] private float totalSpawnTime;
+    [SerializeField] private ObjectiveManagerLevel3 objectiveManagerLevel3;
+
     
     [SerializeField] List<Transform> enemyLocations;
 
@@ -27,11 +29,19 @@ public class WallEnclosureCollision : EnclosureCollision
     {
         if (other.CompareTag("Player"))
         {
+            print("lol we did it");
             Enclosure.SetActive(true);
 
             if (triggerObjective)
             {
-                ObjectiveManagerLevel3.OnUpdateObjective();
+                if (!ObjectiveManagerLevel3.activeObjective)
+                {
+                    objectiveManagerLevel3.NextObjective();
+                }
+                else
+                {
+                    objectiveManagerLevel3.currentObjective.OnComplete();
+                }
             }
             
             if (isBossEntrance && !_collidedBefore)

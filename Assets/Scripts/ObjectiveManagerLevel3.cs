@@ -12,6 +12,7 @@ public class ObjectiveManagerLevel3 : MonoBehaviour
 {
     public Queue<Objective> objList;
     public static bool activeObjective;
+    public Objective currentObjective;
     public static event Action UpdateObjective; // Use 'UpdateObjective?.Invoke();' to invoke this. It will do NextObjective() in this class
     public TMP_Text objectiveText;
     [SerializeField] private GameObject _barriers;
@@ -33,7 +34,7 @@ public class ObjectiveManagerLevel3 : MonoBehaviour
         
         if (_barriers != null) 
         { 
-            for (int i = 0; i < _barriers.transform.childCount; i ++)
+            for (int i = 0; i < _barriers.transform.childCount; i++)
             {
                 GameObject wallGameObject = _barriers.transform.GetChild(i).gameObject;
                 wallGameObject.SetActive(true);
@@ -56,8 +57,8 @@ public class ObjectiveManagerLevel3 : MonoBehaviour
         {
             if (objList.Count > 0)
             {
-                Objective CurrentObjective = objList.Dequeue();
-                CurrentObjective.OnStart();
+                currentObjective = objList.Dequeue();
+                currentObjective.OnStart();
                 // GameObject barrier = ObjectiveManagerLevel3.barrierList.Dequeue(); // This and the next line removes the barrier
                 // barrier.SetActive(false);
             }
@@ -204,23 +205,17 @@ public class Objective2KillPianos : Objective
     }
 }
 
-// TODO
 public class Objective3GetToMiniBosses : Objective
 {
     private GameObject objectiveTextObject;
     private TMP_Text objectiveText;
-
-    public int killNum;
-    public int killObj;
+    
     public override void OnStart()
     {
         ObjectiveManagerLevel3.activeObjective = true;
-        killNum = 0;
-        killObj = 4;
         objectiveTextObject = GameObject.Find("ObjectiveManager/Canvas/Sign/ObjectiveText"); // This is to find the ObjectiveText object for display
         objectiveText = objectiveTextObject.GetComponent<TMP_Text>();
 
-        EnemyStats.OnDeath += KillUpdate;
         PauseMenu.cleanUp += Cleanup;
         GameOverMenu.cleanUp += Cleanup;
 
@@ -229,21 +224,9 @@ public class Objective3GetToMiniBosses : Objective
         // Add the listener for the next obj
     }
     
-    public void KillUpdate()
-    {
-        killNum++;
-        Display();
-        if ((killNum >= killObj) && (killObj != -1)) // Objective completed
-        {
-            killNum = 0;
-            OnComplete();
-        }
-    }
-    
     public override void OnComplete()
     {
         ObjectiveManagerLevel3.activeObjective = false;
-        EnemyStats.OnDeath -= KillUpdate;
         ObjectiveManagerLevel3.OnUpdateObjective();
         
         GameObject barrier = ObjectiveManagerLevel3.barrierList.Dequeue(); // This and the next line removes the barrier
@@ -257,7 +240,6 @@ public class Objective3GetToMiniBosses : Objective
 
     public override void Cleanup()
     {
-        EnemyStats.OnDeath -= KillUpdate;
         PauseMenu.cleanUp -= Cleanup;
         GameOverMenu.cleanUp -= Cleanup;
     }
