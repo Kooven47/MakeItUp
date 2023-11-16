@@ -73,30 +73,30 @@ public class PlayerStats : Stats, ISaveGame
             return;
         }
 
-        _maxHP = data.janitorMaxHealth;
-        _curHP = data.janitorCurrentHealth;
-        _loadedStats = true;
+        // _maxHP = data.janitorMaxHealth;
+        // _curHP = data.janitorCurrentHealth;
+        // _loadedStats = true;
     }
 
     public void LoadInitialData(SaveData data)
     {
-        _maxHP = data.janitorStartMaxHealth;
-        _curHP = data.janitorStartCurrentHealth;
+        // _maxHP = data.janitorStartMaxHealth;
+        // _curHP = data.janitorStartCurrentHealth;
 
-        data.janitorMaxHealth = data.janitorStartMaxHealth;
-        data.janitorCurrentHealth = data.janitorStartCurrentHealth;
+        // data.janitorMaxHealth = data.janitorStartMaxHealth;
+        // data.janitorCurrentHealth = data.janitorStartCurrentHealth;
     }
 
     public void SaveData(ref SaveData data)
     {
-        if (_curHP <= 0f) return;
-        data.janitorMaxHealth = _maxHP;
-        data.janitorCurrentHealth = _curHP;
+        // if (_curHP <= 0f) return;
+        // data.janitorMaxHealth = _maxHP;
+        // data.janitorCurrentHealth = _curHP;
     }
 
     public void SaveInitialData(ref SaveData data)
     {
-        data.janitorStartMaxHealth = _maxHP;
-        data.janitorStartCurrentHealth = _curHP;
+        // data.janitorStartMaxHealth = _maxHP;
+        // data.janitorStartCurrentHealth = _curHP;
     }
 }
