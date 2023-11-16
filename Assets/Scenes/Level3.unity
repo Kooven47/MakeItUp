@@ -67217,7 +67217,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1222340111}
   - component: {fileID: 1222340113}
-  - component: {fileID: 1222340112}
+  - component: {fileID: 1222340114}
   m_Layer: 0
   m_Name: EnemyEnclosure3
   m_TagString: Untagged
@@ -67240,23 +67240,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1187996051}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1222340112
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1222340110}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 94d6d4edffdc3764b8537f5dc6e3bc53, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  EndCurrentObjective: 0
-  _spawnEnemies: 0
-  enemyLocations: []
-  spawnManager: {fileID: 0}
-  objectiveManager: {fileID: 1810720475}
 --- !u!61 &1222340113
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -67302,6 +67285,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 5.979553, y: 6.200363}
   m_EdgeRadius: 0
+--- !u!114 &1222340114
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1222340110}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b009e47b114fe6f4d8de0e71e78d0f13, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Enclosure: {fileID: 49731457}
 --- !u!1 &1227044591
 GameObject:
   m_ObjectHideFlags: 0
@@ -67587,6 +67583,7 @@ MonoBehaviour:
   timedSpawn: 0
   timeBetweenSpawns: 0
   totalSpawnTime: 0
+  objectiveManagerLevel3: {fileID: 0}
   enemyLocations:
   - {fileID: 1160170423}
   - {fileID: 731674290}
@@ -67686,13 +67683,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Enclosure: {fileID: 49731457}
-  isHidden: 1
+  isHidden: 0
   isBossEntrance: 0
   spawnEnemies: 1
-  triggerObjective: 0
+  triggerObjective: 1
   timedSpawn: 0
   timeBetweenSpawns: 0
   totalSpawnTime: 0
+  objectiveManagerLevel3: {fileID: 1810720475}
   enemyLocations:
   - {fileID: 1353860079}
   - {fileID: 1674552590}
@@ -68143,6 +68141,7 @@ MonoBehaviour:
   timedSpawn: 1
   timeBetweenSpawns: 2
   totalSpawnTime: 30
+  objectiveManagerLevel3: {fileID: 1810720475}
   enemyLocations:
   - {fileID: 2013853710}
   - {fileID: 2050712973}
@@ -68948,6 +68947,7 @@ MonoBehaviour:
   timedSpawn: 0
   timeBetweenSpawns: 0
   totalSpawnTime: 0
+  objectiveManagerLevel3: {fileID: 0}
   enemyLocations:
   - {fileID: 1056459305}
   - {fileID: 0}
