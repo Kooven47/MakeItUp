@@ -100,6 +100,6 @@ public class SaveSystem: MonoBehaviour
 
     private void OnApplicationQuit()
     {
-        //SaveGame();
+        SaveGame();
     }
 }

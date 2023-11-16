@@ -6,16 +6,13 @@ public class TriggerColliderWithEnemy : EnclosureCollision
 {
     [SerializeField] private bool _spawnEnemies = false;
     [SerializeField] List<Transform> enemyLocations;
+    [SerializeField] private bool EndCurrentObjective;
+    [SerializeField] private ObjectiveManagerLevel3 objectiveManager;
+
     protected override void Start()
     {
         base.Start();
     }
-    private bool _collidedBefore = false;
-    [SerializeField] private bool EndCurrentObjective;
-    [SerializeField] private bool _spawnEnemies = false;
-    [SerializeField] List<Transform> enemyLocations;
-    public SpawnManager spawnManager;
-    [SerializeField] private ObjectiveManagerLevel3 objectiveManager;
 
     protected override void OnTriggerEnter2D(Collider2D other)
     {
@@ -26,8 +23,10 @@ public class TriggerColliderWithEnemy : EnclosureCollision
                 objectiveManager.currentObjective.OnComplete();
             }
             // ObjectiveManagerLevel3.OnUpdateObjective();
+            
             if (_spawnEnemies && !_collidedBefore)
             {
+                ObjectiveManagerLevel3.OnUpdateObjective();
                 for (int i = 0; i < enemyLocations.Count; i++)
                 {
                     if (enemyLocations[i] != null)
@@ -35,6 +34,8 @@ public class TriggerColliderWithEnemy : EnclosureCollision
                         spawnManager.SpawnEnemy(enemyLocations[i], i);
                     }
                 }
+
+                SetCheckPoint();
 
                 _collidedBefore = true;
             }

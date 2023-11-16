@@ -24,11 +24,12 @@ public class ObjectiveManagerLevel1 : MonoBehaviour,ISaveGame
 
         objectiveText.SetText("Level 1: Janitor's Closet" + System.Environment.NewLine + "Current Objective - Head to north-east platform");
         activeObjective = false;
-        // if (_objectivesComplete < 1)
+        Debug.Log("Objectives completed "+_objectivesComplete);
+        if (_objectivesComplete < 2)
             objList.Enqueue(new Objective1KillSpaghettiMonster());
-        // if (_objectivesComplete < 2)
+        if (_objectivesComplete < 3)
             objList.Enqueue(new Objective2KillSpaghettiAndDustBunny());
-        // if (_objectivesComplete < 3)
+        if (_objectivesComplete < 5)
             objList.Enqueue(new Objective3KillBoss());
         
         if (_barriers != null) 
@@ -36,10 +37,15 @@ public class ObjectiveManagerLevel1 : MonoBehaviour,ISaveGame
             for (int i = 0; i < _barriers.transform.childCount; i ++)
             {
                 GameObject wallGameObject = _barriers.transform.GetChild(i).gameObject;
-                // if (i < _objectivesComplete) continue;
+                if (i+1 < _objectivesComplete) continue;
                 wallGameObject.SetActive(true);
                 barrierList.Enqueue(wallGameObject);
             }
+        }
+
+        if (_objectivesComplete > 0)
+        {
+            UpdateObjective?.Invoke();
         }
     }
     
@@ -51,7 +57,6 @@ public class ObjectiveManagerLevel1 : MonoBehaviour,ISaveGame
     
     public void NextObjective()
     {
-        _objectivesComplete++;
         if (!activeObjective) // No active Objective
         {
             if (objList.Count > 0)
@@ -78,12 +83,12 @@ public class ObjectiveManagerLevel1 : MonoBehaviour,ISaveGame
 
     public void SaveData(ref SaveData sd)
     {
-        sd.numObjectivesCompleted = _objectivesComplete;
+        
     }
 
     public void SaveInitialData(ref SaveData sd)
     {
-        sd.numObjectivesCompleted = -1;
+        
     }
 
     public void LoadSaveData(SaveData sd)
@@ -108,6 +113,7 @@ public class Objective1KillSpaghettiMonster : Objective
     
     public override void OnStart()
     {
+        CheckpointManager.setCheckPoint?.Invoke(1);
         ObjectiveManagerLevel1.activeObjective = true;
         killNum = 0;
         killObj = 1;
@@ -168,6 +174,7 @@ public class Objective2KillSpaghettiAndDustBunny : Objective
     public int killObj;
     public override void OnStart()
     {
+        CheckpointManager.setCheckPoint?.Invoke(2);
         ObjectiveManagerLevel1.activeObjective = true;
         killNum = 0;
         killObj = 5;
@@ -196,6 +203,7 @@ public class Objective2KillSpaghettiAndDustBunny : Objective
     
     public override void OnComplete()
     {
+        CheckpointManager.setCheckPoint?.Invoke(3);
         ObjectiveManagerLevel1.activeObjective = false;
         EnemyStats.OnDeath -= KillUpdate;
         signMenu.GetComponent<SignMenuEnemy>().ShowSign();
@@ -257,6 +265,7 @@ public class Objective3KillBoss : Objective
     
     public override void OnComplete()
     {
+        CheckpointManager.setCheckPoint?.Invoke(5);
         ObjectiveManagerLevel1.activeObjective = false;
         EnemyStats.OnDeath -= KillUpdate;
         signMenu.GetComponent<SignMenu>().ShowSign();

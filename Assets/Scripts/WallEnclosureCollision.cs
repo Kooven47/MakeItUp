@@ -42,15 +42,19 @@ public class WallEnclosureCollision : EnclosureCollision
                 {
                     objectiveManagerLevel3.currentObjective.OnComplete();
                 }
+                ObjectiveManagerLevel3.OnUpdateObjective();
+                //SetCheckPoint();
             }
             
             if (isBossEntrance && !_collidedBefore)
             {
                 BossHealthBar.activateHealthBar?.Invoke();
+                SetCheckPoint();
             }
             
             if (spawnEnemies && !_collidedBefore)
             {
+                //SetCheckPoint();
                 for (int i = 0; i < enemyLocations.Count; i++)
                 {
                     if (enemyLocations[i] != null)

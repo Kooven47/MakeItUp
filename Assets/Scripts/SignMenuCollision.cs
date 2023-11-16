@@ -2,7 +2,7 @@ using UnityEngine;
 using TMPro;
 using Unity.VisualScripting;
 
-public class SignMenuCollision : MonoBehaviour
+public class SignMenuCollision : EnclosureCollision
 {
     public GameObject signMenu;
     public static bool isMenuActive;
@@ -40,9 +40,11 @@ public class SignMenuCollision : MonoBehaviour
         {
             Time.timeScale = 1;
         }
+
+        // SetCheckPoint();
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    protected override void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
         {

@@ -4,12 +4,10 @@ using Unity.VisualScripting;
 using UnityEngine.Events;
 using System;
 
-public class SignMenuCollisionWithEnemy : MonoBehaviour
+public class SignMenuCollisionWithEnemy : EnclosureCollision
 {
     public GameObject signMenu;
     public static bool isMenuActive;
-
-    public SpawnManager spawnManager;
     public Transform enemyLocations;
 
     bool shownBefore;
@@ -17,6 +15,7 @@ public class SignMenuCollisionWithEnemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        base.Start();
         shownBefore = false;
         isMenuActive = false;
         signMenu.SetActive(false);
@@ -40,9 +39,11 @@ public class SignMenuCollisionWithEnemy : MonoBehaviour
             spawnManager.SpawnEnemy(enemyLocations, 0);
             ObjectiveManagerLevel1.OnUpdateObjective();
         }
+
+        // SetCheckPoint();
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    protected override void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
         {
