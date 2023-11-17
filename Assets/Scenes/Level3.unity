@@ -3060,7 +3060,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 4.9
+  orthographic size: 2.95
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -67575,6 +67575,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5274e68ada88ba47aa2b3b9619e0166, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spawnManager: {fileID: 1732954721}
   Enclosure: {fileID: 373290378}
   isHidden: 0
   isBossEntrance: 0
@@ -67587,7 +67588,6 @@ MonoBehaviour:
   enemyLocations:
   - {fileID: 1160170423}
   - {fileID: 731674290}
-  spawnManager: {fileID: 1732954721}
 --- !u!1 &1321621496
 GameObject:
   m_ObjectHideFlags: 0
@@ -67682,6 +67682,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5274e68ada88ba47aa2b3b9619e0166, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spawnManager: {fileID: 1732954721}
   Enclosure: {fileID: 49731457}
   isHidden: 0
   isBossEntrance: 0
@@ -67694,7 +67695,6 @@ MonoBehaviour:
   enemyLocations:
   - {fileID: 1353860079}
   - {fileID: 1674552590}
-  spawnManager: {fileID: 1732954721}
 --- !u!61 &1321952059
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -68133,6 +68133,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5274e68ada88ba47aa2b3b9619e0166, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spawnManager: {fileID: 1732954721}
   Enclosure: {fileID: 491190063}
   isHidden: 1
   isBossEntrance: 0
@@ -68145,7 +68146,6 @@ MonoBehaviour:
   enemyLocations:
   - {fileID: 2013853710}
   - {fileID: 2050712973}
-  spawnManager: {fileID: 1732954721}
 --- !u!1 &1542205842
 GameObject:
   m_ObjectHideFlags: 0
@@ -68939,8 +68939,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5274e68ada88ba47aa2b3b9619e0166, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spawnManager: {fileID: 1732954721}
   Enclosure: {fileID: 427454289}
-  isHidden: 0
+  isHidden: 1
   isBossEntrance: 0
   spawnEnemies: 1
   triggerObjective: 0
@@ -68951,7 +68952,6 @@ MonoBehaviour:
   enemyLocations:
   - {fileID: 1056459305}
   - {fileID: 0}
-  spawnManager: {fileID: 1732954721}
 --- !u!61 &1801118263
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -68984,7 +68984,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 96.44826, y: 70.71679}
+  m_Offset: {x: 59.39699, y: 70.71679}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -68995,7 +68995,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.34507, y: 5.4629364}
+  m_Size: {x: 1.9098892, y: 5.4629364}
   m_EdgeRadius: 0
 --- !u!1 &1801298652
 GameObject:
@@ -75887,7 +75887,7 @@ MonoBehaviour:
   m_Follow: {fileID: 1970230809}
   m_Lens:
     FieldOfView: 60
-    OrthographicSize: 4.9
+    OrthographicSize: 2.95
     NearClipPlane: 0.3
     FarClipPlane: 1000
     Dutch: 0

@@ -13,8 +13,6 @@ public class WallEnclosureCollision : EnclosureCollision
     [SerializeField] private float timeBetweenSpawns;
     [SerializeField] private float totalSpawnTime;
     [SerializeField] private ObjectiveManagerLevel3 objectiveManagerLevel3;
-
-    
     [SerializeField] List<Transform> enemyLocations;
 
     // Start is called before the first frame update
@@ -32,7 +30,7 @@ public class WallEnclosureCollision : EnclosureCollision
             print("lol we did it");
             Enclosure.SetActive(true);
 
-            if (triggerObjective)
+            if (triggerObjective && !_collidedBefore)
             {
                 if (!ObjectiveManagerLevel3.activeObjective)
                 {
@@ -72,7 +70,7 @@ public class WallEnclosureCollision : EnclosureCollision
             }
 
             _collidedBefore = true;
-            gameObject.SetActive(false);
+            // gameObject.SetActive(false);
         }
     }
 }
