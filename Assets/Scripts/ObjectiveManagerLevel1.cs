@@ -272,7 +272,12 @@ public class Objective3KillBoss : Objective
         ObjectiveManagerLevel1.OnUpdateObjective();
         
         GameObject barrier = ObjectiveManagerLevel1.barrierList.Dequeue(); // This and the next line removes the barrier
+
+        if (barrier.name.Equals("Filler"))
+            barrier = ObjectiveManagerLevel1.barrierList.Dequeue();
+        
         barrier.SetActive(false);
+        Debug.Log("Deactivated this barrier "+barrier.name);
         objectiveText.SetText("Level 1: Janitor's Closet" + System.Environment.NewLine + "Current Objective - Get to the Elevator");
     }
 
