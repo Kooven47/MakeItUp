@@ -3460,7 +3460,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &299637134
 Transform:
   m_ObjectHideFlags: 0
@@ -3683,7 +3683,17 @@ CompositeCollider2D:
   m_GeometryType: 0
   m_GenerationType: 0
   m_EdgeRadius: 0
-  m_ColliderPaths: []
+  m_ColliderPaths:
+  - m_Collider: {fileID: 299637135}
+    m_ColliderPaths:
+    - - X: 1340000000
+        Y: 170000000
+      - X: 1330000000
+        Y: 170000000
+      - X: 1330000000
+        Y: 150000000
+      - X: 1340000000
+        Y: 150000000
   m_CompositePaths:
     m_Paths:
     - - {x: 133.99997, y: 15}
@@ -4277,7 +4287,7 @@ MonoBehaviour:
   m_Follow: {fileID: 185689917}
   m_Lens:
     FieldOfView: 60
-    OrthographicSize: 3.45
+    OrthographicSize: 9.2
     NearClipPlane: 0.3
     FarClipPlane: 1000
     Dutch: 0
@@ -4853,7 +4863,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &501640427
 Transform:
   m_ObjectHideFlags: 0
@@ -5054,7 +5064,17 @@ CompositeCollider2D:
   m_GeometryType: 0
   m_GenerationType: 0
   m_EdgeRadius: 0
-  m_ColliderPaths: []
+  m_ColliderPaths:
+  - m_Collider: {fileID: 501640432}
+    m_ColliderPaths:
+    - - X: 410000000
+        Y: 60000000
+      - X: 400000000
+        Y: 60000000
+      - X: 400000000
+        Y: 30000000
+      - X: 410000000
+        Y: 30000000
   m_CompositePaths:
     m_Paths:
     - - {x: 40.999973, y: 3}
@@ -6202,7 +6222,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &698904402
 Transform:
   m_ObjectHideFlags: 0
@@ -6425,7 +6445,17 @@ CompositeCollider2D:
   m_GeometryType: 0
   m_GenerationType: 0
   m_EdgeRadius: 0
-  m_ColliderPaths: []
+  m_ColliderPaths:
+  - m_Collider: {fileID: 698904405}
+    m_ColliderPaths:
+    - - X: 700000000
+        Y: 0
+      - X: 690000000
+        Y: 0
+      - X: 690000000
+        Y: -20000000
+      - X: 700000000
+        Y: -20000000
   m_CompositePaths:
     m_Paths:
     - - {x: 69.99997, y: -2}
@@ -6684,6 +6714,7 @@ MonoBehaviour:
   timedSpawn: 0
   timeBetweenSpawns: 0
   totalSpawnTime: 0
+  objectiveManagerLevel3: {fileID: 0}
   enemyLocations:
   - {fileID: 1146278011}
   - {fileID: 455845809}
@@ -23741,7 +23772,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 3.45
+  orthographic size: 9.2
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -23766,7 +23797,7 @@ Transform:
   m_GameObject: {fileID: 850116248}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -14.360428, y: 0.58010805, z: -10.036367}
+  m_LocalPosition: {x: -14.360428, y: 2.089718, z: -10.036367}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -27326,7 +27357,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1647691119
 Transform:
   m_ObjectHideFlags: 0
@@ -32894,6 +32925,7 @@ MonoBehaviour:
   timedSpawn: 0
   timeBetweenSpawns: 0
   totalSpawnTime: 0
+  objectiveManagerLevel3: {fileID: 0}
   enemyLocations: []
 --- !u!61 &2063533988
 BoxCollider2D:

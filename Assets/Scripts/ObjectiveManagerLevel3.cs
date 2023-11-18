@@ -133,6 +133,7 @@ public class Objective1Survive : Objective
         
         GameObject barrier = ObjectiveManagerLevel3.barrierList.Dequeue(); // This and the next line removes the barrier
         barrier.SetActive(false);
+        Debug.Log("dequeued barrier " + barrier.transform.name);
     }
 
     public override void Display()
@@ -190,6 +191,7 @@ public class Objective2KillPianos : Objective
         
         GameObject barrier = ObjectiveManagerLevel3.barrierList.Dequeue(); // This and the next line removes the barrier
         barrier.SetActive(false);
+        Debug.Log("dequeued barrier " + barrier.transform.name);
     }
 
     public override void Display()
@@ -231,6 +233,7 @@ public class Objective3GetToMiniBosses : Objective
         
         GameObject barrier = ObjectiveManagerLevel3.barrierList.Dequeue(); // This and the next line removes the barrier
         barrier.SetActive(false);
+        Debug.Log("dequeued barrier " + barrier.transform.name);
     }
 
     public override void Display()
@@ -288,6 +291,7 @@ public class Objective4DefeatMiniBosses : Objective
         
         GameObject barrier = ObjectiveManagerLevel3.barrierList.Dequeue(); // This and the next line removes the barrier
         barrier.SetActive(false);
+        Debug.Log("dequeued barrier " + barrier.transform.name);
     }
 
     public override void Display()
@@ -346,6 +350,7 @@ public class Objective5DefeatBoss : Objective
         
         GameObject barrier = ObjectiveManagerLevel3.barrierList.Dequeue(); // This and the next line removes the barrier
         barrier.SetActive(false);
+        Debug.Log("dequeued barrier " + barrier.transform.name);
     }
 
     public override void Display()
