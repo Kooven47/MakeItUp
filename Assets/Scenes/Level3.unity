@@ -3060,7 +3060,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 2.95
+  orthographic size: 4.9
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -67576,6 +67576,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnManager: {fileID: 1732954721}
+  _objectiveIndex: 0
   Enclosure: {fileID: 373290378}
   isHidden: 0
   isBossEntrance: 0
@@ -67683,6 +67684,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnManager: {fileID: 1732954721}
+  _objectiveIndex: 0
   Enclosure: {fileID: 49731457}
   isHidden: 0
   isBossEntrance: 0
@@ -68134,6 +68136,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnManager: {fileID: 1732954721}
+  _objectiveIndex: 0
   Enclosure: {fileID: 491190063}
   isHidden: 1
   isBossEntrance: 0
@@ -68940,6 +68943,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnManager: {fileID: 1732954721}
+  _objectiveIndex: 0
   Enclosure: {fileID: 427454289}
   isHidden: 1
   isBossEntrance: 0
@@ -68951,7 +68955,6 @@ MonoBehaviour:
   objectiveManagerLevel3: {fileID: 0}
   enemyLocations:
   - {fileID: 1056459305}
-  - {fileID: 0}
 --- !u!61 &1801118263
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -75887,7 +75890,7 @@ MonoBehaviour:
   m_Follow: {fileID: 1970230809}
   m_Lens:
     FieldOfView: 60
-    OrthographicSize: 2.95
+    OrthographicSize: 4.9
     NearClipPlane: 0.3
     FarClipPlane: 1000
     Dutch: 0
