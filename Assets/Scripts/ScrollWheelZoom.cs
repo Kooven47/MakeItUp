@@ -22,7 +22,8 @@ public class ScrollWheelZoom : MonoBehaviour
         vCam = GetComponent<CinemachineVirtualCamera>();
         curMinOrthographicSize = minOrthoSize;
         curMaxOrthographicSize = maxOrthoSize;
-        vCam.m_Lens.OrthographicSize = (curMinOrthographicSize + curMaxOrthographicSize) / 2;
+        // vCam.m_Lens.OrthographicSize = (curMinOrthographicSize + curMaxOrthographicSize) / 2;
+        vCam.m_Lens.OrthographicSize = curMaxOrthographicSize;
         
         confiner = GetComponent<CinemachineConfiner2D>();
         boundingBox = confiner.m_BoundingShape2D;
