@@ -26,7 +26,7 @@ public class ExitShortcut : MonoBehaviour
         {
             Enclosure.SetActive(true);
             _collidedBefore = true;
-            EntranceShortcut.takenShortcut = false;
+            EntranceShortcut.inShortcut = false;
         }
     }
 }

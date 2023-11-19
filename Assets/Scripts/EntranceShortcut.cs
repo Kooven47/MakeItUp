@@ -9,6 +9,7 @@ public class EntranceShortcut : MonoBehaviour
     [SerializeField] private Transform target;
     [SerializeField] private bool _isHidden = true;
     public static bool takenShortcut = false;
+    public static bool inShortcut = false;
     private bool _collidedBefore = false;
 
     // Start is called before the first frame update
@@ -27,9 +28,11 @@ public class EntranceShortcut : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            enemy = GameObject.FindWithTag("Enemy");
             Enclosure.SetActive(true);
             _collidedBefore = true;
             takenShortcut = true;
+            inShortcut = true;
             enemy.transform.position = target.position;
         }
     }

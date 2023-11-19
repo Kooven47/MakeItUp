@@ -23,8 +23,9 @@ public class ObjectiveManagerLevel2 : MonoBehaviour
         objectiveText.SetText("Level 2: Cafeteria" + System.Environment.NewLine + "Current Objective - Get some well-earned beans");
         activeObjective = false;
 
-        objList.Enqueue(new Objective1EscapeFreezer());
-        objList.Enqueue(new Objective2DefeatFreezer());
+        objList.Enqueue(new Objective1Investigate());
+        objList.Enqueue(new Objective2EscapeFreezer());
+        objList.Enqueue(new Objective3DefeatFreezer());
     }
     
     public static void OnUpdateObjective()
@@ -61,7 +62,43 @@ public class ObjectiveManagerLevel2 : MonoBehaviour
     }
 }
 
-public class Objective1EscapeFreezer : Objective
+public class Objective1Investigate : Objective
+{
+    private GameObject objectiveTextObject;
+    private TMP_Text objectiveText;
+
+    public override void OnStart()
+    {
+        ObjectiveManagerLevel2.activeObjective = true;
+        objectiveTextObject = GameObject.Find("ObjectiveManager/Canvas/Sign/ObjectiveText"); // This is to find the ObjectiveText object for display
+        objectiveText = objectiveTextObject.GetComponent<TMP_Text>();
+
+        PauseMenu.cleanUp += Cleanup;
+        GameOverMenu.cleanUp += Cleanup;
+
+        Display();
+
+        // Add the listener for the next obj
+    }
+
+    public override void OnComplete()
+    {
+        ObjectiveManagerLevel2.activeObjective = false;
+        ObjectiveManagerLevel2.OnUpdateObjective();
+    }
+
+    public override void Display()
+    {
+        objectiveText.SetText("Level 2: Cafeteria" + System.Environment.NewLine + "Current Objective - Investigate a Mysterious Noise To The Right...");
+    }
+
+    public override void Cleanup()
+    {
+        PauseMenu.cleanUp -= Cleanup;
+        GameOverMenu.cleanUp -= Cleanup;
+    }
+}
+public class Objective2EscapeFreezer : Objective
 {
     private GameObject objectiveTextObject;
     private TMP_Text objectiveText;
@@ -98,7 +135,7 @@ public class Objective1EscapeFreezer : Objective
     }
 }
 
-public class Objective2DefeatFreezer : Objective
+public class Objective3DefeatFreezer : Objective
 {
     private GameObject objectiveTextObject;
     private TMP_Text objectiveText;

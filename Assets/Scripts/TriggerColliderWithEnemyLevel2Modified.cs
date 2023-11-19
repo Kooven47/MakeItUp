@@ -2,13 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TriggerColliderWithEnemyLevel2 : EnclosureCollision
+public class TriggerColliderWithEnemyLevel2Modified : EnclosureCollision
 {
     [SerializeField] private bool _spawnEnemies = false;
     [SerializeField] List<Transform> enemyLocations;
     [SerializeField] private bool EndCurrentObjective;
     [SerializeField] private ObjectiveManagerLevel2 objectiveManager;
-
+    public static bool isActive = false;
     protected override void Start()
     {
         base.Start();
@@ -16,7 +16,7 @@ public class TriggerColliderWithEnemyLevel2 : EnclosureCollision
 
     protected override void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") && isActive)
         {
             if (EndCurrentObjective && !_collidedBefore)
             {
@@ -45,7 +45,6 @@ public class TriggerColliderWithEnemyLevel2 : EnclosureCollision
 
                 _collidedBefore = true;
             }
-            TriggerColliderWithEnemyLevel2Modified.isActive = true;
         }
     }
 }
