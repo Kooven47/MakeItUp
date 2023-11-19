@@ -18,6 +18,7 @@ public class WallEnclosureCollisionLevel2 : EnclosureCollision
     // Start is called before the first frame update
     protected override void Start()
     {
+        Enclosure.SetActive(true);
         base.Start();
         if (isHidden)
             Enclosure.SetActive(false);

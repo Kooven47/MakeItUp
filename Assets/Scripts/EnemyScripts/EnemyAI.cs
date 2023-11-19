@@ -31,6 +31,13 @@ public class EnemyAI : MonoBehaviour
     public float jumpDelay = 0.0f;
     public float groundCheckSize = 0.31f; // 0.31f allowed the groundcheck to match with the spaghetti monster collider. Adjust for other enemies.
 
+    [Header("Stuck Behavior")]
+    [SerializeField] private bool _stuckHelp = false;
+    public float stuckForce = 300f; // Force to apply when stuck
+    public float stuckVelocityThreshold = 0.1f; // Velocity threshold to consider if stuck
+    public float stuckTimeThreshold = 2f; // Time threshold to consider if stuck
+    private float stuckTimer = 0f; // Timer to track how long the enemy is stuck
+
     [Header("Custom Behavior")]
     public bool followEnabled = true;
     public bool jumpEnabled = true;
@@ -48,6 +55,8 @@ public class EnemyAI : MonoBehaviour
     private bool isFollowingJumpPath = false;
     private bool _canFlip = true;
     private bool _canMove = true;
+    [SerializeField] private int _fallFast = 0; // If 0, no fallFast. else, gravity * fallFast multiplier
+    private float _prevGravScale = 1;
 
     public Queue<Vector2> jumpList = new Queue<Vector2>();
 
@@ -67,13 +76,26 @@ public class EnemyAI : MonoBehaviour
         }
         _enemyCore = transform.GetChild(0).GetComponent<EnemyCore>();
         _enemyCore.StartArmor += IsAttacking;
+        _prevGravScale = rb.gravityScale;
         InvokeRepeating("UpdatePath", 0f, pathUpdateSeconds);
+
     }
     private void FixedUpdate()
     {
         if (TargetInDistance() && followEnabled)
         {
             PathFollow();
+        }
+        if (_stuckHelp)
+        {
+            if (Mathf.Abs(rb.velocity.magnitude) < stuckVelocityThreshold)
+            {
+                stuckTimer += Time.fixedDeltaTime;
+            }
+            else
+            {
+                stuckTimer = 0;
+            }
         }
     }
    
@@ -125,10 +147,10 @@ public class EnemyAI : MonoBehaviour
         {
             Vector2 directionToPlayer = ((Vector2)target.position - rb.position).normalized;
             Vector2 moveAwayForce = -directionToPlayer * speed * Time.deltaTime;
-            if(flyingEnabled)
+            if (flyingEnabled)
                 rb.AddForce(moveAwayForce);
             else
-                rb.AddForce(new Vector2(moveAwayForce.x,0));
+                rb.AddForce(new Vector2(moveAwayForce.x, 0));
         }
         else
         {
@@ -148,10 +170,10 @@ public class EnemyAI : MonoBehaviour
                         Vector2 moveAwayFromEnemyForce = -directionToEnemy * speed * distanceFactor * Time.deltaTime;
 
                         // Set the horizontal velocity while keeping the current vertical velocity
-                        
+
 
                         // Apply the force to the Rigidbody2D
-                        if (_canMove) 
+                        if (_canMove)
                         {
                             if (flyingEnabled)
                                 rb.AddForce(moveAwayFromEnemyForce);
@@ -190,6 +212,7 @@ public class EnemyAI : MonoBehaviour
             Vector2 direction = ((Vector2)path.vectorPath[currentWaypoint] - rb.position).normalized;
             Vector2 force = direction * speed * Time.deltaTime;
 
+
             // Jump
             if (jumpEnabled && (isGrounded || IsOnOneWayPlatform) && !flyingEnabled)
             {
@@ -205,6 +228,15 @@ public class EnemyAI : MonoBehaviour
                     }
                     time = jumpDelay;
                 }
+            }
+            // fallFast
+            if (!isGrounded && (_fallFast > 0))
+            {
+                rb.gravityScale = _prevGravScale * _fallFast;
+            }
+            else if (_fallFast > 0)
+            {
+                rb.gravityScale = _prevGravScale;
             }
 
             // Movement
@@ -249,6 +281,25 @@ public class EnemyAI : MonoBehaviour
                     transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
                 }
             }
+            // Check if the enemy is stuck
+            if ((stuckTimer > stuckTimeThreshold) && _stuckHelp)
+            {
+                // Apply force towards the next waypoint
+                if (currentWaypoint < path.vectorPath.Count)
+                {
+                    Debug.Log("HEHEHE");
+                    Vector2 currentPos = new Vector2(rb.position.x, rb.position.y); // Convert to Vector2
+                    Vector2 waypointPos = path.vectorPath[currentWaypoint];
+
+                    // Calculate the direction in the x-axis only
+                    float directionX = waypointPos.x - currentPos.x;
+                    Vector2 directionToWaypoint = new Vector2(directionX, 0).normalized;
+
+                    rb.AddForce(directionToWaypoint * stuckForce);
+                }
+                stuckTimer = 0; // Reset the timer
+            }
+
         }
     }
 
