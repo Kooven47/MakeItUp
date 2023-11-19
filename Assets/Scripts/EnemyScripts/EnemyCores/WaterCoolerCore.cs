@@ -19,6 +19,19 @@ public class WaterCoolerCore : EnemyCore
         _waterBeam.SetActive(false);
     }
 
+    public override void Interrupt()
+    {
+        base.Interrupt();
+        if (_attackWindUp != null)
+        {
+            StopCoroutine(_attackWindUp);
+            _attackWindUp = null;
+        }
+
+        _waterBeamAim.SetActive(false);
+        _waterBeam.SetActive(false);
+    }
+
     protected override IEnumerator ChargeTimers(Vector2 chargeTime, bool isWindUp)
     {
         

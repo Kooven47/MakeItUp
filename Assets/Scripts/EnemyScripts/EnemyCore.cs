@@ -167,7 +167,7 @@ public class EnemyCore : MonoBehaviour
         }
     }
 
-    public void Interrupt()
+    public virtual void Interrupt()
     {
         Recovery();
     }
