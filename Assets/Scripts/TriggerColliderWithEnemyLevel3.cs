@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TriggerColliderWithEnemy : EnclosureCollision
+public class TriggerColliderWithEnemyLevel3 : EnclosureCollision
 {
     [SerializeField] private bool _spawnEnemies = false;
     [SerializeField] List<Transform> enemyLocations;
@@ -18,15 +18,20 @@ public class TriggerColliderWithEnemy : EnclosureCollision
     {
         if (other.CompareTag("Player"))
         {
-            if (EndCurrentObjective)
+            if (EndCurrentObjective && !_collidedBefore)
             {
-                objectiveManager.currentObjective.OnComplete();
+                if (!ObjectiveManagerLevel3.activeObjective)
+                {
+                    objectiveManager.NextObjective();
+                }
+                else
+                {
+                    objectiveManager.currentObjective.OnComplete();
+                }
             }
-            // ObjectiveManagerLevel3.OnUpdateObjective();
             
             if (_spawnEnemies && !_collidedBefore)
             {
-                ObjectiveManagerLevel3.OnUpdateObjective();
                 for (int i = 0; i < enemyLocations.Count; i++)
                 {
                     if (enemyLocations[i] != null)

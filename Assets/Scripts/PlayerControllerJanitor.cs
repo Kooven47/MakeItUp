@@ -136,7 +136,7 @@ public class PlayerControllerJanitor : MonoBehaviour
             }
             isGrounded = true;
             timeInAir = 0f;
-            if (Math.Abs(horizontal) > 0f)
+            if (Math.Abs(horizontal) > 0f && Math.Abs(rb.velocity.x) > 0f && Time.timeScale != 0f)
             {
                 // walkingSound.enabled = speed == normalSpeed;
                 // sprintingSound.enabled = speed == sprintingSpeed;

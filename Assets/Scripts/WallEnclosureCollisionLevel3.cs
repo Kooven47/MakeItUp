@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WallEnclosureCollision : EnclosureCollision
+public class WallEnclosureCollisionLevel3 : EnclosureCollision
 {
     [SerializeField] private GameObject Enclosure;
     [SerializeField] private bool isHidden = true;
@@ -40,7 +40,7 @@ public class WallEnclosureCollision : EnclosureCollision
                 {
                     objectiveManagerLevel3.currentObjective.OnComplete();
                 }
-                ObjectiveManagerLevel3.OnUpdateObjective();
+                // ObjectiveManagerLevel3.OnUpdateObjective();
                 //SetCheckPoint();
             }
             
