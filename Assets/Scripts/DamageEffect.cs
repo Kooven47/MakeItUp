@@ -68,6 +68,7 @@ public class DamageEffect : MonoBehaviour
 
     private IEnumerator HitStop(float timer)
     {
+        if (PlayerStats.playerIsDead) yield break;
         Time.timeScale = 0.1f;
         yield return new WaitForSecondsRealtime(timer);
         Time.timeScale = 1f;

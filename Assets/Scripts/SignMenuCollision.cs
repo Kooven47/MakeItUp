@@ -17,13 +17,6 @@ public class SignMenuCollision : EnclosureCollision
         signMenu.SetActive(false);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-
-    }
-
     public void PauseGame()
     {
         isMenuActive = true;

@@ -18,11 +18,12 @@ public class GameOverMenu : MonoBehaviour
 
     // void Update()
     // {
-    //     if (PlayerStats.playerIsDead) GameOver();
+        // if (PlayerStats.playerIsDead) GameOver();
     // }
 
     public void GameOver()
     {
+        PlayerStats.playerIsDead = true;
         gameOverMenu.SetActive(true);
         isMenuActive = true;
         Time.timeScale = 0;
@@ -40,6 +41,7 @@ public class GameOverMenu : MonoBehaviour
 
     public void RestartLevel()
     {
+        PlayerStats.playerIsDead = false;
         gameOverMenu.SetActive(false);
         Time.timeScale = 1;
         cleanUp?.Invoke();

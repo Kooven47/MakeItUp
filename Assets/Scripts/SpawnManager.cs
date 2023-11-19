@@ -46,13 +46,7 @@ public class SpawnManager : MonoBehaviour
 
         while (curTime <= totalSpawnTime)
         {
-            foreach (Transform spawnPoint in spawnPointObject) 
-            {
-                instantiatedEnemy = Instantiate(enemyPrefabs[prefabNumber], spawnPoint.position, spawnPoint.rotation);
-                instantiatedEnemy.transform.SetParent(enemiesObject);
-
-                PlayerControllerJanitor.enemyAIList = FindObjectsOfType<EnemyAI>();
-            }
+            SpawnEnemy(spawnPointObject, prefabNumber);
 
             yield return new WaitForSeconds(timeBetweenSpawns);
             curTime += timeBetweenSpawns;
