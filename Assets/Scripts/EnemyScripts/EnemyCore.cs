@@ -12,6 +12,8 @@ public class EnemyCore : MonoBehaviour
     [SerializeField] protected Collider2D _hurtBox;
     [SerializeField] protected EnemyAbility[] _enemySkills = new EnemyAbility[2];
     [SerializeField] protected AnimatorOverrideController _animOverride;
+    [SerializeField] protected Transform _parentTransform;
+    [SerializeField] protected float _angleOffset = -90f;
     protected const string ATTACK ="Attack", RECOVERY = "Recovery";
     protected Coroutine _idleTimer;
 
@@ -21,7 +23,7 @@ public class EnemyCore : MonoBehaviour
 
     protected int _attackIndex = -1;
 
-    [SerializeField]protected Transform _target;
+    protected Transform _target;
 
     public Action<bool> StartArmor;
 
@@ -35,6 +37,29 @@ public class EnemyCore : MonoBehaviour
         _anim.runtimeAnimatorController = _animOverride;
         _target = GameObject.Find("Janitor").transform;
         _hurtBox = transform.GetChild(0).GetComponent<Collider2D>();
+        _parentTransform = transform.parent;
+    }
+
+    public Quaternion AnglefromVector(Vector3 dir)
+    {
+        // dir = dir.normalized;
+        float n = Mathf.Atan2(dir.y,dir.x) * Mathf.Rad2Deg - _angleOffset;
+        Quaternion q = Quaternion.AngleAxis(n,Vector3.forward);
+
+        
+        // if( _parentTransform.localScale.x > 0f)
+        // {
+        //     n += _angleOffset;//Obtained by testing
+        // }
+        // else
+        // {
+        //     n += -75;//Obtained by testing
+        // }
+            
+
+        Debug.Log("Measured degree is "+n);
+        
+        return q;
     }
 
     protected bool InDistance(Vector2 range)
@@ -111,6 +136,11 @@ public class EnemyCore : MonoBehaviour
             _idleTimer = StartCoroutine(IdleTimer(_enemySkills[_attackIndex].idleTime));
         }
         _attackIndex = -1;
+    }
+
+    public Vector3 Direction()
+    {
+        return (_target.position - transform.position).normalized;
     }
 
     protected virtual void SelectAttack()
