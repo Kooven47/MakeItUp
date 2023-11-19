@@ -15,7 +15,7 @@ public class EnemyInterrupt : InterruptSystem
         Debug.Log("Calling child start");
         _enemyStats = GetComponent<EnemyStats>();
         _enemyCore = transform.GetChild(0).GetComponent<EnemyCore>();
-        _enemyCore.StartArmor = SuperArmor;
+        _enemyCore.StartArmor += SuperArmor;
     }
 
     protected override IEnumerator StaggerTime(float staggerTime)

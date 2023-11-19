@@ -339,6 +339,7 @@ public class EnemyAI : MonoBehaviour
 
     private void IsAttacking(bool isAttacking)
     {
+        Debug.Log("Calling isAttacking");
         _canFlip = !isAttacking;
         _canMove = !isAttacking;
         if (isAttacking)

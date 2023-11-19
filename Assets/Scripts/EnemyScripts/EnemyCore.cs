@@ -8,18 +8,20 @@ public class EnemyCore : MonoBehaviour
     [SerializeField] private bool _isMelee = true;
     [SerializeField] protected Vector2 _projectileRange = new Vector2(3f,2f);
     [SerializeField] protected Vector2 _meleeRange = new Vector2(3f,2f);
-    [SerializeField] ContactFilter2D _hurtLayers;
+    [SerializeField] protected ContactFilter2D _hurtLayers;
     [SerializeField] protected Collider2D _hurtBox;
     [SerializeField] protected EnemyAbility[] _enemySkills = new EnemyAbility[2];
     [SerializeField] protected AnimatorOverrideController _animOverride;
     [SerializeField] protected Transform _parentTransform;
     [SerializeField] protected float _angleOffset = -90f;
-    protected const string ATTACK ="Attack", RECOVERY = "Recovery";
-    protected Coroutine _idleTimer;
+    protected const string ATTACK ="Attack", RECOVERY = "Recovery",ATTACKCHARGE = "AttackCharge", ATTACKRELEASE ="AttackRelease";
+    protected Coroutine _idleTimer, _attackWindUp;
 
     protected Animator _anim;
 
     protected bool _canAttack = false;
+
+    protected bool _inAttack = false;// Used during charge attacks
 
     protected int _attackIndex = -1;
 
@@ -36,7 +38,8 @@ public class EnemyCore : MonoBehaviour
         _anim = GetComponent<Animator>();
         _anim.runtimeAnimatorController = _animOverride;
         _target = GameObject.Find("Janitor").transform;
-        _hurtBox = transform.GetChild(0).GetComponent<Collider2D>();
+        if (_hurtBox == null)
+            _hurtBox = transform.GetChild(0).GetComponent<Collider2D>();
         _parentTransform = transform.parent;
     }
 
@@ -178,11 +181,42 @@ public class EnemyCore : MonoBehaviour
         _anim.Play(ATTACK);
     }
 
+    protected void ChargingAttacks(float windUpTime, float attackDuration)
+    {
+        StartArmor?.Invoke(true);
+        _animOverride[ATTACKCHARGE] = _enemySkills[_attackIndex].animations[0];
+        _animOverride[ATTACKRELEASE] = _enemySkills[_attackIndex].animations[1];
+
+        _anim.Play(ATTACKCHARGE);
+
+        _attackWindUp = StartCoroutine(ChargeTimers(new Vector2(windUpTime,attackDuration), true));
+    }
+
     protected virtual IEnumerator IdleTimer(float idleTime)
     {
         yield return new WaitForSeconds(idleTime);
         _canAttack = true;
         _idleTimer = null;
+    }
+
+    protected virtual IEnumerator ChargeTimers(Vector2 chargeTime, bool isWindUp)
+    {
+        
+        if (isWindUp)
+        {
+            yield return new WaitForSeconds(chargeTime.x);
+            _anim.SetTrigger("release");
+            _attackWindUp = StartCoroutine(ChargeTimers(chargeTime,false));
+        }
+        else
+        {
+            if (chargeTime.y > 0f)
+                yield return new WaitForSeconds(chargeTime.y);
+            else
+                yield return null;
+            _anim.SetTrigger("endAttack");
+            _attackWindUp = null;
+        }
     }
 
     void Update()
