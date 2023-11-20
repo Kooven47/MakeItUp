@@ -199,7 +199,7 @@ public class PlayerControllerJanitor : MonoBehaviour
         }
         
         // One way platforms
-        if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow) && IsOnOneWayPlatform())
+        if ((Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow)) && IsOnOneWayPlatform())
         {
             StartCoroutine(DisablePlatformCollision());
             PlaySoundEffect(DROP);

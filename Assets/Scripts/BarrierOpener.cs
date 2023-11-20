@@ -9,12 +9,11 @@ public class BarrierOpener : MonoBehaviour
     {
         Enclosure.SetActive(true);
     }
-        private void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
         {
             Enclosure.SetActive(false);
         }
     }
-
 }
