@@ -37,29 +37,32 @@ public class WaterCoolerCore : EnemyCore
         
         if (isWindUp)
         {
-            float aimTime = chargeTime.x * 0.8f;
-            float finalTime = 1 - aimTime;
+            float aimTime = chargeTime.x * 0.7f;
+            float finalTime = chargeTime.x - aimTime;
+            Debug.Log("Final time is "+finalTime);
             _waterBeamAim.SetActive(true);
+            _waterBeamAim.GetComponent<SpriteRenderer>().color = Color.white;
             while (aimTime > 0f)
             {
                 yield return new WaitForSeconds(Time.deltaTime);
                 aimTime -= Time.deltaTime;
                 _waterBeamAim.transform.rotation = Quaternion.Slerp(_waterBeamAim.transform.rotation,AnglefromVector(_target.position - _waterBeamAim.transform.position),Time.deltaTime * _beamSpeed);
             }
-            _waterBeamAim.SetActive(false);
-            _waterBeam.SetActive(true);
-            _waterBeam.transform.rotation = _waterBeamAim.transform.rotation;
+
+            _waterBeamAim.GetComponent<SpriteRenderer>().color = Color.red;
             while(finalTime > 0f)
             {
                 yield return new WaitForSeconds(Time.deltaTime);
                 finalTime -= Time.deltaTime;
             }
-            
             _anim.SetTrigger("release");
             _attackWindUp = StartCoroutine(ChargeTimers(chargeTime,false));
         }
         else
         {
+            _waterBeamAim.SetActive(false);
+            _waterBeam.SetActive(true);
+            _waterBeam.transform.rotation = _waterBeamAim.transform.rotation;
             yield return new WaitForSeconds(chargeTime.y);
             _waterBeam.SetActive(false);
             _anim.SetTrigger("endAttack");
@@ -135,7 +138,7 @@ public class WaterCoolerCore : EnemyCore
             SelectAttack();
             if (_attackIndex != -1)
             {
-                ChargingAttacks(4f,3f);
+                ChargingAttacks(2f,4f);
             }
         }
     }
