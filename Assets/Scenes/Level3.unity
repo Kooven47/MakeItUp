@@ -63981,6 +63981,7 @@ MonoBehaviour:
   coyoteTime: 0.2
   jumpBufferTime: 0.4
   airDashTime: 0.25
+  canAirDash: 1
   maxAirJumpCount: 1
   rb: {fileID: 974544566}
   groundCheck: {fileID: 458635179}

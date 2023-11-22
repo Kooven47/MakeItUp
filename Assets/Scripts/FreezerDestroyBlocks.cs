@@ -9,7 +9,7 @@ public class FreezerDestroyBlocks : MonoBehaviour
         {
             var block = other.gameObject;
             block.SetActive(false);
-            StartCoroutine(SlowFreezerDown(0.5f, 0.25f));
+            StartCoroutine(SlowFreezerDown(0.2f, 0.5f));
         }
     }
 

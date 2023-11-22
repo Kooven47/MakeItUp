@@ -2618,7 +2618,8 @@ MonoBehaviour:
   coyoteTime: 0.2
   jumpBufferTime: 0.4
   airDashTime: 0.25
-  maxAirJumpCount: 1
+  canAirDash: 0
+  maxAirJumpCount: 0
   rb: {fileID: 159826988}
   groundCheck: {fileID: 421689561}
   groundLayer:
@@ -4290,7 +4291,7 @@ MonoBehaviour:
   m_Follow: {fileID: 185689917}
   m_Lens:
     FieldOfView: 60
-    OrthographicSize: 3.45
+    OrthographicSize: 4.9
     NearClipPlane: 0.3
     FarClipPlane: 1000
     Dutch: 0
@@ -4336,8 +4337,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BoundingShape2D: {fileID: 427288590}
-  m_Damping: 0
-  m_MaxWindowSize: 0
+  m_Damping: 0.5
+  m_MaxWindowSize: -1
 --- !u!114 &467581096
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23776,7 +23777,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 3.45
+  orthographic size: 4.9
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -23801,7 +23802,7 @@ Transform:
   m_GameObject: {fileID: 850116248}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -14.360428, y: 0.58010805, z: -10.036367}
+  m_LocalPosition: {x: -14.360428, y: 2.030108, z: -10.036367}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
