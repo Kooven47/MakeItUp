@@ -54,6 +54,7 @@ public class PlayerControllerJanitor : MonoBehaviour
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
+    [SerializeField] private LayerMask obstacleLayer;
     [SerializeField] private LayerMask platformLayer;
     [SerializeField] private Transform wallCheck;
     [SerializeField] private LayerMask wallLayer;
@@ -241,7 +242,7 @@ public class PlayerControllerJanitor : MonoBehaviour
 
     private bool IsGrounded()
     {
-        return Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
+        return Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer | obstacleLayer);
     }
 
     private bool IsOnOneWayPlatform()

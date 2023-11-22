@@ -9,6 +9,7 @@ TagManager:
   - Projectile
   - Ground
   - AlternateTarget
+  - Obstacle
   layers:
   - Default
   - TransparentFX
@@ -24,7 +25,7 @@ TagManager:
   - Projectile
   - Barriers
   - FlyingEnemy
-  - 
+  - Obstacles
   - 
   - 
   - 

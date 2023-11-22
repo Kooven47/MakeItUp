@@ -43,8 +43,8 @@ public class TriggerColliderWithEnemyLevel2 : EnclosureCollision
 
                 SetCheckPoint();
 
-                _collidedBefore = true;
             }
+            _collidedBefore = true;
             TriggerColliderWithEnemyLevel2Modified.isActive = true;
         }
     }

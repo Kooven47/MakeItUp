@@ -42,8 +42,9 @@ public class TriggerColliderWithEnemyLevel3 : EnclosureCollision
 
                 SetCheckPoint();
 
-                _collidedBefore = true;
             }
+            _collidedBefore = true;
+
         }
     }
 }
