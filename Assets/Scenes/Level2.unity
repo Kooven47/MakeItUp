@@ -4625,7 +4625,7 @@ Transform:
   m_GameObject: {fileID: 159826987}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 122.1, y: 64.7, z: 0}
+  m_LocalPosition: {x: 20.1, y: 129.8, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -5252,7 +5252,6 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   _animOverride: {fileID: 0}
-  _parentTransform: {fileID: 0}
   _angleOffset: -90
 --- !u!1 &286694005
 GameObject:
@@ -6682,7 +6681,7 @@ Transform:
   m_GameObject: {fileID: 467581092}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 73.96958, y: 65.224106, z: -10.036367}
+  m_LocalPosition: {x: -28.03042, y: 130.32411, z: -10.036367}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -44766,7 +44765,7 @@ Transform:
   - {fileID: 762555171}
   - {fileID: 1279299180}
   - {fileID: 1601143944}
-  - {fileID: 897720026}
+  - {fileID: 926027387}
   - {fileID: 2103678512}
   - {fileID: 424762813}
   m_Father: {fileID: 1187996051}
@@ -44860,7 +44859,7 @@ Transform:
   m_GameObject: {fileID: 850116248}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 33.420456, y: 84.73013, z: -10.036367}
+  m_LocalPosition: {x: -28.03035, y: 116.6301, z: -10.036367}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -45305,7 +45304,6 @@ MonoBehaviour:
   - {fileID: 4503141391237469523, guid: 2974d5a687e836448babe573992af02f, type: 3}
   enemiesObject: {fileID: 175763758}
 --- !u!1 &897720025
---- !u!1 &926027386
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -45313,35 +45311,16 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 897720026}
+  - component: {fileID: 926027387}
   - component: {fileID: 897720028}
   - component: {fileID: 897720027}
   m_Layer: 0
   m_Name: ShortcutZone1
-  - component: {fileID: 926027387}
-  m_Layer: 0
-  m_Name: FreezerMidwayTarget
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &897720026
---- !u!4 &926027387
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 897720025}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 844879401}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &897720027
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -45401,14 +45380,20 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 6, y: 7}
   m_EdgeRadius: 0
-  m_GameObject: {fileID: 926027386}
+--- !u!4 &926027387
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 897720025}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -16.87, y: -4.21, z: -0.07407904}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1779054684}
+  m_Father: {fileID: 844879401}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &947046537
 GameObject:
@@ -50642,8 +50627,7 @@ Transform:
   m_LocalPosition: {x: 33.615273, y: 99.8086, z: -2.842996}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 926027387}
+  m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1779054685
@@ -61054,3 +61038,4 @@ SceneRoots:
   - {fileID: 428268571}
   - {fileID: 1284796639}
   - {fileID: 2138588546}
+  - {fileID: 37070814}
