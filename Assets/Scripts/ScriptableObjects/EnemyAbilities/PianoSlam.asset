@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2de1d81a5b6c432449110860e48a0570, type: 3}
+  m_Name: PianoSlam
+  m_EditorClassIdentifier: 
+  damage: 20
+  animations:
+  - {fileID: 7400000, guid: d93e370126bbe55479f89dea2a2cc96a, type: 2}
+  - {fileID: 7400000, guid: 9c05345c824797945afacc4fe3752ed7, type: 2}
+  force: 0
+  attribute: 1
+  projectileAnims:
+  - {fileID: 7400000, guid: ee85aede490b15d44823d12cb47095a0, type: 2}
+  - {fileID: 7400000, guid: 24e81b41b6cbd7b4983667063385472b, type: 2}
+  - {fileID: 7400000, guid: a37aa00ff5a0631479ab6c5bd65cdf2d, type: 2}
+  idleTime: 4

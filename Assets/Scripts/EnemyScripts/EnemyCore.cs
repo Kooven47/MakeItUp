@@ -12,7 +12,6 @@ public class EnemyCore : MonoBehaviour
     [SerializeField] protected Collider2D _hurtBox;
     [SerializeField] protected EnemyAbility[] _enemySkills = new EnemyAbility[2];
     [SerializeField] protected AnimatorOverrideController _animOverride;
-    [SerializeField] protected Transform _parentTransform;
     [SerializeField] protected float _angleOffset = -90f;
     protected const string ATTACK ="Attack", RECOVERY = "Recovery",ATTACKCHARGE = "AttackCharge", ATTACKRELEASE ="AttackRelease";
     protected Coroutine _idleTimer, _attackWindUp;
@@ -40,7 +39,6 @@ public class EnemyCore : MonoBehaviour
         _target = GameObject.Find("Janitor").transform;
         if (_hurtBox == null)
             _hurtBox = transform.GetChild(0).GetComponent<Collider2D>();
-        _parentTransform = transform.parent;
     }
 
     public Quaternion AnglefromVector(Vector3 dir)
@@ -48,16 +46,6 @@ public class EnemyCore : MonoBehaviour
         // dir = dir.normalized;
         float n = Mathf.Atan2(dir.y,dir.x) * Mathf.Rad2Deg - _angleOffset;
         Quaternion q = Quaternion.AngleAxis(n,Vector3.forward);
-
-        
-        // if( _parentTransform.localScale.x > 0f)
-        // {
-        //     n += _angleOffset;//Obtained by testing
-        // }
-        // else
-        // {
-        //     n += -75;//Obtained by testing
-        // }
             
 
         Debug.Log("Measured degree is "+n);
@@ -123,7 +111,7 @@ public class EnemyCore : MonoBehaviour
         }
     }
 
-    protected void Recovery()
+    protected virtual void Recovery()
     {
         _canAttack = false;
         StartArmor?.Invoke(false);
