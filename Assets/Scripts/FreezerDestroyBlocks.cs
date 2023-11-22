@@ -1,18 +1,24 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Assertions.Must;
-using UnityEngine.Tilemaps;
 
 public class FreezerDestroyBlocks : MonoBehaviour
 {
-    private void OnCollisionEnter2D(Collision2D other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Obstacle"))
         {
-            var block = other.collider.gameObject;
+            var block = other.gameObject;
             block.SetActive(false);
+            StartCoroutine(SlowFreezerDown(0.5f, 0.25f));
         }
+    }
+
+    private IEnumerator SlowFreezerDown(float time, float ratio)
+    {
+        var freezerStats = this.GetComponent<EnemyAI>();
+        freezerStats.speed *= ratio;
+        yield return new WaitForSeconds(time);
+        freezerStats.speed /= ratio;
+
     }
 }
