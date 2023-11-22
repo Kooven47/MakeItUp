@@ -8213,7 +8213,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BoundingShape2D: {fileID: 427288586}
-  m_Damping: 0
+  m_Damping: 0.5
   m_MaxWindowSize: -1
 --- !u!114 &467581096
 MonoBehaviour:
@@ -8227,6 +8227,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69a25dbaa97dcc345be329296ff9a4b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cameraUpdateTime: 0.1
 --- !u!1 &473003587
 GameObject:
   m_ObjectHideFlags: 0

@@ -14,7 +14,7 @@ public class ScrollWheelZoom : MonoBehaviour
     public static float maxOrthoSize = 4.9f;
     private float zoomSpeed = 1.0f;
     private bool updating = false;
-    private float cameraUpdateTime = 0.5f;
+    [SerializeField] private float cameraUpdateTime = 0.5f;
 
     // Start is called before the first frame update
     void Start()

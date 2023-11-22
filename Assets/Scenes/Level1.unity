@@ -2624,6 +2624,9 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
+  obstacleLayer:
+    serializedVersion: 2
+    m_Bits: 0
   platformLayer:
     serializedVersion: 2
     m_Bits: 512
@@ -4347,6 +4350,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69a25dbaa97dcc345be329296ff9a4b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cameraUpdateTime: 0.1
 --- !u!1 &473003587
 GameObject:
   m_ObjectHideFlags: 0
@@ -5205,11 +5209,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Good Job!\n\n<u>Advanced Movement Controls</u>:\n\u2022 To perform a dash,
-    double tap either <b>a</b> or <b>d</b>\n\u2022 Pressing <b>Spacebar</b> after
-    jumping on a wall will perform a wall jump\n\u2022 You can perform a wall slide
-    by holding either <b>A</b> or <b>D</b> against a wall\n\n<u>Objective</u>:\nContinue
-    East, following the path"
+  m_text: "Good Job!\n\n<u>Advanced Movement Controls</u>:\n\u2022 To perform a grounded
+    dash, tap <b>LShift</b>\n\u2022 You can perform a wall slide by holding either
+    <b>A</b> or <b>D</b> against a wall\n\u2022 Pressing <b>Spacebar</b> after jumping
+    on a wall will perform a wall jump\n\n<u>Objective</u>:\nContinue East, following
+    the path"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e12e091cd76c0414aa2c75f477542fab, type: 2}
   m_sharedMaterial: {fileID: -1670773803869195636, guid: e12e091cd76c0414aa2c75f477542fab, type: 2}
@@ -34046,7 +34050,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 20395f7c789558349b03831d55ad2c7e, type: 2}
   - {fileID: 0}
   _animOverride: {fileID: 0}
-  _target: {fileID: 0}
+  _angleOffset: -90
 --- !u!4 &7245647824116209566
 Transform:
   m_ObjectHideFlags: 0
