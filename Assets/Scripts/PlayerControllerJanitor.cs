@@ -46,6 +46,7 @@ public class PlayerControllerJanitor : MonoBehaviour
     private int maxAirDashes = 1;
     private int airDashesRemaining;
     private bool isDashing;
+    [SerializeField] private bool canAirDash;
 
     private int jumpCount;
     [SerializeField] private int maxAirJumpCount = 1;
@@ -354,7 +355,7 @@ public class PlayerControllerJanitor : MonoBehaviour
         }
         else
         {
-            if (airDashesRemaining > 0 && !isDashing && Time.timeScale != 0 && Input.GetKeyDown(KeyCode.LeftShift))
+            if (canAirDash && airDashesRemaining > 0 && !isDashing && Time.timeScale != 0 && Input.GetKeyDown(KeyCode.LeftShift))
             {
                 airDashesRemaining--;
                 isDashing = true;

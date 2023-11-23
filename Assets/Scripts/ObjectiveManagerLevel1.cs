@@ -35,9 +35,9 @@ public class ObjectiveManagerLevel1 : MonoBehaviour,ISaveGame
         if (_barriers != null) 
         { 
             for (int i = 0; i < _barriers.transform.childCount; i ++)
-            {
+            {                
+                if ((i + 1) < _objectivesComplete) continue;
                 GameObject wallGameObject = _barriers.transform.GetChild(i).gameObject;
-                if (i+1 < _objectivesComplete) continue;
                 wallGameObject.SetActive(true);
                 barrierList.Enqueue(wallGameObject);
             }
