@@ -6,6 +6,7 @@ using System;
 public class PianoCore : EnemyCore
 {
     [SerializeField] private GameObject _dropTelegraph;
+    [SerializeField] private float _trackSpeed = 3f;
     private Rigidbody2D _rigid;
     private Transform _parent;
     private bool _isAiming = false,_isFalling = false;
@@ -87,7 +88,7 @@ public class PianoCore : EnemyCore
         if (_isAiming)
         {
             // Debug.Log("target's x position is ");
-            _rigid.position = new Vector2(_target.position.x,_parent.position.y);
+            _rigid.position = new Vector2(_rigid.position.x + (_target.position.x-_rigid.position.x)*Time.deltaTime *_trackSpeed,_parent.position.y);
         }
 
         if (_isFalling && _rigid.velocity.y <= 0f)

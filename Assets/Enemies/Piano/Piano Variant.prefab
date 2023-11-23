@@ -232,6 +232,7 @@ MonoBehaviour:
   _animOverride: {fileID: 22100000, guid: 5cf7b63d388f9e6468e69146ff35af9a, type: 2}
   _angleOffset: -90
   _dropTelegraph: {fileID: 730355054227325995}
+  _trackSpeed: 5
 --- !u!61 &1133279246227380224 stripped
 BoxCollider2D:
   m_CorrespondingSourceObject: {fileID: 4040517162892676818, guid: 52ef50d26a617054f942d9f279d53e36, type: 3}
