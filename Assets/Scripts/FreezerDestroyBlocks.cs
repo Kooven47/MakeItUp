@@ -19,6 +19,5 @@ public class FreezerDestroyBlocks : MonoBehaviour
         freezerStats.speed *= ratio;
         yield return new WaitForSeconds(time);
         freezerStats.speed /= ratio;
-
     }
 }
