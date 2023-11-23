@@ -5044,7 +5044,7 @@ MonoBehaviour:
     m_Bits: 1024
   obstacleWallLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 32768
   _anim: {fileID: 297442758}
   _soundEffects:
   - {fileID: 8300000, guid: fe0b1f9aeb45b41b089175aeeabd5d95, type: 3}
@@ -6710,18 +6710,30 @@ CompositeCollider2D:
   - m_Collider: {fileID: 298782430}
     m_ColliderPaths:
     - - X: 370000000
-        Y: 820000000
+        Y: 830000000
+      - X: 360000000
+        Y: 830000000
       - X: 360000000
         Y: 820000000
+      - X: 370000000
+        Y: 820000000
+    - - X: 370000000
+        Y: 810000000
+      - X: 360000000
+        Y: 810000000
       - X: 360000000
         Y: 780000000
       - X: 370000000
         Y: 780000000
   m_CompositePaths:
     m_Paths:
+    - - {x: 36.999973, y: 82}
+      - {x: 36.999973, y: 83}
+      - {x: 36, y: 82.99997}
+      - {x: 36.00003, y: 82}
     - - {x: 36.999973, y: 78}
-      - {x: 36.999973, y: 82}
-      - {x: 36, y: 81.99997}
+      - {x: 36.999973, y: 81}
+      - {x: 36, y: 80.99997}
       - {x: 36.00003, y: 78}
   m_VertexDistance: 0.0005
   m_OffsetDistance: 0.00005
@@ -6878,7 +6890,7 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
-  - first: {x: 36, y: 81, z: 0}
+  - first: {x: 36, y: 82, z: 0}
     second:
       serializedVersion: 2
       m_TileIndex: 2
@@ -8995,7 +9007,7 @@ MonoBehaviour:
   m_Follow: {fileID: 185689917}
   m_Lens:
     FieldOfView: 60
-    OrthographicSize: 3.4
+    OrthographicSize: 7.5
     NearClipPlane: 0.3
     FarClipPlane: 1000
     Dutch: 0
@@ -48770,7 +48782,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 3.4
+  orthographic size: 7.5
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -58294,18 +58306,30 @@ CompositeCollider2D:
   - m_Collider: {fileID: 1629989401}
     m_ColliderPaths:
     - - X: 520000000
-        Y: 650000000
+        Y: 660000000
+      - X: 510000000
+        Y: 660000000
       - X: 510000000
         Y: 650000000
+      - X: 520000000
+        Y: 650000000
+    - - X: 520000000
+        Y: 640000000
+      - X: 510000000
+        Y: 640000000
       - X: 510000000
         Y: 610000000
       - X: 520000000
         Y: 610000000
   m_CompositePaths:
     m_Paths:
+    - - {x: 51.999973, y: 65}
+      - {x: 51.999973, y: 66}
+      - {x: 51, y: 65.99997}
+      - {x: 51.00003, y: 65}
     - - {x: 51.999973, y: 61}
-      - {x: 51.999973, y: 65}
-      - {x: 51, y: 64.99997}
+      - {x: 51.999973, y: 64}
+      - {x: 51, y: 63.99997}
       - {x: 51.00003, y: 61}
   m_VertexDistance: 0.0005
   m_OffsetDistance: 0.00005
@@ -58462,7 +58486,7 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
-  - first: {x: 51, y: 64, z: 0}
+  - first: {x: 51, y: 65, z: 0}
     second:
       serializedVersion: 2
       m_TileIndex: 2
@@ -60849,18 +60873,30 @@ CompositeCollider2D:
   - m_Collider: {fileID: 1890976394}
     m_ColliderPaths:
     - - X: 490000000
-        Y: 990000000
+        Y: 1000000000
+      - X: 480000000
+        Y: 1000000000
       - X: 480000000
         Y: 990000000
+      - X: 490000000
+        Y: 990000000
+    - - X: 490000000
+        Y: 980000000
+      - X: 480000000
+        Y: 980000000
       - X: 480000000
         Y: 950000000
       - X: 490000000
         Y: 950000000
   m_CompositePaths:
     m_Paths:
+    - - {x: 48.999973, y: 99}
+      - {x: 48.999973, y: 100}
+      - {x: 48, y: 99.99997}
+      - {x: 48.00003, y: 99}
     - - {x: 48.999973, y: 95}
-      - {x: 48.999973, y: 99}
-      - {x: 48, y: 98.99997}
+      - {x: 48.999973, y: 98}
+      - {x: 48, y: 97.99997}
       - {x: 48.00003, y: 95}
   m_VertexDistance: 0.0005
   m_OffsetDistance: 0.00005
@@ -61017,7 +61053,7 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
-  - first: {x: 48, y: 98, z: 0}
+  - first: {x: 48, y: 99, z: 0}
     second:
       serializedVersion: 2
       m_TileIndex: 2
