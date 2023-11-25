@@ -233,6 +233,12 @@ MonoBehaviour:
   _angleOffset: -90
   _dropTelegraph: {fileID: 730355054227325995}
   _trackSpeed: 5
+  _crashDownMask:
+    serializedVersion: 2
+    m_Bits: 512
+  _defaultMask:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!61 &1133279246227380224 stripped
 BoxCollider2D:
   m_CorrespondingSourceObject: {fileID: 4040517162892676818, guid: 52ef50d26a617054f942d9f279d53e36, type: 3}

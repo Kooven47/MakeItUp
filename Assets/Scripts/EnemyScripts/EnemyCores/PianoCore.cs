@@ -7,9 +7,12 @@ public class PianoCore : EnemyCore
 {
     [SerializeField] private GameObject _dropTelegraph;
     [SerializeField] private float _trackSpeed = 3f;
+    [SerializeField] LayerMask _crashDownMask,_defaultMask;
     private Rigidbody2D _rigid;
     private Transform _parent;
     private bool _isAiming = false,_isFalling = false;
+
+    private float _minorOffsetTimer = 1f;
 
     private EnemyDamageContact _enemyDamageContact;
 
@@ -64,6 +67,7 @@ public class PianoCore : EnemyCore
     {
         _rigid.AddForce(new Vector2(0f,500f));
         _rigid.gravityScale = 0f;
+        _rigid.excludeLayers = _crashDownMask;
 
         yield return new WaitForSeconds(1f);
         _rigid.velocity = Vector2.zero;
@@ -81,6 +85,7 @@ public class PianoCore : EnemyCore
         _rigid.AddForce(new Vector2(0f,-500f));
         _isFalling = true;
         _enemyDamageContact.StartAttack();
+        _minorOffsetTimer = 1f;
     }
 
     void FixedUpdate()
@@ -91,11 +96,19 @@ public class PianoCore : EnemyCore
             _rigid.position = new Vector2(_rigid.position.x + (_target.position.x-_rigid.position.x)*Time.deltaTime *_trackSpeed,_parent.position.y);
         }
 
-        if (_isFalling && _rigid.velocity.y <= 0f)
+        if (_isFalling && _rigid.velocity.y <= 0f && _minorOffsetTimer <= 0f)
         {
             Debug.Log("Ended falling");
             _isFalling = false;
             _anim.SetTrigger("release");
+            _rigid.excludeLayers = _defaultMask;
+        }
+
+        if (_minorOffsetTimer != 0f)
+        {
+            _minorOffsetTimer -= Time.deltaTime;
+            if (_minorOffsetTimer <= 0f)
+                _minorOffsetTimer = 0f;
         }
     }
 
