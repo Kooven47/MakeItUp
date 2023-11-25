@@ -59,6 +59,7 @@ public class PlayerControllerJanitor : MonoBehaviour
     [SerializeField] private LayerMask platformLayer;
     [SerializeField] private Transform wallCheck;
     [SerializeField] private LayerMask wallLayer;
+    [SerializeField] private LayerMask obstacleWallLayer;
     [SerializeField] private Animator _anim;
     
     [Header("Sound Effects")]
@@ -253,7 +254,7 @@ public class PlayerControllerJanitor : MonoBehaviour
     
     private bool IsWalled()
     {
-        return Physics2D.OverlapCircle(wallCheck.position, 0.2f, wallLayer);
+        return Physics2D.OverlapCircle(wallCheck.position, 0.2f, wallLayer | obstacleWallLayer);
     }
 
     private void WallSlide()
