@@ -260,6 +260,7 @@ public class Objective4DefeatMiniBosses : Objective
 
     public SpawnManager spawnManager;
     private List<Transform> minibossSpawnLocations;
+    
     public override void OnStart()
     {
         spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
@@ -287,8 +288,8 @@ public class Objective4DefeatMiniBosses : Objective
         // Spawn 2nd round of minibosses
         if (killNum == 2)
         {
-            spawnManager.SpawnEnemy(minibossSpawnLocations[0], 0);
-            spawnManager.SpawnEnemy(minibossSpawnLocations[1], 1);
+            spawnManager.SpawnEnemy(minibossSpawnLocations[0], 8);
+            spawnManager.SpawnEnemy(minibossSpawnLocations[1], 9);
         }
         
         if ((killNum >= killObj) && (killObj != -1)) // Objective completed
@@ -329,6 +330,7 @@ public class Objective5DefeatBoss : Objective
 
     public int killNum;
     public int killObj;
+    
     public override void OnStart()
     {
         ObjectiveManagerLevel3.activeObjective = true;

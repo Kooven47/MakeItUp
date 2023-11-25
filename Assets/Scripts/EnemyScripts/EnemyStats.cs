@@ -6,7 +6,14 @@ using System;
 public class EnemyStats : Stats
 {
     public const int RESIST = -1, NEUTRAL = 0, WEAK = 1;
-    [SerializeField]EnumLib.DamageType _attribute = EnumLib.DamageType.Neutral;
+    [SerializeField] EnumLib.DamageType _attribute = EnumLib.DamageType.Neutral;
+
+    public EnumLib.DamageType Attribute
+    {
+        get => _attribute;
+        set => _attribute = value;
+    }
+
     private float _shieldHealth = 0f;
     public bool isShielded {get {return _isShielded;} private set {_isShielded = value;}}
 
