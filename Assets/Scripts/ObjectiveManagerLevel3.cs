@@ -17,6 +17,9 @@ public class ObjectiveManagerLevel3 : MonoBehaviour
     public TMP_Text objectiveText;
     [SerializeField] private GameObject _barriers;
     public static Queue<GameObject> barrierList;
+    [SerializeField] private List<Transform> minibossSpawnLocations1;
+    public static List<Transform> minibossSpawnLocations2;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -31,6 +34,8 @@ public class ObjectiveManagerLevel3 : MonoBehaviour
         objList.Enqueue(new Objective3GetToMiniBosses());
         objList.Enqueue(new Objective4DefeatMiniBosses());
         objList.Enqueue(new Objective5DefeatBoss());
+
+        minibossSpawnLocations2 = minibossSpawnLocations1;
         
         if (_barriers != null) 
         { 
@@ -41,9 +46,6 @@ public class ObjectiveManagerLevel3 : MonoBehaviour
                 barrierList.Enqueue(wallGameObject);
             }
         }
-        
-        // Just go to next objective immediately
-        // ObjectiveManagerLevel3.OnUpdateObjective();
     }
     
     public static void OnUpdateObjective()
@@ -255,8 +257,13 @@ public class Objective4DefeatMiniBosses : Objective
 
     public int killNum;
     public int killObj;
+
+    public SpawnManager spawnManager;
+    private List<Transform> minibossSpawnLocations;
     public override void OnStart()
     {
+        spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
+        minibossSpawnLocations = ObjectiveManagerLevel3.minibossSpawnLocations2;
         ObjectiveManagerLevel3.activeObjective = true;
         killNum = 0;
         killObj = 4;
@@ -276,9 +283,17 @@ public class Objective4DefeatMiniBosses : Objective
     {
         killNum++;
         Display();
+        
+        // Spawn 2nd round of minibosses
+        if (killNum == 2)
+        {
+            spawnManager.SpawnEnemy(minibossSpawnLocations[0], 0);
+            spawnManager.SpawnEnemy(minibossSpawnLocations[1], 1);
+        }
+        
         if ((killNum >= killObj) && (killObj != -1)) // Objective completed
         {
-            killNum = 0;
+            killNum = 0;    
             OnComplete();
         }
     }

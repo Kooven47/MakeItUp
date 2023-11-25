@@ -282,11 +282,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3762292207589212751, guid: 52ef50d26a617054f942d9f279d53e36, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 45.638004
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3762292207589212751, guid: 52ef50d26a617054f942d9f279d53e36, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 41.89
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3762292207589212751, guid: 52ef50d26a617054f942d9f279d53e36, type: 3}
       propertyPath: m_LocalPosition.z
@@ -394,7 +394,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 32f02afebaeccff4cb9b57196521c386, type: 2}
   - {fileID: 0}
   _animOverride: {fileID: 22100000, guid: da3002b405102c343913276302cfe8c2, type: 2}
-  _parentTransform: {fileID: 0}
   _angleOffset: 100
   _waterBeam: {fileID: 8293943053060091056}
   _waterBeamAim: {fileID: 4962944307883585375}

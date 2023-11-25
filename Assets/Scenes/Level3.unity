@@ -2866,37 +2866,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 35, y: 20}
   m_EdgeRadius: 0
---- !u!1 &131989261
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 131989262}
-  m_Layer: 0
-  m_Name: EnemyLocation1 (2)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &131989262
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 131989261}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 100.24, y: 74.79, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1674552590}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &143025563
 GameObject:
   m_ObjectHideFlags: 0
@@ -3125,7 +3094,7 @@ Transform:
   m_GameObject: {fileID: 168634041}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -9.135086, y: 43.030106, z: -10.036367}
+  m_LocalPosition: {x: 30.642677, y: 48.530106, z: -10.036367}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3266,7 +3235,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 3.9
+  orthographic size: 10.5
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -4008,6 +3977,37 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 1312866162907876713, guid: 6f7d061574aca564eb5b241bb97a1033, type: 3}
   m_PrefabInstance: {fileID: 251512897}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &256965979
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 256965980}
+  m_Layer: 0
+  m_Name: Miniboss1Location
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &256965980
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 256965979}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 91.9, y: 69.1, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1743178144}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &267640974
 GameObject:
   m_ObjectHideFlags: 0
@@ -63664,6 +63664,38 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!1 &970047206
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 970047207}
+  m_Layer: 0
+  m_Name: Miniboss2Location
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &970047207
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 970047206}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 981005868}
+  m_Father: {fileID: 1810720474}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &974544557
 GameObject:
   m_ObjectHideFlags: 0
@@ -63998,6 +64030,9 @@ MonoBehaviour:
   wallLayer:
     serializedVersion: 2
     m_Bits: 1024
+  obstacleWallLayer:
+    serializedVersion: 2
+    m_Bits: 0
   _anim: {fileID: 1279831561}
   _soundEffects:
   - {fileID: 8300000, guid: fe0b1f9aeb45b41b089175aeeabd5d95, type: 3}
@@ -64088,6 +64123,37 @@ Transform:
   - {fileID: 1970230809}
   - {fileID: 317186599}
   m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &981005867
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 981005868}
+  m_Layer: 0
+  m_Name: Miniboss2Location
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &981005868
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 981005867}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 86.5, y: 68.6, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 970047207}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1002913110
 GameObject:
@@ -65203,37 +65269,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Enclosure: {fileID: 49731457}
---- !u!1 &1227044591
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1227044592}
-  m_Layer: 0
-  m_Name: EnemyLocation1 (2)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1227044592
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1227044591}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 105.52, y: 75.02, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1353860079}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1279831560
 GameObject:
   m_ObjectHideFlags: 0
@@ -65677,7 +65712,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 569281874}
-  - {fileID: 1227044592}
   m_Father: {fileID: 1321952057}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1362153722
@@ -66052,6 +66086,8 @@ MonoBehaviour:
   totalSpawnTime: 30
   objectiveManagerLevel3: {fileID: 1810720475}
   enemyLocations:
+  - {fileID: 0}
+  - {fileID: 0}
   - {fileID: 2013853710}
   - {fileID: 2050712973}
 --- !u!1 &1542205842
@@ -66553,7 +66589,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1733484534}
-  - {fileID: 131989262}
   m_Father: {fileID: 1321952057}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1732954720
@@ -66589,6 +66624,7 @@ MonoBehaviour:
   - {fileID: 472122592458666930, guid: db306fa2c8303b846aac884a8cd19766, type: 3}
   - {fileID: 5281422339143581533, guid: 732ac9d8b1362044ea2fc49bc57603c0, type: 3}
   - {fileID: 8689150111416385762, guid: 0b29232a87de4c449bf8eaee7b3b24a1, type: 3}
+  - {fileID: 6475044959009426531, guid: be0c38daec9fa364090f6ad7871d8f3a, type: 3}
   enemiesObject: {fileID: 162310052}
 --- !u!4 &1732954722
 Transform:
@@ -66770,6 +66806,38 @@ RectTransform:
   m_AnchoredPosition: {x: -10, y: 29}
   m_SizeDelta: {x: 1200.4, y: 330}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &1743178143
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1743178144}
+  m_Layer: 0
+  m_Name: Miniboss1Location
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1743178144
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1743178143}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 256965980}
+  m_Father: {fileID: 1810720474}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1801118260
 GameObject:
   m_ObjectHideFlags: 0
@@ -66976,10 +67044,12 @@ Transform:
   m_GameObject: {fileID: 1810720472}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 35.88506, y: 3.0157144, z: -1.0629882}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1743178144}
+  - {fileID: 970047207}
   - {fileID: 913486915}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -66997,6 +67067,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectiveText: {fileID: 1737855189}
   _barriers: {fileID: 1913816025}
+  minibossSpawnLocations1:
+  - {fileID: 1743178144}
+  - {fileID: 970047207}
 --- !u!1 &1821712672
 GameObject:
   m_ObjectHideFlags: 0
@@ -73866,7 +73939,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2013853710}
   m_Layer: 0
-  m_Name: SpaghettiEnemyLocations
+  m_Name: WaterCoolerLocations
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -73899,7 +73972,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2050712973}
   m_Layer: 0
-  m_Name: DustBunnyEnemyLocations
+  m_Name: PianoLocations
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -74133,7 +74206,7 @@ MonoBehaviour:
   m_Follow: {fileID: 1970230809}
   m_Lens:
     FieldOfView: 60
-    OrthographicSize: 3.9
+    OrthographicSize: 10.5
     NearClipPlane: 0.3
     FarClipPlane: 1000
     Dutch: 0
