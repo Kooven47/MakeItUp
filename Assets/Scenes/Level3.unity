@@ -705,7 +705,7 @@ GameObject:
   - component: {fileID: 66012604}
   m_Layer: 10
   m_Name: WalljumpableWalls
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3094,7 +3094,7 @@ Transform:
   m_GameObject: {fileID: 168634041}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4.4017525, y: 77.63011, z: -10.036367}
+  m_LocalPosition: {x: -4.3843307, y: 77.63011, z: -10.036367}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -68271,7 +68271,7 @@ GameObject:
   - component: {fileID: 2004955441}
   m_Layer: 6
   m_Name: Terrain
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
