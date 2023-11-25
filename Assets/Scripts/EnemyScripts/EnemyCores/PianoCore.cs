@@ -7,7 +7,7 @@ public class PianoCore : EnemyCore
 {
     [SerializeField] private GameObject _dropTelegraph, _platformDetector;
     [SerializeField] private float _trackSpeed = 3f;
-    [SerializeField] LayerMask _crashDownMask,_defaultMask;
+    [SerializeField] LayerMask _crashDownMask;
     private Rigidbody2D _rigid;
     private Transform _parent;
     private bool _isAiming = false,_isFalling = false;
