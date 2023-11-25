@@ -5,7 +5,7 @@ using System;
 
 public class PianoCore : EnemyCore
 {
-    [SerializeField] private GameObject _dropTelegraph;
+    [SerializeField] private GameObject _dropTelegraph, _platformDetector;
     [SerializeField] private float _trackSpeed = 3f;
     [SerializeField] LayerMask _crashDownMask,_defaultMask;
     private Rigidbody2D _rigid;
@@ -15,6 +15,8 @@ public class PianoCore : EnemyCore
     private float _minorOffsetTimer = 1f;
 
     private EnemyDamageContact _enemyDamageContact;
+
+    List<Collider2D> _ignoredColliders = new List<Collider2D>();
 
     protected override void Start()
     {
@@ -53,6 +55,35 @@ public class PianoCore : EnemyCore
         base.Recovery();
     }
 
+    private void ReturnCollisions()
+    {
+        if (_ignoredColliders.Count > 0)
+        {
+            foreach(Collider2D col in _ignoredColliders)
+            {
+                Physics2D.IgnoreCollision(col,_hurtBox, false);
+            }
+        }
+    }
+
+    private void IsOnOneWayPlatform()
+    {
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(_platformDetector.transform.position, 0.2f, _crashDownMask);
+
+        if (colliders.Length <= 0)
+            return;
+
+        foreach(Collider2D col in colliders)
+        {
+            if (!Physics2D.GetIgnoreCollision(col,_hurtBox))
+            {
+                //Debug.Log("Colliding with and ignoring "+col.name);
+                Physics2D.IgnoreCollision(col,_hurtBox, true);
+                _ignoredColliders.Add(col);
+            }
+        }
+    }
+
     protected override void SelectAttack()
     {
         if (InDistance(_meleeRange))
@@ -67,7 +98,7 @@ public class PianoCore : EnemyCore
     {
         _rigid.AddForce(new Vector2(0f,500f));
         _rigid.gravityScale = 0f;
-        _rigid.excludeLayers = _crashDownMask;
+        // _rigid.excludeLayers = _crashDownMask;
 
         yield return new WaitForSeconds(1f);
         _rigid.velocity = Vector2.zero;
@@ -85,7 +116,7 @@ public class PianoCore : EnemyCore
         _rigid.AddForce(new Vector2(0f,-500f));
         _isFalling = true;
         _enemyDamageContact.StartAttack();
-        _minorOffsetTimer = 1f;
+        _minorOffsetTimer = 0.5f;
     }
 
     void FixedUpdate()
@@ -96,12 +127,18 @@ public class PianoCore : EnemyCore
             _rigid.position = new Vector2(_rigid.position.x + (_target.position.x-_rigid.position.x)*Time.deltaTime *_trackSpeed,_parent.position.y);
         }
 
-        if (_isFalling && _rigid.velocity.y <= 0f && _minorOffsetTimer <= 0f)
+        if (_isFalling)
         {
-            Debug.Log("Ended falling");
-            _isFalling = false;
-            _anim.SetTrigger("release");
-            _rigid.excludeLayers = _defaultMask;
+            if ( _rigid.velocity.y <= 0f && _minorOffsetTimer <= 0f)
+            {    
+                Debug.Log("Ended falling");
+                _isFalling = false;
+                _anim.SetTrigger("release");
+                ReturnCollisions();
+                // _rigid.excludeLayers = _defaultMask;
+            }
+            else
+                IsOnOneWayPlatform();
         }
 
         if (_minorOffsetTimer != 0f)
