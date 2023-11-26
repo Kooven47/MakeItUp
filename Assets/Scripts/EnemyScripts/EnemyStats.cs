@@ -21,6 +21,9 @@ public class EnemyStats : Stats
     [SerializeField] private bool _isBoss = false;
     EnumLib.DamageType _shieldAttribute = EnumLib.DamageType.Neutral;
     public static event Action OnDeath;
+    public static Action <EnumLib.DamageType> OnDeathWithType;
+    public static event Action BossOnDeath;
+
     // Start is called before the first frame update
     protected void Start()
     {
@@ -43,9 +46,17 @@ public class EnemyStats : Stats
 
     public override void Death()
     {
-         Debug.Log("DEFEATED!");
+        Debug.Log("DEFEATED!");
+        if (_isBoss)
+        {
+            BossOnDeath?.Invoke();
+        }
+        else
+        {
             OnDeath?.Invoke();
-            Destroy(gameObject);
+            OnDeathWithType?.Invoke(_attribute);
+        }
+        Destroy(gameObject);
         if (PlayerStatus.Instance.playerHPRatio <= 0.5f)
         {
             if (UnityEngine.Random.Range(0f,1f) < 0.25f)
