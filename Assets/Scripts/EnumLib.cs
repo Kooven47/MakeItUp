@@ -4,7 +4,7 @@ using UnityEngine;
 public class EnumLib
 {
     public enum DamageType {Neutral,Dry,Wet};
-    public enum KnockBackPower{Sideways,Launch,SideLaunch};
+    public enum KnockBackPower{None,Sideways,Launch,SideLaunch};
 
     public enum ProjectileType{None,Dust};
 

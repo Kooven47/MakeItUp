@@ -40,12 +40,6 @@ public class PianoCore : EnemyCore
         _anim.ResetTrigger("endAttack");
         _enemyDamageContact.EndAttack();
 
-        if (_attackWindUp != null)
-        {
-            StopCoroutine(_attackWindUp);
-            _attackWindUp = null;
-        }
-
         base.Interrupt();
     }
 

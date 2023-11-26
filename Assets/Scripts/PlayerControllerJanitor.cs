@@ -17,6 +17,8 @@ public class PlayerControllerJanitor : MonoBehaviour
     private bool isGrounded;
     private float timeInAir;
 
+    private bool _isStunned = false;
+
     private bool _canMove = true, _isSprinting = true;
     [SerializeField] private Vector2 counterJumpForce;
     
@@ -85,6 +87,21 @@ public class PlayerControllerJanitor : MonoBehaviour
     public void SetMobility(bool isMobile)
     {
         _canMove = isMobile;
+    }
+
+    public bool SetStunned(bool isStun)
+    {
+        if (isStun && !_isStunned)
+        {
+            _isStunned = true;
+            return true;
+        }
+        else if (!isStun)
+        {
+            _isStunned = false;
+        }
+
+        return false;
     }
 
     // Update is called once per frame
@@ -220,7 +237,7 @@ public class PlayerControllerJanitor : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (_canMove)
+        if (_canMove && !_isStunned)
             Movement();
     }
 

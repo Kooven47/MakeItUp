@@ -16,7 +16,7 @@ MonoBehaviour:
   animations:
   - {fileID: 7400000, guid: d16d838e69c49e346a690cb750c8518e, type: 2}
   - {fileID: 7400000, guid: d16d838e69c49e346a690cb750c8518e, type: 2}
-  force: 0
+  force: 1
   attribute: 2
   projectileAnims: []
   idleTime: 2

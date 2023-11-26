@@ -70,7 +70,7 @@ public class EnemyCore : MonoBehaviour
         ProjectileManager.createProjectile?.Invoke(transform.position,Direction(),_enemySkills[skillIndex]);
     }
 
-    protected void MeleeStrike()
+    protected virtual void MeleeStrike()
     {
         List<Collider2D> targets = new List<Collider2D>();
         _hurtBox.gameObject.SetActive(true);
@@ -115,6 +115,13 @@ public class EnemyCore : MonoBehaviour
     {
         _canAttack = false;
         StartArmor?.Invoke(false);
+
+        if (_attackWindUp != null)
+        {
+            StopCoroutine(_attackWindUp);
+            _attackWindUp = null;
+        }
+        
         if (_idleTimer != null || _attackIndex < 0)
         {
             if (_idleTimer != null)
@@ -199,11 +206,14 @@ public class EnemyCore : MonoBehaviour
         else
         {
             if (chargeTime.y > 0f)
+            {
                 yield return new WaitForSeconds(chargeTime.y);
+                _anim.SetTrigger("endAttack");
+                _attackWindUp = null;
+            }
             else
                 yield return null;
-            _anim.SetTrigger("endAttack");
-            _attackWindUp = null;
+            
         }
     }
 
