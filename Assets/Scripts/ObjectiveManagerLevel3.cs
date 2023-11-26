@@ -330,44 +330,36 @@ public class Objective5DefeatBoss : Objective
 
     public int killNum;
     public int killObj;
+    public bool bossDefeated;
     
     public override void OnStart()
     {
         ObjectiveManagerLevel3.activeObjective = true;
         killNum = 0;
         killObj = 1;
+        bossDefeated = false;
         objectiveTextObject = GameObject.Find("ObjectiveManager/Canvas/Sign/ObjectiveText"); // This is to find the ObjectiveText object for display
         objectiveText = objectiveTextObject.GetComponent<TMP_Text>();
 
-        EnemyStats.OnDeath += KillUpdate;
         PauseMenu.cleanUp += Cleanup;
         GameOverMenu.cleanUp += Cleanup;
-
+        EnemyStats.BossOnDeath += BossKillUpdate;
         Display();
 
         // Add the listener for the next obj
     }
-    
-    public void KillUpdate()
+ 
+    public void BossKillUpdate()
     {
-        killNum++;
-        Display();
-        if ((killNum >= killObj) && (killObj != -1)) // Objective completed
-        {
-            killNum = 0;
-            OnComplete();
-        }
+        Debug.Log("Boss Defeated");
+        OnComplete();
     }
-    
+
     public override void OnComplete()
     {
         ObjectiveManagerLevel3.activeObjective = false;
-        EnemyStats.OnDeath -= KillUpdate;
         ObjectiveManagerLevel3.OnUpdateObjective();
         
-        GameObject barrier = ObjectiveManagerLevel3.barrierList.Dequeue(); // This and the next line removes the barrier
-        barrier.SetActive(false);
-        Debug.Log("dequeued barrier " + barrier.transform.name);
     }
 
     public override void Display()
@@ -377,8 +369,9 @@ public class Objective5DefeatBoss : Objective
 
     public override void Cleanup()
     {
-        EnemyStats.OnDeath -= KillUpdate;
         PauseMenu.cleanUp -= Cleanup;
         GameOverMenu.cleanUp -= Cleanup;
+        EnemyStats.BossOnDeath -= BossKillUpdate;
+
     }
 }
