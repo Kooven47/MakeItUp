@@ -61,13 +61,13 @@ public class EnemyCore : MonoBehaviour
         return x_dist <= range.x && y_dist <= range.y;
     }
 
-    protected void ProjectileFire()
+    protected virtual void ProjectileFire()
     {
         int skillIndex = _attackIndex;
         if (skillIndex == -1)
             skillIndex = 0;
 
-        ProjectileManager.createProjectile?.Invoke(transform.position,(_target.transform.position - transform.position).normalized,_enemySkills[skillIndex]);
+        ProjectileManager.createProjectile?.Invoke(transform.position,Direction(),_enemySkills[skillIndex]);
     }
 
     protected void MeleeStrike()

@@ -36,7 +36,7 @@ public class PlayerStats : Stats, ISaveGame
 
     public override void DamageCalc(float attack, EnumLib.DamageType attribute, bool isCrit)
     {
-        float damage = (attack - _defense / 2f) * (isCrit ? 1.5f : 1.0f);
+        float damage = (attack) * (isCrit ? 1.5f : 1.0f);
         curHP -= damage;
 
         DamageNumberPool.summonDamageNum?.Invoke(damage,0,transform.position);

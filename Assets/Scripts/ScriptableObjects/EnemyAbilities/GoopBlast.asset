@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2de1d81a5b6c432449110860e48a0570, type: 3}
+  m_Name: GoopBlast
+  m_EditorClassIdentifier: 
+  damage: 1
+  animations:
+  - {fileID: 7400000, guid: e67eef5b0ed4ad1469a1cf38fbed9995, type: 2}
+  - {fileID: 7400000, guid: f223cf0ecb1b7fc41b05cfedb17c2af2, type: 2}
+  force: 0
+  attribute: 2
+  projectileAnims:
+  - {fileID: 7400000, guid: c6189c58df6a25944b007dab1acf31e0, type: 2}
+  - {fileID: 7400000, guid: ea2f6b64f485a8e4a93b852bb0cf6562, type: 2}
+  - {fileID: 7400000, guid: fc6d43d3325f2d54eb206db7f6603f71, type: 2}
+  idleTime: 2
