@@ -7,6 +7,7 @@ using UnityEngine.Events;
 using static KillManager;
 using TMPro;
 using Object = UnityEngine.Object;
+using Random = UnityEngine.Random;
 
 public class ObjectiveManagerLevel3 : MonoBehaviour
 {
@@ -30,10 +31,11 @@ public class ObjectiveManagerLevel3 : MonoBehaviour
         activeObjective = false;
 
         objList.Enqueue(new Objective1Survive());
-        objList.Enqueue(new Objective2KillPianos());
-        objList.Enqueue(new Objective3GetToMiniBosses());
-        objList.Enqueue(new Objective4DefeatMiniBosses());
-        objList.Enqueue(new Objective5DefeatBoss());
+        objList.Enqueue(new Objective2GetOut());
+        objList.Enqueue(new Objective3KillPianos());
+        objList.Enqueue(new Objective4GetToMiniBosses());
+        objList.Enqueue(new Objective5DefeatMiniBosses());
+        objList.Enqueue(new Objective6DefeatBoss());
 
         minibossSpawnLocations2 = minibossSpawnLocations1;
         
@@ -91,8 +93,10 @@ public class Objective1Survive : Objective
     public int secObj;
 
     public static MonoBehaviour _mb;
+    private List<GameObject> _enemies;
     public override void OnStart()
     {
+        _enemies = new List<GameObject>();
         Debug.Log("on start triggered");
         ObjectiveManagerLevel3.activeObjective = true;
         curSec = 0;
@@ -114,7 +118,7 @@ public class Objective1Survive : Objective
     
     public IEnumerator TimeUpdate()
     {
-        while (curSec <= secObj)
+        while (curSec < secObj)
         {
             yield return new WaitForSeconds(1f);
             curSec++;
@@ -136,8 +140,26 @@ public class Objective1Survive : Objective
         GameObject barrier = ObjectiveManagerLevel3.barrierList.Dequeue(); // This and the next line removes the barrier
         barrier.SetActive(false);
         Debug.Log("dequeued barrier " + barrier.transform.name);
+        
+        foreach (Transform child in GameObject.Find("Enemies").GetComponent<Transform>())
+        {
+            _enemies.Add(child.gameObject);
+        }
+        _mb.StartCoroutine(KillOffEnemies());
     }
 
+    public IEnumerator KillOffEnemies()
+    {
+        while (_enemies.Count > 0)
+        {
+            yield return new WaitForSeconds(0.1f);
+            var enemyToRemove = Random.Range(0, _enemies.Count);
+            _enemies[enemyToRemove].GetComponent<EnemyStats>().Death();
+            _enemies.RemoveAt(enemyToRemove);
+            Debug.Log($"removed enemy, count is now {_enemies.Count}");
+        }
+    }
+    
     public override void Display()
     {
         objectiveText.SetText("Level 3: Executive Suite" + System.Environment.NewLine + "Current Objective - Survive: " + (curSec) + "/" + secObj);
@@ -150,7 +172,44 @@ public class Objective1Survive : Objective
     }
 }
 
-public class Objective2KillPianos : Objective
+public class Objective2GetOut : Objective
+{
+    private GameObject objectiveTextObject;
+    private TMP_Text objectiveText;
+    
+    public override void OnStart()
+    {
+        ObjectiveManagerLevel3.activeObjective = true;
+        objectiveTextObject = GameObject.Find("ObjectiveManager/Canvas/Sign/ObjectiveText"); // This is to find the ObjectiveText object for display
+        objectiveText = objectiveTextObject.GetComponent<TMP_Text>();
+
+        PauseMenu.cleanUp += Cleanup;
+        GameOverMenu.cleanUp += Cleanup;
+
+        Display();
+
+        // Add the listener for the next obj
+    }
+    
+    public override void OnComplete()
+    {
+        ObjectiveManagerLevel3.activeObjective = false;
+        ObjectiveManagerLevel3.OnUpdateObjective();
+    }
+
+    public override void Display()
+    {
+        objectiveText.SetText("Level 3: Executive Suite" + System.Environment.NewLine + "Current Objective - Escape this room!");
+    }
+
+    public override void Cleanup()
+    {
+        PauseMenu.cleanUp -= Cleanup;
+        GameOverMenu.cleanUp -= Cleanup;
+    }
+}
+
+public class Objective3KillPianos : Objective
 {
     private GameObject objectiveTextObject;
     private TMP_Text objectiveText;
@@ -209,7 +268,7 @@ public class Objective2KillPianos : Objective
     }
 }
 
-public class Objective3GetToMiniBosses : Objective
+public class Objective4GetToMiniBosses : Objective
 {
     private GameObject objectiveTextObject;
     private TMP_Text objectiveText;
@@ -250,7 +309,7 @@ public class Objective3GetToMiniBosses : Objective
     }
 }
 
-public class Objective4DefeatMiniBosses : Objective
+public class Objective5DefeatMiniBosses : Objective
 {
     private GameObject objectiveTextObject;
     private TMP_Text objectiveText;
@@ -323,7 +382,7 @@ public class Objective4DefeatMiniBosses : Objective
     }
 }
 
-public class Objective5DefeatBoss : Objective
+public class Objective6DefeatBoss : Objective
 {
     private GameObject objectiveTextObject;
     private TMP_Text objectiveText;
@@ -359,7 +418,6 @@ public class Objective5DefeatBoss : Objective
     {
         ObjectiveManagerLevel3.activeObjective = false;
         ObjectiveManagerLevel3.OnUpdateObjective();
-        
     }
 
     public override void Display()

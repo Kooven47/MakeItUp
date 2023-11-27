@@ -48807,7 +48807,7 @@ Transform:
   m_GameObject: {fileID: 850116248}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -26.790434, y: 131.5301, z: -10.036367}
+  m_LocalPosition: {x: -27.401743, y: 116.6301, z: -10.036367}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -50134,6 +50134,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyPrefabs:
+  - {fileID: 8563846529661670228, guid: 4f6450e040cb76845998fe90ff4c2727, type: 3}
+  - {fileID: 9058650198454236251, guid: 5674d10d60e6ff64b808681fa2ee633d, type: 3}
   - {fileID: 4503141391237469523, guid: 2974d5a687e836448babe573992af02f, type: 3}
   enemiesObject: {fileID: 175763758}
 --- !u!1 &897720025
@@ -62012,6 +62014,8 @@ MonoBehaviour:
   _objectiveIndex: 1
   _spawnEnemies: 1
   enemyLocations:
+  - {fileID: 0}
+  - {fileID: 0}
   - {fileID: 1332932590}
   EndCurrentObjective: 1
   objectiveManager: {fileID: 1876503038}

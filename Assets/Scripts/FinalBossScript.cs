@@ -60,7 +60,7 @@ public class FinalBossScript : MonoBehaviour
     {
         for (int i = 0; i < numMinions; i++)
         {
-            int enemyPrefabNumber = Random.Range(0, 4);
+            int enemyPrefabNumber = Random.Range(0, 6);
             Debug.Log($"Random number: {enemyPrefabNumber}");
             spawnManager.SpawnEnemy(minionLocations[i], enemyPrefabNumber);
             numAlive++;
@@ -78,70 +78,60 @@ public class FinalBossScript : MonoBehaviour
                 case 3:
                     numDry++;
                     break;
+                case 4:
+                    numWet++;
+                    break;
+                case 5:
+                    numDry++;
+                    break;
                 default: break;
             }
         }
+        
         Debug.Log("NumDry: " + numDry + "   NumWet: " + numWet);
-        if (numDry > numWet)
-        {
-            // Make attribute Dry
-            _bossStats.Attribute = EnumLib.DamageType.Dry;
-            _bossSpriteRender.material = DryOutline;
-            _bossBubbleEmitter.gameObject.SetActive(false);
-            _bossDustEmitter.gameObject.SetActive(true);
-        }
-        else if (numWet > numDry)
-        {
-            // Make attribute Wet
-            _bossStats.Attribute = EnumLib.DamageType.Wet;
-            _bossSpriteRender.material = WetOutline;
-            _bossBubbleEmitter.gameObject.SetActive(true);
-            _bossDustEmitter.gameObject.SetActive(false);
-        }
-        else if (numWet == numDry)
-        {
-            _bossStats.Attribute = EnumLib.DamageType.Neutral;
-            _bossSpriteRender.material = defaultOutline;
-            _bossBubbleEmitter.gameObject.SetActive(false);
-            _bossDustEmitter.gameObject.SetActive(false);
-        }
+        DecideBossAttribute();
     }
 
-    private void KillUpdate(EnumLib.DamageType _attribute)
+    private void KillUpdate(EnumLib.DamageType attribute)
     {
         numAlive--;
-        if (_attribute == EnumLib.DamageType.Dry) numDry--;
-        if (_attribute == EnumLib.DamageType.Wet) numWet--;
+        if (attribute == EnumLib.DamageType.Dry) numDry--;
+        if (attribute == EnumLib.DamageType.Wet) numWet--;
         Debug.Log("NumDry: " + numDry + "   NumWet: " + numWet);
 
-        if (numDry > numWet)
-        {
-            // Make attribute Dry
-            _bossStats.Attribute = EnumLib.DamageType.Dry;
-            _bossSpriteRender.material = DryOutline;
-            _bossBubbleEmitter.gameObject.SetActive(false);
-            _bossDustEmitter.gameObject.SetActive(true);
-        }
-        else if (numWet > numDry)
-        {
-            // Make attribute Wet
-            _bossStats.Attribute = EnumLib.DamageType.Wet;
-            _bossSpriteRender.material = WetOutline;
-            _bossBubbleEmitter.gameObject.SetActive(true);
-            _bossDustEmitter.gameObject.SetActive(false);
-        }
-        else if (numWet == numDry)
-        {
-            _bossStats.Attribute = EnumLib.DamageType.Neutral;
-            _bossSpriteRender.material = defaultOutline;
-            _bossBubbleEmitter.gameObject.SetActive(false);
-            _bossDustEmitter.gameObject.SetActive(false);
-        }
+        DecideBossAttribute();
     }
 
     private void OnDestroy()
     {
         EnemyStats.OnDeathWithType -= KillUpdate;
     }
-    
+
+    private void DecideBossAttribute()
+    {
+        if (numDry > numWet)
+        {
+            // Make attribute Dry
+            _bossStats.Attribute = EnumLib.DamageType.Dry;
+            _bossSpriteRender.material = DryOutline;
+            _bossBubbleEmitter.gameObject.SetActive(false);
+            _bossDustEmitter.gameObject.SetActive(true);
+        }
+        else if (numWet > numDry)
+        {
+            // Make attribute Wet
+            _bossStats.Attribute = EnumLib.DamageType.Wet;
+            _bossSpriteRender.material = WetOutline;
+            _bossBubbleEmitter.gameObject.SetActive(true);
+            _bossDustEmitter.gameObject.SetActive(false);
+        }
+        else if (numWet == numDry)
+        {
+            // Make attribute Neutral
+            _bossStats.Attribute = EnumLib.DamageType.Neutral;
+            _bossSpriteRender.material = defaultOutline;
+            _bossBubbleEmitter.gameObject.SetActive(false);
+            _bossDustEmitter.gameObject.SetActive(false);
+        }
+    }
 }

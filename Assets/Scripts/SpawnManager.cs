@@ -7,21 +7,7 @@ public class SpawnManager : MonoBehaviour
 {
     public List<GameObject> enemyPrefabs; // Reference to your Enemy Prefab
     public Transform enemiesObject;
-    //public Transform spawnPoint;   // Reference to your Spawn Point
-    //public float spawnInterval = 2f; // Time between enemy spawns
-
-    //private float nextSpawnTime = 0f;
     private GameObject instantiatedEnemy;
-
-    void Update()
-    {
-        // Check if it's time to spawn a new enemy
-        //if (Time.time >= nextSpawnTime)
-        //{
-        //    SpawnEnemy();
-        //    nextSpawnTime = Time.time + spawnInterval;
-        //}
-    }
 
     public void SpawnEnemy(Transform spawnPointObject, int prefabNumber)
     {
