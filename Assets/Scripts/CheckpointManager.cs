@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CheckpointManager : MonoBehaviour,ISaveGame
 {
@@ -13,6 +14,11 @@ public class CheckpointManager : MonoBehaviour,ISaveGame
     public static Action<int> setCheckPoint;
 
     private int _currentCheckPoint = -1;
+
+    public int CurrentCheckPoint
+    {
+        get => _currentCheckPoint;
+    }
 
     private bool _initialized = false;
     // Start is called before the first frame update
@@ -38,6 +44,7 @@ public class CheckpointManager : MonoBehaviour,ISaveGame
 
     public void LoadSaveData(SaveData data)
     {
+        // SceneManager.LoadScene(data.currentLevel);
         _currentCheckPoint = data.numObjectivesCompleted;
         Awake();
         int i = _currentCheckPoint >= _checkpoints.Count ? _checkpoints.Count - 1 : _currentCheckPoint;
@@ -52,6 +59,7 @@ public class CheckpointManager : MonoBehaviour,ISaveGame
     public void SaveData(ref SaveData data)
     {
         data.numObjectivesCompleted = _currentCheckPoint;
+        // data.currentLevel = SceneManager.GetActiveScene().buildIndex;
     }
 
     public void SaveInitialData(ref SaveData data)

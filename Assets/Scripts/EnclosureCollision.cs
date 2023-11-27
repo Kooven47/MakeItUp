@@ -17,6 +17,7 @@ public class EnclosureCollision : MonoBehaviour
     public void SetCheckPoint()
     {
         CheckpointManager.setCheckPoint?.Invoke(_objectiveIndex);
+        Debug.Log("Checkpoint set");
     }
 
     protected virtual void Start()

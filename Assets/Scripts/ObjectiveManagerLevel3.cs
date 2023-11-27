@@ -430,6 +430,5 @@ public class Objective6DefeatBoss : Objective
         PauseMenu.cleanUp -= Cleanup;
         GameOverMenu.cleanUp -= Cleanup;
         EnemyStats.BossOnDeath -= BossKillUpdate;
-
     }
 }

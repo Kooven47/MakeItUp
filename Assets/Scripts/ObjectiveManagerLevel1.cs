@@ -31,6 +31,19 @@ public class ObjectiveManagerLevel1 : MonoBehaviour,ISaveGame
             objList.Enqueue(new Objective2KillSpaghettiAndDustBunny());
         if (_objectivesComplete < 5)
             objList.Enqueue(new Objective3KillBoss());
+
+        if (_objectivesComplete >= 3)
+        {
+            GameObject.Find("Grid/EnemyEnclosure").GetComponent<WallEnclosureCollisionLevel3>().spawnEnemies = false;
+            _barriers.transform.GetChild(0).gameObject.SetActive(true);
+            _barriers.transform.GetChild(1).gameObject.SetActive(false);
+        }
+
+        if (_objectivesComplete >= 5)
+        {
+            _barriers.transform.GetChild(3).gameObject.SetActive(false);
+            objectiveText.SetText("Level 1: Janitor's Closet" + System.Environment.NewLine + "Current Objective - Get to the Elevator");
+        }
         
         if (_barriers != null) 
         { 
@@ -243,7 +256,7 @@ public class Objective3KillBoss : Objective
         objectiveTextObject = GameObject.Find("ObjectiveManager/Canvas/Sign/ObjectiveText"); // This is to find the ObjectiveText object for display
         objectiveText = objectiveTextObject.GetComponent<TMP_Text>();
 
-        EnemyStats.OnDeath += KillUpdate;
+        EnemyStats.BossOnDeath += KillUpdate;
         PauseMenu.cleanUp += Cleanup;
         GameOverMenu.cleanUp += Cleanup;
 
@@ -254,20 +267,13 @@ public class Objective3KillBoss : Objective
     
     public void KillUpdate()
     {
-        killNum++;
-        Display();
-        if ((killNum >= killObj) && (killObj != -1)) // Objective completed
-        {
-            killNum = 0;
-            OnComplete();
-        }
+        OnComplete();
     }
     
     public override void OnComplete()
     {
         CheckpointManager.setCheckPoint?.Invoke(5);
         ObjectiveManagerLevel1.activeObjective = false;
-        EnemyStats.OnDeath -= KillUpdate;
         signMenu.GetComponent<SignMenu>().ShowSign();
         ObjectiveManagerLevel1.OnUpdateObjective();
         
@@ -277,7 +283,7 @@ public class Objective3KillBoss : Objective
             barrier = ObjectiveManagerLevel1.barrierList.Dequeue();
         
         barrier.SetActive(false);
-        Debug.Log("Deactivated this barrier "+barrier.name);
+        Debug.Log("Deactivated this barrier " + barrier.name);
         objectiveText.SetText("Level 1: Janitor's Closet" + System.Environment.NewLine + "Current Objective - Get to the Elevator");
     }
 
@@ -288,7 +294,7 @@ public class Objective3KillBoss : Objective
 
     public override void Cleanup()
     {
-        EnemyStats.OnDeath -= KillUpdate;
+        EnemyStats.BossOnDeath -= KillUpdate;
         PauseMenu.cleanUp -= Cleanup;
         GameOverMenu.cleanUp -= Cleanup;
     }
