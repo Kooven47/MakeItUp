@@ -7,7 +7,7 @@ public class WallEnclosureCollisionLevel3 : EnclosureCollision
     [SerializeField] private GameObject Enclosure;
     [SerializeField] private bool isHidden = true;
     [SerializeField] private bool isBossEntrance;
-    [SerializeField] private bool spawnEnemies = false;
+    public bool spawnEnemies = false;
     [SerializeField] private bool triggerObjective = false;
     [SerializeField] private bool timedSpawn = false;
     [SerializeField] private float timeBetweenSpawns;
@@ -44,6 +44,7 @@ public class WallEnclosureCollisionLevel3 : EnclosureCollision
                 //SetCheckPoint();
             }
             
+            Debug.Log($"Collided before: {_collidedBefore}");
             if (isBossEntrance && !_collidedBefore)
             {
                 BossHealthBar.activateHealthBar?.Invoke();
