@@ -52,7 +52,7 @@ public class ObjectiveManagerLevel1 : MonoBehaviour,ISaveGame
     public static void OnUpdateObjective()
     {
         UpdateObjective?.Invoke();
-        SaveSystem.instance.SaveGame();
+        //SaveSystem.instance.SaveGame();
     }
     
     public void NextObjective()

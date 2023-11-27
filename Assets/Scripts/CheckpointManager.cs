@@ -32,8 +32,11 @@ public class CheckpointManager : MonoBehaviour,ISaveGame
 
     public void SetCheckPoint(int i)
     {
-        if (i >= 0)
+        if (i >= _currentCheckPoint)
+        {
             _currentCheckPoint = i;
+            SaveSystem.instance.SaveGame();
+        }
     }
 
     public void LoadSaveData(SaveData data)

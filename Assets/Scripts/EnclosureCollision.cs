@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnclosureCollision : MonoBehaviour
 {
     public SpawnManager spawnManager;
-    protected bool _collidedBefore = false;
+    [SerializeField]protected bool _collidedBefore = false;
     
     [SerializeField]protected int _objectiveIndex = 0;
 
@@ -16,6 +16,10 @@ public class EnclosureCollision : MonoBehaviour
 
     public void SetCheckPoint()
     {
+        if (CheckpointManager.setCheckPoint == null)
+        {
+            Debug.Log("Checkpoint manager wasn't set");
+        }
         CheckpointManager.setCheckPoint?.Invoke(_objectiveIndex);
     }
 
