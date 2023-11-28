@@ -5,13 +5,13 @@ using UnityEngine;
 
 public class ToiletBossAI : BossCore
 {   
-    [SerializeField] private Transform toiletTransform;
-    [SerializeField] private Transform leftSideTransform;
-    [SerializeField] private BoxCollider2D leftSideCollider;
-    [SerializeField] private Transform centerTransform;
-    [SerializeField] private BoxCollider2D centerCollider;
-    [SerializeField] private Transform rightSideTransform;
-    [SerializeField] private BoxCollider2D rightSideCollider;
+    private Transform toiletTransform;
+    private Transform leftSideTransform;
+    private BoxCollider2D leftSideCollider;
+    private Transform centerTransform;
+    private BoxCollider2D centerCollider;
+    private Transform rightSideTransform;
+    private BoxCollider2D rightSideCollider;
 
     private Vector3 leftSide;
     private Vector3 rightSide;
@@ -34,6 +34,8 @@ public class ToiletBossAI : BossCore
     
     private float centerCooldown = 5f;
     private float playerHitCooldown = 3f;
+
+    private bool justSpawned = true;
     private enum BossState
     {
         DashToLeft,
@@ -49,14 +51,32 @@ public class ToiletBossAI : BossCore
     protected override void Start()
     {
         base.Start();
+        
         _rb = GetComponent<Rigidbody2D>();
+        
+        toiletTransform = transform;
+        
+        var leftObject = GameObject.Find("LeftSide");
+        leftSideTransform = leftObject.transform;
         leftSide = leftSideTransform.position;
-        rightSide = rightSideTransform.position;
+        leftSideCollider = leftObject.GetComponent<BoxCollider2D>();
+        
+        var centerObject = GameObject.Find("center");
+        centerTransform = centerObject.transform;
         center = centerTransform.position;
+        centerCollider = centerObject.GetComponent<BoxCollider2D>();
+        
+        var rightObject = GameObject.Find("RightSide");
+        rightSideTransform = rightObject.transform;
+        rightSide = rightSideTransform.position;
+        rightSideCollider = rightObject.GetComponent<BoxCollider2D>();
+        
         dashesRemaining = maxDashes;
         currentDashSpeed = phaseOneDashSpeed;
         currentDamage = phaseOneDamage;
+        
         _bossStats = GetComponent<EnemyStats>();
+        
         bossCoroutine = StartCoroutine(StartBoss());
     }
 
@@ -80,6 +100,12 @@ public class ToiletBossAI : BossCore
 
     IEnumerator StartBoss()
     {
+        if (justSpawned)
+        {
+            yield return new WaitForSeconds(2f);
+            justSpawned = false;
+        }
+        
         while (true)
         {
             // Fuck switch statements, all my homies hate switch statements

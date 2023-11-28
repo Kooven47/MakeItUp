@@ -359,6 +359,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 10818645}
   m_CullTransparentMesh: 1
+--- !u!1 &50409896
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 50409897}
+  m_Layer: 0
+  m_Name: BossLocation
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &50409897
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 50409896}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 99.1, y: 16.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 841289700}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &66012600
 GameObject:
   m_ObjectHideFlags: 0
@@ -3772,7 +3803,7 @@ MonoBehaviour:
   m_Follow: {fileID: 185689917}
   m_Lens:
     FieldOfView: 60
-    OrthographicSize: 2.4
+    OrthographicSize: 5.9
     NearClipPlane: 0.3
     FarClipPlane: 1000
     Dutch: 0
@@ -5974,7 +6005,7 @@ Transform:
   m_GameObject: {fileID: 710177884}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 95.79, y: 15.67, z: 0}
+  m_LocalPosition: {x: 94.55, y: 15.67, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6124,7 +6155,6 @@ GameObject:
   - component: {fileID: 730773502}
   - component: {fileID: 730773504}
   - component: {fileID: 730773505}
-  - component: {fileID: 730773503}
   m_Layer: 0
   m_Name: EnemyEnclosure
   m_TagString: Untagged
@@ -6149,33 +6179,6 @@ Transform:
   - {fileID: 455845809}
   m_Father: {fileID: 1187996051}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &730773503
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 730773501}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5274e68ada88ba47aa2b3b9619e0166, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spawnManager: {fileID: 894913568}
-  _collidedBefore: 0
-  _objectiveIndex: -1
-  Enclosure: {fileID: 501640426}
-  isHidden: 1
-  isBossEntrance: 0
-  spawnEnemies: 1
-  triggerObjective: 0
-  timedSpawn: 0
-  timeBetweenSpawns: 0
-  totalSpawnTime: 0
-  objectiveManagerLevel3: {fileID: 0}
-  enemyLocations:
-  - {fileID: 1146278011}
-  - {fileID: 455845809}
 --- !u!61 &730773504
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -23154,6 +23157,38 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1146278011}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &841289699
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 841289700}
+  m_Layer: 0
+  m_Name: ToiletBossLocation
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &841289700
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 841289699}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 28.863874, y: -0.77934885, z: 1.7657592}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 50409897}
+  m_Father: {fileID: 2063533986}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &844879400
 GameObject:
   m_ObjectHideFlags: 0
@@ -23257,7 +23292,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 2.4
+  orthographic size: 5.9
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -23282,7 +23317,7 @@ Transform:
   m_GameObject: {fileID: 850116248}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -14.29842, y: -0.29989192, z: -10.036367}
+  m_LocalPosition: {x: 63.420456, y: 20.030107, z: -10.036367}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -23695,6 +23730,7 @@ MonoBehaviour:
   enemyPrefabs:
   - {fileID: 472122592458666930, guid: db306fa2c8303b846aac884a8cd19766, type: 3}
   - {fileID: 5281422339143581533, guid: 732ac9d8b1362044ea2fc49bc57603c0, type: 3}
+  - {fileID: 7933956672352586596, guid: 3f3612d7a64cfc240a228aea57c62367, type: 3}
   enemiesObject: {fileID: 175763758}
 --- !u!1 &929299744
 GameObject:
@@ -32242,7 +32278,6 @@ GameObject:
   - component: {fileID: 2063533986}
   - component: {fileID: 2063533988}
   - component: {fileID: 2063533989}
-  - component: {fileID: 2063533987}
   m_Layer: 0
   m_Name: BossEnclosure
   m_TagString: Untagged
@@ -32263,34 +32298,10 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 841289700}
   - {fileID: 1817370023}
   m_Father: {fileID: 1187996051}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2063533987
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2063533985}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5274e68ada88ba47aa2b3b9619e0166, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spawnManager: {fileID: 0}
-  _collidedBefore: 0
-  _objectiveIndex: 4
-  Enclosure: {fileID: 1817370022}
-  isHidden: 1
-  isBossEntrance: 1
-  spawnEnemies: 0
-  triggerObjective: 0
-  timedSpawn: 0
-  timeBetweenSpawns: 0
-  totalSpawnTime: 0
-  objectiveManagerLevel3: {fileID: 0}
-  enemyLocations: []
 --- !u!61 &2063533988
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -32348,19 +32359,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 430c4029c98d98242b0b3c4ee0e12861, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnManager: {fileID: 0}
+  spawnManager: {fileID: 894913568}
   _collidedBefore: 0
   _objectiveIndex: -1
   Enclosure: {fileID: 1817370022}
   isHidden: 0
   isBossEntrance: 1
-  spawnEnemies: 0
+  spawnEnemies: 1
   triggerObjective: 1
   timedSpawn: 0
   timeBetweenSpawns: 0
   totalSpawnTime: 0
   objectiveManagerLevel1: {fileID: 1876503036}
-  enemyLocations: []
+  enemyLocations:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 841289700}
 --- !u!1 &2066100583
 GameObject:
   m_ObjectHideFlags: 0
@@ -33442,7 +33456,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!95 &6060800172553377562
 Animator:
   serializedVersion: 5
@@ -33699,13 +33713,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 05f34cb49e1913a42bdd4d8b6942265c, type: 2}
   - {fileID: 11400000, guid: 17a0bcf85dd98fc41ae0a16f18444cff, type: 2}
   _animOverride: {fileID: 22100000, guid: 5637c636ea5c92949a49ed107421f73b, type: 2}
-  toiletTransform: {fileID: 6459844245242173203}
-  leftSideTransform: {fileID: 256378233}
-  leftSideCollider: {fileID: 256378234}
-  centerTransform: {fileID: 1192979881}
-  centerCollider: {fileID: 1192979880}
-  rightSideTransform: {fileID: 542330867}
-  rightSideCollider: {fileID: 542330868}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
