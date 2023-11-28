@@ -11,6 +11,7 @@ public class ObjectiveManagerLevel1 : MonoBehaviour,ISaveGame
 {
     public Queue<Objective> objList;
     public static bool activeObjective;
+    public Objective currentObjective;
     public static event Action UpdateObjective; // Use 'UpdateObjective?.Invoke();' to invoke this. It will do NextObjective() in this class
     public TMP_Text objectiveText;
     [SerializeField] private GameObject _barriers;
@@ -29,12 +30,14 @@ public class ObjectiveManagerLevel1 : MonoBehaviour,ISaveGame
             objList.Enqueue(new Objective1KillSpaghettiMonster());
         if (_objectivesComplete < 3)
             objList.Enqueue(new Objective2KillSpaghettiAndDustBunny());
+        if (_objectivesComplete <= 4)
+            objList.Enqueue(new Objective3GetToBoss());
         if (_objectivesComplete < 5)
-            objList.Enqueue(new Objective3KillBoss());
+            objList.Enqueue(new Objective4KillToilet());
 
         if (_objectivesComplete >= 3)
         {
-            GameObject.Find("Grid/EnemyEnclosure").GetComponent<WallEnclosureCollisionLevel3>().spawnEnemies = false;
+            GameObject.Find("Grid/EnemyEnclosure").GetComponent<WallEnclosureCollisionLevel1>().spawnEnemies = false;
             _barriers.transform.GetChild(0).gameObject.SetActive(true);
             _barriers.transform.GetChild(1).gameObject.SetActive(false);
         }
@@ -74,8 +77,8 @@ public class ObjectiveManagerLevel1 : MonoBehaviour,ISaveGame
         {
             if (objList.Count > 0)
             {
-                Objective CurrentObjective = objList.Dequeue();
-                CurrentObjective.OnStart();
+                currentObjective = objList.Dequeue();
+                currentObjective.OnStart();
             }
         }
         else
@@ -238,20 +241,61 @@ public class Objective2KillSpaghettiAndDustBunny : Objective
     }
 }
 
-public class Objective3KillBoss : Objective
+public class Objective3GetToBoss : Objective
 {
-    private GameObject signMenu;
     private GameObject objectiveTextObject;
     private TMP_Text objectiveText;
-
-    public int killNum;
-    public int killObj;
     
     public override void OnStart()
     {
         ObjectiveManagerLevel1.activeObjective = true;
-        killNum = 0;
-        killObj = 1;
+        objectiveTextObject = GameObject.Find("ObjectiveManager/Canvas/Sign/ObjectiveText"); // This is to find the ObjectiveText object for display
+        objectiveText = objectiveTextObject.GetComponent<TMP_Text>();
+
+        EnemyStats.BossOnDeath += KillUpdate;
+        PauseMenu.cleanUp += Cleanup;
+        GameOverMenu.cleanUp += Cleanup;
+
+        Display();
+
+        // Add the listener for the next obj
+    }
+
+    public void KillUpdate()
+    {
+        OnComplete();
+    }
+
+    public override void OnComplete()
+    {
+        CheckpointManager.setCheckPoint?.Invoke(4);
+        ObjectiveManagerLevel1.activeObjective = false;
+        ObjectiveManagerLevel1.OnUpdateObjective();
+    }
+
+    public override void Display()
+    {
+        objectiveText.SetText("Level 1: Janitor's Closet" + System.Environment.NewLine +
+                              "Current Objective - Go to the right");
+    }
+
+    public override void Cleanup()
+    {
+        EnemyStats.BossOnDeath -= KillUpdate;
+        PauseMenu.cleanUp -= Cleanup;
+        GameOverMenu.cleanUp -= Cleanup;
+    }
+}
+
+public class Objective4KillToilet : Objective
+{
+    private GameObject signMenu;
+    private GameObject objectiveTextObject;
+    private TMP_Text objectiveText;
+    
+    public override void OnStart()
+    {
+        ObjectiveManagerLevel1.activeObjective = true;
         signMenu = GameObject.Find("Signs/BossDefeatSign/Canvas/Sign"); // Change this to the sign object location
         objectiveTextObject = GameObject.Find("ObjectiveManager/Canvas/Sign/ObjectiveText"); // This is to find the ObjectiveText object for display
         objectiveText = objectiveTextObject.GetComponent<TMP_Text>();

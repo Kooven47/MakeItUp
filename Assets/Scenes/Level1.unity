@@ -3338,6 +3338,145 @@ Transform:
   - {fileID: 1227373766}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &419135789
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 419135790}
+  - component: {fileID: 419135793}
+  - component: {fileID: 419135792}
+  - component: {fileID: 419135791}
+  m_Layer: 0
+  m_Name: Objective4Ender
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &419135790
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 419135789}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1187996051}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &419135791
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 419135789}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b009e47b114fe6f4d8de0e71e78d0f13, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Enclosure: {fileID: 1817370022}
+--- !u!114 &419135792
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 419135789}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03a3f981ef2b7c64198f934430a5e0a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnManager: {fileID: 0}
+  _collidedBefore: 0
+  _objectiveIndex: 4
+  SetCheckpoint: 1
+--- !u!61 &419135793
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 419135789}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 99.66263, y: 16.57694}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.99063873, y: 3.5276108}
+  m_EdgeRadius: 0
+--- !u!1 &421689560
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 421689561}
+  m_Layer: 0
+  m_Name: GroundCheck
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &421689561
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 421689560}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.095, y: -0.0027, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 159826991}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &427288585
 GameObject:
   m_ObjectHideFlags: 0
@@ -3633,7 +3772,7 @@ MonoBehaviour:
   m_Follow: {fileID: 185689917}
   m_Lens:
     FieldOfView: 60
-    OrthographicSize: 9.2
+    OrthographicSize: 2.4
     NearClipPlane: 0.3
     FarClipPlane: 1000
     Dutch: 0
@@ -5834,7 +5973,7 @@ Transform:
   m_GameObject: {fileID: 710177884}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 99.8, y: 16.2, z: 0}
+  m_LocalPosition: {x: 95.79, y: 15.67, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5983,7 +6122,7 @@ GameObject:
   m_Component:
   - component: {fileID: 730773502}
   - component: {fileID: 730773504}
-  - component: {fileID: 730773503}
+  - component: {fileID: 730773505}
   m_Layer: 0
   m_Name: EnemyEnclosure
   m_TagString: Untagged
@@ -6080,6 +6219,33 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.1947212, y: 5.413906}
   m_EdgeRadius: 0
+--- !u!114 &730773505
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 730773501}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 430c4029c98d98242b0b3c4ee0e12861, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnManager: {fileID: 894913568}
+  _collidedBefore: 0
+  _objectiveIndex: -1
+  Enclosure: {fileID: 501640426}
+  isHidden: 1
+  isBossEntrance: 0
+  spawnEnemies: 1
+  triggerObjective: 0
+  timedSpawn: 0
+  timeBetweenSpawns: 0
+  totalSpawnTime: 0
+  objectiveManagerLevel1: {fileID: 0}
+  enemyLocations:
+  - {fileID: 1146278011}
+  - {fileID: 455845809}
 --- !u!1 &730866379
 GameObject:
   m_ObjectHideFlags: 0
@@ -23089,7 +23255,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 9.2
+  orthographic size: 2.4
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -24851,6 +25017,7 @@ Transform:
   - {fileID: 427288589}
   - {fileID: 1250672940}
   - {fileID: 730773502}
+  - {fileID: 419135790}
   - {fileID: 2063533986}
   - {fileID: 844879401}
   m_Father: {fileID: 0}
@@ -32072,7 +32239,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2063533986}
   - component: {fileID: 2063533988}
-  - component: {fileID: 2063533987}
+  - component: {fileID: 2063533989}
   m_Layer: 0
   m_Name: BossEnclosure
   m_TagString: Untagged
@@ -32166,6 +32333,31 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 4.1981125, y: 20.59359}
   m_EdgeRadius: 0
+--- !u!114 &2063533989
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2063533985}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 430c4029c98d98242b0b3c4ee0e12861, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnManager: {fileID: 0}
+  _collidedBefore: 0
+  _objectiveIndex: -1
+  Enclosure: {fileID: 1817370022}
+  isHidden: 0
+  isBossEntrance: 1
+  spawnEnemies: 0
+  triggerObjective: 1
+  timedSpawn: 0
+  timeBetweenSpawns: 0
+  totalSpawnTime: 0
+  objectiveManagerLevel1: {fileID: 1876503036}
+  enemyLocations: []
 --- !u!1 &2066100583
 GameObject:
   m_ObjectHideFlags: 0
