@@ -5,7 +5,6 @@ using UnityEngine;
 public class EntranceShortcut : MonoBehaviour
 {
     [SerializeField] private GameObject Enclosure;
-    [SerializeField] private GameObject enemy;
     [SerializeField] private Transform target;
     [SerializeField] private bool _isHidden = true;
     public static bool takenShortcut = false;
@@ -19,21 +18,15 @@ public class EntranceShortcut : MonoBehaviour
             Enclosure.SetActive(false);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
         {
-            enemy = GameObject.FindWithTag("Enemy");
             Enclosure.SetActive(true);
             _collidedBefore = true;
             takenShortcut = true;
             inShortcut = true;
-            enemy.transform.position = target.position;
+            GameObject.Find("Freezer Variant(Clone)").transform.position = target.position;
         }
     }
 }
