@@ -16,7 +16,7 @@ public class NormalAttack : MonoBehaviour
 
     private Vector2 _knockBackVector = Vector2.zero;
 
-    private enum Direction {UP = 0,SIDE = 1,DOWN = 2};
+    private enum Direction {UP = 0,SIDE = 1,DOWN = 1};
 
     EnumLib.DamageType _activeDamageType = EnumLib.DamageType.Neutral;
 
@@ -195,6 +195,10 @@ public class NormalAttack : MonoBehaviour
                     {
                         JanitorFu(1,(int)Direction.UP);
                     }
+                    else if (Input.GetAxisRaw("Vertical") < 0f)
+                    {
+                        JanitorFu(1,(int)Direction.DOWN);
+                    }
                     else
                         Attack(1);
                 }
@@ -212,6 +216,10 @@ public class NormalAttack : MonoBehaviour
                     if (Input.GetAxisRaw("Vertical") > 0f)
                     {
                         JanitorFu(2,(int)Direction.UP);
+                    }
+                    else if (Input.GetAxisRaw("Vertical") < 0f)
+                    {
+                        JanitorFu(2,(int)Direction.DOWN);
                     }
                     else
                         Attack(2);

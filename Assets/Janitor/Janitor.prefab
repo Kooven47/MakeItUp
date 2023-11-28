@@ -666,8 +666,10 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 29e4fd4ef75f4d0438fe04b2f190d0d7, type: 2}
   _broomFu:
   - {fileID: 11400000, guid: 6eb7f929f76697f448d481037d8cff09, type: 2}
+  - {fileID: 11400000, guid: ab47b4a8ab2140149a83d4de1f497573, type: 2}
   _mopFu:
   - {fileID: 11400000, guid: 19bf6078b495baf4a863b5491280395e, type: 2}
+  - {fileID: 11400000, guid: a4006f7cd886f344e81a1abd687b16ca, type: 2}
   _canAttack: 1
 --- !u!95 &5849195002188585485
 Animator:
