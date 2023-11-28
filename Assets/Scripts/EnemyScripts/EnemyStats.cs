@@ -24,6 +24,11 @@ public class EnemyStats : Stats
     public static Action <EnumLib.DamageType> OnDeathWithType;
     public static event Action BossOnDeath;
 
+    public bool isBoss
+    {
+        get{return _isBoss;}
+    }
+
     // Start is called before the first frame update
     protected void Start()
     {

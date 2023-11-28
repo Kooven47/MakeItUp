@@ -208,7 +208,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 20395f7c789558349b03831d55ad2c7e, type: 2}
   - {fileID: 0}
   _animOverride: {fileID: 22100000, guid: 20a8ae4de267ebf42aee4f1fd7509608, type: 2}
-  _target: {fileID: 0}
+  _angleOffset: -90
 --- !u!4 &6685603223680461644 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3762292207589212751, guid: 52ef50d26a617054f942d9f279d53e36, type: 3}

@@ -33,7 +33,7 @@ public class EnemyInterrupt : InterruptSystem
     {
         int effective = _enemyStats.IsEffective((EnumLib.DamageType)damageType);
 
-        if ((_poise == ArmorType.SuperArmor && effective != 1) || _enemyStats.isShielded)
+        if ((_poise == ArmorType.SuperArmor && effective != 1) || _enemyStats.isBoss)
             return;
 
         float staggerTimeMod = 1f;
