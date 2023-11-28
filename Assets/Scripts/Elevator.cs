@@ -7,7 +7,12 @@ public class Elevator : MonoBehaviour
     public Animator anim;
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Player")) StartCoroutine(Advance());
+        if (other.CompareTag("Player"))
+        {
+            const int ELEVATOR = 8;
+            GameObject.FindWithTag("Player").GetComponent<PlayerControllerJanitor>().PlaySoundEffect(ELEVATOR);
+            StartCoroutine(Advance());
+        }
     }
 
     private IEnumerator Advance()

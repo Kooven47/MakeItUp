@@ -65,9 +65,9 @@ public class PlayerControllerJanitor : MonoBehaviour
     [SerializeField] private Animator _anim;
     
     [Header("Sound Effects")]
-    private const int JUMP = 0,DROP = 1,LAND = 2,WALK = 3,RUN = 4;
-    [SerializeField] private AudioClip[] _soundEffects = new AudioClip[5];
-    [SerializeField] private AudioSource _audioSrc, _moveAudio;
+    private const int JUMP = 0, DROP = 1, LAND = 2, WALK = 3, RUN = 4;
+    public AudioClip[] _soundEffects = new AudioClip[5];
+    public AudioSource _audioSrc, _moveAudio;
  
     // public int maxJumpTrackNum = 3; // This is the number of jump history you want to keep track of for the ai to follow 
     // Start is called before the first frame update
@@ -78,7 +78,7 @@ public class PlayerControllerJanitor : MonoBehaviour
         PlayerInterrupt.staggered += SetMobility;
     }
 
-    private void PlaySoundEffect(int index)
+    public void PlaySoundEffect(int index)
     {
         _audioSrc.clip = _soundEffects[index];
         _audioSrc.Play();

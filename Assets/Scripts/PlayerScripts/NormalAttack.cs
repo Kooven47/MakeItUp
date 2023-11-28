@@ -35,7 +35,6 @@ public class NormalAttack : MonoBehaviour
         _anim = GetComponent<Animator>();
         _anim.runtimeAnimatorController = aoc;
         PlayerInterrupt.staggered += SetCanAttack;
-        
     }
 
     public void SetCanAttack(bool toggle)
@@ -66,14 +65,13 @@ public class NormalAttack : MonoBehaviour
 
 
     void Hit()
-    {
+    { 
         List<Collider2D> targets = new List<Collider2D>();
         _hurtBox.gameObject.SetActive(true);
         Physics2D.OverlapCollider(_hurtBox,_hurtLayers,targets);
         _hurtBox.gameObject.SetActive(false);
         bool didHit = false;
-
-
+        
         DamageEffect damageEffect;
         EnemyStats _enemyStat;
         ProjectileScript _projectile;
@@ -110,14 +108,26 @@ public class NormalAttack : MonoBehaviour
                         Debug.Log("Wrong weapon to destroy");
                     }
                 }
-                    
             }
         }
 
+        const int WET = 5, DRY = 6, MISS = 7;
         if (didHit)
         {
+            if ((int)_activeDamageType == 1)
+            {
+                GameObject.FindWithTag("Player").GetComponent<PlayerControllerJanitor>().PlaySoundEffect(DRY);
+            }
+            else
+            {
+                GameObject.FindWithTag("Player").GetComponent<PlayerControllerJanitor>().PlaySoundEffect(WET);
+            }
             // Question mark acts as a null check to avoid invoking an action if not initialized somehow
             CameraFollow.StartShake?.Invoke();
+        }
+        else
+        {
+            GameObject.FindWithTag("Player").GetComponent<PlayerControllerJanitor>().PlaySoundEffect(MISS);
         }
     }
 
@@ -169,7 +179,7 @@ public class NormalAttack : MonoBehaviour
             aoc["Attack"] = _mopNormalAttacks[_chain].animations[0];
             aoc["Recovery"] = _mopNormalAttacks[_chain].animations[1];
             _damageDealing = _mopNormalAttacks[_chain].damage;
-             _knockBackVector = EnumLib.KnockbackVector(_mopNormalAttacks[_chain].force);
+            _knockBackVector = EnumLib.KnockbackVector(_mopNormalAttacks[_chain].force);
         }
 
         _activeDamageType = (EnumLib.DamageType)weapon;
@@ -185,7 +195,8 @@ public class NormalAttack : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {   if (Time.timeScale != 0 && _attackBuffer == 0 && _canAttack)
+    {   
+        if (Time.timeScale != 0 && _attackBuffer == 0 && _canAttack)
         {
             if (Input.GetKeyUp("j"))
             {
@@ -200,13 +211,14 @@ public class NormalAttack : MonoBehaviour
                         JanitorFu(1,(int)Direction.DOWN);
                     }
                     else
+                    {
                         Attack(1);
+                    }
                 }
                 else
                 {
                     _attackBuffer = 1;
                 }
-
             }
 
             if (Input.GetKeyUp("k"))
@@ -222,13 +234,14 @@ public class NormalAttack : MonoBehaviour
                         JanitorFu(2,(int)Direction.DOWN);
                     }
                     else
+                    {
                         Attack(2);
+                    }
                 }
                 else
                 {
                     _attackBuffer = 2;
                 }
-
             }
         }
     }

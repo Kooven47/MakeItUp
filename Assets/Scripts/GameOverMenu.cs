@@ -36,7 +36,7 @@ public class GameOverMenu : MonoBehaviour
         Time.timeScale = 1;
         cleanUp?.Invoke();
         isMenuActive = false;
-        SceneManager.LoadScene("Start Screen");
+        SceneManager.LoadScene("StartScreen");
     }
 
     public void RestartLevel()
