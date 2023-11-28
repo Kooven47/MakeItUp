@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: a187fe74aaae08a42a1a82d78f738ca5
+guid: 428ff6e9f705c2544b69889a9022ebe9
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -106,228 +106,194 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: Android
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 0
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: SpaghettiRanged_0
+      name: BossSuperPunch_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 192
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        y: 512
+        width: 256
+        height: 128
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 84b0b37f568c5734cadd85d7fbfec5c3
-      internalID: -934725954
+      spriteID: 8d2a4ee292d4f6f4b9d5eebbbbc6846b
+      internalID: 125037429
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SpaghettiRanged_1
+      name: BossSuperPunch_1
       rect:
         serializedVersion: 2
-        x: 64
-        y: 192
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 256
+        y: 512
+        width: 256
+        height: 128
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e540b10dcbb0c384bb37224e9fc16c12
-      internalID: 1767442572
+      spriteID: 62aac919b209c414a9b10abefb03616f
+      internalID: 917665632
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SpaghettiRanged_2
+      name: BossSuperPunch_2
       rect:
         serializedVersion: 2
-        x: 128
-        y: 192
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 0
+        y: 384
+        width: 256
+        height: 128
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d9a46962e93129944ab7a6689847f63c
-      internalID: 1872243994
+      spriteID: f49e5047a4a39a7438600a8d7a01e006
+      internalID: 611694873
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SpaghettiRanged_3
+      name: BossSuperPunch_3
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 384
+        width: 256
+        height: 128
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dafb326351fd1da44958135f53cde3a6
+      internalID: -1841980947
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BossSuperPunch_4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 256
+        width: 256
+        height: 128
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7ce549bf43c30aa49b118f0d7ee2b4f7
+      internalID: -1822506763
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BossSuperPunch_5
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 256
+        width: 256
+        height: 128
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 926c5d0ad2ac6154a91c8979b0faacfc
+      internalID: 448708305
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BossSuperPunch_6
       rect:
         serializedVersion: 2
         x: 0
         y: 128
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 256
+        height: 128
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1460236107018ce4da939c815b1e7e31
-      internalID: 1118741649
+      spriteID: 6cc37ab09eab70a43ba8a212b1e54eda
+      internalID: 2057160179
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SpaghettiRanged_4
+      name: BossSuperPunch_7
       rect:
         serializedVersion: 2
-        x: 64
+        x: 256
         y: 128
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 256
+        height: 128
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3eecbd8bcc1a0ac499fc93515635bef1
-      internalID: 1221219387
+      spriteID: 31ca50a47757d8d44a062334e05c330e
+      internalID: 2009853786
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SpaghettiRanged_5
-      rect:
-        serializedVersion: 2
-        x: 128
-        y: 128
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: af906b634e888ae418d151b6443ee38a
-      internalID: 884671127
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: SpaghettiRanged_6
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 64
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: f755902b588dde543883372c4586fc19
-      internalID: -1680911219
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: SpaghettiRanged_7
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 64
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 2e9898e94830ace4ab08518ee69c09e6
-      internalID: -610657598
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: SpaghettiRanged_8
-      rect:
-        serializedVersion: 2
-        x: 128
-        y: 64
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 9b299a3f7b7037649ba41ea34408ca3c
-      internalID: -1048196173
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: SpaghettiRanged_9
+      name: BossSuperPunch_8
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 256
+        height: 128
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0baf10e25c2126d48aa2a119e223ef2e
-      internalID: 1486890859
+      spriteID: 30df0662108fb4a4089223529e9b600a
+      internalID: 1051458047
       vertices: []
       indices: 
       edges: []
@@ -343,16 +309,15 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      SpaghettiRanged_0: -934725954
-      SpaghettiRanged_1: 1767442572
-      SpaghettiRanged_2: 1872243994
-      SpaghettiRanged_3: 1118741649
-      SpaghettiRanged_4: 1221219387
-      SpaghettiRanged_5: 884671127
-      SpaghettiRanged_6: -1680911219
-      SpaghettiRanged_7: -610657598
-      SpaghettiRanged_8: -1048196173
-      SpaghettiRanged_9: 1486890859
+      BossSuperPunch_0: 125037429
+      BossSuperPunch_1: 917665632
+      BossSuperPunch_2: 611694873
+      BossSuperPunch_3: -1841980947
+      BossSuperPunch_4: -1822506763
+      BossSuperPunch_5: 448708305
+      BossSuperPunch_6: 2057160179
+      BossSuperPunch_7: 2009853786
+      BossSuperPunch_8: 1051458047
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

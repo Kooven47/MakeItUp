@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 27ca85078f9cc9d45ac0ea00b3f4fc74
+guid: ecd4deed2c926104cb70607708c4b1dd
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -72,7 +72,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -106,186 +106,257 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: Android
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: SpaghettiMelee_0
+      name: WaterOrb1
       rect:
         serializedVersion: 2
         x: 0
-        y: 256
-        width: 128
-        height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        y: 192
+        width: 64
+        height: 64
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3907fb07a7fbba34a97a14ccd3b596f3
-      internalID: -859203798
+      spriteID: 7dd844b0cf6a59542856f357eafa1d3c
+      internalID: 27604667
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SpaghettiMelee_1
+      name: WaterOrb2
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 192
+        width: 64
+        height: 64
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 52da598bb5f9be049bcb9c11ec50938d
+      internalID: -850227327
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WaterOrb3
       rect:
         serializedVersion: 2
         x: 128
-        y: 256
-        width: 128
-        height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        y: 192
+        width: 64
+        height: 64
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cf7feba3c48bf61468661d752a304f97
-      internalID: -532241940
+      spriteID: dc6d42704fccd5149983e07adba1c825
+      internalID: 1320611165
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SpaghettiMelee_2
-      rect:
-        serializedVersion: 2
-        x: 256
-        y: 256
-        width: 128
-        height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: dbd354eae1f848c47ba49ea2e4b91302
-      internalID: 240945970
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: SpaghettiMelee_3
+      name: Dirt Orb1
       rect:
         serializedVersion: 2
         x: 0
         y: 128
-        width: 128
-        height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 64
+        height: 64
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a34a2b9edc031e241902c50460d0c9e8
-      internalID: 605809596
+      spriteID: d3352c112ad8557448161cbb3bb26c52
+      internalID: 738157708
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SpaghettiMelee_4
+      name: Dirt Orb2
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 128
+        width: 64
+        height: 64
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eae6b0bd68912e047807877caf1d45ee
+      internalID: 738271697
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dirt Orb3
       rect:
         serializedVersion: 2
         x: 128
         y: 128
-        width: 128
-        height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 64
+        height: 64
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 510dcde26cb72404998664d8fb2622cd
-      internalID: 1954425717
+      spriteID: 88e8ef0719c121d40ad5db22803d0266
+      internalID: 877351625
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SpaghettiMelee_5
+      name: NeutralOrb1
       rect:
         serializedVersion: 2
-        x: 256
-        y: 128
-        width: 128
-        height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 0
+        y: 64
+        width: 64
+        height: 64
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a05a5ef0caa3d2e4d9eb78c313267fa2
-      internalID: -343873538
+      spriteID: f9ae3da160c7fba4b99bca5ebc47e783
+      internalID: -1016068919
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SpaghettiMelee_6
+      name: NeutralOrb2
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 64
+        width: 64
+        height: 64
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 48a58b6b5f09772429f6b1531455a14d
+      internalID: 234361106
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NeutralOrb3
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 64
+        width: 64
+        height: 64
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0d02a0b4270153d4c9b2162ef623d481
+      internalID: -2077378111
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DirtWave
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 128
-        height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 64
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5f231a1e54458bf4aa2818db2cd54504
-      internalID: 1509935092
+      spriteID: 2cdfa9c122395bb458e20e31eed45ccb
+      internalID: 676548887
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SpaghettiMelee_7
+      name: WaterWave
       rect:
         serializedVersion: 2
-        x: 128
+        x: 64
         y: 0
-        width: 128
-        height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 64
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 13eec2b9b46477e4796a6ca14468ab57
-      internalID: 1602198353
+      spriteID: cdb1eb0999b756e4a898f272b03bb786
+      internalID: 1366816372
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NeutralWave
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 0
+        width: 64
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dcd063bac6e74174ebed4cfbd197e24c
+      internalID: 1329592942
       vertices: []
       indices: 
       edges: []
@@ -301,14 +372,18 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      SpaghettiMelee_0: -859203798
-      SpaghettiMelee_1: -532241940
-      SpaghettiMelee_2: 240945970
-      SpaghettiMelee_3: 605809596
-      SpaghettiMelee_4: 1954425717
-      SpaghettiMelee_5: -343873538
-      SpaghettiMelee_6: 1509935092
-      SpaghettiMelee_7: 1602198353
+      Dirt Orb1: 738157708
+      Dirt Orb2: 738271697
+      Dirt Orb3: 877351625
+      DirtWave: 676548887
+      NeutralOrb1: -1016068919
+      NeutralOrb2: 234361106
+      NeutralOrb3: -2077378111
+      NeutralWave: 1329592942
+      WaterOrb1: 27604667
+      WaterOrb2: -850227327
+      WaterOrb3: 1320611165
+      WaterWave: 1366816372
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

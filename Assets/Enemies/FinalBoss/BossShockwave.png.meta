@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: b94878a48bac57647851ff3ef8eb7363
+guid: dca9e6cfec07a764497f6bad46bcc8f9
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -106,144 +106,131 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: Android
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 0
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: SpaghettiMonsterMove_0
+      name: BossShockwave_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 256
+        width: 256
+        height: 128
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ab6baa658e8a3eb4cbdeae6bfdb16ecd
+      internalID: 746105929
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BossShockwave_1
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 256
+        width: 256
+        height: 128
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4c206a266a3db6040b7e61c09837334d
+      internalID: -899260581
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BossShockwave_2
       rect:
         serializedVersion: 2
         x: 0
         y: 128
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 256
+        height: 128
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1fe49558320a4304dbd05d7967edc3de
-      internalID: 1723271305
+      spriteID: 16d5b0899429cad40ad28b502a633a57
+      internalID: 184605254
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SpaghettiMonsterMove_1
+      name: BossShockwave_3
       rect:
         serializedVersion: 2
-        x: 64
+        x: 256
         y: 128
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 256
+        height: 128
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6f52e442fb94b4f48b3ca9faf3e39fdc
-      internalID: -2069777714
+      spriteID: 44e36005f5110f144b89342bfaecdbd1
+      internalID: -999852176
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SpaghettiMonsterMove_2
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 64
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 8a3087765a0fa8b41a4527e21f55e773
-      internalID: 1760773305
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: SpaghettiMonsterMove_3
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 64
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: bc910b8d5869bcf4c891337f97cafd5e
-      internalID: 1853985423
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: SpaghettiMonsterMove_4
+      name: BossShockwave_4
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 256
+        height: 128
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 605c76a92dbb5594eb3156aa2d8a717e
-      internalID: -1059360520
+      spriteID: 746386b20733c70419aa5cd311a38c84
+      internalID: -383412361
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SpaghettiMonsterMove_5
+      name: BossShockwave_5
       rect:
         serializedVersion: 2
-        x: 64
+        x: 256
         y: 0
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 256
+        height: 128
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4fa34c716b441e844b54396906dcb21f
-      internalID: 938564582
+      spriteID: c3550093b825bb543854b45eeca29eef
+      internalID: 1674964022
       vertices: []
       indices: 
       edges: []
@@ -259,12 +246,12 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      SpaghettiMonsterMove_0: 1723271305
-      SpaghettiMonsterMove_1: -2069777714
-      SpaghettiMonsterMove_2: 1760773305
-      SpaghettiMonsterMove_3: 1853985423
-      SpaghettiMonsterMove_4: -1059360520
-      SpaghettiMonsterMove_5: 938564582
+      BossShockwave_0: 746105929
+      BossShockwave_1: -899260581
+      BossShockwave_2: 184605254
+      BossShockwave_3: -999852176
+      BossShockwave_4: -383412361
+      BossShockwave_5: 1674964022
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

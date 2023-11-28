@@ -316,7 +316,7 @@ MonoBehaviour:
     maxNormalAngle: 0
   _hurtBox: {fileID: 0}
   _enemySkills:
+  - {fileID: 11400000, guid: 17a0bcf85dd98fc41ae0a16f18444cff, type: 2}
   - {fileID: 0}
-  - {fileID: 0}
-  _animOverride: {fileID: 0}
+  _animOverride: {fileID: 22100000, guid: 6debf1c59b80153458161bd8fa985d3e, type: 2}
   _angleOffset: -90
