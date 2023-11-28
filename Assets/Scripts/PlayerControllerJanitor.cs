@@ -368,7 +368,7 @@ public class PlayerControllerJanitor : MonoBehaviour
             {
                 isDashing = true;
                 StartCoroutine(DoDash());
-                PlayerStats.dashIFrame(0.1f);
+                PlayerStats.dashIFrame(0.25f);
             }
         }
         else
@@ -378,7 +378,7 @@ public class PlayerControllerJanitor : MonoBehaviour
                 airDashesRemaining--;
                 isDashing = true;
                 StartCoroutine(DoDash());
-                PlayerStats.dashIFrame(0.1f);
+                PlayerStats.dashIFrame(0.25f);
             }
         }
     }
