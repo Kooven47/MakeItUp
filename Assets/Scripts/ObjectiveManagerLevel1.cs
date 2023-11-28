@@ -44,6 +44,8 @@ public class ObjectiveManagerLevel1 : MonoBehaviour,ISaveGame
 
         if (_objectivesComplete >= 5)
         {
+            GameObject.Find("Grid/BossEnclosure").GetComponent<WallEnclosureCollisionLevel1>().spawnEnemies = false;
+            GameObject.Find("Grid/BossEnclosure").GetComponent<WallEnclosureCollisionLevel1>().isBossEntrance = false;
             _barriers.transform.GetChild(3).gameObject.SetActive(false);
             objectiveText.SetText("Level 1: Janitor's Closet" + System.Environment.NewLine + "Current Objective - Get to the Elevator");
         }
