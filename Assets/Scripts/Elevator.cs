@@ -13,7 +13,7 @@ public class Elevator : MonoBehaviour
     private IEnumerator Advance()
     {
         anim.SetBool("Fade", true);
-        yield return new WaitForSecondsRealtime(4f);
+        yield return new WaitForSecondsRealtime(2f);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 }
