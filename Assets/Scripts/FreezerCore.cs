@@ -12,6 +12,7 @@ public class FreezerCore : MonoBehaviour
         _freezerAI = this.GetComponent<EnemyAI>();
         _player = GameObject.FindWithTag("Player");
     }
+    
     private void Update()
     {
         AdjustFreezerSpeedBasedOnDistance();
@@ -36,13 +37,14 @@ public class FreezerCore : MonoBehaviour
 
     private void AdjustFreezerSpeedBasedOnDistance()
     {
+        // Feel free to adjust these as you see fit
         const int minSpeed = 400;
         const int maxSpeed = 800;
         const int minDistance = 5;
         const int maxDistance = 20;
         
         var distance = Vector2.Distance(_player.transform.position, transform.position);
-        Debug.Log($"Distance: {distance}");
+        // Debug.Log($"Distance: {distance}");
         
         if (distance > maxDistance) 
         { 
