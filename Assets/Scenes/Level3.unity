@@ -76240,6 +76240,10 @@ PrefabInstance:
       propertyPath: _explosioneffect.Array.data[2]
       value: 
       objectReference: {fileID: 1366816372, guid: ecd4deed2c926104cb70607708c4b1dd, type: 3}
+    - target: {fileID: 5708073074597584633, guid: 7c3671f993f24404eaece258d4e23f3e, type: 3}
+      propertyPath: speed
+      value: 500
+      objectReference: {fileID: 0}
     - target: {fileID: 6685603223680461644, guid: 7c3671f993f24404eaece258d4e23f3e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 28.41

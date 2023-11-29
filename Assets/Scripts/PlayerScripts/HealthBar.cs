@@ -98,11 +98,11 @@ public class HealthBar : MonoBehaviour
         // For test purposes. Later on the HP management will be done by stat script.
         if (Input.GetKeyUp("c"))
         {
-            SetHealth(_testCurHP - 10f,_testMaxHP);
+            // SetHealth(_testCurHP - 10f,_testMaxHP);
         }
         if (Input.GetKeyUp("v"))
         {
-            SetHealth(_testCurHP + 10f,_testMaxHP);
+            // SetHealth(_testCurHP + 10f,_testMaxHP);
         }
     }
 }
