@@ -6,6 +6,8 @@ public class FreezerCore : MonoBehaviour
 {
     private EnemyAI _freezerAI;
     private GameObject _player;
+
+    [SerializeField]private float _contactDamage = 30f;
     
     private void Start()
     {
@@ -25,6 +27,15 @@ public class FreezerCore : MonoBehaviour
             var block = other.gameObject;
             block.SetActive(false);
             StartCoroutine(SlowFreezerDown(0.2f, 0.5f));
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.collider.gameObject.CompareTag("Player"))
+        {
+            Collider2D col = other.collider;
+            col.GetComponent<PlayerStats>().DamageCalc(_contactDamage,EnumLib.DamageType.Wet,true);
         }
     }
 
