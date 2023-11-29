@@ -27,9 +27,11 @@ public class Elevator : MonoBehaviour,ISaveGame
 
     private IEnumerator Advance()
     {
+        _playerControllerJanitor.SetStunned(true);
         anim.SetBool("Fade", true);
         SaveSystem.instance.SaveGame();
         yield return new WaitForSecondsRealtime(2f);
+        _playerControllerJanitor.SetStunned(false);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 

@@ -13,7 +13,7 @@ public class CheckpointManager : MonoBehaviour,ISaveGame
 
     public static Action<int> setCheckPoint;
 
-    private int _currentCheckPoint = -1;
+    private int _currentCheckPoint = 0;
 
     public int CurrentCheckPoint
     {
@@ -22,36 +22,36 @@ public class CheckpointManager : MonoBehaviour,ISaveGame
 
     private bool _initialized = false;
     // Start is called before the first frame update
-    void Awake()
-    {
-        if (_initialized)
-            return;
-        _janitor = GameObject.Find("Janitor");
-        for (int i = 0; i < transform.childCount; i++)
-        {
-            _checkpoints.Add(transform.GetChild(i).gameObject);
-        }
-
-        setCheckPoint = SetCheckPoint;
-        _initialized = true;
-    }
+    // void Awake()
+    // {
+    //     if (_initialized)
+    //         return;
+    //     _janitor = GameObject.Find("Janitor");
+    //     for (int i = 0; i < transform.childCount; i++)
+    //     {
+    //         _checkpoints.Add(transform.GetChild(i).gameObject);
+    //     }
+    //
+    //     setCheckPoint = SetCheckPoint;
+    //     _initialized = true;
+    // }
 
     public void SetCheckPoint(int i)
     {
-        if (i >= _currentCheckPoint)
-        {
-            _currentCheckPoint = i;
-            SaveSystem.instance.SaveGame();
-        }
+        // if (i >= _currentCheckPoint)
+        // {
+        //     _currentCheckPoint = i;
+        //     SaveSystem.instance.SaveGame();
+        // }
     }
 
     public void LoadSaveData(SaveData data)
     {
         // SceneManager.LoadScene(data.currentLevel);
         _currentCheckPoint = data.numObjectivesCompleted;
-        Awake();
+        // Awake();
         int i = _currentCheckPoint >= _checkpoints.Count ? _checkpoints.Count - 1 : _currentCheckPoint;
-        _janitor.transform.position = _checkpoints[i].transform.position;
+        // _janitor.transform.position = _checkpoints[i].transform.position;
     }
 
     public void LoadInitialData(SaveData data)

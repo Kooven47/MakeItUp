@@ -1146,7 +1146,19 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 397336105977092172, guid: 52ef50d26a617054f942d9f279d53e36, type: 3}
       propertyPath: m_Size.x
-      value: 1.2
+      value: 1.6136785
+      objectReference: {fileID: 0}
+    - target: {fileID: 397336105977092172, guid: 52ef50d26a617054f942d9f279d53e36, type: 3}
+      propertyPath: m_Size.y
+      value: 1.8952732
+      objectReference: {fileID: 0}
+    - target: {fileID: 397336105977092172, guid: 52ef50d26a617054f942d9f279d53e36, type: 3}
+      propertyPath: m_Offset.x
+      value: -0.15127063
+      objectReference: {fileID: 0}
+    - target: {fileID: 397336105977092172, guid: 52ef50d26a617054f942d9f279d53e36, type: 3}
+      propertyPath: m_Offset.y
+      value: 0.4476366
       objectReference: {fileID: 0}
     - target: {fileID: 400818854647062406, guid: 52ef50d26a617054f942d9f279d53e36, type: 3}
       propertyPath: m_IsActive
@@ -1331,7 +1343,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _isMelee: 1
   _projectileRange: {x: 5, y: 3}
-  _meleeRange: {x: 3, y: 2}
+  _meleeRange: {x: 3, y: 20}
   _hurtLayers:
     useTriggers: 0
     useLayerMask: 0
