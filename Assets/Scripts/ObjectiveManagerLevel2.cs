@@ -89,7 +89,7 @@ public class Objective1Investigate : Objective
 
     public override void Display()
     {
-        objectiveText.SetText("Level 2: Cafeteria" + System.Environment.NewLine + "Current Objective - Investigate a Mysterious Noise To The Right...");
+        objectiveText.SetText("Level 2: Cafeteria" + System.Environment.NewLine + "Current Objective - Find a way out of the cafeteria");
     }
 
     public override void Cleanup()
