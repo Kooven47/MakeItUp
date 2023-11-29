@@ -269,7 +269,7 @@ MonoBehaviour:
   _attack: 5
   _defense: 2
   _moveSpeed: 1
-  _critRate: 0.05
+  _critRate: 0.15
   _critDMG: 0.5
   _invincTimer: 0.5
 --- !u!251 &8128059514542387555

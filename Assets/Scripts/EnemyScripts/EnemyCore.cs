@@ -222,7 +222,7 @@ public class EnemyCore : MonoBehaviour
 
     void Update()
     {
-        if (_canAttack)
+        if (_canAttack && _enemySkills.Length > 0)
         {
             SelectAttack();
             if (_attackIndex != -1)
