@@ -24,6 +24,11 @@ public class ObjectiveManagerLevel3 : MonoBehaviour, ISaveGame
     // Start is called before the first frame update
     void Start()
     {
+        if (_objectivesComplete < 0)
+        {
+            SaveSystem.instance.LoadGame();
+        }
+        
         objList = new Queue<Objective>();
         barrierList = new Queue<GameObject>();
 

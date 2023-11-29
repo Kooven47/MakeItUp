@@ -23,13 +23,15 @@ public class SaveSystem: MonoBehaviour
             Debug.LogError("Should not occur");
         }
         instance = this;
+
+        fdh = new FileDataHandler(Application.persistentDataPath,fileName, useEncryption);
+        this.saveSystemObjects = FindAllSaveObjects();
+        LoadGame();
     }
 
     private void Start()
     {
-        fdh = new FileDataHandler(Application.persistentDataPath,fileName, useEncryption);
-        this.saveSystemObjects = FindAllSaveObjects();
-        LoadGame();
+        
     }
 
     private List<ISaveGame> FindAllSaveObjects()
