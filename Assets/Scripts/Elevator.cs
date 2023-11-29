@@ -2,10 +2,12 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class Elevator : MonoBehaviour
+public class Elevator : MonoBehaviour,ISaveGame
 {
     public Animator anim;
     private PlayerControllerJanitor _playerControllerJanitor;
+
+    bool _entered = false;
     
     private void Start()
     {
@@ -17,6 +19,7 @@ public class Elevator : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             const int ELEVATOR = 9;
+            _entered = true;
             _playerControllerJanitor.PlaySoundEffect(ELEVATOR);
             StartCoroutine(Advance());
         }
@@ -25,7 +28,36 @@ public class Elevator : MonoBehaviour
     private IEnumerator Advance()
     {
         anim.SetBool("Fade", true);
+        SaveSystem.instance.SaveGame();
         yield return new WaitForSecondsRealtime(2f);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
+
+    public void LoadSaveData(SaveData data)
+    {
+        
+    }
+
+    public void LoadInitialData(SaveData data)
+    {
+        
+    }
+
+    public void SaveData(ref SaveData data)
+    {
+        if (!_entered)
+            return;
+        
+        data.currentLevel = SceneManager.GetActiveScene().buildIndex + 1;
+        data.numObjectivesCompleted = 0;
+    }
+
+    public void SaveInitialData(ref SaveData data)
+    {
+        if(!_entered)
+            return;
+        
+        data.currentLevel = SceneManager.GetActiveScene().buildIndex + 1;
+        data.numObjectivesCompleted = 0;
     }
 }
