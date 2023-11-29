@@ -306,6 +306,7 @@ public class PlayerControllerJanitor : MonoBehaviour
         if (Input.GetButtonDown("Jump") && wallJumpingTimeCounter > 0f)
         {
             isWallJumping = true;
+            if (Time.timeScale != 0) PlaySoundEffect(JUMP);
             rb.velocity = new Vector2(wallJumpingDirection * wallJumpingPower.x, wallJumpingPower.y);
             jumpCount = 0; // maybe a mistake lol
             StartCoroutine(JumpCooldown(wallJumpingDuration));

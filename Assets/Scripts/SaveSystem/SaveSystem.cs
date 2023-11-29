@@ -79,7 +79,6 @@ public class SaveSystem: MonoBehaviour
 
     public void SaveGame()
     {
-        
         foreach(ISaveGame ss in saveSystemObjects)
         {
             ss.SaveData(ref sd);

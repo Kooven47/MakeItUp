@@ -38,7 +38,7 @@ public class ScrollWheelZoom : MonoBehaviour
             float currentRatio = (vCam.m_Lens.OrthographicSize - curMinOrthographicSize) /
                                  (curMaxOrthographicSize - curMinOrthographicSize);
             float newCalculatedOrthographicSize = currentRatio * (maxOrthoSize - minOrthoSize) + minOrthoSize;
-            Debug.Log("Old orthographic size: " + vCam.m_Lens.OrthographicSize);
+            // Debug.Log("Old orthographic size: " + vCam.m_Lens.OrthographicSize);
             updating = true;
             StartCoroutine(SmoothTowardsNewValue(newCalculatedOrthographicSize, cameraUpdateTime));
             curMinOrthographicSize = minOrthoSize;
@@ -50,7 +50,7 @@ public class ScrollWheelZoom : MonoBehaviour
             float scrollWheelInput = Input.GetAxis("Mouse ScrollWheel");
             float newOrthographicSize = vCam.m_Lens.OrthographicSize - scrollWheelInput * zoomSpeed;
             newOrthographicSize = Mathf.Clamp(newOrthographicSize, curMinOrthographicSize, curMaxOrthographicSize);
-            if (newOrthographicSize != vCam.m_Lens.OrthographicSize) Debug.Log("New orthographic size: " + newOrthographicSize);
+            // if (newOrthographicSize != vCam.m_Lens.OrthographicSize) Debug.Log("New orthographic size: " + newOrthographicSize);
             vCam.m_Lens.OrthographicSize = newOrthographicSize;
         }
 
@@ -71,6 +71,6 @@ public class ScrollWheelZoom : MonoBehaviour
         }
         vCam.m_Lens.OrthographicSize = endValue;
         updating = false;
-        Debug.Log("New orthographic size: " + endValue);
+        // Debug.Log("New orthographic size: " + endValue);
     }
 }

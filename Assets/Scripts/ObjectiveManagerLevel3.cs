@@ -9,7 +9,7 @@ using TMPro;
 using Object = UnityEngine.Object;
 using Random = UnityEngine.Random;
 
-public class ObjectiveManagerLevel3 : MonoBehaviour
+public class ObjectiveManagerLevel3 : MonoBehaviour, ISaveGame
 {
     public Queue<Objective> objList;
     public static bool activeObjective;
@@ -20,7 +20,8 @@ public class ObjectiveManagerLevel3 : MonoBehaviour
     public static Queue<GameObject> barrierList;
     [SerializeField] private List<Transform> minibossSpawnLocations1;
     public static List<Transform> minibossSpawnLocations2;
-    
+    private int _objectivesComplete = -1;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -29,14 +30,28 @@ public class ObjectiveManagerLevel3 : MonoBehaviour
 
         objectiveText.SetText("Level 3: Executive Suite" + System.Environment.NewLine + "Current Objective - Head to the east");
         activeObjective = false;
+        Debug.Log($"num objectives completed: {_objectivesComplete}");
+        
+        if (_objectivesComplete < 2)
+            objList.Enqueue(new Objective1Survive());
+        if (_objectivesComplete < 3)
+            objList.Enqueue(new Objective2GetOut());
+        if (_objectivesComplete < 4)
+            objList.Enqueue(new Objective3KillPianos());
+        if (_objectivesComplete < 5)
+            objList.Enqueue(new Objective4GetToMiniBosses());
+        if (_objectivesComplete < 6)
+            objList.Enqueue(new Objective5DefeatMiniBosses());
+        if (_objectivesComplete < 7)
+            objList.Enqueue(new Objective6DefeatBoss());
 
-        objList.Enqueue(new Objective1Survive());
-        objList.Enqueue(new Objective2GetOut());
-        objList.Enqueue(new Objective3KillPianos());
-        objList.Enqueue(new Objective4GetToMiniBosses());
-        objList.Enqueue(new Objective5DefeatMiniBosses());
-        objList.Enqueue(new Objective6DefeatBoss());
-
+        if (_objectivesComplete >= 2)
+        {
+            GameObject.Find("Grid/EnemyEnclosure1").GetComponent<WallEnclosureCollisionLevel3>().spawnEnemies = false;
+            GameObject.Find("Grid/EnemyEnclosure1/Wall1").gameObject.SetActive(true);
+            _barriers.transform.GetChild(0).gameObject.SetActive(false);
+        }
+        
         minibossSpawnLocations2 = minibossSpawnLocations1;
         
         if (_barriers != null) 
@@ -47,6 +62,11 @@ public class ObjectiveManagerLevel3 : MonoBehaviour
                 wallGameObject.SetActive(true);
                 barrierList.Enqueue(wallGameObject);
             }
+        }
+        
+        if (_objectivesComplete > 0)
+        {
+            UpdateObjective?.Invoke();
         }
     }
     
@@ -82,6 +102,26 @@ public class ObjectiveManagerLevel3 : MonoBehaviour
     {
         UpdateObjective -= NextObjective;
     }
+    
+    public void SaveData(ref SaveData sd)
+    {
+        
+    }
+
+    public void SaveInitialData(ref SaveData sd)
+    {
+        
+    }
+
+    public void LoadSaveData(SaveData sd)
+    {
+        _objectivesComplete = sd.numObjectivesCompleted;
+    }
+
+    public void LoadInitialData(SaveData sd)
+    {
+        _objectivesComplete = -1;
+    }
 }
 
 public class Objective1Survive : Objective
@@ -96,6 +136,7 @@ public class Objective1Survive : Objective
     private List<GameObject> _enemies;
     public override void OnStart()
     {
+        CheckpointManager.setCheckPoint?.Invoke(1);
         _enemies = new List<GameObject>();
         Debug.Log("on start triggered");
         ObjectiveManagerLevel3.activeObjective = true;
@@ -193,6 +234,7 @@ public class Objective2GetOut : Objective
     
     public override void OnComplete()
     {
+        CheckpointManager.setCheckPoint?.Invoke(2);
         ObjectiveManagerLevel3.activeObjective = false;
         ObjectiveManagerLevel3.OnUpdateObjective();
     }
@@ -246,6 +288,7 @@ public class Objective3KillPianos : Objective
     
     public override void OnComplete()
     {
+        CheckpointManager.setCheckPoint?.Invoke(3);
         ObjectiveManagerLevel3.activeObjective = false;
         EnemyStats.OnDeath -= KillUpdate;
         ObjectiveManagerLevel3.OnUpdateObjective();
@@ -289,6 +332,7 @@ public class Objective4GetToMiniBosses : Objective
     
     public override void OnComplete()
     {
+        CheckpointManager.setCheckPoint?.Invoke(4);
         ObjectiveManagerLevel3.activeObjective = false;
         ObjectiveManagerLevel3.OnUpdateObjective();
         
@@ -360,6 +404,7 @@ public class Objective5DefeatMiniBosses : Objective
     
     public override void OnComplete()
     {
+        CheckpointManager.setCheckPoint?.Invoke(5);
         ObjectiveManagerLevel3.activeObjective = false;
         EnemyStats.OnDeath -= KillUpdate;
         ObjectiveManagerLevel3.OnUpdateObjective();
@@ -409,6 +454,7 @@ public class Objective6DefeatBoss : Objective
 
     public override void OnComplete()
     {
+        CheckpointManager.setCheckPoint?.Invoke(6);
         ObjectiveManagerLevel3.activeObjective = false;
         ObjectiveManagerLevel3.OnUpdateObjective();
         

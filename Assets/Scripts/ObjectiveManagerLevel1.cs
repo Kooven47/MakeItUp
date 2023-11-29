@@ -7,7 +7,7 @@ using UnityEngine.Events;
 using static KillManager;
 using TMPro;
 
-public class ObjectiveManagerLevel1 : MonoBehaviour,ISaveGame
+public class ObjectiveManagerLevel1 : MonoBehaviour, ISaveGame
 {
     public Queue<Objective> objList;
     public static bool activeObjective;
@@ -25,7 +25,7 @@ public class ObjectiveManagerLevel1 : MonoBehaviour,ISaveGame
 
         objectiveText.SetText("Level 1: Janitor's Closet" + System.Environment.NewLine + "Current Objective - Head to north-east platform");
         activeObjective = false;
-        Debug.Log("Objectives completed "+_objectivesComplete);
+        Debug.Log("Objectives completed " + _objectivesComplete);
         if (_objectivesComplete < 2)
             objList.Enqueue(new Objective1KillSpaghettiMonster());
         if (_objectivesComplete < 3)
