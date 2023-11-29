@@ -21,8 +21,8 @@ public class ToiletBossAI : BossCore
     private float phaseOneDashSpeed = 25f;
     private float phaseTwoDashSpeed = 50f;
     private float currentDashSpeed;
-    private float phaseOneDamage = 10f;
-    private float phaseTwoDamage = 20f;
+    private float phaseOneDamage = 15f;
+    private float phaseTwoDamage = 25f;
     private float currentDamage;
     private bool isDashing = false;
     private int dashesRemaining;
@@ -33,7 +33,7 @@ public class ToiletBossAI : BossCore
     private bool _isReady = true;
     
     private float centerCooldown = 5f;
-    private float playerHitCooldown = 3f;
+    private float playerHitCooldown = 1.5f;
 
     private bool justSpawned = true;
     private enum BossState

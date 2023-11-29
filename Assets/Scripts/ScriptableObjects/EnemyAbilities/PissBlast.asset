@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2de1d81a5b6c432449110860e48a0570, type: 3}
   m_Name: PissBlast
   m_EditorClassIdentifier: 
-  damage: 3
+  damage: 20
   animations:
   - {fileID: 7400000, guid: 224604f92d71a0340a14b7457488650a, type: 2}
   - {fileID: 7400000, guid: a4fe4566fdf7ba041ad3761e27b38bf4, type: 2}
