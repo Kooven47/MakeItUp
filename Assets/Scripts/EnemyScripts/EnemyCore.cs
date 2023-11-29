@@ -16,6 +16,8 @@ public class EnemyCore : MonoBehaviour
     protected const string ATTACK ="Attack", RECOVERY = "Recovery",ATTACKCHARGE = "AttackCharge", ATTACKRELEASE ="AttackRelease";
     protected Coroutine _idleTimer, _attackWindUp;
 
+    protected EnemyStats _enemyStats;
+
     protected Animator _anim;
 
     protected bool _canAttack = false;
@@ -32,6 +34,7 @@ public class EnemyCore : MonoBehaviour
 
     protected virtual void Start()
     {
+        _enemyStats = transform.parent.GetComponent<EnemyStats>();
         _idleTimer = StartCoroutine(IdleTimer(3f));
         _animOverride = Instantiate(_animOverride);
         _anim = GetComponent<Animator>();
@@ -67,7 +70,7 @@ public class EnemyCore : MonoBehaviour
         if (skillIndex == -1)
             skillIndex = 0;
 
-        ProjectileManager.createProjectile?.Invoke(transform.position,Direction(),_enemySkills[skillIndex]);
+        ProjectileManager.createProjectile?.Invoke(transform.position,Direction(),_enemySkills[skillIndex],_enemyStats.attack);
     }
 
     protected virtual void MeleeStrike()
@@ -92,7 +95,7 @@ public class EnemyCore : MonoBehaviour
                     {
                         Vector2 direction = (col.transform.position - transform.position).normalized;
                         col.GetComponent<PlayerInterrupt>().Stagger(1,_knockBackVector * direction * 0.5f);
-                        _playerStat.DamageCalc(_enemySkills[_attackIndex].damage,_enemySkills[_attackIndex].attribute,false);
+                        _playerStat.DamageCalc(_enemySkills[_attackIndex].damage + _enemyStats.attack,_enemySkills[_attackIndex].attribute,false);
                         col.gameObject.GetComponent<DamageEffect>().TriggerEffect((int)_enemySkills[_attackIndex].attribute);
                         didHit = true;
                     }

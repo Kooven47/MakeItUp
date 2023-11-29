@@ -13,9 +13,9 @@ public class DirtyDishCore : EnemyCore
         if (skillIndex == -1)
             skillIndex = 0;
         
-        ProjectileManager.createProjectile(new Vector2(_firePoint.position.x,_firePoint.position.y - _firePointOffset),Direction(),_enemySkills[0]);
-        ProjectileManager.createProjectile(_firePoint.position,Direction(),_enemySkills[0]);
-        ProjectileManager.createProjectile(new Vector2(_firePoint.position.x,_firePoint.position.y + _firePointOffset),Direction(),_enemySkills[0]);
+        ProjectileManager.createProjectile(new Vector2(_firePoint.position.x,_firePoint.position.y - _firePointOffset),Direction(),_enemySkills[0],_enemyStats.attack);
+        ProjectileManager.createProjectile(_firePoint.position,Direction(),_enemySkills[0],_enemyStats.attack);
+        ProjectileManager.createProjectile(new Vector2(_firePoint.position.x,_firePoint.position.y + _firePointOffset),Direction(),_enemySkills[0],_enemyStats.attack);
     }
 
     void Update()

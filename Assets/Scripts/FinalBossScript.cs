@@ -7,7 +7,6 @@ using Random = UnityEngine.Random;
 public class FinalBossScript : EnemyCore
 {
     // Bosscore?
-    protected EnemyStats _bossStats;
     protected EnemyAI _bossAI;
     protected Rigidbody2D _bossRB;
     protected SpriteRenderer _bossSpriteRender;
@@ -46,7 +45,7 @@ public class FinalBossScript : EnemyCore
         spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
         numMinions = minionLocations.Count;
         _bossGameObject = transform.parent.gameObject;
-        _bossStats = _bossGameObject.GetComponent<EnemyStats>();
+        _enemyStats = _bossGameObject.GetComponent<EnemyStats>();
         _bossAI = _bossGameObject.GetComponent<EnemyAI>();
         _bossRB = _bossGameObject.GetComponent<Rigidbody2D>();
         
@@ -124,7 +123,7 @@ public class FinalBossScript : EnemyCore
         if (numDry > numWet)
         {
             // Make attribute Dry
-            _bossStats.Attribute = EnumLib.DamageType.Dry;
+            _enemyStats.Attribute = EnumLib.DamageType.Dry;
             _bossSpriteRender.material = DryOutline;
             _bossBubbleEmitter.gameObject.SetActive(false);
             _bossDustEmitter.gameObject.SetActive(true);
@@ -132,7 +131,7 @@ public class FinalBossScript : EnemyCore
         else if (numWet > numDry)
         {
             // Make attribute Wet
-            _bossStats.Attribute = EnumLib.DamageType.Wet;
+            _enemyStats.Attribute = EnumLib.DamageType.Wet;
             _bossSpriteRender.material = WetOutline;
             _bossBubbleEmitter.gameObject.SetActive(true);
             _bossDustEmitter.gameObject.SetActive(false);
@@ -140,7 +139,7 @@ public class FinalBossScript : EnemyCore
         else if (numWet == numDry)
         {
             // Make attribute Neutral
-            _bossStats.Attribute = EnumLib.DamageType.Neutral;
+            _enemyStats.Attribute = EnumLib.DamageType.Neutral;
             _bossSpriteRender.material = defaultOutline;
             _bossBubbleEmitter.gameObject.SetActive(false);
             _bossDustEmitter.gameObject.SetActive(false);
@@ -161,15 +160,15 @@ public class FinalBossScript : EnemyCore
             float charging = chargeTime.x * 0.9f;
             float finalCharge = chargeTime.x - charging;
 
-            _lastRecorded = _bossStats.Attribute;
+            _lastRecorded = _enemyStats.Attribute;
             _bossOrb.SetActive(true);
             SetOrb((int)_lastRecorded);
             
             while (charging > 0f)
             {
-                if (_lastRecorded != _bossStats.Attribute)
+                if (_lastRecorded != _enemyStats.Attribute)
                 {
-                    _lastRecorded = _bossStats.Attribute;
+                    _lastRecorded = _enemyStats.Attribute;
                     SetOrb((int)_lastRecorded);
                 }
                 charging -= Time.deltaTime;
@@ -186,7 +185,7 @@ public class FinalBossScript : EnemyCore
             yield return new WaitForSeconds(chargeTime.y);
             _anim.SetTrigger("endAttack");
             _attackWindUp = null;
-            _orbCooldown = StartCoroutine(OrbCooldown((numAlive > 0 ? 8f : 5f)));
+            _orbCooldown = StartCoroutine(OrbCooldown((numAlive > 0 ? 12f : 8f)));
             SummonShockwave(false);
             Recovery();
         }
@@ -362,8 +361,8 @@ public class FinalBossScript : EnemyCore
                     {
                         Vector2 direction = (col.transform.position - transform.position).normalized;
                         col.GetComponent<PlayerInterrupt>().Stagger(1,_knockBackVector * direction * 0.5f);
-                        _playerStat.DamageCalc(_enemySkills[_attackIndex].damage,_bossStats.Attribute,false);
-                        col.gameObject.GetComponent<DamageEffect>().TriggerEffect((int)_bossStats.Attribute);
+                        _playerStat.DamageCalc(_enemySkills[_attackIndex].damage,_enemyStats.Attribute,false);
+                        col.gameObject.GetComponent<DamageEffect>().TriggerEffect((int)_enemyStats.Attribute);
                         didHit = true;
                     }
                     else
@@ -409,7 +408,7 @@ public class FinalBossScript : EnemyCore
 
     void Update()
     {
-        // if (_bossStats.healthRatio <= 0.5f)
+        // if (_enemyStats.healthRatio <= 0.5f)
         // {
         //     _bossRB.gravityScale = 0;
         //     _bossAI.flyingEnabled = true;

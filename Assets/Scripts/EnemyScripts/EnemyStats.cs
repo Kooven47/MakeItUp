@@ -7,6 +7,7 @@ public class EnemyStats : Stats
 {
     public const int RESIST = -1, NEUTRAL = 0, WEAK = 1;
     [SerializeField] EnumLib.DamageType _attribute = EnumLib.DamageType.Neutral;
+    [SerializeField] private float _healthDropChance = 0.25f;
 
     public EnumLib.DamageType Attribute
     {
@@ -64,7 +65,7 @@ public class EnemyStats : Stats
         Destroy(gameObject);
         if (PlayerStatus.Instance.playerHPRatio <= 0.5f)
         {
-            if (UnityEngine.Random.Range(0f,1f) < 0.25f)
+            if (UnityEngine.Random.Range(0f,1f) <= _healthDropChance)
             {
                 PowerupManager.spawnHealingItem?.Invoke(0, transform.position);
             }

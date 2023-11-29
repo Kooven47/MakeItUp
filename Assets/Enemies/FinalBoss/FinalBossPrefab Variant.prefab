@@ -1240,6 +1240,10 @@ PrefabInstance:
       propertyPath: m_Offset.y
       value: 0.57
       objectReference: {fileID: 0}
+    - target: {fileID: 4458653363327073621, guid: 52ef50d26a617054f942d9f279d53e36, type: 3}
+      propertyPath: m_Mass
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 4547201741492377882, guid: 52ef50d26a617054f942d9f279d53e36, type: 3}
       propertyPath: m_Name
       value: BossSprite

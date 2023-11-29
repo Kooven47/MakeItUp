@@ -8,7 +8,8 @@ public class ProjectileManager : MonoBehaviour
     [SerializeField] private int _projectileCopies = 10;
     [SerializeField] private GameObject _projectilePrefab;
     Queue<GameObject> _projectileQueue = new();
-    public static Action<Vector2,Vector2,Ability> createProjectile,projectileArc;
+    public static Action<Vector2,Vector2,Ability,float> createProjectile;
+    public static Action<Vector2,Vector2,Ability> projectileArc;
     
     public static Action<GameObject> returnProjectile;
 
@@ -44,11 +45,11 @@ public class ProjectileManager : MonoBehaviour
             temp.GetComponent<ProjectileScript>().FireArc(trajectory,_skill);
     }
 
-    public void SummonProjectile(Vector2 position, Vector2 trajectory, Ability _skill)
+    public void SummonProjectile(Vector2 position, Vector2 trajectory, Ability _skill, float attack)
     {
             GameObject temp = _projectileQueue.Dequeue();
             temp.gameObject.SetActive(true);
             temp.transform.position = position;
-            temp.GetComponent<ProjectileScript>().Fire(trajectory,_skill);
+            temp.GetComponent<ProjectileScript>().Fire(trajectory,_skill, attack);
     }
 }

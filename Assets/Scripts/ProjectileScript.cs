@@ -23,6 +23,8 @@ public class ProjectileScript : MonoBehaviour
     protected EnumLib.DamageType _damageType = EnumLib.DamageType.Neutral;
     protected EnumLib.KnockBackPower _knockBack = EnumLib.KnockBackPower.Sideways;
 
+    private float _attack = 0f;
+
     public EnumLib.DamageType damageType
     {
         get{return _damageType;}
@@ -70,13 +72,14 @@ public class ProjectileScript : MonoBehaviour
         }
     }
 
-    public void Fire(Vector2 trajectory, Ability skill)
+    public void Fire(Vector2 trajectory, Ability skill, float attack)
     {
         InitializeProjectile(skill);
         _anim.Play("Motion");
         _rigid.AddForce(trajectory * 300f);
         _projectileLife = StartCoroutine(ProjectileLifeSpan(3f));
         _rigid.gravityScale = 0f;
+        _attack = attack;
     }
 
     protected IEnumerator ProjectileLifeSpan(float projTime)
@@ -96,7 +99,7 @@ public class ProjectileScript : MonoBehaviour
             {
                 Vector2 knockBack = EnumLib.KnockbackVector(_knockBack);
                 col.GetComponent<PlayerInterrupt>().Stagger((int) _damageType,Vector2.zero);
-                _playerStat.DamageCalc(_damage,_damageType,false); 
+                _playerStat.DamageCalc(_damage + _attack,_damageType,false); 
                 col.gameObject.GetComponent<DamageEffect>().TriggerEffect((int) _damageType);
             }
             Dissipate();
