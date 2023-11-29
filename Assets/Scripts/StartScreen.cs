@@ -6,6 +6,7 @@ public class StartScreen : MonoBehaviour,ISaveGame
     bool _readyToLoad = false;
     public void NewGame()
     {
+        _readyToLoad = true;
         SaveSystem.instance.SaveGame();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
@@ -44,13 +45,13 @@ public class StartScreen : MonoBehaviour,ISaveGame
 
     public void SaveData(ref SaveData data)
     {
-        if (data.currentLevel < (SceneManager.GetActiveScene().buildIndex + 2))
+        if (data.currentLevel < (SceneManager.GetActiveScene().buildIndex + 2) || _readyToLoad)
             data.currentLevel = SceneManager.GetActiveScene().buildIndex + 2;
     }
 
     public void SaveInitialData(ref SaveData data)
     {
-        if (data.currentLevel < (SceneManager.GetActiveScene().buildIndex + 2))
+        if (data.currentLevel < (SceneManager.GetActiveScene().buildIndex + 2) || _readyToLoad)
             data.currentLevel = SceneManager.GetActiveScene().buildIndex + 2;
     }
 }
