@@ -32,17 +32,17 @@ public class ObjectiveManagerLevel3 : MonoBehaviour, ISaveGame
         activeObjective = false;
         Debug.Log($"num objectives completed: {_objectivesComplete}");
         
-        if (_objectivesComplete < 2)
+        if (_objectivesComplete < 1)
             objList.Enqueue(new Objective1Survive());
-        if (_objectivesComplete < 3)
+        if (_objectivesComplete < 2)
             objList.Enqueue(new Objective2GetOut());
-        if (_objectivesComplete < 4)
+        if (_objectivesComplete < 3)
             objList.Enqueue(new Objective3KillPianos());
-        if (_objectivesComplete < 5)
+        if (_objectivesComplete < 4)
             objList.Enqueue(new Objective4GetToMiniBosses());
-        if (_objectivesComplete < 6)
+        if (_objectivesComplete < 5)
             objList.Enqueue(new Objective5DefeatMiniBosses());
-        if (_objectivesComplete < 7)
+        if (_objectivesComplete < 6)
             objList.Enqueue(new Objective6DefeatBoss());
 
         if (_objectivesComplete >= 2)
@@ -50,6 +50,11 @@ public class ObjectiveManagerLevel3 : MonoBehaviour, ISaveGame
             GameObject.Find("Grid/EnemyEnclosure1").GetComponent<WallEnclosureCollisionLevel3>().spawnEnemies = false;
             GameObject.Find("Grid/EnemyEnclosure1/Wall1").gameObject.SetActive(true);
             _barriers.transform.GetChild(0).gameObject.SetActive(false);
+            GameObject.Find("Grid/EnemyEnclosure2").GetComponent<WallEnclosureCollisionLevel3>().triggerObj = false;
+            if (_objectivesComplete >= 4)
+            {
+                GameObject.Find("Grid/EnemyEnclosure4").GetComponent<WallEnclosureCollisionLevel3>().triggerObj = false;
+            }
         }
         
         minibossSpawnLocations2 = minibossSpawnLocations1;
@@ -59,6 +64,13 @@ public class ObjectiveManagerLevel3 : MonoBehaviour, ISaveGame
             for (int i = 0; i < _barriers.transform.childCount; i++)
             {
                 GameObject wallGameObject = _barriers.transform.GetChild(i).gameObject;
+                if (i + 2 <= _objectivesComplete)
+                {
+                    wallGameObject.SetActive(false); 
+                    continue;
+                }
+                
+                Debug.Log("added in barrier "+wallGameObject.name);
                 wallGameObject.SetActive(true);
                 barrierList.Enqueue(wallGameObject);
             }
@@ -136,7 +148,6 @@ public class Objective1Survive : Objective
     private List<GameObject> _enemies;
     public override void OnStart()
     {
-        CheckpointManager.setCheckPoint?.Invoke(1);
         _enemies = new List<GameObject>();
         Debug.Log("on start triggered");
         ObjectiveManagerLevel3.activeObjective = true;

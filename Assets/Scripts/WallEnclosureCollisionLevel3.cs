@@ -15,6 +15,12 @@ public class WallEnclosureCollisionLevel3 : EnclosureCollision
     [SerializeField] private ObjectiveManagerLevel3 objectiveManagerLevel3;
     [SerializeField] List<Transform> enemyLocations;
 
+    public bool triggerObj
+    {
+        get{return triggerObjective;}
+        set{triggerObjective = value;}
+    }
+
     // Start is called before the first frame update
     protected override void Start()
     {
