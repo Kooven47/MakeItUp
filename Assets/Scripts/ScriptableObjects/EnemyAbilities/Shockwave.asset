@@ -22,4 +22,4 @@ MonoBehaviour:
   - {fileID: 7400000, guid: ee85aede490b15d44823d12cb47095a0, type: 2}
   - {fileID: 7400000, guid: 24e81b41b6cbd7b4983667063385472b, type: 2}
   - {fileID: 7400000, guid: a37aa00ff5a0631479ab6c5bd65cdf2d, type: 2}
-  idleTime: 5
+  idleTime: 1
