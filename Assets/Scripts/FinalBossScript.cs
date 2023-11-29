@@ -392,16 +392,17 @@ public class FinalBossScript : EnemyCore
     protected override void SelectAttack()
     {
         
-        if (InDistance(_meleeRange))
-        {
-            _canAttack = false;
-            _attackIndex = 0;
-            _knockBackVector = EnumLib.KnockbackVector(_enemySkills[_attackIndex].force);
-        }
-        else if (InDistance(_projectileRange) && _orbCooldown == null)
+        
+        if (InDistance(_meleeRange) && _orbCooldown == null)
         {
             _canAttack = false;
             _attackIndex = 1;
+            _knockBackVector = EnumLib.KnockbackVector(_enemySkills[_attackIndex].force);
+        }
+        else if (InDistance(_meleeRange))
+        {
+            _canAttack = false;
+            _attackIndex = 0;
             _knockBackVector = EnumLib.KnockbackVector(_enemySkills[_attackIndex].force);
         }
     }
