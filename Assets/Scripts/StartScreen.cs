@@ -44,11 +44,13 @@ public class StartScreen : MonoBehaviour,ISaveGame
 
     public void SaveData(ref SaveData data)
     {
-        data.currentLevel = SceneManager.GetActiveScene().buildIndex + 2;
+        if (data.currentLevel < (SceneManager.GetActiveScene().buildIndex + 2))
+            data.currentLevel = SceneManager.GetActiveScene().buildIndex + 2;
     }
 
     public void SaveInitialData(ref SaveData data)
     {
-        data.currentLevel = SceneManager.GetActiveScene().buildIndex + 2;
+        if (data.currentLevel < (SceneManager.GetActiveScene().buildIndex + 2))
+            data.currentLevel = SceneManager.GetActiveScene().buildIndex + 2;
     }
 }
