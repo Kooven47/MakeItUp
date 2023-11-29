@@ -216,7 +216,6 @@ public class EnemyCore : MonoBehaviour
             }
             else
                 yield return null;
-            
         }
     }
 

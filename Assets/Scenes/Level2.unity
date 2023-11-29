@@ -410,6 +410,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ffee078cd0073b4f9e20b196e5bf7ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _contactDamage: 30
 --- !u!1 &42098585
 GameObject:
   m_ObjectHideFlags: 0
@@ -7910,7 +7911,7 @@ MonoBehaviour:
   m_Follow: {fileID: 1598894077}
   m_Lens:
     FieldOfView: 60
-    OrthographicSize: 5.9
+    OrthographicSize: 3.9
     NearClipPlane: 0.3
     FarClipPlane: 1000
     Dutch: 0
@@ -41926,7 +41927,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5.9
+  orthographic size: 3.9
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -41951,7 +41952,7 @@ Transform:
   m_GameObject: {fileID: 850116248}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -26.579525, y: 134.0301, z: -10.036367}
+  m_LocalPosition: {x: -26.665707, y: 131.5301, z: -10.036367}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

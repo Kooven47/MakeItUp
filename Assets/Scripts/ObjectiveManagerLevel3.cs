@@ -448,10 +448,10 @@ public class Objective6DefeatBoss : Objective
         ObjectiveManagerLevel3.activeObjective = true;
         objectiveTextObject = GameObject.Find("ObjectiveManager/Canvas/Sign/ObjectiveText"); // This is to find the ObjectiveText object for display
         objectiveText = objectiveTextObject.GetComponent<TMP_Text>();
-
+        
+        EnemyStats.BossOnDeath += BossKillUpdate;
         PauseMenu.cleanUp += Cleanup;
         GameOverMenu.cleanUp += Cleanup;
-        EnemyStats.BossOnDeath += BossKillUpdate;
         Display();
 
         // Add the listener for the next obj
@@ -483,8 +483,8 @@ public class Objective6DefeatBoss : Objective
 
     public override void Cleanup()
     {
+        EnemyStats.BossOnDeath -= BossKillUpdate;
         PauseMenu.cleanUp -= Cleanup;
         GameOverMenu.cleanUp -= Cleanup;
-        EnemyStats.BossOnDeath -= BossKillUpdate;
     }
 }

@@ -36,6 +36,7 @@ public class FreezerCore : MonoBehaviour
         {
             Collider2D col = other.collider;
             col.GetComponent<PlayerStats>().DamageCalc(_contactDamage,EnumLib.DamageType.Wet,true);
+            col.gameObject.GetComponent<DamageEffect>().TriggerEffect((int)EnumLib.DamageType.Wet);
         }
     }
 
