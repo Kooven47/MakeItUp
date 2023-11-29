@@ -46,12 +46,18 @@ public class StartScreen : MonoBehaviour,ISaveGame
     public void SaveData(ref SaveData data)
     {
         if (data.currentLevel < (SceneManager.GetActiveScene().buildIndex + 2) || _readyToLoad)
+        {
             data.currentLevel = SceneManager.GetActiveScene().buildIndex + 2;
+            data.numObjectivesCompleted = 0;
+        }
     }
 
     public void SaveInitialData(ref SaveData data)
     {
         if (data.currentLevel < (SceneManager.GetActiveScene().buildIndex + 2) || _readyToLoad)
+        {
             data.currentLevel = SceneManager.GetActiveScene().buildIndex + 2;
+            data.numObjectivesCompleted = 0;
+        }
     }
 }
