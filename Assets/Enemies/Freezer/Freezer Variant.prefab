@@ -185,6 +185,10 @@ PrefabInstance:
       value: FreezerSprite
       objectReference: {fileID: 0}
     - target: {fileID: 5183310862211311413, guid: 52ef50d26a617054f942d9f279d53e36, type: 3}
+      propertyPath: _maxHP
+      value: 100000000
+      objectReference: {fileID: 0}
+    - target: {fileID: 5183310862211311413, guid: 52ef50d26a617054f942d9f279d53e36, type: 3}
       propertyPath: _isBoss
       value: 1
       objectReference: {fileID: 0}
@@ -280,6 +284,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ffee078cd0073b4f9e20b196e5bf7ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _contactDamage: 30
 --- !u!1 &8005069474777765624 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4547201741492377882, guid: 52ef50d26a617054f942d9f279d53e36, type: 3}
@@ -315,8 +320,6 @@ MonoBehaviour:
     minNormalAngle: 0
     maxNormalAngle: 0
   _hurtBox: {fileID: 0}
-  _enemySkills:
-  - {fileID: 11400000, guid: 17a0bcf85dd98fc41ae0a16f18444cff, type: 2}
-  - {fileID: 0}
+  _enemySkills: []
   _animOverride: {fileID: 22100000, guid: 6debf1c59b80153458161bd8fa985d3e, type: 2}
   _angleOffset: -90
