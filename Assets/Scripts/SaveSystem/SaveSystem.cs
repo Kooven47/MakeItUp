@@ -13,9 +13,9 @@ public class SaveSystem: MonoBehaviour
     private List<ISaveGame> saveSystemObjects;
     private FileDataHandler fdh;
 
-    [SerializeField]private bool useEncryption;
-
-
+    [SerializeField] private bool useEncryption;
+    [SerializeField] private bool activateOnStart = true;
+    
     private void Awake()
     {
         if (instance != null)
@@ -29,7 +29,7 @@ public class SaveSystem: MonoBehaviour
     {
         fdh = new FileDataHandler(Application.persistentDataPath,fileName, useEncryption);
         this.saveSystemObjects = FindAllSaveObjects();
-        LoadGame();
+        if (activateOnStart) LoadGame();
     }
 
     private List<ISaveGame> FindAllSaveObjects()

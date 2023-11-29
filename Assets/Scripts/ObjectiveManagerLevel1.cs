@@ -345,10 +345,3 @@ public class Objective4KillToilet : Objective
         GameOverMenu.cleanUp -= Cleanup;
     }
 }
-
-// -------- Level 2 -------- //
-
-// TODO
-// Get can of beans from freezer <-- spawn manager
-// Escape freezer <-- spawn manager
-// Defeat freezer

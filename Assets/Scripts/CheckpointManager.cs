@@ -27,7 +27,7 @@ public class CheckpointManager : MonoBehaviour,ISaveGame
         if (_initialized)
             return;
         _janitor = GameObject.Find("Janitor");
-        for(int i = 0; i < transform.childCount; i++)
+        for (int i = 0; i < transform.childCount; i++)
         {
             _checkpoints.Add(transform.GetChild(i).gameObject);
         }

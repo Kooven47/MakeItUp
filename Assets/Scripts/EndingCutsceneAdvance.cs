@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class IntroCutsceneAdvance : MonoBehaviour
+public class EndingCutsceneAdvance : MonoBehaviour
 {
     private float elapsedTime = 0f;
     [SerializeField] private float cutsceneDuration = 25f;
@@ -22,6 +22,6 @@ public class IntroCutsceneAdvance : MonoBehaviour
     {
         anim.SetBool("Fade", true);
         yield return new WaitForSecondsRealtime(4f);
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        SceneManager.LoadScene("StartScreen");
     }
 }

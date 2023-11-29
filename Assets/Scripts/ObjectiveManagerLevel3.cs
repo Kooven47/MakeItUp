@@ -154,7 +154,7 @@ public class Objective1Survive : Objective
         {
             yield return new WaitForSeconds(0.1f);
             var enemyToRemove = Random.Range(0, _enemies.Count);
-            _enemies[enemyToRemove].GetComponent<EnemyStats>().Death();
+            Object.Destroy(_enemies[enemyToRemove].gameObject);
             _enemies.RemoveAt(enemyToRemove);
             Debug.Log($"removed enemy, count is now {_enemies.Count}");
         }
@@ -386,17 +386,10 @@ public class Objective6DefeatBoss : Objective
 {
     private GameObject objectiveTextObject;
     private TMP_Text objectiveText;
-
-    public int killNum;
-    public int killObj;
-    public bool bossDefeated;
     
     public override void OnStart()
     {
         ObjectiveManagerLevel3.activeObjective = true;
-        killNum = 0;
-        killObj = 1;
-        bossDefeated = false;
         objectiveTextObject = GameObject.Find("ObjectiveManager/Canvas/Sign/ObjectiveText"); // This is to find the ObjectiveText object for display
         objectiveText = objectiveTextObject.GetComponent<TMP_Text>();
 
@@ -418,6 +411,12 @@ public class Objective6DefeatBoss : Objective
     {
         ObjectiveManagerLevel3.activeObjective = false;
         ObjectiveManagerLevel3.OnUpdateObjective();
+        
+        objectiveText.SetText("Level 3: Executive Suite" + System.Environment.NewLine + "Current Objective - Get to the Elevator");
+        
+        GameObject barrier = ObjectiveManagerLevel3.barrierList.Dequeue(); // This and the next line removes the barrier
+        barrier.SetActive(false);
+        Debug.Log("dequeued barrier " + barrier.transform.name);
     }
 
     public override void Display()

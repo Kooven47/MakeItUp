@@ -373,7 +373,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 266894153}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 64ae46ae807010c49afb19a0c3ae67ec, type: 3}
+  m_Script: {fileID: 11500000, guid: 283ce9b205fca014da797b76898d6270, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   cutsceneDuration: 15

@@ -1356,6 +1356,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 325038610876568035, guid: 33af9f4911472d147a9656718afb3525, type: 3}
+      propertyPath: activateOnStart
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3441937194083024314, guid: 33af9f4911472d147a9656718afb3525, type: 3}
       propertyPath: m_Name
       value: SaveManager
