@@ -10,6 +10,7 @@ public class PlayerStats : Stats, ISaveGame
     private Coroutine _iFrameTimer;
     public static bool playerIsDead = false;
     public static Action<float> dashIFrame;
+    PlayerControllerJanitor _playerControllerJanitor;
 
     private bool _loadedStats = false;
 
@@ -20,6 +21,8 @@ public class PlayerStats : Stats, ISaveGame
     // Start is called before the first frame update
     void Start()
     {
+        _playerControllerJanitor = GameObject.FindWithTag("Player").GetComponent<PlayerControllerJanitor>();
+        
         if(!_loadedStats)
             base.Start();
         
@@ -38,6 +41,8 @@ public class PlayerStats : Stats, ISaveGame
     {
         float damage = (attack) * (isCrit ? 1.5f : 1.0f);
         curHP -= damage;
+        const int GOTHIT = 5;
+        _playerControllerJanitor.PlaySoundEffect(GOTHIT);
 
         DamageNumberPool.summonDamageNum?.Invoke(damage,0,transform.position);
         HealthBar.settingHealth?.Invoke(_curHP,_maxHP);

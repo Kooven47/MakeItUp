@@ -29,9 +29,12 @@ public class NormalAttack : MonoBehaviour
 
     [SerializeField]private bool _canAttack = true;
 
+    private PlayerControllerJanitor _playerControllerJanitor;
+
     // Start is called before the first frame update
     void Start()
     {
+        _playerControllerJanitor = GameObject.FindWithTag("Player").GetComponent<PlayerControllerJanitor>();
         _anim = GetComponent<Animator>();
         _anim.runtimeAnimatorController = aoc;
         PlayerInterrupt.staggered += SetCanAttack;
@@ -111,23 +114,23 @@ public class NormalAttack : MonoBehaviour
             }
         }
 
-        const int WET = 5, DRY = 6, MISS = 7;
+        const int WET = 6, DRY = 7, MISS = 8;
         if (didHit)
         {
             if ((int)_activeDamageType == 1)
             {
-                GameObject.FindWithTag("Player").GetComponent<PlayerControllerJanitor>().PlaySoundEffect(DRY);
+                _playerControllerJanitor.PlaySoundEffect(DRY);
             }
             else
             {
-                GameObject.FindWithTag("Player").GetComponent<PlayerControllerJanitor>().PlaySoundEffect(WET);
+                _playerControllerJanitor.PlaySoundEffect(WET);
             }
             // Question mark acts as a null check to avoid invoking an action if not initialized somehow
             CameraFollow.StartShake?.Invoke();
         }
         else
-        {
-            GameObject.FindWithTag("Player").GetComponent<PlayerControllerJanitor>().PlaySoundEffect(MISS);
+        { 
+            _playerControllerJanitor.PlaySoundEffect(MISS);
         }
     }
 

@@ -3849,7 +3849,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BoundingShape2D: {fileID: 427288590}
-  m_Damping: 0.5
+  m_Damping: 0
   m_MaxWindowSize: -1
 --- !u!114 &467581096
 MonoBehaviour:
@@ -23317,7 +23317,7 @@ Transform:
   m_GameObject: {fileID: 850116248}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -14.298431, y: 2.030108, z: -10.036367}
+  m_LocalPosition: {x: 69.28714, y: 23.330107, z: -10.036367}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -33181,6 +33181,30 @@ PrefabInstance:
       propertyPath: m_Name
       value: Janitor
       objectReference: {fileID: 0}
+    - target: {fileID: 4710187658440231466, guid: 4fe1aae9a7aa3144ba7aa4ebe90562ba, type: 3}
+      propertyPath: _soundEffects.Array.size
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4710187658440231466, guid: 4fe1aae9a7aa3144ba7aa4ebe90562ba, type: 3}
+      propertyPath: _soundEffects.Array.data[5]
+      value: 
+      objectReference: {fileID: 8300000, guid: edadd29b0948afa4aafe9bf0589d0a64, type: 3}
+    - target: {fileID: 4710187658440231466, guid: 4fe1aae9a7aa3144ba7aa4ebe90562ba, type: 3}
+      propertyPath: _soundEffects.Array.data[6]
+      value: 
+      objectReference: {fileID: 8300000, guid: 6acded0eb2d5d624bb703073e8ac6b3b, type: 3}
+    - target: {fileID: 4710187658440231466, guid: 4fe1aae9a7aa3144ba7aa4ebe90562ba, type: 3}
+      propertyPath: _soundEffects.Array.data[7]
+      value: 
+      objectReference: {fileID: 8300000, guid: e3e2bf402aeca4643b61337389ddc95c, type: 3}
+    - target: {fileID: 4710187658440231466, guid: 4fe1aae9a7aa3144ba7aa4ebe90562ba, type: 3}
+      propertyPath: _soundEffects.Array.data[8]
+      value: 
+      objectReference: {fileID: 8300000, guid: ce9e27be78554514992e503ae534c080, type: 3}
+    - target: {fileID: 4710187658440231466, guid: 4fe1aae9a7aa3144ba7aa4ebe90562ba, type: 3}
+      propertyPath: _soundEffects.Array.data[9]
+      value: 
+      objectReference: {fileID: 8300000, guid: 2667a0a008b044e218b63df62e2be749, type: 3}
     - target: {fileID: 5287549742816523219, guid: 4fe1aae9a7aa3144ba7aa4ebe90562ba, type: 3}
       propertyPath: m_LocalPosition.x
       value: 33.77
