@@ -29,7 +29,7 @@ public class SaveSystem: MonoBehaviour
     {
         fdh = new FileDataHandler(Application.persistentDataPath,fileName, useEncryption);
         this.saveSystemObjects = FindAllSaveObjects();
-        if (activateOnStart) LoadGame();
+        LoadGame();
     }
 
     private List<ISaveGame> FindAllSaveObjects()
