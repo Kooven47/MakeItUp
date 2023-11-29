@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class PlayerStats : Stats, ISaveGame
@@ -61,6 +62,16 @@ public class PlayerStats : Stats, ISaveGame
     {
         curHP += _maxHP * percent;
         HealthBar.settingHealth?.Invoke(_curHP,_maxHP);
+    }
+
+    public bool DidCritical()
+    {
+        return UnityEngine.Random.Range(0f,1f) <= _critRate;
+    }
+
+    public bool DidCriticalEnhanced()
+    {
+        return UnityEngine.Random.Range(0f,1f) <= _critRate + 0.15f;
     }
 
     public override void Death()

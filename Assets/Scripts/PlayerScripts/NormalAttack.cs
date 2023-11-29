@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class NormalAttack : MonoBehaviour
@@ -73,7 +74,7 @@ public class NormalAttack : MonoBehaviour
         _hurtBox.gameObject.SetActive(true);
         Physics2D.OverlapCollider(_hurtBox,_hurtLayers,targets);
         _hurtBox.gameObject.SetActive(false);
-        bool didHit = false;
+        bool didHit = false, didCrit = false;
         
         DamageEffect damageEffect;
         EnemyStats _enemyStat;
@@ -88,7 +89,8 @@ public class NormalAttack : MonoBehaviour
                 if (damageEffect != null && col.CompareTag("Enemy"))
                 {
                     _enemyStat = col.gameObject.GetComponent<EnemyStats>();
-                    _enemyStat.DamageCalc(_damageDealing,_activeDamageType,false);
+                    didCrit = _enemyStat.Attribute == EnumLib.DamageType.Neutral ? _playerStat.DidCritical() : _playerStat.DidCriticalEnhanced();
+                    _enemyStat.DamageCalc(_damageDealing,_activeDamageType,didCrit);
                     if (_enemyStat.healthRatio > 0f)
                     {
                         damageEffect.TriggerEffect(_inAttack);
