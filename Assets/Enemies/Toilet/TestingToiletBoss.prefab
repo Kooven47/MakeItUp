@@ -466,7 +466,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3a22861b8619d24ba3bd3971ecdff31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHP: 100
+  _maxHP: 150
   _attack: 5
   _defense: 2
   _moveSpeed: 1
@@ -518,10 +518,3 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 05f34cb49e1913a42bdd4d8b6942265c, type: 2}
   - {fileID: 11400000, guid: 17a0bcf85dd98fc41ae0a16f18444cff, type: 2}
   _animOverride: {fileID: 22100000, guid: 5637c636ea5c92949a49ed107421f73b, type: 2}
-  toiletTransform: {fileID: 2836320507644315667}
-  leftSideTransform: {fileID: 0}
-  leftSideCollider: {fileID: 0}
-  centerTransform: {fileID: 0}
-  centerCollider: {fileID: 0}
-  rightSideTransform: {fileID: 0}
-  rightSideCollider: {fileID: 0}
