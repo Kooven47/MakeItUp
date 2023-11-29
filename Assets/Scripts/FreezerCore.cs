@@ -6,6 +6,7 @@ public class FreezerCore : MonoBehaviour
 {
     private EnemyAI _freezerAI;
     private GameObject _player;
+    PlayerStats _playerStats;
 
     [SerializeField]private float _contactDamage = 30f;
     
@@ -13,6 +14,7 @@ public class FreezerCore : MonoBehaviour
     {
         _freezerAI = this.GetComponent<EnemyAI>();
         _player = GameObject.FindWithTag("Player");
+        _playerStats = _player.GetComponent<PlayerStats>();
     }
     
     private void Update()
@@ -33,10 +35,13 @@ public class FreezerCore : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D other)
     {
         if (other.collider.gameObject.CompareTag("Player"))
-        {
-            Collider2D col = other.collider;
-            col.GetComponent<PlayerStats>().DamageCalc(_contactDamage,EnumLib.DamageType.Wet,true);
-            col.gameObject.GetComponent<DamageEffect>().TriggerEffect((int)EnumLib.DamageType.Wet);
+        {   
+            if (!_playerStats.iFrame)
+            {
+                _playerStats.DamageCalc(_contactDamage,EnumLib.DamageType.Wet,true);
+                other.gameObject.GetComponent<DamageEffect>().TriggerEffect((int)EnumLib.DamageType.Wet);
+            }
+            
         }
     }
 
