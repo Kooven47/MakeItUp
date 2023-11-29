@@ -7911,7 +7911,7 @@ MonoBehaviour:
   m_Follow: {fileID: 1598894077}
   m_Lens:
     FieldOfView: 60
-    OrthographicSize: 3.9
+    OrthographicSize: 3.4
     NearClipPlane: 0.3
     FarClipPlane: 1000
     Dutch: 0
@@ -41927,7 +41927,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 3.9
+  orthographic size: 3.4
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -48460,14 +48460,6 @@ PrefabInstance:
     - target: {fileID: 1955038464595699153, guid: 4fe1aae9a7aa3144ba7aa4ebe90562ba, type: 3}
       propertyPath: m_Name
       value: Janitor
-      objectReference: {fileID: 0}
-    - target: {fileID: 2824223202590654676, guid: 4fe1aae9a7aa3144ba7aa4ebe90562ba, type: 3}
-      propertyPath: m_CollisionDetection
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4710187658440231466, guid: 4fe1aae9a7aa3144ba7aa4ebe90562ba, type: 3}
-      propertyPath: canAirDash
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5287549742816523219, guid: 4fe1aae9a7aa3144ba7aa4ebe90562ba, type: 3}
       propertyPath: m_LocalPosition.x

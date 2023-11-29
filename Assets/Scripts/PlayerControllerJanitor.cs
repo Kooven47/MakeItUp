@@ -63,9 +63,8 @@ public class PlayerControllerJanitor : MonoBehaviour
     [SerializeField] private LayerMask wallLayer;
     [SerializeField] private LayerMask obstacleWallLayer;
     [SerializeField] private Animator _anim;
-    
-    [Header("Sound Effects")]
-    private const int JUMP = 0, DROP = 1, LAND = 2, WALK = 3, RUN = 4;
+
+    [Header("Sound Effects")] private const int JUMP = 0, DROP = 1, LAND = 2, WALK = 3, RUN = 4, FART = 10;
     public AudioClip[] _soundEffects = new AudioClip[5];
     public AudioSource _audioSrc, _moveAudio;
  
@@ -198,12 +197,20 @@ public class PlayerControllerJanitor : MonoBehaviour
                         enemy.newJumpPosition(rb.position);
                     }
                 }
-                if (Time.timeScale != 0) PlaySoundEffect(JUMP);
+                
                 rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
                 jumpBufferTimeCounter = 0f;
                 StartCoroutine(JumpCooldown());
                 
+                
+                if (Time.timeScale != 0)
+                {
+                    if (jumpCount == 0 && !isGrounded) PlaySoundEffect(FART);
+                    else PlaySoundEffect(JUMP);
+                }
+                
                 jumpCount++;
+
             }
             
             // Make jump last longer on hold
@@ -367,6 +374,7 @@ public class PlayerControllerJanitor : MonoBehaviour
 
             if (Time.timeScale != 0 && !isDashing && Input.GetKeyDown(KeyCode.LeftShift))
             {
+                PlaySoundEffect(FART);
                 isDashing = true;
                 StartCoroutine(DoDash());
                 PlayerStats.dashIFrame(0.25f);
@@ -376,6 +384,7 @@ public class PlayerControllerJanitor : MonoBehaviour
         {
             if (canAirDash && airDashesRemaining > 0 && !isDashing && Time.timeScale != 0 && Input.GetKeyDown(KeyCode.LeftShift))
             {
+                PlaySoundEffect(FART);
                 airDashesRemaining--;
                 isDashing = true;
                 StartCoroutine(DoDash());
