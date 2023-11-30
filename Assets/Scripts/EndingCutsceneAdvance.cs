@@ -15,13 +15,13 @@ public class EndingCutsceneAdvance : MonoBehaviour
         if (Input.GetKey(KeyCode.Escape)) coroutine = StartCoroutine(Advance());
 
         elapsedTime += Time.deltaTime;
-        if (elapsedTime >= cutsceneDuration && coroutine != null) StartCoroutine(Advance());
+        if (elapsedTime >= cutsceneDuration && coroutine == null) StartCoroutine(Advance());
     }
     
     private IEnumerator Advance()
     {
         anim.SetBool("Fade", true);
-        yield return new WaitForSecondsRealtime(4f);
+        yield return new WaitForSecondsRealtime(1f);
         SceneManager.LoadScene("StartScreen");
     }
 }

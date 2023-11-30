@@ -293,6 +293,8 @@ public class PlayerControllerJanitor : MonoBehaviour
         {
             isWallSliding = false;
         }
+        Debug.Log($"Is walled: {IsWalled()}, is wall sliding: {isWallSliding}, Is grounded: {IsGrounded()}");
+
     }
 
     private void WallJump()
