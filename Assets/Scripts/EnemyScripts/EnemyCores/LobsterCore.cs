@@ -103,6 +103,10 @@ public class LobsterCore : EnemyCore
     }
     void Update()
     {
+        if (_enemyStats.healthRatio <= 0f && _playerContJan != null)
+        {
+            Recovery();
+        }
         if (_canAttack)
         {
             SelectAttack();

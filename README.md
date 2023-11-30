@@ -29,7 +29,7 @@ The visuals are 16-bit, lighthearted, and vibrant to go with the story. Characte
 ## Team Clean Em Up
 [Ethan Adkins](https://github.com/EthanAdkins) - Scripting
 <br> [Kevin Alfonso](https://github.com/Kooven47) - Level Design, Scripting, and Project Manager
-<br> [Rayyan Haque](https://github.com/Rhaque20) - Art and Sound Design
+<br> [Rayyan Haque](https://github.com/Rhaque20) - Art and Scripting
 <br> [Zachary Hull](https://github.com/Mrvenom789) - Scripting and Level Design
 
 ## JIRA

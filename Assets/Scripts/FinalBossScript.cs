@@ -160,7 +160,13 @@ public class FinalBossScript : EnemyCore
             float charging = chargeTime.x * 0.9f;
             float finalCharge = chargeTime.x - charging;
 
-            _lastRecorded = _enemyStats.Attribute;
+            if (numAlive == 0)
+            {
+                _lastRecorded = (EnumLib.DamageType)Random.Range(0,3);
+            }
+            else
+                _lastRecorded = _enemyStats.Attribute;
+            
             _bossOrb.SetActive(true);
             SetOrb((int)_lastRecorded);
             
