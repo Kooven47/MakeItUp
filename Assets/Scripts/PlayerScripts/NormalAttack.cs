@@ -8,8 +8,9 @@ public class NormalAttack : MonoBehaviour
 {
     [SerializeField]private Animator _anim;
     [SerializeField]private PlayerStats _playerStat;
+    [SerializeField]private float _chainDMGBoost = 0.25f;
 
-    [SerializeField]int _attackBuffer = 0,_inAttack = 0;
+    [SerializeField]int _attackBuffer = 0,_inAttack = 0, _useFu = 0;
     [SerializeField]int _chain = 0;
     [SerializeField]Collider2D _hurtBox;
     [SerializeField]ContactFilter2D _hurtLayers;
@@ -21,7 +22,7 @@ public class NormalAttack : MonoBehaviour
 
     EnumLib.DamageType _activeDamageType = EnumLib.DamageType.Neutral;
 
-    float _damageDealing = 0f;
+    float _damageDealing = 0f,_chainDMGMod = 1f;
 
     [SerializeField]private List<PlayerAbility> _broomNormalAttacks = new List<PlayerAbility>(3);
     [SerializeField]private List<PlayerAbility> _mopNormalAttacks = new List<PlayerAbility>(3);
@@ -56,15 +57,29 @@ public class NormalAttack : MonoBehaviour
     {
         if (_attackBuffer != 0)
         {
-            Attack(_attackBuffer);
+            if (_useFu == 0)
+                Attack(_attackBuffer);
+            else
+            {
+                if (_useFu == 1)
+                {
+                    JanitorFu(_attackBuffer,(int)Direction.UP);
+                }
+                else if (_useFu == 2)
+                {
+                    JanitorFu(_attackBuffer,(int)Direction.DOWN);
+                }
+            }
         }
         else
         {
             Debug.Log("End Chain");
             _inAttack = 0;
+            _useFu = 0;
             _chain = 0;
         }
         _attackBuffer = 0;
+        _useFu = 0;
     }
 
 
@@ -90,7 +105,7 @@ public class NormalAttack : MonoBehaviour
                 {
                     _enemyStat = col.gameObject.GetComponent<EnemyStats>();
                     didCrit = _enemyStat.Attribute == EnumLib.DamageType.Neutral ? _playerStat.DidCritical() : _playerStat.DidCriticalEnhanced();
-                    _enemyStat.DamageCalc(_damageDealing,_activeDamageType,didCrit);
+                    _enemyStat.DamageCalc(_damageDealing * _chainDMGMod,_activeDamageType,didCrit);
                     if (_enemyStat.healthRatio > 0f)
                     {
                         damageEffect.TriggerEffect(_inAttack);
@@ -146,7 +161,6 @@ public class NormalAttack : MonoBehaviour
                 aoc["Recovery"] = _broomFu[direction].animations[1];
                 _knockBackVector = EnumLib.KnockbackVector(_broomFu[direction].force);
                 _damageDealing = _broomFu[direction].damage;
-                _chain = 0;
                 _anim.Play("Attack");
                 _inAttack = weapon;
                 _activeDamageType = (EnumLib.DamageType)weapon;
@@ -161,13 +175,14 @@ public class NormalAttack : MonoBehaviour
                 aoc["Recovery"] = _mopFu[direction].animations[1];
                 _damageDealing = _mopFu[direction].damage;
                 _knockBackVector = EnumLib.KnockbackVector(_mopFu[direction].force);
-                _chain = 0;
                 _anim.Play("Attack");
                 _inAttack = weapon;
                 _activeDamageType = (EnumLib.DamageType)weapon;
                 Debug.Log("Mop Skill in Attack "+((EnumLib.DamageType)_inAttack));
             }
         }
+        _chainDMGMod = 1 + (_chainDMGBoost * _chain);
+        _chain = (_chain + 1) % _broomNormalAttacks.Count;
     }
 
     void Attack(int weapon)
@@ -193,6 +208,8 @@ public class NormalAttack : MonoBehaviour
         
         _anim.Play("Attack");
 
+        _chainDMGMod = 1 + (_chainDMGBoost * _chain);
+
         _chain = (_chain + 1) % _broomNormalAttacks.Count;
 
         _inAttack = weapon;
@@ -203,49 +220,77 @@ public class NormalAttack : MonoBehaviour
     {   
         if (Time.timeScale != 0 && _attackBuffer == 0 && _canAttack)
         {
-            if (Input.GetKeyUp("j"))
+            if (Input.GetKeyUp("j") && _attackBuffer == 0)
             {
-                if (_inAttack == 0)
+                if (Input.GetAxisRaw("Vertical") > 0f)
                 {
-                    if (Input.GetAxisRaw("Vertical") > 0f)
-                    {
+                    if (_useFu == 0 && _inAttack == 0)
                         JanitorFu(1,(int)Direction.UP);
-                    }
-                    else if (Input.GetAxisRaw("Vertical") < 0f)
-                    {
-                        JanitorFu(1,(int)Direction.DOWN);
-                    }
                     else
                     {
-                        Attack(1);
+                        _useFu = 1;
+                        _attackBuffer = 1;
+                    }
+                }
+                else if (Input.GetAxisRaw("Vertical") < 0f)
+                {
+                    if (_useFu == 0 && _inAttack == 0)
+                        JanitorFu(1,(int)Direction.DOWN);
+                    else
+                    {
+                        _useFu = 2;
+                        _attackBuffer = 1;
                     }
                 }
                 else
                 {
-                    _attackBuffer = 1;
+                    if (_inAttack == 0)
+                        Attack(1);
+                    else
+                    {
+                        _attackBuffer = 1;
+                    }
                 }
+                // if (_inAttack == 0)
+                // {
+                    
+                // }
+                // else
+                // {
+                //     _attackBuffer = 1;
+                // }
             }
 
-            if (Input.GetKeyUp("k"))
+            if (Input.GetKeyUp("k") && _attackBuffer == 0)
             {
-                if (_inAttack == 0)
+                if (Input.GetAxisRaw("Vertical") > 0f)
                 {
-                    if (Input.GetAxisRaw("Vertical") > 0f)
-                    {
+                    if (_useFu == 0 && _inAttack == 0)
                         JanitorFu(2,(int)Direction.UP);
-                    }
-                    else if (Input.GetAxisRaw("Vertical") < 0f)
-                    {
-                        JanitorFu(2,(int)Direction.DOWN);
-                    }
                     else
                     {
-                        Attack(2);
+                        _useFu = 1;
+                        _attackBuffer = 2;
+                    }
+                }
+                else if (Input.GetAxisRaw("Vertical") < 0f)
+                {
+                    if (_useFu == 0 && _inAttack == 0)
+                        JanitorFu(2,(int)Direction.DOWN);
+                    else
+                    {
+                        _useFu = 2;
+                        _attackBuffer = 2;
                     }
                 }
                 else
                 {
-                    _attackBuffer = 2;
+                    if (_inAttack == 0)
+                        Attack(2);
+                    else
+                    {
+                        _attackBuffer = 2;
+                    }
                 }
             }
         }
