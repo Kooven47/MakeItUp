@@ -32,7 +32,6 @@ public class TriggerColliderWithEnemyLevel2Modified : EnclosureCollision
             
             if (_spawnEnemies && !_collidedBefore)
             {
-              
                 for (int i = 0; i < enemyLocations.Count; i++)
                 {
                     if (enemyLocations[i] != null)
