@@ -252,7 +252,7 @@ public class PlayerControllerJanitor : MonoBehaviour
     {
         _anim.SetBool("isMoving",horizontal != 0f);
 
-        if (!isWallJumping && !isDashing)
+        if (!isWallJumping && !isDashing && !isWallSliding)
         {
             rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
         }
