@@ -12,6 +12,7 @@ public class CheckpointManager : MonoBehaviour,ISaveGame
     private GameObject _janitor;
 
     public static Action<int> setCheckPoint;
+    public static Action resetCheckPoint;
 
     private int _currentCheckPoint = 0;
 
@@ -33,6 +34,7 @@ public class CheckpointManager : MonoBehaviour,ISaveGame
         }
     
         setCheckPoint = SetCheckPoint;
+        resetCheckPoint = ResetCheckPoint;
         _initialized = true;
     }
 
@@ -43,6 +45,12 @@ public class CheckpointManager : MonoBehaviour,ISaveGame
             _currentCheckPoint = i;
             SaveSystem.instance.SaveGame();
         }
+    }
+
+    public void ResetCheckPoint()
+    {
+        _currentCheckPoint = 0;
+        SaveSystem.instance.SaveGame();
     }
 
     public void LoadSaveData(SaveData data)
