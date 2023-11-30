@@ -105,7 +105,7 @@ public class NormalAttack : MonoBehaviour
                 {
                     _enemyStat = col.gameObject.GetComponent<EnemyStats>();
                     didCrit = _enemyStat.Attribute == EnumLib.DamageType.Neutral ? _playerStat.DidCritical() : _playerStat.DidCriticalEnhanced();
-                    _enemyStat.DamageCalc(_damageDealing * _chainDMGMod,_activeDamageType,didCrit);
+                    _enemyStat.DamageCalc(_damageDealing * _chainDMGMod, _activeDamageType, didCrit);
                     if (_enemyStat.healthRatio > 0f)
                     {
                         damageEffect.TriggerEffect(_inAttack);
