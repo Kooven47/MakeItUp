@@ -32,7 +32,7 @@ public class ToiletBossAI : BossCore
     private bool onPhaseTwo = false;
     private bool _isReady = true;
     
-    private float centerCooldown = 5f;
+    private float centerCooldown = 8f;
     private float playerHitCooldown = 1.5f;
 
     private bool justSpawned = true;
@@ -45,6 +45,7 @@ public class ToiletBossAI : BossCore
     
     private BossState currentState = BossState.DashToLeft;
     private BossState stateBeforeHit;
+    private BossState stateBeforeCenter;
     private Coroutine bossCoroutine;
     
     // Start is called before the first frame update
@@ -92,10 +93,10 @@ public class ToiletBossAI : BossCore
 
     public override void Fire()
     {
-        ProjectileManager.projectileArc?.Invoke(transform.position,new Vector2(-1f,1f),_moveSet[0]);
-        ProjectileManager.projectileArc?.Invoke(transform.position,new Vector2(-0.5f,1f),_moveSet[0]);
-        ProjectileManager.projectileArc?.Invoke(transform.position,new Vector2(1f,1f),_moveSet[0]);
-        ProjectileManager.projectileArc?.Invoke(transform.position,new Vector2(0.5f,1f),_moveSet[0]);
+        ProjectileManager.projectileArc?.Invoke(transform.position, new Vector2(-1f,1f), _moveSet[0]);
+        ProjectileManager.projectileArc?.Invoke(transform.position, new Vector2(-0.5f,1f), _moveSet[0]);
+        ProjectileManager.projectileArc?.Invoke(transform.position, new Vector2(1f,1f), _moveSet[0]);
+        ProjectileManager.projectileArc?.Invoke(transform.position, new Vector2(0.5f,1f), _moveSet[0]);
     }
 
     IEnumerator StartBoss()
@@ -119,7 +120,15 @@ public class ToiletBossAI : BossCore
                 _anim.SetTrigger("recover");
                 yield return new WaitForSeconds(dashCooldown);
                 dashesRemaining--;
-                currentState = dashesRemaining > 0 ? BossState.DashToRight : BossState.DashToCenter;
+                if (dashesRemaining > 0)
+                {
+                    currentState = BossState.DashToRight;
+                }
+                else
+                {
+                    currentState = BossState.DashToCenter;
+                    stateBeforeCenter = BossState.DashToLeft;
+                }
             }
             else if (currentState == BossState.DashToRight)
             {
@@ -131,7 +140,15 @@ public class ToiletBossAI : BossCore
                 _anim.SetTrigger("recover");
                 yield return new WaitForSeconds(dashCooldown);
                 dashesRemaining--;
-                currentState = dashesRemaining > 0 ? BossState.DashToLeft : BossState.DashToCenter;
+                if (dashesRemaining > 0)
+                {
+                    currentState = BossState.DashToLeft;
+                }
+                else
+                {
+                    currentState = BossState.DashToCenter;
+                    stateBeforeCenter = BossState.DashToRight;
+                }
             }
             else if (currentState == BossState.DashToCenter)
             {
@@ -143,26 +160,25 @@ public class ToiletBossAI : BossCore
                 _anim.SetTrigger("recover");
                 if (onPhaseTwo)
                 {
-                    if (timeToPee)
-                    {
+                    // if (timeToPee)
+                    // {
                         SetUpAttack(0);
                         yield return new WaitForSeconds(centerCooldown / 2);
                         _anim.SetTrigger("release");
-                        yield return new WaitForSeconds(centerCooldown);
-                    }
-                    else
-                    {
-                        yield return new WaitForSeconds(centerCooldown);
-                    }
-
-                    timeToPee = !timeToPee;
+                        yield return new WaitForSeconds(centerCooldown / 2);
+                    // }
+                    // else
+                    // {
+                        // yield return new WaitForSeconds(centerCooldown);
+                    // }
+                    // timeToPee = !timeToPee;
                 }
                 else
                 {
                     yield return new WaitForSeconds(centerCooldown);
                 }
                 dashesRemaining = maxDashes;
-                currentState = BossState.DashToLeft;
+                currentState = stateBeforeCenter == BossState.DashToLeft ? BossState.DashToRight : BossState.DashToLeft;
             }
         }
     }
@@ -203,6 +219,40 @@ public class ToiletBossAI : BossCore
                 Vector2 direction = (col.transform.position - toiletTransform.position).normalized;
                 col.GetComponent<PlayerInterrupt>().Stagger(1,knockBackVector * direction.x * 0.5f);
                 playerStat.DamageCalc(currentDamage, EnumLib.DamageType.Wet,false);
+                CameraFollow.StartShake?.Invoke();
+            }
+            else
+            {
+                Debug.Log("Under Iframes");
+            }
+    
+            _rb.velocity = Vector2.zero;
+            isDashing = false;
+            stateBeforeHit = currentState;
+            StopCoroutine(bossCoroutine);
+            StartCoroutine(HitPlayerCooldown());
+        }
+    }
+    
+    void OnTriggerStay2D(Collider2D col)
+    {
+        PlayerStats playerStat;
+        Vector2 knockBackVector = EnumLib.KnockbackVector(EnumLib.KnockBackPower.SideLaunch);
+    
+        if (col.CompareTag("Player") && isDashing)
+        {
+            Physics2D.IgnoreCollision(col, _toiletCollider, true);
+            StartCoroutine(ReenableCollision(col));
+            Debug.Log("Hit the janitor!");
+            Debug.Log("isDashing: " + isDashing + ", current state: " + currentState);
+            playerStat = col.GetComponent<PlayerStats>();
+            if (!playerStat.iFrame)
+            {
+                Debug.Log("Vroom vroom you fool! Toilet gonna give it to ya");
+                Vector2 direction = (col.transform.position - toiletTransform.position).normalized;
+                col.GetComponent<PlayerInterrupt>().Stagger(1,knockBackVector * direction.x);
+                playerStat.DamageCalc(currentDamage, EnumLib.DamageType.Wet,false);
+                col.gameObject.GetComponent<DamageEffect>().TriggerEffect((int)EnumLib.DamageType.Wet);
                 CameraFollow.StartShake?.Invoke();
             }
             else

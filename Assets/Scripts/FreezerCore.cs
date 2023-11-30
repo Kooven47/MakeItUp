@@ -41,7 +41,6 @@ public class FreezerCore : MonoBehaviour
                 _playerStats.DamageCalc(_contactDamage,EnumLib.DamageType.Wet,true);
                 other.gameObject.GetComponent<DamageEffect>().TriggerEffect((int)EnumLib.DamageType.Wet);
             }
-            
         }
     }
 

@@ -8,6 +8,7 @@ public class TriggerColliderWithEnemyLevel2Modified : EnclosureCollision
     [SerializeField] List<Transform> enemyLocations;
     [SerializeField] private bool EndCurrentObjective;
     [SerializeField] private ObjectiveManagerLevel2 objectiveManager;
+    [SerializeField] private GameObject _beans;
     public static bool isActive = false;
     protected override void Start()
     {
@@ -41,7 +42,7 @@ public class TriggerColliderWithEnemyLevel2Modified : EnclosureCollision
                 }
 
                 SetCheckPoint();
-
+                _beans.SetActive(false);
             }
             _collidedBefore = true;
         }

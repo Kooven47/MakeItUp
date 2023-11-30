@@ -48339,6 +48339,10 @@ PrefabInstance:
       propertyPath: m_Volume
       value: 0.1
       objectReference: {fileID: 0}
+    - target: {fileID: 4710187658440231466, guid: 4fe1aae9a7aa3144ba7aa4ebe90562ba, type: 3}
+      propertyPath: canAirDash
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5287549742816523219, guid: 4fe1aae9a7aa3144ba7aa4ebe90562ba, type: 3}
       propertyPath: m_LocalPosition.x
       value: 21.402718
@@ -51134,7 +51138,7 @@ Transform:
   m_GameObject: {fileID: 1531070240}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 10.87, y: -7.79, z: 0}
+  m_LocalPosition: {x: 0.66, y: -7.3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -54634,7 +54638,6 @@ GameObject:
   - component: {fileID: 1985492359}
   - component: {fileID: 1985492362}
   - component: {fileID: 1985492363}
-  - component: {fileID: 1985492364}
   m_Layer: 0
   m_Name: Run
   m_TagString: Untagged
@@ -54689,7 +54692,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 32.312786, y: 131.42699}
+  m_Offset: {x: 27.5957, y: 135.60326}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -54700,7 +54703,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 7.6973343, y: 6.093231}
+  m_Size: {x: 6.7959843, y: 14.44577}
   m_EdgeRadius: 0
 --- !u!114 &1985492363
 MonoBehaviour:
@@ -54724,18 +54727,6 @@ MonoBehaviour:
   - {fileID: 1332932590}
   EndCurrentObjective: 1
   objectiveManager: {fileID: 1876503038}
---- !u!114 &1985492364
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1985492358}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bad06b5f1dd05cc4f8da51801c6b66f6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
   _beans: {fileID: 743688425}
 --- !u!1 &2001949875
 GameObject:
