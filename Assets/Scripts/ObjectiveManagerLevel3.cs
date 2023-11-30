@@ -42,35 +42,21 @@ public class ObjectiveManagerLevel3 : MonoBehaviour, ISaveGame
             objList.Enqueue(new Objective2GetOut());
         if (_objectivesComplete < 3)
             objList.Enqueue(new Objective3KillPianos());
-        if (_objectivesComplete < 4)
+        if (_objectivesComplete <= 4)
             objList.Enqueue(new Objective4GetToMiniBosses());
         if (_objectivesComplete < 5)
             objList.Enqueue(new Objective5DefeatMiniBosses());
         if (_objectivesComplete < 6)
             objList.Enqueue(new Objective6DefeatBoss());
 
-        if (_objectivesComplete >= 2)
-        {
-            GameObject.Find("Grid/EnemyEnclosure1").GetComponent<WallEnclosureCollisionLevel3>().spawnEnemies = false;
-            GameObject.Find("Grid/EnemyEnclosure1/Wall1").gameObject.SetActive(true);
-            _barriers.transform.GetChild(0).gameObject.SetActive(false);
-            GameObject.Find("Grid/EnemyEnclosure2").GetComponent<WallEnclosureCollisionLevel3>().triggerObj = false;
-            if (_objectivesComplete >= 4)
-            {
-                GameObject.Find("Grid/EnemyEnclosure4").GetComponent<WallEnclosureCollisionLevel3>().triggerObj = false;
-            }
-        }
-        
-        minibossSpawnLocations2 = minibossSpawnLocations1;
-        
         if (_barriers != null) 
         { 
             for (int i = 0; i < _barriers.transform.childCount; i++)
             {
                 GameObject wallGameObject = _barriers.transform.GetChild(i).gameObject;
-                if (i + 2 <= _objectivesComplete)
+                if ((i + 1) < _objectivesComplete)
                 {
-                    wallGameObject.SetActive(false); 
+                    // wallGameObject.SetActive(false); 
                     continue;
                 }
                 
@@ -79,6 +65,46 @@ public class ObjectiveManagerLevel3 : MonoBehaviour, ISaveGame
                 barrierList.Enqueue(wallGameObject);
             }
         }
+        
+        if (_objectivesComplete >= 2)
+        {
+            GameObject.Find("Grid/EnemyEnclosure1").GetComponent<WallEnclosureCollisionLevel3>().spawnEnemies = false;
+            GameObject.Find("Grid/EnemyEnclosure1").GetComponent<WallEnclosureCollisionLevel3>().triggerObj = false;
+            GameObject.Find("Grid/EnemyEnclosure1/Wall1").gameObject.SetActive(true);
+            _barriers.transform.GetChild(0).gameObject.SetActive(false);
+            GameObject.Find("Grid/EnemyEnclosure2").GetComponent<WallEnclosureCollisionLevel3>().triggerObj = false;
+        }
+
+        if (_objectivesComplete >= 3)
+        {
+            GameObject.Find("Grid/EnemyEnclosure2").GetComponent<WallEnclosureCollisionLevel3>().spawnEnemies = false;
+            _barriers.transform.GetChild(0).gameObject.SetActive(true);
+            _barriers.transform.GetChild(1).gameObject.SetActive(false);
+        }
+
+        // if (_objectivesComplete >= 4)
+        // {
+            // GameObject.Find("Grid/EnemyEnclosure4").GetComponent<WallEnclosureCollisionLevel3>().triggerObj = false;
+        // }
+        
+        if (_objectivesComplete >= 5)
+        {
+            GameObject.Find("Grid/EnemyEnclosure4").GetComponent<WallEnclosureCollisionLevel3>().triggerObj = false;
+            GameObject.Find("Grid/EnemyEnclosure4").GetComponent<WallEnclosureCollisionLevel3>().spawnEnemies = false;
+            _barriers.transform.GetChild(0).gameObject.SetActive(true);
+            _barriers.transform.GetChild(3).gameObject.SetActive(false);
+        }
+
+        if (_objectivesComplete >= 6)
+        {
+            objectiveText.SetText("Level 3: Executive Suite" + System.Environment.NewLine + "Current Objective - Get to the Elevator");
+            GameObject.Find("Grid/EnemyEnclosure5").GetComponent<WallEnclosureCollisionLevel3>().spawnEnemies = false;
+            GameObject.Find("Grid/EnemyEnclosure5").GetComponent<WallEnclosureCollisionLevel3>().isBossEntrance = false;
+            _barriers.transform.GetChild(3).gameObject.SetActive(true);
+            _barriers.transform.GetChild(4).gameObject.SetActive(false);
+        }
+
+        minibossSpawnLocations2 = minibossSpawnLocations1;
         
         if (_objectivesComplete > 0)
         {
@@ -351,9 +377,9 @@ public class Objective4GetToMiniBosses : Objective
         ObjectiveManagerLevel3.activeObjective = false;
         ObjectiveManagerLevel3.OnUpdateObjective();
         
-        GameObject barrier = ObjectiveManagerLevel3.barrierList.Dequeue(); // This and the next line removes the barrier
-        barrier.SetActive(false);
-        Debug.Log("dequeued barrier " + barrier.transform.name);
+        // GameObject barrier = ObjectiveManagerLevel3.barrierList.Dequeue(); // This and the next line removes the barrier
+        // barrier.SetActive(false);
+        // Debug.Log("dequeued barrier " + barrier.transform.name);
     }
 
     public override void Display()

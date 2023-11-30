@@ -6,7 +6,7 @@ public class WallEnclosureCollisionLevel3 : EnclosureCollision
 {
     [SerializeField] private GameObject Enclosure;
     [SerializeField] private bool isHidden = true;
-    [SerializeField] private bool isBossEntrance;
+    public bool isBossEntrance;
     public bool spawnEnemies = false;
     [SerializeField] private bool triggerObjective = false;
     [SerializeField] private bool timedSpawn = false;
