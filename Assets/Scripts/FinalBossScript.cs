@@ -39,6 +39,7 @@ public class FinalBossScript : EnemyCore
     {
         base.Start();
         EnemyStats.OnDeathWithType += KillUpdate;
+        EnemyStats.BossOnDeath += OnDeath;
         minionLocations = new List<Transform>();
         foreach (Transform child in GameObject.Find("GruLocations").GetComponent<Transform>())
         {
@@ -118,7 +119,12 @@ public class FinalBossScript : EnemyCore
 
     private void OnDestroy()
     {
+        EnemyStats.BossOnDeath += OnDeath;
         EnemyStats.OnDeathWithType -= KillUpdate;
+    }
+
+    private void OnDeath()
+    {
         SpawnMinions();
     }
 
