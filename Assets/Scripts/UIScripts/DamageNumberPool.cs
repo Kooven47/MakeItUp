@@ -13,7 +13,7 @@ public class DamageNumberPool : MonoBehaviour
     Queue<DamageNumbers> _damageNumbers = new Queue<DamageNumbers>();
 
     public static Action<DamageNumbers> returnToPool;
-    public static Action<float,int,Vector2> summonDamageNum;
+    public static Action<float,int,Vector2, bool> summonDamageNum;
     void Start()
     {
         GameObject temp;
@@ -30,11 +30,11 @@ public class DamageNumberPool : MonoBehaviour
         summonDamageNum = SpawnDamageNumber;
     }
 
-    public void SpawnDamageNumber(float value, int effective ,Vector2 position)
+    public void SpawnDamageNumber(float value, int effective ,Vector2 position, bool isCrit)
     {
         DamageNumbers temp = _damageNumbers.Dequeue();
         temp.transform.position = new Vector2(position.x + UnityEngine.Random.Range(-_positionVariance,_positionVariance), position.y + UnityEngine.Random.Range(-_positionVariance,_positionVariance));
-        temp.SetValue(value,effective);
+        temp.SetValue(value,effective, isCrit);
     }
 
     public void ReturnToPool(DamageNumbers damage)

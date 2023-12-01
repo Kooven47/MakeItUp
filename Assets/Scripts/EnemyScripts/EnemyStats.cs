@@ -83,7 +83,7 @@ public class EnemyStats : Stats
 
     public override void DamageCalc(float attack,EnumLib.DamageType attribute, bool isCrit)
     {
-        float damage = (attack) * (isCrit ? 1.5f : 1.0f);
+        float damage = attack;
         int effective = 0;
         Debug.Log("Attribute is "+attribute);
 
@@ -93,6 +93,7 @@ public class EnemyStats : Stats
                 Debug.Log("RESIST!");
                 damage *= 0.5f;
                 effective = -1;
+                isCrit = false;
             break;
 
             case WEAK:
@@ -101,10 +102,11 @@ public class EnemyStats : Stats
             break;
         }
 
+        damage *= (isCrit ? 1.5f : 1.0f);
         _curHP -= damage;
         Debug.Log("Damage received "+damage);
 
-        DamageNumberPool.summonDamageNum?.Invoke(damage,effective,transform.position);
+        DamageNumberPool.summonDamageNum?.Invoke(damage,effective,transform.position,isCrit);
 
         if(_isBoss)
             BossHealthBar.settingHealth?.Invoke(_curHP,_maxHP);
