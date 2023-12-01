@@ -25,6 +25,12 @@ public class ProjectileScript : MonoBehaviour
 
     private float _attack = 0f;
 
+    private bool _isHoming = false;
+    private float _movementSpeed = 5f;
+    private float _angleChangingSpeed = 1f;
+
+    private Transform _target;
+
     public EnumLib.DamageType damageType
     {
         get{return _damageType;}
@@ -36,6 +42,7 @@ public class ProjectileScript : MonoBehaviour
         _anim = GetComponent<Animator>();
         _hitBox = GetComponent<BoxCollider2D>();
         _spriteRender = GetComponent<SpriteRenderer>();
+        _animatorOverride = Instantiate(_animatorOverride);
 
         _anim.runtimeAnimatorController = _animatorOverride;
     }
@@ -72,9 +79,24 @@ public class ProjectileScript : MonoBehaviour
         }
     }
 
+    public void FireHoming(Transform target, Ability skill, float attack)
+    {
+        Debug.Log("Fired homing projectile!");
+        _target = target;
+        InitializeProjectile(skill);
+        _anim.Play("Motion");
+        _projectileLife = StartCoroutine(ProjectileLifeSpan(5f));
+        _rigid.gravityScale = 0f;
+        _attack = attack;
+        _isHoming = true;
+        _bounces = 0;
+    }
+
     public void Fire(Vector2 trajectory, Ability skill, float attack)
     {
+        Debug.Log("Initiatlizing projectile with "+skill.name);
         InitializeProjectile(skill);
+        _bounces = _maxBounce;
         _anim.Play("Motion");
         _rigid.AddForce(trajectory * 300f);
         _projectileLife = StartCoroutine(ProjectileLifeSpan(3f));
@@ -136,6 +158,7 @@ public class ProjectileScript : MonoBehaviour
             StopCoroutine(_projectileLife);
             _projectileLife = null;
         }
+        _isHoming = false;
         ProjectileManager.returnProjectile?.Invoke(gameObject);
     }
 
@@ -149,6 +172,14 @@ public class ProjectileScript : MonoBehaviour
             _projectileLife = StartCoroutine(ProjectileLifeSpan(2f));
             _rigid.velocity = Vector2.zero;
             _anim.Play("Idle");
+        }
+    }
+
+    void FixedUpdate()
+    {
+        if(_isHoming)
+        {
+            _rigid.position = Vector2.MoveTowards(_rigid.position,_target.position, _movementSpeed * Time.deltaTime);
         }
     }
 

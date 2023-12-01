@@ -24,6 +24,7 @@ public class CameraFollow : MonoBehaviour
     void Start()
     {
         multiChannelPerlin = _cinemaVirtualCam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
+        multiChannelPerlin.m_AmplitudeGain = 0f;
         StartShake = CameraShake;
     }
 
@@ -41,6 +42,7 @@ public class CameraFollow : MonoBehaviour
 
     private void CameraShake()
     {
+        Debug.Log("Camera shake called");
         if (_shakeTimer != null)
         {
             StopCoroutine(_shakeTimer);

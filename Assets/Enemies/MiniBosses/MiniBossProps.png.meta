@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: ec6ffd8f25629254a928f7765e34e3cd
+guid: 126e0edd26ea0ba40b1a4b2fe7701752
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -110,7 +110,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: BerryMiniBoss_0
+      name: Sniper
       rect:
         serializedVersion: 2
         x: 0
@@ -118,20 +118,20 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 9
-      pivot: {x: 0.5, y: 0.33}
+      pivot: {x: 0.06, y: 0.47}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c888bdc67ca622645b8bee32bb57df82
-      internalID: 2051229337
+      spriteID: c9dcda46da8ad1a4ba605d16b02f1b16
+      internalID: -651340763
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BerryMiniBoss_1
+      name: Briefcase
       rect:
         serializedVersion: 2
         x: 64
@@ -139,161 +139,77 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 9
-      pivot: {x: 0.5, y: 0.33}
+      pivot: {x: 0.5, y: 0.78}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7e92e36c9b793ea46b47c0b5e2f28df2
-      internalID: -1481282030
+      spriteID: 9ce67a45189add0448772d8a9b3b0627
+      internalID: 795155225
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BerryMiniBoss_2
-      rect:
-        serializedVersion: 2
-        x: 128
-        y: 128
-        width: 64
-        height: 64
-      alignment: 9
-      pivot: {x: 0.5, y: 0.33}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 1468d09ec7eb05f418c3f921d3391a8b
-      internalID: -479403023
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: BerryMiniBoss_3
+      name: Jetpack1
       rect:
         serializedVersion: 2
         x: 0
         y: 64
         width: 64
         height: 64
-      alignment: 9
-      pivot: {x: 0.5, y: 0.33}
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: aef0dc56f50202e42b7debaf70784402
-      internalID: -1457436376
+      spriteID: c886dd4da68970145b7e1107c243cfe2
+      internalID: -1053887389
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BerryMiniBoss_4
+      name: Jetpack2
       rect:
         serializedVersion: 2
         x: 64
         y: 64
         width: 64
         height: 64
-      alignment: 9
-      pivot: {x: 0.5, y: 0.33}
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d4dfa87269a412e489c1b7dcae2bcf08
-      internalID: 445025157
+      spriteID: 1d1732c77d190a8468c7783f2b0adf00
+      internalID: -1129512890
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BerryMiniBoss_5
-      rect:
-        serializedVersion: 2
-        x: 128
-        y: 64
-        width: 64
-        height: 64
-      alignment: 9
-      pivot: {x: 0.5, y: 0.33}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: bcbdfa8d5fad8b049907d254aba37220
-      internalID: 1298689877
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: BerryMiniBoss_6
+      name: Jetpack3
       rect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 64
         height: 64
-      alignment: 9
-      pivot: {x: 0.5, y: 0.33}
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7825c0ad7a32ce348bc0af51ca982a5b
-      internalID: 1291646024
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: BerryMiniBoss_7
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 0
-        width: 64
-        height: 64
-      alignment: 9
-      pivot: {x: 0.5, y: 0.33}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 87c6cc4c2a6908a4e93ed2f305d0085d
-      internalID: -1946273364
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: BerryMiniBoss_8
-      rect:
-        serializedVersion: 2
-        x: 128
-        y: 0
-        width: 64
-        height: 64
-      alignment: 9
-      pivot: {x: 0.5, y: 0.33}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 301c10555b4c0c749b46ee02455e66b5
-      internalID: -72626717
+      spriteID: dcbe0b2f355d387458ea595aa2de31c6
+      internalID: 264340257
       vertices: []
       indices: 
       edges: []
@@ -309,15 +225,11 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      BerryMiniBoss_0: 2051229337
-      BerryMiniBoss_1: -1481282030
-      BerryMiniBoss_2: -479403023
-      BerryMiniBoss_3: -1457436376
-      BerryMiniBoss_4: 445025157
-      BerryMiniBoss_5: 1298689877
-      BerryMiniBoss_6: 1291646024
-      BerryMiniBoss_7: -1946273364
-      BerryMiniBoss_8: -72626717
+      Briefcase: 795155225
+      Jetpack1: -1053887389
+      Jetpack2: -1129512890
+      Jetpack3: 264340257
+      Sniper: -651340763
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

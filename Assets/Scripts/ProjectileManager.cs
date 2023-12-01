@@ -10,6 +10,7 @@ public class ProjectileManager : MonoBehaviour
     Queue<GameObject> _projectileQueue = new();
     public static Action<Vector2,Vector2,Ability,float> createProjectile;
     public static Action<Vector2,Vector2,Ability> projectileArc;
+    public static Action <Vector2,Transform,Ability,float> createHoming;
     
     public static Action<GameObject> returnProjectile;
 
@@ -29,12 +30,21 @@ public class ProjectileManager : MonoBehaviour
         createProjectile = SummonProjectile;
         projectileArc = SummonProjectileArc;
         returnProjectile = ReturnProjectile;
+        createHoming = SummonHomingProjectile;
     }
 
     public void ReturnProjectile(GameObject projectile)
     {
         projectile.SetActive(false);
         _projectileQueue.Enqueue(projectile);
+    }
+
+    public void SummonHomingProjectile(Vector2 position,Transform target, Ability skill, float attack)
+    {
+        GameObject temp = _projectileQueue.Dequeue();
+            temp.gameObject.SetActive(true);
+            temp.transform.position = position;
+            temp.GetComponent<ProjectileScript>().FireHoming(target,skill,attack);
     }
 
     public void SummonProjectileArc(Vector2 position, Vector2 trajectory, Ability _skill)

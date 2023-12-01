@@ -5,7 +5,7 @@ using System;
 
 public class EnemyCore : MonoBehaviour
 {
-    [SerializeField] private bool _isMelee = true;
+    [SerializeField] protected bool _isMelee = true;
     [SerializeField] protected Vector2 _projectileRange = new Vector2(3f,2f);
     [SerializeField] protected Vector2 _meleeRange = new Vector2(3f,2f);
     [SerializeField] protected ContactFilter2D _hurtLayers;
