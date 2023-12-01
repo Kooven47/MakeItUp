@@ -145,6 +145,7 @@ public class ProjectileScript : MonoBehaviour
             }
             else if (_damageType == EnumLib.DamageType.Wet && _projState != IDLE)
             {
+                _isHoming = false;
                 Linger();
             }
             

@@ -385,9 +385,10 @@ MonoBehaviour:
   _enemySkills:
   - {fileID: 11400000, guid: 2a14e473ab395924394a161f8b01402a, type: 2}
   - {fileID: 11400000, guid: 20395f7c789558349b03831d55ad2c7e, type: 2}
-  _animOverride: {fileID: 22100000, guid: f65e91ad8483e784c81a18fcccbb0a8c, type: 2}
+  _animOverride: {fileID: 22100000, guid: c182a8555cfc38341bc7beb9dbe4cc78, type: 2}
   _angleOffset: -90
-  _fireSpot: {fileID: 1508471775539579326}
+  _firePoint: {fileID: 0}
+  _firePointOffset: 0.2
 --- !u!4 &3277396553262864056 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 739654602591810388, guid: 52ef50d26a617054f942d9f279d53e36, type: 3}

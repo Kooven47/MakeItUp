@@ -239,7 +239,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 7936052e61129a041bf4e697b5ec5d1d, type: 2}
     - target: {fileID: 7958705647578651313, guid: 52ef50d26a617054f942d9f279d53e36, type: 3}
       propertyPath: m_Name
-      value: MiniBoss1 Variant
+      value: MiniBoss1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
