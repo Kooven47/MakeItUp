@@ -7,17 +7,19 @@ using TMPro;
 public class DamageNumbers : MonoBehaviour
 {
     Animator _anim;
-    TMP_Text _damageText,_subText;
+    TMP_Text _damageText,_subText,_criticalText;
 
     public void Initialize()
     {
         _anim = GetComponent<Animator>();
         _damageText = transform.GetChild(0).GetComponent<TMP_Text>();
         _subText = transform.GetChild(1).GetComponent<TMP_Text>();
+        _criticalText = transform.GetChild(2).GetComponent<TMP_Text>();
     }
-    public void SetValue(float val, int effective)
+    public void SetValue(float val, int effective, bool isCrit)
     {
         gameObject.SetActive(true);
+        _criticalText.gameObject.SetActive(isCrit);
         _damageText.SetText(val.ToString("F1"));
         if (effective == 1)
         {

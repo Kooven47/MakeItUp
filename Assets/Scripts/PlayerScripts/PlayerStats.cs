@@ -45,7 +45,7 @@ public class PlayerStats : Stats, ISaveGame
         const int GOTHIT = 5;
         _playerControllerJanitor.PlaySoundEffect(GOTHIT);
 
-        DamageNumberPool.summonDamageNum?.Invoke(damage,0,transform.position);
+        DamageNumberPool.summonDamageNum?.Invoke(damage,0,transform.position,isCrit);
         HealthBar.settingHealth?.Invoke(_curHP,_maxHP);
         _iFrameTimer = StartCoroutine(InvincibilityTimer(1f + _invincTimer));
         
