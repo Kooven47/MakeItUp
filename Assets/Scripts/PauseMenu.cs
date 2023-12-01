@@ -21,8 +21,17 @@ public class PauseMenu : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape) && !PlayerStats.playerIsDead)
         {
-            if (isPaused) ResumeGame();
-            else PauseGame();
+            if (isConfirmationMenuActive)
+            {
+                confirmationMenu.SetActive(false);
+                pauseMenu.SetActive(true);
+                isConfirmationMenuActive = false;
+            }
+            else
+            {
+                if (isPaused) ResumeGame();
+                else PauseGame();
+            }
         }
     }
 

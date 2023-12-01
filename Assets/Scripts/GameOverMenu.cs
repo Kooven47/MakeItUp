@@ -21,6 +21,16 @@ public class GameOverMenu : MonoBehaviour
         confirmationMenu.SetActive(false);
     }
 
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape) && isConfirmationMenuActive && PlayerStats.playerIsDead)
+        {
+            confirmationMenu.SetActive(false);
+            gameOverMenu.SetActive(true);
+            isConfirmationMenuActive = false;
+        }
+    }
+
     public void GameOver()
     {
         PlayerStats.playerIsDead = true;
