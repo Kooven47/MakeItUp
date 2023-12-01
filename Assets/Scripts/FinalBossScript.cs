@@ -27,6 +27,8 @@ public class FinalBossScript : EnemyCore
     private Coroutine _orbCooldown = null;
 
     private bool _shockWaveActive = false;
+    
+    private bool spawnedSecondWave, spawnedThirdWave, spawnedFourthWave = false;
 
     public enum ShockWaveIndex{Dirt1,Dirt2,Wave1,Wave2,Neutral};
 
@@ -52,6 +54,7 @@ public class FinalBossScript : EnemyCore
         _bossSpriteRender = GetComponent<SpriteRenderer>();
         _bossBubbleEmitter = _bossGameObject.transform.GetChild(2);
         _bossDustEmitter = _bossGameObject.transform.GetChild(3);
+        
         SpawnMinions();
 
         foreach(GameObject g in _explosioneffect)
@@ -116,6 +119,7 @@ public class FinalBossScript : EnemyCore
     private void OnDestroy()
     {
         EnemyStats.OnDeathWithType -= KillUpdate;
+        SpawnMinions();
     }
 
     private void DecideBossAttribute()
@@ -154,7 +158,6 @@ public class FinalBossScript : EnemyCore
 
     protected override IEnumerator ChargeTimers(Vector2 chargeTime, bool isWindUp)
     {
-        
         if (isWindUp)
         {
             float charging = chargeTime.x * 0.9f;
@@ -339,7 +342,7 @@ public class FinalBossScript : EnemyCore
                     explosion1.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
                     explosion2.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
                 }
-            break;
+                break;
         }
         _shockWaveActive = setActive;
     }
@@ -353,9 +356,7 @@ public class FinalBossScript : EnemyCore
         _hurtBox.gameObject.SetActive(false);
         bool didHit = false;
         PlayerStats _playerStat;
-
         
-
         if (targets.Count != 0)
         {
             foreach(Collider2D col in targets)
@@ -396,8 +397,6 @@ public class FinalBossScript : EnemyCore
 
     protected override void SelectAttack()
     {
-        
-        
         if (InDistance(_meleeRange) && _orbCooldown == null)
         {
             _canAttack = false;
@@ -419,6 +418,22 @@ public class FinalBossScript : EnemyCore
         //     _bossRB.gravityScale = 0;
         //     _bossAI.flyingEnabled = true;
         // }
+        
+        if (_enemyStats.healthRatio <= 0.75 && !spawnedSecondWave)
+        {
+            spawnedSecondWave = true;
+            SpawnMinions();
+        }
+        if (_enemyStats.healthRatio <= 0.5 && !spawnedThirdWave)
+        {
+            spawnedThirdWave = true;
+            SpawnMinions();
+        }
+        if (_enemyStats.healthRatio <= 0.25 && !spawnedFourthWave)
+        {
+            spawnedFourthWave = true;
+            SpawnMinions();
+        }
 
         if (_canAttack)
         {

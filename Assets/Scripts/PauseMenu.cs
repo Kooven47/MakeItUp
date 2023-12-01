@@ -5,12 +5,15 @@ using System;
 public class PauseMenu : MonoBehaviour
 {
     public GameObject pauseMenu;
+    public GameObject confirmationMenu;
     public static bool isPaused;
+    public static bool isConfirmationMenuActive;
     public static event Action cleanUp;
     // Start is called before the first frame update
     void Start()
     {
         pauseMenu.SetActive(false);
+        confirmationMenu.SetActive(false);
     }
 
     // Update is called once per frame
@@ -18,8 +21,17 @@ public class PauseMenu : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape) && !PlayerStats.playerIsDead)
         {
-            if (isPaused) ResumeGame();
-            else PauseGame();
+            if (isConfirmationMenuActive)
+            {
+                confirmationMenu.SetActive(false);
+                pauseMenu.SetActive(true);
+                isConfirmationMenuActive = false;
+            }
+            else
+            {
+                if (isPaused) ResumeGame();
+                else PauseGame();
+            }
         }
     }
 
@@ -47,6 +59,29 @@ public class PauseMenu : MonoBehaviour
     }
 
     public void RestartLevel()
+    {
+        if (!isConfirmationMenuActive)
+        {
+            pauseMenu.SetActive(false);
+            confirmationMenu.SetActive(true);
+            isConfirmationMenuActive = true;
+        }
+    }
+    
+    public void ConfirmRestart()
+    {
+        CheckpointManager.resetCheckPoint?.Invoke();
+        RestartFromCheckpoint();
+    }
+
+    public void CancelRestart()
+    {
+        confirmationMenu.SetActive(false);
+        pauseMenu.SetActive(true);
+        isConfirmationMenuActive = false;
+    }
+    
+    public void RestartFromCheckpoint()
     {
         Time.timeScale = 1;
         isPaused = false;

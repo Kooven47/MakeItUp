@@ -20,6 +20,7 @@ public class EnemyAI : MonoBehaviour
     public int maxJumpTrackNum = 3;
     [SerializeField] private float _playerBubbleDistance = 1f;
     [SerializeField] private float _enemyBubbleDistance = 1f;
+    [SerializeField] public bool pathfind = true;
     [Header("Physics")]
     public float minDropAngle = 240;
     public float maxDropAngle = 300;
@@ -132,7 +133,7 @@ public class EnemyAI : MonoBehaviour
     }
     private void PathFollow()
     {
-        if (path == null)
+        if (path == null || pathfind == false)
         {
             isFollowingJumpPath = false;
             return;

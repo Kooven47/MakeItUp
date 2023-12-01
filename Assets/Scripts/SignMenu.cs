@@ -17,12 +17,6 @@ public class SignMenu : MonoBehaviour
         signMenu.SetActive(false);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     public void PauseGame()
     {
         isMenuActive = true;

@@ -7,7 +7,7 @@ public class EndingCutsceneAdvance : MonoBehaviour
     private float elapsedTime = 0f;
     [SerializeField] private float cutsceneDuration = 25f;
     public Animator anim;
-    private Coroutine coroutine;
+    private Coroutine coroutine = null;
     
     // Update is called once per frame
     void Update()
