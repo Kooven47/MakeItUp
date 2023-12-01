@@ -8,6 +8,8 @@ public class PlayerControllerJanitor : MonoBehaviour
 {
     private float horizontal;
     private float speed;
+
+    private float _dashIframe = 0.25f;
     [SerializeField] private float normalSpeed;
     [SerializeField] private float sprintingSpeed;
     [SerializeField] private float jumpingPower;
@@ -188,7 +190,7 @@ public class PlayerControllerJanitor : MonoBehaviour
         }
         
         // Handle jump
-        if (jumpBufferTimeCounter > 0f && !isJumping)
+        if (jumpBufferTimeCounter > 0f && !isJumping && !_isStunned)
         {
             jumpKeyHeld = true;
             if (!isDashing && (coyoteTimeCounter > 0f || jumpCount < maxAirJumpCount))
@@ -230,7 +232,7 @@ public class PlayerControllerJanitor : MonoBehaviour
         }
         
         // One way platforms
-        if ((Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow)) && IsOnOneWayPlatform())
+        if ((Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow)) && IsOnOneWayPlatform() && !_isStunned)
         {
             StartCoroutine(DisablePlatformCollision());
             PlaySoundEffect(DROP);
@@ -372,7 +374,7 @@ public class PlayerControllerJanitor : MonoBehaviour
     
     private void GroundAndAirDash()
     {
-        if (IsGrounded() || IsOnOneWayPlatform() || IsWalled())
+        if (IsGrounded() || IsOnOneWayPlatform() || IsWalled() && !_isStunned)
         {
             airDashesRemaining = maxAirDashes;
 
@@ -381,10 +383,10 @@ public class PlayerControllerJanitor : MonoBehaviour
                 PlaySoundEffect(FART);
                 isDashing = true;
                 StartCoroutine(DoDash());
-                PlayerStats.dashIFrame(0.25f);
+                PlayerStats.dashIFrame(_dashIframe);
             }
         }
-        else
+        else if (!_isStunned)
         {
             if (canAirDash && airDashesRemaining > 0 && !isDashing && Time.timeScale != 0 && Input.GetKeyDown(KeyCode.LeftShift))
             {
@@ -392,7 +394,7 @@ public class PlayerControllerJanitor : MonoBehaviour
                 airDashesRemaining--;
                 isDashing = true;
                 StartCoroutine(DoDash());
-                PlayerStats.dashIFrame(0.25f);
+                PlayerStats.dashIFrame(_dashIframe);
             }
         }
     }

@@ -1,17 +1,33 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System;
 
 public class LobsterCore : EnemyCore
 {
     private PlayerControllerJanitor _playerContJan;
+    private Rigidbody2D _playerRigid;
+    
+    private bool _lockedPlayer = false;
+
+    protected override void Start()
+    {
+        base.Start();
+        EnemyStats.OnDeath += Recovery;
+    }
+
+    public void OnDestroy()
+    {
+        EnemyStats.OnDeath -= Recovery;
+    }
     protected override void Recovery()
     {
         if (_playerContJan != null)
         {
             _playerContJan.SetStunned(false);
             _playerContJan = null;
+            _playerRigid.isKinematic = false;
+            _playerRigid = null;
+            _lockedPlayer = false;
         }
         base.Recovery();
         
@@ -28,7 +44,17 @@ public class LobsterCore : EnemyCore
         }
         else
         {
-            yield return new WaitForSeconds(chargeTime.y);
+            float pinchTimer = chargeTime.y;
+            while (pinchTimer > 0f)
+            {
+                if (_lockedPlayer)
+                {
+                    _playerRigid.position = _hurtBox.transform.position;
+                }
+                pinchTimer -= Time.deltaTime;
+                yield return new WaitForSeconds(Time.deltaTime);
+            }
+            
             Recovery();
             _anim.SetTrigger("endAttack");
             _attackWindUp = null;
@@ -60,6 +86,10 @@ public class LobsterCore : EnemyCore
                         if (_playerContJan.SetStunned(true))
                         {
                             lockedOn = true;
+                            _lockedPlayer = true;
+                            _playerRigid = col.GetComponent<Rigidbody2D>();
+                            _playerRigid.isKinematic = true;
+                            _playerRigid.position = _hurtBox.transform.position;
                         }
                         else
                         {
@@ -103,10 +133,10 @@ public class LobsterCore : EnemyCore
     }
     void Update()
     {
-        if (_enemyStats.healthRatio <= 0f && _playerContJan != null)
-        {
-            Recovery();
-        }
+        // if (_enemyStats.healthRatio <= 0f && _playerContJan != null)
+        // {
+        //     Recovery();
+        // }
         if (_canAttack)
         {
             SelectAttack();
