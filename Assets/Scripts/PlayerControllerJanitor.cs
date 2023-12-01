@@ -67,16 +67,20 @@ public class PlayerControllerJanitor : MonoBehaviour
     [Header("Sound Effects")] private const int JUMP = 0, DROP = 1, LAND = 2, WALK = 3, RUN = 4, FART = 10;
     public AudioClip[] _soundEffects = new AudioClip[5];
     public AudioSource _audioSrc, _moveAudio;
- 
+    public static event Action InitializeSound;
     // public int maxJumpTrackNum = 3; // This is the number of jump history you want to keep track of for the ai to follow 
     // Start is called before the first frame update
     private void Start()
     {
+        InitializeSound?.Invoke();
         speed = sprintingSpeed;
         _moveAudio.clip = _soundEffects[RUN];
         PlayerInterrupt.staggered += SetMobility;
     }
-
+    private void OnDisable()
+    {
+        PlayerInterrupt.staggered -= SetMobility;
+    }
     public void PlaySoundEffect(int index)
     {
         _audioSrc.clip = _soundEffects[index];

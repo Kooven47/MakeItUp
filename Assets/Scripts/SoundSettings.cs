@@ -25,6 +25,12 @@ public class SoundSettings : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        PlayerControllerJanitor.InitializeSound += InitializeSound;
+        InitializeSound();
+    }
+
+    private void InitializeSound()
+    {
         SetVolume(PlayerPrefs.GetFloat("SavedMasterVolume", 100), "MasterVolume"); // There is where we need to access saved volume
         SetVolume(PlayerPrefs.GetFloat("SavedBackgroundMusicVolume", 100), "BackgroundMusicVolume");
         SetVolume(PlayerPrefs.GetFloat("SavedFootstepVolume", 100), "FootstepVolume");
