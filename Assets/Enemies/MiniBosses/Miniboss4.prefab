@@ -271,7 +271,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 400818854647062406, guid: 52ef50d26a617054f942d9f279d53e36, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 739654602591810388, guid: 52ef50d26a617054f942d9f279d53e36, type: 3}
       propertyPath: m_LocalScale.x
@@ -474,9 +474,9 @@ MonoBehaviour:
     maxNormalAngle: 0
   _hurtBox: {fileID: 0}
   _enemySkills:
-  - {fileID: 11400000, guid: 2f39dd5a9281f6c49bcca06f43fbcec9, type: 2}
+  - {fileID: 11400000, guid: 824427b2e6c27b54689cca7a6f0f8716, type: 2}
   - {fileID: 11400000, guid: c149a41035c047f4cb1ca7ce78457c4b, type: 2}
-  _animOverride: {fileID: 22100000, guid: ad39c491b51cb9d4cb2e970dc1939535, type: 2}
+  _animOverride: {fileID: 22100000, guid: 6de21aa18dff3684591dd783e18f04ac, type: 2}
   _angleOffset: -90
   _firePoint: {fileID: 1508471775539579326}
   _firePointOffset: 0.2

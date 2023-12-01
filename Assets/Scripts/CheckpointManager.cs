@@ -57,7 +57,10 @@ public class CheckpointManager : MonoBehaviour,ISaveGame
         // SceneManager.LoadScene(data.currentLevel);
         _currentCheckPoint = data.numObjectivesCompleted;
         Awake();
+        Debug.Log("Current checkpoint asked exceeds checkpoint count: "+(_currentCheckPoint >= _checkpoints.Count));
+        Debug.Log("Data says "+data.numObjectivesCompleted);
         int i = _currentCheckPoint >= _checkpoints.Count ? _checkpoints.Count - 1 : _currentCheckPoint;
+        Debug.Log("Starting at checkpoint "+i);
         _janitor.transform.position = _checkpoints[i].transform.position;
     }
 

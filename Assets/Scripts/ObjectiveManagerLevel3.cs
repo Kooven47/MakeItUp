@@ -26,6 +26,7 @@ public class ObjectiveManagerLevel3 : MonoBehaviour, ISaveGame
     {
         if (_objectivesComplete < 0)
         {
+            Debug.Log("Objectives completed not initialized");
             SaveSystem.instance.LoadGame();
         }
         
