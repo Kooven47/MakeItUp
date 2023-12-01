@@ -7,11 +7,14 @@ public class StartScreen : MonoBehaviour, ISaveGame
     [SerializeField] private GameObject _firstSelections;
     [SerializeField] private GameObject _Settings;
     [SerializeField] private GameObject _SoundSettings;
+    [SerializeField] private GameObject _DisplaySettings;
+
     void Start()
     {
         _firstSelections.SetActive(true);
         _Settings.SetActive(false);
         _SoundSettings.SetActive(false);
+        _DisplaySettings.SetActive(false);
     }
 
     public void NewGame()
@@ -52,6 +55,18 @@ public class StartScreen : MonoBehaviour, ISaveGame
         _Settings.SetActive(true);
         _SoundSettings.SetActive(false);
         Debug.Log("Pressed sound options back button!");
+    }
+    public void DisplayOption()
+    {
+        _Settings.SetActive(false);
+        _DisplaySettings.SetActive(true);
+        Debug.Log("Pressed display options button!");
+    }
+    public void DisplayOptionBackButton()
+    {
+        _Settings.SetActive(true);
+        _DisplaySettings.SetActive(false);
+        Debug.Log("Pressed display options back button!");
     }
 
 
