@@ -208,8 +208,8 @@ public class ToiletBossAI : BossCore
     
         if (col.CompareTag("Player") && isDashing)
         {
-            Physics2D.IgnoreCollision(col, _toiletCollider, true);
-            StartCoroutine(ReenableCollision(col));
+            // Physics2D.IgnoreCollision(col, _toiletCollider, true);
+            // StartCoroutine(ReenableCollision(col));
             Debug.Log("Hit the janitor!");
             Debug.Log("isDashing: " + isDashing + ", current state: " + currentState);
             playerStat = col.GetComponent<PlayerStats>();
@@ -241,8 +241,8 @@ public class ToiletBossAI : BossCore
     
         if (col.CompareTag("Player") && isDashing)
         {
-            Physics2D.IgnoreCollision(col, _toiletCollider, true);
-            StartCoroutine(ReenableCollision(col));
+            // Physics2D.IgnoreCollision(col, _toiletCollider, true);
+            // StartCoroutine(ReenableCollision(col));
             Debug.Log("Hit the janitor!");
             Debug.Log("isDashing: " + isDashing + ", current state: " + currentState);
             playerStat = col.GetComponent<PlayerStats>();
