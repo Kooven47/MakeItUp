@@ -93,7 +93,7 @@ public class ObjectiveManagerLevel3 : MonoBehaviour, ISaveGame
             GameObject.Find("Grid/EnemyEnclosure4").GetComponent<WallEnclosureCollisionLevel3>().triggerObj = false;
             GameObject.Find("Grid/EnemyEnclosure4").GetComponent<WallEnclosureCollisionLevel3>().spawnEnemies = false;
             _barriers.transform.GetChild(0).gameObject.SetActive(true);
-            _barriers.transform.GetChild(3).gameObject.SetActive(false);
+            _barriers.transform.GetChild(2).gameObject.SetActive(false);
         }
 
         if (_objectivesComplete >= 6)
@@ -101,8 +101,8 @@ public class ObjectiveManagerLevel3 : MonoBehaviour, ISaveGame
             objectiveText.SetText("Level 3: Executive Suite" + System.Environment.NewLine + "Current Objective - Get to the Elevator");
             GameObject.Find("Grid/EnemyEnclosure5").GetComponent<WallEnclosureCollisionLevel3>().spawnEnemies = false;
             GameObject.Find("Grid/EnemyEnclosure5").GetComponent<WallEnclosureCollisionLevel3>().isBossEntrance = false;
-            _barriers.transform.GetChild(3).gameObject.SetActive(true);
-            _barriers.transform.GetChild(4).gameObject.SetActive(false);
+            _barriers.transform.GetChild(2).gameObject.SetActive(true);
+            _barriers.transform.GetChild(3).gameObject.SetActive(false);
         }
 
         minibossSpawnLocations2 = minibossSpawnLocations1;
