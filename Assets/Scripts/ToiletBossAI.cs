@@ -175,7 +175,9 @@ public class ToiletBossAI : BossCore
                 }
                 else
                 {
+                    _anim.Play("Asleep");
                     yield return new WaitForSeconds(centerCooldown);
+                    _anim.SetTrigger("wakeUp");
                 }
                 dashesRemaining = maxDashes;
                 currentState = stateBeforeCenter == BossState.DashToLeft ? BossState.DashToRight : BossState.DashToLeft;
