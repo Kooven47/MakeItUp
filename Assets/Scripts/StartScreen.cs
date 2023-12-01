@@ -7,6 +7,12 @@ public class StartScreen : MonoBehaviour, ISaveGame
     [SerializeField] private GameObject _firstSelections;
     [SerializeField] private GameObject _Settings;
     [SerializeField] private GameObject _SoundSettings;
+    void Start()
+    {
+        _firstSelections.SetActive(true);
+        _Settings.SetActive(false);
+        _SoundSettings.SetActive(false);
+    }
 
     public void NewGame()
     {
