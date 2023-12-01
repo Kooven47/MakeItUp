@@ -102,7 +102,7 @@ public class ObjectiveManagerLevel3 : MonoBehaviour, ISaveGame
             GameObject.Find("Grid/EnemyEnclosure5").GetComponent<WallEnclosureCollisionLevel3>().spawnEnemies = false;
             GameObject.Find("Grid/EnemyEnclosure5").GetComponent<WallEnclosureCollisionLevel3>().isBossEntrance = false;
             _barriers.transform.GetChild(2).gameObject.SetActive(true);
-            _barriers.transform.GetChild(3).gameObject.SetActive(false);
+            _barriers.transform.GetChild(4).gameObject.SetActive(false);
         }
 
         minibossSpawnLocations2 = minibossSpawnLocations1;
@@ -505,6 +505,9 @@ public class Objective6DefeatBoss : Objective
         GameObject barrier = ObjectiveManagerLevel3.barrierList.Dequeue(); // This and the next line removes the barrier
         barrier.SetActive(false);
         Debug.Log("dequeued barrier " + barrier.transform.name);
+        
+        if (barrier.name.Equals("Filler"))
+            barrier = ObjectiveManagerLevel1.barrierList.Dequeue();
     }
 
     public override void Display()
