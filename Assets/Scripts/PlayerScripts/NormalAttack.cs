@@ -50,6 +50,7 @@ public class NormalAttack : MonoBehaviour
             _attackBuffer = 0;
             _inAttack = 0;
             _chain = 0;
+            _useFu = 0;
         }
     }
 
