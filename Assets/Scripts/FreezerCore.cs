@@ -43,6 +43,18 @@ public class FreezerCore : MonoBehaviour
             }
         }
     }
+    
+    private void OnCollisionStay2D(Collision2D other)
+    {
+        if (other.collider.gameObject.CompareTag("Player"))
+        {   
+            if (!_playerStats.iFrame)
+            {
+                _playerStats.DamageCalc(_contactDamage,EnumLib.DamageType.Wet,true);
+                other.gameObject.GetComponent<DamageEffect>().TriggerEffect((int)EnumLib.DamageType.Wet);
+            }
+        }
+    }
 
     private IEnumerator SlowFreezerDown(float time, float ratio)
     {

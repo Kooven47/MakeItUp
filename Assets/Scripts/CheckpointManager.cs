@@ -7,7 +7,6 @@ using UnityEngine.SceneManagement;
 public class CheckpointManager : MonoBehaviour,ISaveGame
 {
     [SerializeField]private List<GameObject> _checkpoints = new();
-    [SerializeField]private List<EnclosureCollision> _enclosureTriggers = new();
 
     private GameObject _janitor;
 

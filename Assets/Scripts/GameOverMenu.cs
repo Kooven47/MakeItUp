@@ -8,18 +8,18 @@ public class GameOverMenu : MonoBehaviour
     public static Action gameOver;
     public static event Action cleanUp;
     public static bool isMenuActive;
+    
+    public GameObject confirmationMenu;
+    public static bool isConfirmationMenuActive;
+
     // Start is called before the first frame update
     void Start()
     {
         isMenuActive = false;
         gameOverMenu.SetActive(false);
         gameOver = GameOver;
+        confirmationMenu.SetActive(false);
     }
-
-    // void Update()
-    // {
-        // if (PlayerStats.playerIsDead) GameOver();
-    // }
 
     public void GameOver()
     {
@@ -38,8 +38,31 @@ public class GameOverMenu : MonoBehaviour
         isMenuActive = false;
         SceneManager.LoadScene("StartScreen");
     }
-
+    
     public void RestartLevel()
+    {
+        if (!isConfirmationMenuActive)
+        {
+            gameOverMenu.SetActive(false);
+            confirmationMenu.SetActive(true);
+            isConfirmationMenuActive = true;
+        }
+    }
+    
+    public void ConfirmRestart()
+    {
+        CheckpointManager.resetCheckPoint?.Invoke();
+        RestartFromCheckpoint();
+    }
+
+    public void CancelRestart()
+    {
+        confirmationMenu.SetActive(false);
+        gameOverMenu.SetActive(true);
+        isConfirmationMenuActive = false;
+    }
+
+    public void RestartFromCheckpoint()
     {
         PlayerStats.playerIsDead = false;
         gameOverMenu.SetActive(false);

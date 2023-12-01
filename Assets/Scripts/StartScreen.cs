@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class StartScreen : MonoBehaviour,ISaveGame
+public class StartScreen : MonoBehaviour, ISaveGame
 {
     bool _readyToLoad = false;
     public void NewGame()
