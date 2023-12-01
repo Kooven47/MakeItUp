@@ -33,7 +33,7 @@ public class HealthBar : MonoBehaviour
         // 0.8f new ratio, old ratio = 0.67f
         float newRatio = (curHP/maxHP);
 
-        _healthTally.SetText(curHP.ToString()+"/"+maxHP.ToString());
+        _healthTally.SetText(curHP.ToString("F0")+"/"+maxHP.ToString("F0"));
 
         if (newRatio == _curRatio)
             return;

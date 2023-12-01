@@ -18,7 +18,7 @@ public class DamageNumbers : MonoBehaviour
     public void SetValue(float val, int effective)
     {
         gameObject.SetActive(true);
-        _damageText.SetText(val.ToString());
+        _damageText.SetText(val.ToString("F1"));
         if (effective == 1)
         {
             _subText.SetText("EFFECTIVE!");
