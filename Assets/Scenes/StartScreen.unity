@@ -4535,7 +4535,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1651111244}
-  - component: {fileID: 1651111245}
   m_Layer: 0
   m_Name: Settings
   m_TagString: Untagged
@@ -4560,23 +4559,6 @@ Transform:
   - {fileID: 228773619}
   m_Father: {fileID: 342015554}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1651111245
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1651111243}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a291536adb3d05045af4d78348355b89, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MasterVolumeSlider: {fileID: 0}
-  BackgroundMusicVolumeSlider: {fileID: 0}
-  FootstepVolumeSlider: {fileID: 0}
-  SoundEffectVolume: {fileID: 0}
-  masterMixer: {fileID: 24100000, guid: c0408b09fe526b749b68d0c0073e2cf5, type: 2}
 --- !u!1 &1664793298
 GameObject:
   m_ObjectHideFlags: 0
