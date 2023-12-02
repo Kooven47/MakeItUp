@@ -471,7 +471,7 @@ public class PlayerControllerJanitor : MonoBehaviour
         rb.velocity = new Vector2(10 * transform.localScale.x, 0);
 
         _fartClouds[1].gameObject.SetActive(true);
-        _fartClouds[1].transform.localPosition = new Vector2(0.25f,0f);
+        _fartClouds[1].transform.localPosition = new Vector2(0f,0.35f);
         _fartClouds[1].AddForce(new Vector2(transform.localScale.x * -1 * 500f,0f));
 
         yield return new WaitForSeconds(airDashTime);
