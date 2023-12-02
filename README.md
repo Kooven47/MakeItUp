@@ -85,6 +85,9 @@ Everything not listed below was hand made.
 <br> <b> Success Sound Effect </b>
 <br> Link: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;https://pixabay.com/sound-effects/success-1-6297/
 <br> License: Pixabay Content License (https://pixabay.com/service/license-summary/)
+<br> <b> Toilet Paper Item Sound Effect </b>
+<br> Link: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;https://pixabay.com/sound-effects/apple-munch-40169/
+<br> License: Pixabay Content License (https://pixabay.com/service/license-summary/)
 
 ## Team Clean Em Up
 [Ethan Adkins](https://github.com/EthanAdkins) &nbsp;&nbsp;- Scripting and Sound Design
