@@ -26,6 +26,13 @@ The visuals are 16-bit, lighthearted, and vibrant to go with the story. Characte
 * Hollow Knight
 * Enter the Gungeon
 
+## Things To Know
+* Dashing gives you some i-frames
+* Hitting a projectile with the same attribute will destroy the projectile
+* Zooming with scroll wheel or +/- is a thing
+* Enemies have superamor when doing attacks unless hit with the correct attack
+* Increased damage on consecutive hits up to a combo of 3
+
 ## Assets
 Everything not listed below was hand made.
 <br> <b> Tileset </b>
