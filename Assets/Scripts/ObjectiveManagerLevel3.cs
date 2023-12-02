@@ -372,8 +372,11 @@ public class Objective4GetToMiniBosses : Objective
     private GameObject objectiveTextObject;
     private TMP_Text objectiveText;
     
+    private PlayerControllerJanitor _playerControllerJanitor;
+
     public override void OnStart()
     {
+        _playerControllerJanitor = GameObject.FindWithTag("Player").GetComponent<PlayerControllerJanitor>();
         ObjectiveManagerLevel3.activeObjective = true;
         objectiveTextObject = GameObject.Find("ObjectiveManager/Canvas/Sign/ObjectiveText"); // This is to find the ObjectiveText object for display
         objectiveText = objectiveTextObject.GetComponent<TMP_Text>();
@@ -388,6 +391,8 @@ public class Objective4GetToMiniBosses : Objective
     
     public override void OnComplete()
     {
+        const int SUCCESS = 13;
+        _playerControllerJanitor.PlaySoundEffect(SUCCESS);
         CheckpointManager.setCheckPoint?.Invoke(4);
         ObjectiveManagerLevel3.activeObjective = false;
         ObjectiveManagerLevel3.OnUpdateObjective();
