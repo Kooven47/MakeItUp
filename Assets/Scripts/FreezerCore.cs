@@ -8,13 +8,17 @@ public class FreezerCore : MonoBehaviour
     private GameObject _player;
     PlayerStats _playerStats;
 
+    Animator _anim;
+
     [SerializeField]private float _contactDamage = 30f;
     
     private void Start()
     {
         _freezerAI = this.GetComponent<EnemyAI>();
+        _anim = transform.GetChild(0).GetComponent<Animator>();
         _player = GameObject.FindWithTag("Player");
         _playerStats = _player.GetComponent<PlayerStats>();
+        transform.localScale = new Vector2(-5, 5);
     }
     
     private void Update()
@@ -40,6 +44,7 @@ public class FreezerCore : MonoBehaviour
             {
                 _playerStats.DamageCalc(_contactDamage,EnumLib.DamageType.Wet,true);
                 other.gameObject.GetComponent<DamageEffect>().TriggerEffect((int)EnumLib.DamageType.Wet);
+                _anim.Play("Attack");
             }
         }
     }

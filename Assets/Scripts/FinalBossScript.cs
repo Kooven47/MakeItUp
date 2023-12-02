@@ -32,6 +32,8 @@ public class FinalBossScript : EnemyCore
 
     public enum ShockWaveIndex{Dirt1,Dirt2,Wave1,Wave2,Neutral};
 
+    private Vector2 _wavePos = Vector2.zero;
+
     private EnumLib.DamageType _lastRecorded = EnumLib.DamageType.Neutral;
 
     // Start is called before the first frame update
@@ -55,6 +57,8 @@ public class FinalBossScript : EnemyCore
         _bossSpriteRender = GetComponent<SpriteRenderer>();
         _bossBubbleEmitter = _bossGameObject.transform.GetChild(2);
         _bossDustEmitter = _bossGameObject.transform.GetChild(3);
+
+        _wavePos = _explosioneffect[(int)ShockWaveIndex.Wave1].transform.localPosition;
         
         SpawnMinions();
 
@@ -331,8 +335,8 @@ public class FinalBossScript : EnemyCore
                 explosion1 = _explosioneffect[(int)ShockWaveIndex.Wave1];
                 explosion2 = _explosioneffect[(int)ShockWaveIndex.Wave2];
 
-                explosion1.transform.localPosition = Vector2.zero;
-                explosion2.transform.localPosition = Vector2.zero;
+                explosion1.transform.localPosition = _wavePos;
+                explosion2.transform.localPosition = _wavePos;
                 
                 explosion1.SetActive(setActive);
                 explosion2.SetActive(setActive);
