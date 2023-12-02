@@ -24,6 +24,7 @@ public class EnemyAI : MonoBehaviour
     [Header("Physics")]
     public float minDropAngle = 240;
     public float maxDropAngle = 300;
+    [SerializeField] private float dropthroughTime = 0.5f;
     public float speed = 200f;
     public float nextWaypointDistance = 3f;
     public float jumpNodeHeightRequirement = 0.8f;
@@ -323,7 +324,7 @@ public class EnemyAI : MonoBehaviour
         {
             Physics2D.IgnoreCollision(playerCollider, collider, true);
         }
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(dropthroughTime);
         foreach (Collider2D collider in colliders)
         {
             Physics2D.IgnoreCollision(playerCollider, collider, false);
