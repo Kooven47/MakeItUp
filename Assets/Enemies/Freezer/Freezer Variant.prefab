@@ -85,6 +85,10 @@ PrefabInstance:
       value: 1e+17
       objectReference: {fileID: 0}
     - target: {fileID: 2866952751640819706, guid: 52ef50d26a617054f942d9f279d53e36, type: 3}
+      propertyPath: _facePlayerAlways
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2866952751640819706, guid: 52ef50d26a617054f942d9f279d53e36, type: 3}
       propertyPath: pathUpdateSeconds
       value: 0.25
       objectReference: {fileID: 0}
