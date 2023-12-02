@@ -82,6 +82,9 @@ Everything not listed below was hand made.
 <br> <b> Can’t Stop My Feet ! Music </b>
 <br> Link: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;https://www.chosic.com/download-audio/25495/
 <br> License: Free For Personal Use
+<br> <b> Success Sound Effect </b>
+<br> Link: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;https://pixabay.com/sound-effects/success-1-6297/
+<br> License: Pixabay Content License (https://pixabay.com/service/license-summary/)
 
 ## Team Clean Em Up
 [Ethan Adkins](https://github.com/EthanAdkins) &nbsp;&nbsp;- Scripting and Sound Design
