@@ -48,6 +48,6 @@ public class BossCore : MonoBehaviour
     
     public virtual void Recovery()
     {
-        _anim.SetTrigger("recover");
+        // _anim.SetTrigger("recover");
     }
 }

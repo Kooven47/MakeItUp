@@ -114,10 +114,10 @@ public class ToiletBossAI : BossCore
             {
                 SetUpAttack(1);
                 yield return new WaitForSeconds(dashCooldown/2f);
-                _anim.SetTrigger("release");
+                _anim.SetBool("attack",true);
                 MoveTo(leftSide, leftSideCollider);
                 yield return new WaitWhile(() => isDashing);
-                _anim.SetTrigger("recover");
+                _anim.SetBool("attack",false);
                 yield return new WaitForSeconds(dashCooldown);
                 dashesRemaining--;
                 if (dashesRemaining > 0)
@@ -134,10 +134,10 @@ public class ToiletBossAI : BossCore
             {
                 SetUpAttack(1);
                 yield return new WaitForSeconds(dashCooldown/2f);
-                _anim.SetTrigger("release");
+                _anim.SetBool("attack",true);
                 MoveTo(rightSide, rightSideCollider);
                 yield return new WaitWhile(() => isDashing);
-                _anim.SetTrigger("recover");
+                _anim.SetBool("attack",false);
                 yield return new WaitForSeconds(dashCooldown);
                 dashesRemaining--;
                 if (dashesRemaining > 0)
@@ -154,18 +154,19 @@ public class ToiletBossAI : BossCore
             {
                 SetUpAttack(1);
                 yield return new WaitForSeconds(dashCooldown/2f);
-                _anim.SetTrigger("release");
+                _anim.SetBool("attack",true);
                 MoveTo(center, centerCollider);
                 yield return new WaitWhile(() => isDashing);
-                _anim.SetTrigger("recover");
+                _anim.SetBool("attack",false);
                 if (onPhaseTwo)
                 {
                     // if (timeToPee)
                     // {
                         SetUpAttack(0);
                         yield return new WaitForSeconds(centerCooldown / 2);
-                        _anim.SetTrigger("release");
+                        _anim.SetBool("attack",true);
                         yield return new WaitForSeconds(centerCooldown / 2);
+                        _anim.SetBool("attack",false);
                     // }
                     // else
                     // {
@@ -177,7 +178,7 @@ public class ToiletBossAI : BossCore
                 {
                     _anim.Play("Asleep");
                     yield return new WaitForSeconds(centerCooldown);
-                    _anim.SetTrigger("wakeUp");
+                    _anim.Play("Awake");
                 }
                 dashesRemaining = maxDashes;
                 currentState = stateBeforeCenter == BossState.DashToLeft ? BossState.DashToRight : BossState.DashToLeft;
