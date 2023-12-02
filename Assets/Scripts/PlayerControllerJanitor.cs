@@ -70,6 +70,9 @@ public class PlayerControllerJanitor : MonoBehaviour
     public AudioClip[] _soundEffects = new AudioClip[5];
     public AudioSource _audioSrc, _moveAudio;
     public static event Action InitializeSound;
+
+    private Rigidbody2D[] _fartClouds = new Rigidbody2D[2];
+    private Coroutine _jumpFartTimer = null;
     // public int maxJumpTrackNum = 3; // This is the number of jump history you want to keep track of for the ai to follow 
     // Start is called before the first frame update
     private void Start()
@@ -78,6 +81,8 @@ public class PlayerControllerJanitor : MonoBehaviour
         speed = sprintingSpeed;
         _moveAudio.clip = _soundEffects[RUN];
         PlayerInterrupt.staggered += SetMobility;
+        _fartClouds[0] = transform.GetChild(5).GetComponent<Rigidbody2D>();
+        _fartClouds[1] = transform.GetChild(6).GetComponent<Rigidbody2D>();
     }
     private void OnDisable()
     {
@@ -133,6 +138,12 @@ public class PlayerControllerJanitor : MonoBehaviour
         if ((IsGrounded() || IsOnOneWayPlatform()) && (Time.timeScale != 0))
         {
             coyoteTimeCounter = coyoteTime;
+            if (_jumpFartTimer != null)
+            {
+                StopCoroutine(_jumpFartTimer);
+                _jumpFartTimer = null;
+                SetFartJump(false);
+            }
             jumpCount = 0;
         }
         else
@@ -211,7 +222,12 @@ public class PlayerControllerJanitor : MonoBehaviour
                 
                 if (Time.timeScale != 0)
                 {
-                    if (jumpCount == 0 && !isGrounded) PlaySoundEffect(FART);
+                    if (jumpCount == 0 && !isGrounded)
+                    {
+                        PlaySoundEffect(FART);
+                        if (_jumpFartTimer == null)
+                            _jumpFartTimer = StartCoroutine(FartCloudJumpTimer());
+                    }
                     else PlaySoundEffect(JUMP);
                 }
                 
@@ -292,6 +308,12 @@ public class PlayerControllerJanitor : MonoBehaviour
         if (IsWalled() && !IsGrounded() && !IsOnOneWayPlatform() && horizontal != 0f)
         {
             isWallSliding = true;
+            if (_jumpFartTimer != null)
+            {
+                StopCoroutine(_jumpFartTimer);
+                _jumpFartTimer = null;
+                SetFartJump(false);
+            }
             jumpCount = 0;
             rb.velocity = new Vector2(rb.velocity.x, Mathf.Clamp(rb.velocity.y, -wallSlidingSpeed, float.MaxValue));
         }
@@ -321,6 +343,12 @@ public class PlayerControllerJanitor : MonoBehaviour
             isWallJumping = true;
             if (Time.timeScale != 0) PlaySoundEffect(JUMP);
             rb.velocity = new Vector2(wallJumpingDirection * wallJumpingPower.x, wallJumpingPower.y);
+            if (_jumpFartTimer != null)
+            {
+                StopCoroutine(_jumpFartTimer);
+                _jumpFartTimer = null;
+                SetFartJump(false);
+            }
             jumpCount = 0; // maybe a mistake lol
             StartCoroutine(JumpCooldown(wallJumpingDuration));
             wallJumpingTimeCounter = 0f;
@@ -399,6 +427,23 @@ public class PlayerControllerJanitor : MonoBehaviour
         }
     }
 
+    private void SetFartJump(bool setFart)
+    {
+        _fartClouds[0].gameObject.SetActive(setFart);
+        if (setFart)
+        {
+            _fartClouds[0].transform.localPosition = Vector2.zero;
+            _fartClouds[0].AddForce(new Vector2(0f,-300f));
+        }
+    }
+
+    private IEnumerator FartCloudJumpTimer()
+    {
+        SetFartJump(true);
+        yield return new WaitForSeconds(0.5f);
+        SetFartJump(false);
+        _jumpFartTimer = null;
+    }
     private IEnumerator DisablePlatformCollision()
     {
         var playerCollider = rb.GetComponent<Collider2D>();
@@ -426,7 +471,13 @@ public class PlayerControllerJanitor : MonoBehaviour
         rb.velocity = Vector2.zero;
         rb.gravityScale = 0f;
         rb.velocity = new Vector2(10 * transform.localScale.x, 0);
+
+        _fartClouds[1].gameObject.SetActive(true);
+        _fartClouds[1].transform.localPosition = new Vector2(0.25f,0f);
+        _fartClouds[1].AddForce(new Vector2(transform.localScale.x * -1 * 500f,0f));
+
         yield return new WaitForSeconds(airDashTime);
+        _fartClouds[1].gameObject.SetActive(false);
         rb.gravityScale = 1.5f;
         isDashing = false;
     }
