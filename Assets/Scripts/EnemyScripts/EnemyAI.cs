@@ -21,7 +21,6 @@ public class EnemyAI : MonoBehaviour
     [SerializeField] private float _playerBubbleDistance = 1f;
     [SerializeField] private float _enemyBubbleDistance = 1f;
     [SerializeField] public bool pathfind = true;
-    [SerializeField] private bool _facePlayerAlways = false;
     [Header("Physics")]
     public float minDropAngle = 240;
     public float maxDropAngle = 300;
@@ -98,7 +97,7 @@ public class EnemyAI : MonoBehaviour
             }
         }
     }
-   
+
     private void OnDisable()
     {
         _enemyCore.StartArmor -= IsAttacking;
@@ -272,23 +271,13 @@ public class EnemyAI : MonoBehaviour
             // Direction Graphics Handling
             if (directionLookEnabled && _canFlip)
             {
-                if (!_facePlayerAlways)
+                if (rb.velocity.x > 0.5f)
                 {
-                    if (rb.velocity.x > 0.5f)
-                    {
-                        transform.localScale = new Vector3(-1f * Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
-                    }
-                    else if (rb.velocity.x < 0.5f)
-                    {
-                        transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
-                    }
+                    transform.localScale = new Vector3(-1f * Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
                 }
-                else
+                else if (rb.velocity.x < 0.5f)
                 {
-                    if (((Vector2)target.position).x < rb.position.x)
-                        transform.localScale = new Vector3(-1f * Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
-                    else
-                        transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+                    transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
                 }
             }
             // Check if the enemy is stuck
@@ -297,7 +286,6 @@ public class EnemyAI : MonoBehaviour
                 // Apply force towards the next waypoint
                 if (currentWaypoint < path.vectorPath.Count)
                 {
-                    Debug.Log("HEHEHE");
                     Vector2 currentPos = new Vector2(rb.position.x, rb.position.y); // Convert to Vector2
                     Vector2 waypointPos = path.vectorPath[currentWaypoint];
 
