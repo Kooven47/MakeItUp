@@ -13,7 +13,12 @@ public class Powerup : MonoBehaviour
 
     private Coroutine _existenceTimer;
 
+    private PlayerControllerJanitor _playerControllerJanitor;
 
+    void Start()
+    {
+        _playerControllerJanitor = GameObject.FindWithTag("Player").GetComponent<PlayerControllerJanitor>();
+    }
 
     public void OnTriggerEnter2D(Collider2D col)
     {
@@ -21,7 +26,10 @@ public class Powerup : MonoBehaviour
         {
             if (_typeofPowerUp == PowerUpCategory.Heal)
             {
+                const int MUNCH = 11;
+                _playerControllerJanitor.PlaySoundEffect(MUNCH);
                 col.GetComponent<PlayerStats>().RestoreHealth(_effectValue);
+                
                 if (_existenceTimer == null)
                     gameObject.SetActive(false);
                 else

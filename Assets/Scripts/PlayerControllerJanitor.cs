@@ -91,7 +91,7 @@ public class PlayerControllerJanitor : MonoBehaviour
     public void PlaySoundEffect(int index)
     {
         _audioSrc.clip = _soundEffects[index];
-        _audioSrc.Play();
+        _audioSrc.PlayOneShot(_audioSrc.clip);
     }
 
     public void SetMobility(bool isMobile)
