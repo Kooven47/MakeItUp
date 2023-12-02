@@ -119,7 +119,7 @@ public class FinalBossScript : EnemyCore
 
     private void OnDestroy()
     {
-        EnemyStats.BossOnDeath += OnDeath;
+        EnemyStats.BossOnDeath -= OnDeath;
         EnemyStats.OnDeathWithType -= KillUpdate;
     }
 
@@ -235,16 +235,15 @@ public class FinalBossScript : EnemyCore
         {
             case EnumLib.DamageType.Neutral:
                 explosion1 = _explosioneffect[(int)ShockWaveIndex.Neutral].GetComponent<Collider2D>();
-            break;
+                break;
             case EnumLib.DamageType.Dry:
                 explosion1 = _explosioneffect[(int)ShockWaveIndex.Dirt1].GetComponent<Collider2D>();
                 explosion2 = _explosioneffect[(int)ShockWaveIndex.Dirt2].GetComponent<Collider2D>();
-            break;
-
+                break;
             case EnumLib.DamageType.Wet:
                 explosion1 = _explosioneffect[(int)ShockWaveIndex.Wave1].GetComponent<Collider2D>();
                 explosion2 = _explosioneffect[(int)ShockWaveIndex.Wave2].GetComponent<Collider2D>();
-            break;
+                break;
         }
         
         if (explosion1 != null)

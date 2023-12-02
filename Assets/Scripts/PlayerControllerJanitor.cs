@@ -219,7 +219,6 @@ public class PlayerControllerJanitor : MonoBehaviour
                 jumpBufferTimeCounter = 0f;
                 StartCoroutine(JumpCooldown());
                 
-                
                 if (Time.timeScale != 0)
                 {
                     if (jumpCount == 0 && !isGrounded)
@@ -232,7 +231,6 @@ public class PlayerControllerJanitor : MonoBehaviour
                 }
                 
                 jumpCount++;
-
             }
             
             // Make jump last longer on hold
