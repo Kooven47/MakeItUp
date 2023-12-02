@@ -76,6 +76,12 @@ Everything not listed below was hand made.
 <br> <b> Shape Bit Regular Font </b>
 <br> Link: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;https://www.cufonfonts.com/font/shape-bit
 <br> License: Free For Personal Use
+<br> <b> Run Amok by Kevin MacLeod Music</b>
+<br> Link: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;https://www.chosic.com/download-audio/39324/
+<br> License: Creative Commons CC BY 3.0
+<br> <b> Can’t Stop My Feet ! Music </b>
+<br> Link: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;https://www.chosic.com/download-audio/25495/
+<br> License: Free For Personal Use
 
 ## Team Clean Em Up
 [Ethan Adkins](https://github.com/EthanAdkins) &nbsp;&nbsp;- Scripting and Sound Design
