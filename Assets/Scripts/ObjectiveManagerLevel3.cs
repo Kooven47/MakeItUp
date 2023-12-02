@@ -454,6 +454,9 @@ public class Objective5DefeatMiniBosses : Objective
         GameObject barrier = ObjectiveManagerLevel3.barrierList.Dequeue(); // This and the next line removes the barrier
         barrier.SetActive(false);
         Debug.Log("dequeued barrier " + barrier.transform.name);
+        // im so tired
+        if (barrier.name.Equals("FILLER"))
+            GameObject.Find("Grid/Barriers/Wall5Boss").SetActive(false);
     }
 
     public override void Display()
@@ -505,9 +508,9 @@ public class Objective6DefeatBoss : Objective
         GameObject barrier = ObjectiveManagerLevel3.barrierList.Dequeue(); // This and the next line removes the barrier
         barrier.SetActive(false);
         Debug.Log("dequeued barrier " + barrier.transform.name);
-        
-        if (barrier.name.Equals("Filler"))
+        if (barrier.name.Equals("FILLER"))
             barrier = ObjectiveManagerLevel1.barrierList.Dequeue();
+
     }
 
     public override void Display()
