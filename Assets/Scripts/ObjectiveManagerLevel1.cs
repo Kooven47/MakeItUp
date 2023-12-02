@@ -132,6 +132,8 @@ public class Objective1KillSpaghettiMonster : Objective
     public int killNum;
     public int killObj;
     
+    private PlayerControllerJanitor _playerControllerJanitor;
+    
     public override void OnStart()
     {
         CheckpointManager.setCheckPoint?.Invoke(1);
@@ -147,6 +149,8 @@ public class Objective1KillSpaghettiMonster : Objective
         GameOverMenu.cleanUp += Cleanup;
 
         Display();
+        
+        _playerControllerJanitor = GameObject.FindWithTag("Player").GetComponent<PlayerControllerJanitor>();
 
         // Add the listener for the next obj
     }
@@ -170,6 +174,8 @@ public class Objective1KillSpaghettiMonster : Objective
         ObjectiveManagerLevel1.OnUpdateObjective();
         GameObject barrier = ObjectiveManagerLevel1.barrierList.Dequeue(); // This and the next line removes the barrier
         barrier.SetActive(false);
+        const int SUCCESS = 13;
+        _playerControllerJanitor.PlaySoundEffect(SUCCESS);
     }
 
     public override void Display()
@@ -193,6 +199,9 @@ public class Objective2KillSpaghettiAndDustBunny : Objective
 
     public int killNum;
     public int killObj;
+    
+    private PlayerControllerJanitor _playerControllerJanitor;
+
     public override void OnStart()
     {
         CheckpointManager.setCheckPoint?.Invoke(2);
@@ -208,6 +217,8 @@ public class Objective2KillSpaghettiAndDustBunny : Objective
         GameOverMenu.cleanUp += Cleanup;
 
         Display();
+        
+        _playerControllerJanitor = GameObject.FindWithTag("Player").GetComponent<PlayerControllerJanitor>();
 
         // Add the listener for the next obj
     }
@@ -231,6 +242,8 @@ public class Objective2KillSpaghettiAndDustBunny : Objective
         ObjectiveManagerLevel1.OnUpdateObjective();
         GameObject barrier = ObjectiveManagerLevel1.barrierList.Dequeue(); // This and the next line removes the barrier
         barrier.SetActive(false);
+        const int SUCCESS = 13;
+        _playerControllerJanitor.PlaySoundEffect(SUCCESS);
     }
 
     public override void Display()
@@ -251,6 +264,8 @@ public class Objective3GetToBoss : Objective
     private GameObject objectiveTextObject;
     private TMP_Text objectiveText;
     
+    private PlayerControllerJanitor _playerControllerJanitor;
+    
     public override void OnStart()
     {
         ObjectiveManagerLevel1.activeObjective = true;
@@ -262,6 +277,8 @@ public class Objective3GetToBoss : Objective
         GameOverMenu.cleanUp += Cleanup;
 
         Display();
+
+        _playerControllerJanitor = GameObject.FindWithTag("Player").GetComponent<PlayerControllerJanitor>();
 
         // Add the listener for the next obj
     }
@@ -276,6 +293,8 @@ public class Objective3GetToBoss : Objective
         CheckpointManager.setCheckPoint?.Invoke(4);
         ObjectiveManagerLevel1.activeObjective = false;
         ObjectiveManagerLevel1.OnUpdateObjective();
+        const int SUCCESS = 13;
+        _playerControllerJanitor.PlaySoundEffect(SUCCESS);
     }
 
     public override void Display()
@@ -298,6 +317,8 @@ public class Objective4KillToilet : Objective
     private GameObject objectiveTextObject;
     private TMP_Text objectiveText;
     
+    private PlayerControllerJanitor _playerControllerJanitor;
+
     public override void OnStart()
     {
         ObjectiveManagerLevel1.activeObjective = true;
@@ -311,6 +332,7 @@ public class Objective4KillToilet : Objective
 
         Display();
 
+        _playerControllerJanitor = GameObject.FindWithTag("Player").GetComponent<PlayerControllerJanitor>();
         // Add the listener for the next obj
     }
     
@@ -335,6 +357,8 @@ public class Objective4KillToilet : Objective
         barrier.SetActive(false);
         Debug.Log("Deactivated this barrier " + barrier.name);
         objectiveText.SetText("Level 1: Janitor's Closet" + System.Environment.NewLine + "Current Objective - Get to the Elevator");
+        const int SUCCESS = 13;
+        _playerControllerJanitor.PlaySoundEffect(SUCCESS);
     }
 
     public override void Display()

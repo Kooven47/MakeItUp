@@ -11,9 +11,13 @@ public class PowerupManager : MonoBehaviour
     Queue<GameObject> _healingItemQ = new();
     public static Action<int,Vector2> spawnHealingItem;
     public static Action<GameObject> returnToHealingPool;
+
+    private PlayerControllerJanitor _playerControllerJanitor;
     // Start is called before the first frame update
     void Start()
     {
+        _playerControllerJanitor = GameObject.FindWithTag("Player").GetComponent<PlayerControllerJanitor>();
+
         if (_healingItems.Length == 0 || _healingItems[0] == null)
         {
             Debug.LogError("Need to initialize one healing prefab");
@@ -36,6 +40,8 @@ public class PowerupManager : MonoBehaviour
 
     void ReturnToHealingPool(GameObject g)
     {
+        const int MUNCH = 11;
+        _playerControllerJanitor.PlaySoundEffect(MUNCH);
         g.SetActive(false);
         _healingItemQ.Enqueue(g);
     }

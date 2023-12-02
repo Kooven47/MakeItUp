@@ -260,6 +260,8 @@ public class Objective2GetOut : Objective
     private GameObject objectiveTextObject;
     private TMP_Text objectiveText;
     
+    private PlayerControllerJanitor _playerControllerJanitor;
+    
     public override void OnStart()
     {
         ObjectiveManagerLevel3.activeObjective = true;
@@ -271,6 +273,8 @@ public class Objective2GetOut : Objective
 
         Display();
 
+        _playerControllerJanitor = GameObject.FindWithTag("Player").GetComponent<PlayerControllerJanitor>();
+
         // Add the listener for the next obj
     }
     
@@ -279,6 +283,8 @@ public class Objective2GetOut : Objective
         CheckpointManager.setCheckPoint?.Invoke(2);
         ObjectiveManagerLevel3.activeObjective = false;
         ObjectiveManagerLevel3.OnUpdateObjective();
+        const int SUCCESS = 13;
+        _playerControllerJanitor.PlaySoundEffect(SUCCESS);
     }
 
     public override void Display()
@@ -300,6 +306,9 @@ public class Objective3KillPianos : Objective
 
     public int killNum;
     public int killObj;
+    
+    private PlayerControllerJanitor _playerControllerJanitor;
+
     public override void OnStart()
     {
         ObjectiveManagerLevel3.activeObjective = true;
@@ -313,6 +322,8 @@ public class Objective3KillPianos : Objective
         GameOverMenu.cleanUp += Cleanup;
 
         Display();
+
+        _playerControllerJanitor = GameObject.FindWithTag("Player").GetComponent<PlayerControllerJanitor>();
 
         // Add the listener for the next obj
     }
@@ -330,6 +341,9 @@ public class Objective3KillPianos : Objective
     
     public override void OnComplete()
     {
+        const int SUCCESS = 13;
+        _playerControllerJanitor.PlaySoundEffect(SUCCESS);
+        
         CheckpointManager.setCheckPoint?.Invoke(3);
         ObjectiveManagerLevel3.activeObjective = false;
         EnemyStats.OnDeath -= KillUpdate;
@@ -406,6 +420,8 @@ public class Objective5DefeatMiniBosses : Objective
     public SpawnManager spawnManager;
     private List<Transform> minibossSpawnLocations;
     
+    private PlayerControllerJanitor _playerControllerJanitor;
+    
     public override void OnStart()
     {
         spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
@@ -421,6 +437,8 @@ public class Objective5DefeatMiniBosses : Objective
         GameOverMenu.cleanUp += Cleanup;
 
         Display();
+
+        _playerControllerJanitor = GameObject.FindWithTag("Player").GetComponent<PlayerControllerJanitor>();
 
         // Add the listener for the next obj
     }
@@ -457,6 +475,8 @@ public class Objective5DefeatMiniBosses : Objective
         // im so tired
         if (barrier.name.Equals("FILLER"))
             GameObject.Find("Grid/Barriers/Wall5Boss").SetActive(false);
+        const int SUCCESS = 13;
+        _playerControllerJanitor.PlaySoundEffect(SUCCESS);
     }
 
     public override void Display()
@@ -477,6 +497,8 @@ public class Objective6DefeatBoss : Objective
     private GameObject objectiveTextObject;
     private TMP_Text objectiveText;
     
+    private PlayerControllerJanitor _playerControllerJanitor;
+
     public override void OnStart()
     {
         ObjectiveManagerLevel3.activeObjective = true;
@@ -487,6 +509,8 @@ public class Objective6DefeatBoss : Objective
         PauseMenu.cleanUp += Cleanup;
         GameOverMenu.cleanUp += Cleanup;
         Display();
+
+        _playerControllerJanitor = GameObject.FindWithTag("Player").GetComponent<PlayerControllerJanitor>();
 
         // Add the listener for the next obj
     }
@@ -511,6 +535,8 @@ public class Objective6DefeatBoss : Objective
             barrier = ObjectiveManagerLevel1.barrierList.Dequeue();
         barrier.SetActive(false);
         Debug.Log("dequeued barrier " + barrier.transform.name);
+        const int SUCCESS = 13;
+        _playerControllerJanitor.PlaySoundEffect(SUCCESS);
     }
 
     public override void Display()
