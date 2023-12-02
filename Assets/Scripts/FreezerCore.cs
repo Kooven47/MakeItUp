@@ -15,6 +15,7 @@ public class FreezerCore : MonoBehaviour
         _freezerAI = this.GetComponent<EnemyAI>();
         _player = GameObject.FindWithTag("Player");
         _playerStats = _player.GetComponent<PlayerStats>();
+        transform.localScale = new Vector2(-5, 5);
     }
     
     private void Update()
