@@ -327,6 +327,7 @@ public class Objective4KillToilet : Objective
         ObjectiveManagerLevel1.OnUpdateObjective();
         
         GameObject barrier = ObjectiveManagerLevel1.barrierList.Dequeue(); // This and the next line removes the barrier
+        Debug.Log("dequeued barrier " + barrier.transform.name);
 
         if (barrier.name.Equals("Filler"))
             barrier = ObjectiveManagerLevel1.barrierList.Dequeue();

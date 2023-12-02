@@ -12152,6 +12152,22 @@ PrefabInstance:
       propertyPath: maxAirJumpCount
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4710187658440231466, guid: 4fe1aae9a7aa3144ba7aa4ebe90562ba, type: 3}
+      propertyPath: _soundEffects.Array.size
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 4710187658440231466, guid: 4fe1aae9a7aa3144ba7aa4ebe90562ba, type: 3}
+      propertyPath: _soundEffects.Array.data[11]
+      value: 
+      objectReference: {fileID: 8300000, guid: 44f5825ddb0d95644bcd026e739b3682, type: 3}
+    - target: {fileID: 4710187658440231466, guid: 4fe1aae9a7aa3144ba7aa4ebe90562ba, type: 3}
+      propertyPath: _soundEffects.Array.data[12]
+      value: 
+      objectReference: {fileID: 8300000, guid: fa1cad3304d5a2748bebd62c2a394a45, type: 3}
+    - target: {fileID: 4710187658440231466, guid: 4fe1aae9a7aa3144ba7aa4ebe90562ba, type: 3}
+      propertyPath: _soundEffects.Array.data[13]
+      value: 
+      objectReference: {fileID: 8300000, guid: 67955aee52e9f554db02748fb534c330, type: 3}
     - target: {fileID: 5287549742816523219, guid: 4fe1aae9a7aa3144ba7aa4ebe90562ba, type: 3}
       propertyPath: m_LocalPosition.x
       value: 35.8

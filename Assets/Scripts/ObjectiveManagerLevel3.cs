@@ -506,11 +506,11 @@ public class Objective6DefeatBoss : Objective
         objectiveText.SetText("Level 3: Executive Suite" + System.Environment.NewLine + "Current Objective - Get to the Elevator");
         
         GameObject barrier = ObjectiveManagerLevel3.barrierList.Dequeue(); // This and the next line removes the barrier
-        barrier.SetActive(false);
         Debug.Log("dequeued barrier " + barrier.transform.name);
         if (barrier.name.Equals("FILLER"))
             barrier = ObjectiveManagerLevel1.barrierList.Dequeue();
-
+        barrier.SetActive(false);
+        Debug.Log("dequeued barrier " + barrier.transform.name);
     }
 
     public override void Display()
