@@ -270,7 +270,7 @@ public class PlayerControllerJanitor : MonoBehaviour
 
     private void Movement()
     {
-        _anim.SetBool("isMoving",horizontal != 0f);
+        _anim.SetBool("isMoving",horizontal != 0f || (isGrounded && isDashing));
 
         if (!isWallJumping && !isDashing && !isWallSliding)
         {
