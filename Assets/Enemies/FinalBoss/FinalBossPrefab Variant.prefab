@@ -1202,7 +1202,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2866952751640819706, guid: 52ef50d26a617054f942d9f279d53e36, type: 3}
       propertyPath: jumpModifier
-      value: 1.5
+      value: 1.7
       objectReference: {fileID: 0}
     - target: {fileID: 2866952751640819706, guid: 52ef50d26a617054f942d9f279d53e36, type: 3}
       propertyPath: dropthroughTime
@@ -1210,7 +1210,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2866952751640819706, guid: 52ef50d26a617054f942d9f279d53e36, type: 3}
       propertyPath: groundCheckSize
-      value: 1
+      value: 0.75
       objectReference: {fileID: 0}
     - target: {fileID: 2866952751640819706, guid: 52ef50d26a617054f942d9f279d53e36, type: 3}
       propertyPath: maxJumpTrackNum
