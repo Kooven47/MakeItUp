@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2e7dfdbcdfa317419ba30cac05519fc, type: 3}
   m_Name: BroomDownTilt
   m_EditorClassIdentifier: 
-  damage: 12
+  damage: 5
   animations:
   - {fileID: 7400000, guid: 5d5ea8d71cc03a742ba1be47f6d8dba3, type: 2}
   - {fileID: 7400000, guid: 005fb9e05e9d8ac4c85ee7b757178982, type: 2}
