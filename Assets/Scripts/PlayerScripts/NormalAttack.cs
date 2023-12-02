@@ -42,6 +42,13 @@ public class NormalAttack : MonoBehaviour
         PlayerInterrupt.staggered += SetCanAttack;
     }
 
+    public void PlayDeathAnim()
+    {
+        Debug.Log("Called player death anim");
+        _anim.Play("Defeat");
+        _anim.updateMode = AnimatorUpdateMode.UnscaledTime;
+    }
+
     public void SetCanAttack(bool toggle)
     {
         _canAttack = toggle;

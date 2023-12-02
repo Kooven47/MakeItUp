@@ -7,14 +7,17 @@ using UnityEngine.SceneManagement;
 public class CheckpointManager : MonoBehaviour,ISaveGame
 {
     [SerializeField]private List<GameObject> _checkpoints = new();
-
+    [SerializeField] private GameObject _autosaveDisplay;
     private GameObject _janitor;
 
     public static Action<int> setCheckPoint;
     public static Action resetCheckPoint;
 
     private int _currentCheckPoint = 0;
-
+    void Start()
+    {
+        _autosaveDisplay.SetActive(false);
+    }
     public int CurrentCheckPoint
     {
         get => _currentCheckPoint;
@@ -43,6 +46,7 @@ public class CheckpointManager : MonoBehaviour,ISaveGame
         {
             _currentCheckPoint = i;
             SaveSystem.instance.SaveGame();
+            StartCoroutine(autosaveWait());
         }
     }
 
@@ -78,5 +82,12 @@ public class CheckpointManager : MonoBehaviour,ISaveGame
     public void SaveInitialData(ref SaveData data)
     {
         _currentCheckPoint = -1;
+    }
+
+    IEnumerator autosaveWait()
+    {
+        _autosaveDisplay.SetActive(true);
+        yield return new WaitForSeconds(2.0f);
+        _autosaveDisplay.SetActive(false);
     }
 }

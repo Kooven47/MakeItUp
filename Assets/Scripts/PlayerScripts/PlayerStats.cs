@@ -40,6 +40,7 @@ public class PlayerStats : Stats, ISaveGame
 
     public override void DamageCalc(float attack, EnumLib.DamageType attribute, bool isCrit)
     {
+        if (playerIsDead) return;
         float damage = (attack) * (isCrit ? 1.5f : 1.0f);
         curHP -= damage;
         const int GOTHIT = 5;
@@ -49,7 +50,11 @@ public class PlayerStats : Stats, ISaveGame
         HealthBar.settingHealth?.Invoke(_curHP,_maxHP);
         _iFrameTimer = StartCoroutine(InvincibilityTimer(1f + _invincTimer));
         
-        if (_curHP <= 0) Death();
+        if (_curHP <= 0)
+        {
+            playerIsDead = true;
+            Death();
+        }
     }
 
     public void DashIFrame(float iFrameLength)
@@ -76,6 +81,7 @@ public class PlayerStats : Stats, ISaveGame
 
     public override void Death()
     {
+        transform.GetChild(0).GetComponent<NormalAttack>().PlayDeathAnim();
         GameOverMenu.gameOver?.Invoke();
     }
 
