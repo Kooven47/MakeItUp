@@ -11,10 +11,14 @@ public class GameOverMenu : MonoBehaviour
     
     public GameObject confirmationMenu;
     public static bool isConfirmationMenuActive;
+    
+    private PlayerControllerJanitor _playerControllerJanitor;
+
 
     // Start is called before the first frame update
     void Start()
     {
+        _playerControllerJanitor = GameObject.FindWithTag("Player").GetComponent<PlayerControllerJanitor>();
         isMenuActive = false;
         gameOverMenu.SetActive(false);
         gameOver = GameOver;
@@ -33,6 +37,8 @@ public class GameOverMenu : MonoBehaviour
 
     public void GameOver()
     {
+        const int DEAD = 12;
+        _playerControllerJanitor.PlaySoundEffect(DEAD);
         PlayerStats.playerIsDead = true;
         gameOverMenu.SetActive(true);
         isMenuActive = true;
