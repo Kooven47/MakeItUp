@@ -49,6 +49,10 @@ public class ScrollWheelZoom : MonoBehaviour
         {
             float scrollWheelInput = Input.GetAxis("Mouse ScrollWheel");
             float newOrthographicSize = vCam.m_Lens.OrthographicSize - scrollWheelInput * zoomSpeed;
+            if (Input.GetKeyDown(KeyCode.Equals)) // Use KeyCode.Equals for '+'
+                newOrthographicSize -= (zoomSpeed * 0.5f);
+            if (Input.GetKeyDown(KeyCode.Minus))
+                newOrthographicSize += (zoomSpeed * 0.5f);
             newOrthographicSize = Mathf.Clamp(newOrthographicSize, curMinOrthographicSize, curMaxOrthographicSize);
             // if (newOrthographicSize != vCam.m_Lens.OrthographicSize) Debug.Log("New orthographic size: " + newOrthographicSize);
             vCam.m_Lens.OrthographicSize = newOrthographicSize;

@@ -221,7 +221,7 @@ public class NormalAttack : MonoBehaviour
     {   
         if (Time.timeScale != 0 && _attackBuffer == 0 && _canAttack)
         {
-            if (Input.GetKeyUp("j") && _attackBuffer == 0)
+            if ((Input.GetKeyUp("j") || Input.GetMouseButtonDown(0)) && _attackBuffer == 0)
             {
                 if (Input.GetAxisRaw("Vertical") > 0f)
                 {
@@ -262,7 +262,7 @@ public class NormalAttack : MonoBehaviour
                 // }
             }
 
-            if (Input.GetKeyUp("k") && _attackBuffer == 0)
+            if ((Input.GetKeyUp("k") || Input.GetMouseButtonDown(1)) && _attackBuffer == 0)
             {
                 if (Input.GetAxisRaw("Vertical") > 0f)
                 {
