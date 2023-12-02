@@ -16,8 +16,8 @@ There is a janitor working at a hotel, when some sort of drug gets applied to hi
 * Move on to the next level by entering the elevator
 
 ## Visuals / Audio
-The visuals are 16-bit, lighthearted, and vibrant to go with the story. Characters, enemies, weapons, and upgrades will be made by the artists while backgrounds, UI elements, and platforming elements will use pre-made art from Unity and Itch.IO
-<br> The audio is 8-bit, generated from https://sfxr.me/ or acquired from the Unity story.
+The visuals are 16-bit, lighthearted, and vibrant to go with the story. Characters, enemies, weapons, and upgrades will be made by the artists while backgrounds and tilesets will use pre-made art from Unity and Itch.IO
+<br> The audio is 8-bit acquired from the Unity story or online elsewhere.
 
 ## Inspirations
 * Luigi's Mansion
