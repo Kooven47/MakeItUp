@@ -76,6 +76,9 @@ public class DamageEffect : MonoBehaviour
 
     public void TriggerEffect(int damageType)
     {
+        if (PlayerStats.playerIsDead)
+            return;
+        
         if (_hitEffect != null)
             StopCoroutine(_hitEffect);
         
