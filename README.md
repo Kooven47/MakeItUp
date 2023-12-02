@@ -26,11 +26,62 @@ The visuals are 16-bit, lighthearted, and vibrant to go with the story. Characte
 * Hollow Knight
 * Enter the Gungeon
 
+## Assets
+Everything not listed below was hand made.
+<br> <b> Tileset </b>
+<br> Link: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;https://assetstore.unity.com/packages/2d/characters/pixel-adventure-1-155360
+<br> License: Standard Unity Asset Store EULA
+<br> <b> A-Star </b>
+<br> Link: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;https://arongranberg.com/astar/
+<br> License: Unknown
+<br> <b> Level 2 Beans Picture </b>
+<br> Link: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;https://www.bushbeans.com/en_US/product/red-beans
+<br> License: Unknown
+<br> <b> Level 2 Fridge Picture </b>
+<br> Link: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;https://kharlixfashions.websites.co.in/products/ramtons-rf174-2-door-direct-cool-fridge-128-litres-white/177072
+<br> License: Unknown
+<br> <b> Background Music </b>
+<br> Link: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;https://assetstore.unity.com/packages/audio/music/casual-game-bgm-5-135943
+<br> License: Standard Unity Asset Store EULA
+<br> <b> Getting Hit Sound Effect </b>
+<br> Link: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;https://mixkit.co/free-sound-effects/hit/ (It is called "Cartoon Punch", I can't link to the specific sound effect because this website sucks)
+<br> License: Sound Effects Free License (https://mixkit.co/license/#sfxFree)
+<br> <b> Broom Hit Sound Effect </b>
+<br> Link: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;https://pixabay.com/sound-effects/straw-broom-sweeping-hard-92376/
+<br> License: Pixabay Content License (https://pixabay.com/service/license-summary/)
+<br> <b> Mop Hit Sound Effect </b>
+<br> Link: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;https://www.youtube.com/watch?v=ZrJCHCk8Rgo
+<br> License: Unknown
+<br> <b> Missed Hit Sound Effect (Whoosh) </b>
+<br> Link: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;https://pixabay.com/sound-effects/whoosh-6316/
+<br> License: Pixabay Content License (https://pixabay.com/service/license-summary/)
+<br> <b> Fart Dash/Double Jump Sound Effect </b>
+<br> Link: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;https://www.youtube.com/watch?v=ZNQOEn6GkkM
+<br> License: Unknown
+<br> <b> Start Menu Background Image </b>
+<br> Link: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;https://www.freepik.com/premium-vector/pixel-art-game-background-grass-sky-clouds_9047947.htm
+<br> License: Premium license
+<br> <b> Start Menu Hotel Picture </b>
+<br> Link: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;https://www.shutterstock.com/image-vector/hotel-pixel-art-old-school-computer-1277150515
+<br> License: Royalty-Free License (https://www.shutterstock.com/terms#your_content)
+<br> <b> Wood Footstep Sound Effect </b>
+<br> Link: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;https://assetstore.unity.com/packages/audio/sound-fx/foley/footsteps-essentials-189879
+<br> License: Standard Unity Asset Store EULA
+<br> <b> Cinemachine Camera </b>
+<br> Link: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;https://unity.com/unity/features/editor/art-and-design/cinemachine
+<br> License: Standard Unity Asset Store EULA
+<br> <b> Press Start 2P Font </b>
+<br> Link: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;https://fonts.google.com/specimen/Press+Start+2P
+<br> License: SIL Open Font License (https://openfontlicense.org/)
+<br> <b> Shape Bit Regular Font </b>
+<br> Link: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;https://www.cufonfonts.com/font/shape-bit
+<br> License: Free For Personal Use
+
 ## Team Clean Em Up
-[Ethan Adkins](https://github.com/EthanAdkins) - Scripting
-<br> [Kevin Alfonso](https://github.com/Kooven47) - Level Design, Scripting, and Project Manager
+[Ethan Adkins](https://github.com/EthanAdkins) &nbsp;&nbsp;- Scripting and Sound Design
+<br> [Kevin Alfonso](https://github.com/Kooven47) &nbsp;- Level Design, Scripting, and Project Manager
 <br> [Rayyan Haque](https://github.com/Rhaque20) - Art and Scripting
-<br> [Zachary Hull](https://github.com/Mrvenom789) - Scripting and Level Design
+<br> [Zachary Hull](https://github.com/Mrvenom789) &nbsp;&nbsp;&nbsp;- Scripting and Level Design
 
 ## JIRA
 https://make-it-up.atlassian.net/jira/software/projects/MIU/boards/1
