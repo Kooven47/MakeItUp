@@ -27,6 +27,7 @@ public class Elevator : MonoBehaviour,ISaveGame
 
     private IEnumerator Advance()
     {
+        GlobalSpeedrunTimer.StopTimer();
         _playerControllerJanitor.SetStunned(true);
         anim.SetBool("Fade", true);
         SaveSystem.instance.SaveGame();

@@ -37,6 +37,7 @@ public class GameOverMenu : MonoBehaviour
 
     public void GameOver()
     {
+        GlobalSpeedrunTimer.StopTimer();
         const int DEAD = 12;
         _playerControllerJanitor.PlaySoundEffect(DEAD);
         PlayerStats.playerIsDead = true;
@@ -90,6 +91,7 @@ public class GameOverMenu : MonoBehaviour
     
     public void QuitGame()
     {
+        GlobalSpeedrunTimer.StopTimer();
         PlayerStats.playerIsDead = false;
         Debug.Log("Pressed quit game!");
         isMenuActive = false;

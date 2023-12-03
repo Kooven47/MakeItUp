@@ -184,7 +184,7 @@ public class Objective1Survive : Objective
         ObjectiveManagerLevel3.activeObjective = true;
         curSec = 0;
         secObj = 30;
-        objectiveTextObject = GameObject.Find("ObjectiveManager/Canvas/Sign/ObjectiveText"); // This is to find the ObjectiveText object for display
+        objectiveTextObject = GameObject.Find("ObjectiveManager/Canvas/TextBox/ObjectiveText"); // This is to find the ObjectiveText object for display
         objectiveText = objectiveTextObject.GetComponent<TMP_Text>();
         
         _mb = Object.FindObjectOfType<MonoBehaviour>();
@@ -265,7 +265,7 @@ public class Objective2GetOut : Objective
     public override void OnStart()
     {
         ObjectiveManagerLevel3.activeObjective = true;
-        objectiveTextObject = GameObject.Find("ObjectiveManager/Canvas/Sign/ObjectiveText"); // This is to find the ObjectiveText object for display
+        objectiveTextObject = GameObject.Find("ObjectiveManager/Canvas/TextBox/ObjectiveText"); // This is to find the ObjectiveText object for display
         objectiveText = objectiveTextObject.GetComponent<TMP_Text>();
 
         PauseMenu.cleanUp += Cleanup;
@@ -314,7 +314,7 @@ public class Objective3KillPianos : Objective
         ObjectiveManagerLevel3.activeObjective = true;
         killNum = 0;
         killObj = 4;
-        objectiveTextObject = GameObject.Find("ObjectiveManager/Canvas/Sign/ObjectiveText"); // This is to find the ObjectiveText object for display
+        objectiveTextObject = GameObject.Find("ObjectiveManager/Canvas/TextBox/ObjectiveText"); // This is to find the ObjectiveText object for display
         objectiveText = objectiveTextObject.GetComponent<TMP_Text>();
 
         EnemyStats.OnDeath += KillUpdate;
@@ -372,13 +372,10 @@ public class Objective4GetToMiniBosses : Objective
     private GameObject objectiveTextObject;
     private TMP_Text objectiveText;
     
-    private PlayerControllerJanitor _playerControllerJanitor;
-
     public override void OnStart()
     {
-        _playerControllerJanitor = GameObject.FindWithTag("Player").GetComponent<PlayerControllerJanitor>();
         ObjectiveManagerLevel3.activeObjective = true;
-        objectiveTextObject = GameObject.Find("ObjectiveManager/Canvas/Sign/ObjectiveText"); // This is to find the ObjectiveText object for display
+        objectiveTextObject = GameObject.Find("ObjectiveManager/Canvas/TextBox/ObjectiveText"); // This is to find the ObjectiveText object for display
         objectiveText = objectiveTextObject.GetComponent<TMP_Text>();
 
         PauseMenu.cleanUp += Cleanup;
@@ -391,8 +388,6 @@ public class Objective4GetToMiniBosses : Objective
     
     public override void OnComplete()
     {
-        const int SUCCESS = 13;
-        _playerControllerJanitor.PlaySoundEffect(SUCCESS);
         CheckpointManager.setCheckPoint?.Invoke(4);
         ObjectiveManagerLevel3.activeObjective = false;
         ObjectiveManagerLevel3.OnUpdateObjective();
@@ -434,7 +429,7 @@ public class Objective5DefeatMiniBosses : Objective
         ObjectiveManagerLevel3.activeObjective = true;
         killNum = 0;
         killObj = 4;
-        objectiveTextObject = GameObject.Find("ObjectiveManager/Canvas/Sign/ObjectiveText"); // This is to find the ObjectiveText object for display
+        objectiveTextObject = GameObject.Find("ObjectiveManager/Canvas/TextBox/ObjectiveText"); // This is to find the ObjectiveText object for display
         objectiveText = objectiveTextObject.GetComponent<TMP_Text>();
 
         EnemyStats.OnDeath += KillUpdate;
@@ -507,7 +502,7 @@ public class Objective6DefeatBoss : Objective
     public override void OnStart()
     {
         ObjectiveManagerLevel3.activeObjective = true;
-        objectiveTextObject = GameObject.Find("ObjectiveManager/Canvas/Sign/ObjectiveText"); // This is to find the ObjectiveText object for display
+        objectiveTextObject = GameObject.Find("ObjectiveManager/Canvas/TextBox/ObjectiveText"); // This is to find the ObjectiveText object for display
         objectiveText = objectiveTextObject.GetComponent<TMP_Text>();
         
         EnemyStats.BossOnDeath += BossKillUpdate;

@@ -141,7 +141,7 @@ public class Objective1KillSpaghettiMonster : Objective
         killNum = 0;
         killObj = 1;
         signMenu = GameObject.Find("Signs/AttackTutorial2Sign/Canvas/Sign");
-        objectiveTextObject = GameObject.Find("ObjectiveManager/Canvas/Sign/ObjectiveText"); // This is to find the ObjectiveText object for display
+        objectiveTextObject = GameObject.Find("ObjectiveManager/Canvas/TextBox/ObjectiveText"); // This is to find the ObjectiveText object for display
         objectiveText = objectiveTextObject.GetComponent<TMP_Text>();
 
         EnemyStats.OnDeath += KillUpdate;
@@ -209,7 +209,7 @@ public class Objective2KillSpaghettiAndDustBunny : Objective
         killNum = 0;
         killObj = 5;
         signMenu = GameObject.Find("Signs/ContinueSign/Canvas/Sign");
-        objectiveTextObject = GameObject.Find("ObjectiveManager/Canvas/Sign/ObjectiveText"); // This is to find the ObjectiveText object for display
+        objectiveTextObject = GameObject.Find("ObjectiveManager/Canvas/TextBox/ObjectiveText"); // This is to find the ObjectiveText object for display
         objectiveText = objectiveTextObject.GetComponent<TMP_Text>();
 
         EnemyStats.OnDeath += KillUpdate;
@@ -264,12 +264,10 @@ public class Objective3GetToBoss : Objective
     private GameObject objectiveTextObject;
     private TMP_Text objectiveText;
     
-    private PlayerControllerJanitor _playerControllerJanitor;
-    
     public override void OnStart()
     {
         ObjectiveManagerLevel1.activeObjective = true;
-        objectiveTextObject = GameObject.Find("ObjectiveManager/Canvas/Sign/ObjectiveText"); // This is to find the ObjectiveText object for display
+        objectiveTextObject = GameObject.Find("ObjectiveManager/Canvas/TextBox/ObjectiveText"); // This is to find the ObjectiveText object for display
         objectiveText = objectiveTextObject.GetComponent<TMP_Text>();
 
         EnemyStats.BossOnDeath += KillUpdate;
@@ -277,9 +275,7 @@ public class Objective3GetToBoss : Objective
         GameOverMenu.cleanUp += Cleanup;
 
         Display();
-
-        _playerControllerJanitor = GameObject.FindWithTag("Player").GetComponent<PlayerControllerJanitor>();
-
+        
         // Add the listener for the next obj
     }
 
@@ -293,8 +289,6 @@ public class Objective3GetToBoss : Objective
         CheckpointManager.setCheckPoint?.Invoke(4);
         ObjectiveManagerLevel1.activeObjective = false;
         ObjectiveManagerLevel1.OnUpdateObjective();
-        const int SUCCESS = 13;
-        _playerControllerJanitor.PlaySoundEffect(SUCCESS);
     }
 
     public override void Display()
@@ -323,7 +317,7 @@ public class Objective4KillToilet : Objective
     {
         ObjectiveManagerLevel1.activeObjective = true;
         signMenu = GameObject.Find("Signs/BossDefeatSign/Canvas/Sign"); // Change this to the sign object location
-        objectiveTextObject = GameObject.Find("ObjectiveManager/Canvas/Sign/ObjectiveText"); // This is to find the ObjectiveText object for display
+        objectiveTextObject = GameObject.Find("ObjectiveManager/Canvas/TextBox/ObjectiveText"); // This is to find the ObjectiveText object for display
         objectiveText = objectiveTextObject.GetComponent<TMP_Text>();
 
         EnemyStats.BossOnDeath += KillUpdate;

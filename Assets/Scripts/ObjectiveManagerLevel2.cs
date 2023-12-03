@@ -69,7 +69,7 @@ public class Objective1Investigate : Objective
     public override void OnStart()
     {
         ObjectiveManagerLevel2.activeObjective = true;
-        objectiveTextObject = GameObject.Find("ObjectiveManager/Canvas/Sign/ObjectiveText"); // This is to find the ObjectiveText object for display
+        objectiveTextObject = GameObject.Find("ObjectiveManager/Canvas/TextBox/ObjectiveText"); // This is to find the ObjectiveText object for display
         objectiveText = objectiveTextObject.GetComponent<TMP_Text>();
 
         PauseMenu.cleanUp += Cleanup;
@@ -97,6 +97,7 @@ public class Objective1Investigate : Objective
         GameOverMenu.cleanUp -= Cleanup;
     }
 }
+
 public class Objective2EscapeFreezer : Objective
 {
     private GameObject objectiveTextObject;
@@ -105,7 +106,7 @@ public class Objective2EscapeFreezer : Objective
     public override void OnStart()
     {
         ObjectiveManagerLevel2.activeObjective = true;
-        objectiveTextObject = GameObject.Find("ObjectiveManager/Canvas/Sign/ObjectiveText"); // This is to find the ObjectiveText object for display
+        objectiveTextObject = GameObject.Find("ObjectiveManager/Canvas/TextBox/ObjectiveText"); // This is to find the ObjectiveText object for display
         objectiveText = objectiveTextObject.GetComponent<TMP_Text>();
 
         PauseMenu.cleanUp += Cleanup;
@@ -147,7 +148,7 @@ public class Objective3DefeatFreezer : Objective
         ObjectiveManagerLevel2.activeObjective = true;
         killNum = 0;
         killObj = 1;
-        objectiveTextObject = GameObject.Find("ObjectiveManager/Canvas/Sign/ObjectiveText"); // This is to find the ObjectiveText object for display
+        objectiveTextObject = GameObject.Find("ObjectiveManager/Canvas/TextBox/ObjectiveText"); // This is to find the ObjectiveText object for display
         objectiveText = objectiveTextObject.GetComponent<TMP_Text>();
 
         EnemyStats.OnDeath += KillUpdate;

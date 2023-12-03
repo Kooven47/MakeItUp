@@ -21,14 +21,9 @@ public class SignMenuEnemy : MonoBehaviour
         signMenu.SetActive(false);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     public void PauseGame()
     {
+        GlobalSpeedrunTimer.StopTimer();
         isMenuActive = true;
         signMenu.SetActive(true);
         Time.timeScale = 0;
@@ -36,6 +31,7 @@ public class SignMenuEnemy : MonoBehaviour
 
     public void ResumeGame()
     {
+        GlobalSpeedrunTimer.StartTimer();
         isMenuActive = false;
         signMenu.SetActive(false);
         shownBefore = true;

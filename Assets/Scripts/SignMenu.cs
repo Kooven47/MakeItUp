@@ -19,6 +19,7 @@ public class SignMenu : MonoBehaviour
 
     public void PauseGame()
     {
+        GlobalSpeedrunTimer.StopTimer();
         isMenuActive = true;
         signMenu.SetActive(true);
         Time.timeScale = 0;
@@ -26,6 +27,7 @@ public class SignMenu : MonoBehaviour
 
     public void ResumeGame()
     {
+        GlobalSpeedrunTimer.StartTimer();
         isMenuActive = false;
         signMenu.SetActive(false);
         shownBefore = true;

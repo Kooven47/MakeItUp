@@ -84,10 +84,12 @@ public class PlayerControllerJanitor : MonoBehaviour
         _fartClouds[0] = transform.GetChild(5).GetComponent<Rigidbody2D>();
         _fartClouds[1] = transform.GetChild(6).GetComponent<Rigidbody2D>();
     }
+    
     private void OnDisable()
     {
         PlayerInterrupt.staggered -= SetMobility;
     }
+    
     public void PlaySoundEffect(int index)
     {
         _audioSrc.clip = _soundEffects[index];
@@ -284,6 +286,12 @@ public class PlayerControllerJanitor : MonoBehaviour
                 rb.AddForce(counterJumpForce * rb.mass);
             }
         }
+        
+        if ((Math.Abs(rb.velocity.x) > 0 || rb.velocity.y > 0) && !GlobalSpeedrunTimer.IsTimerRunning())
+        {
+            Debug.Log("Started timer");
+            GlobalSpeedrunTimer.StartTimer();
+        }
     }
 
     private bool IsGrounded()
@@ -442,6 +450,7 @@ public class PlayerControllerJanitor : MonoBehaviour
         SetFartJump(false);
         _jumpFartTimer = null;
     }
+    
     private IEnumerator DisablePlatformCollision()
     {
         var playerCollider = rb.GetComponent<Collider2D>();

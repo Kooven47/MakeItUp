@@ -37,6 +37,7 @@ public class PauseMenu : MonoBehaviour
 
     public void PauseGame()
     {
+        GlobalSpeedrunTimer.StopTimer();
         pauseMenu.SetActive(true);
         Time.timeScale = 0;
         isPaused = true;
@@ -44,6 +45,7 @@ public class PauseMenu : MonoBehaviour
 
     public void ResumeGame()
     {
+        GlobalSpeedrunTimer.StartTimer();
         pauseMenu.SetActive(false);
         if (!SignMenuCollision.isMenuActive && !SignMenuCollisionWithEnemy.isMenuActive && !SignMenu.isMenuActive && !SignMenuEnemy.isMenuActive && !GameOverMenu.isMenuActive)
             Time.timeScale = 1;
@@ -52,6 +54,7 @@ public class PauseMenu : MonoBehaviour
 
     public void GoToMainMenu()
     {
+        GlobalSpeedrunTimer.StopTimer();
         Time.timeScale = 1;
         cleanUp?.Invoke();
         SceneManager.LoadScene("StartScreen");
@@ -71,6 +74,7 @@ public class PauseMenu : MonoBehaviour
     public void ConfirmRestart()
     {
         CheckpointManager.resetCheckPoint?.Invoke();
+        if (SceneManager.GetActiveScene().name == "Level1") GlobalSpeedrunTimer.ResetTimer();
         RestartFromCheckpoint();
     }
 
