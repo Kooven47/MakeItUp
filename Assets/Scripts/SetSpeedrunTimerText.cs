@@ -11,7 +11,7 @@ public class SetSpeedrunTimerText : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        timerText.SetText("Time: 00:00:00");    
+        timerText.SetText("Time: 00:00.00");    
     }
 
     // Update is called once per frame
