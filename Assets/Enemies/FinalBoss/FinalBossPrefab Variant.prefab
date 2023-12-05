@@ -1206,7 +1206,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2866952751640819706, guid: 52ef50d26a617054f942d9f279d53e36, type: 3}
       propertyPath: dropthroughTime
-      value: 1
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 2866952751640819706, guid: 52ef50d26a617054f942d9f279d53e36, type: 3}
       propertyPath: groundCheckSize

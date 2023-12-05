@@ -451,8 +451,8 @@ public class Objective5DefeatMiniBosses : Objective
         // Spawn 2nd round of minibosses
         if (killNum == 2)
         {
-            spawnManager.SpawnEnemy(minibossSpawnLocations[0], 8);
-            spawnManager.SpawnEnemy(minibossSpawnLocations[1], 9);
+            spawnManager.SpawnEnemy(minibossSpawnLocations[0], 6);
+            spawnManager.SpawnEnemy(minibossSpawnLocations[1], 7);
         }
         
         if ((killNum >= killObj) && (killObj != -1)) // Objective completed
