@@ -9,6 +9,5 @@ public class SaveData
     public float janitorMaxHealth = -1f, janitorCurrentHealth = -1f;
     public int currentLevel;
     public int numObjectivesCompleted = 0;
-
     public float janitorStartMaxHealth = -1f, janitorStartCurrentHealth = -1f;
 }

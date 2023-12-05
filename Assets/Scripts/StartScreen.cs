@@ -26,7 +26,6 @@ public class StartScreen : MonoBehaviour, ISaveGame
 
     public void LoadGame()
     {
-        // TODO: INSERT LOADING FROM SAVE FUNCTIONALITY
         _readyToLoad = true;
         SaveSystem.instance.LoadGame();
         Debug.Log("Pressed load game!");
@@ -68,8 +67,7 @@ public class StartScreen : MonoBehaviour, ISaveGame
         _DisplaySettings.SetActive(false);
         Debug.Log("Pressed display options back button!");
     }
-
-
+    
     public void QuitGame()
     {
         Debug.Log("Pressed quit game!");

@@ -7,10 +7,16 @@ using UnityEngine;
 public class SetSpeedrunTimerText : MonoBehaviour
 {
     [SerializeField] private TMP_Text timerText;
+    [SerializeField] private GameObject timerObject;
 
     // Start is called before the first frame update
     void Start()
     {
+        if (PlayerPrefs.HasKey("IsSpeedrunTimerEnabled"))
+        {
+            timerObject.SetActive(PlayerPrefs.GetInt("IsSpeedrunTimerEnabled") == 1);
+        }
+        
         timerText.SetText("Time: 00:00.00");    
     }
 
