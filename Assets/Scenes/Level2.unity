@@ -56697,6 +56697,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timerText: {fileID: 1579207133}
+  timerObject: {fileID: 1804567003}
 --- !u!1 &1881912708
 GameObject:
   m_ObjectHideFlags: 0

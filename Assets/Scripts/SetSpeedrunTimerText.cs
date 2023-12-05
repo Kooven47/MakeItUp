@@ -16,13 +16,26 @@ public class SetSpeedrunTimerText : MonoBehaviour
         {
             timerObject.SetActive(PlayerPrefs.GetInt("IsSpeedrunTimerEnabled") == 1);
         }
+        else
+        {
+            timerObject.SetActive(true);
+        }
         
-        timerText.SetText("Time: 00:00.00");    
+        timerText.SetText("Time: 00:00.000");    
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (PlayerPrefs.HasKey("IsSpeedrunTimerEnabled"))
+        {
+            timerObject.SetActive(PlayerPrefs.GetInt("IsSpeedrunTimerEnabled") == 1);
+        }
+        else
+        {
+            timerObject.SetActive(true);
+        }
+        
         TimeSpan currentTime = GlobalSpeedrunTimer.GetTime();
         string formattedTime = FormatTime(currentTime);
         timerText.SetText($"Time: {formattedTime}");
